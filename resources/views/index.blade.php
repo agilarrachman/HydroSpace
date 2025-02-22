@@ -23,7 +23,7 @@
         #mainmenu li a.active {
             color: white !important;
             font-weight: 700;
-            border-bottom: 2px solid white;                
+            border-bottom: 2px solid white;
         }
     </style>
 
@@ -32,7 +32,7 @@
 <body class="dark-scheme">
     <div id="wrapper">
         <a href="#" id="back-to-top"></a>
-        
+
         <!-- preloader begin -->
         <div id="de-loader"></div>
         <!-- preloader end -->
@@ -64,7 +64,7 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-            </div>            
+            </div>
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -83,17 +83,17 @@
                                 <!-- mainemenu begin -->
                                 <ul id="mainmenu">
                                     <li><a class="menu-item active" href="/">Beranda</a></li>
-                                    <li><a class="menu-item" href="shop-homepage.html">E-commerce</a></li>
+                                    <li><a class="menu-item" href="/produk">Produk</a></li>
                                     <li><a class="menu-item" href="projects.html">Edukasi</a></li>
                                     <li><a class="menu-item" href="about.html">HydroBot</a></li>
                                     <li><a class="menu-item" href="about.html">Tentang Kami</a></li>
-                                    <li><a class="menu-item" href="team.html">Our Team</a></li>                                                                
+                                    <li><a class="menu-item" href="team.html">Our Team</a></li>
                                     <li><a class="menu-item" href="contact.html">Kontak</a></li>
                                 </ul>
                                 <!-- mainmenu end -->
                             </div>
                             <div class="de-flex-col">
-                                <div class="menu_side_area">          
+                                <div class="menu_side_area">
                                     <a href="contact.html" class="btn-main btn-line">Sign In</a>
                                     <span id="menu-btn"></span>
                                 </div>
@@ -132,7 +132,7 @@
 
                                             <div class="spacer-double"></div>
 
-                                            <div class="col-lg-6 offset-lg-6">     
+                                            <div class="col-lg-6 offset-lg-6">
                                                 <div class="spacer-single"></div>
                                                 <div class="sw-text-wrapper">
                                                     <div class="subtitle">Solusi Berkebun Modern</div>
@@ -143,12 +143,12 @@
 
                                             <div class="spacer-single"></div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="sw-overlay op-3"></div>
                             </div>
-                        </div>                        
+                        </div>
                         <!-- Slides -->
 
                         <!-- Slides -->
@@ -160,7 +160,7 @@
 
                                             <div class="spacer-double"></div>
 
-                                            <div class="col-lg-6">     
+                                            <div class="col-lg-6">
                                                 <div class="spacer-single"></div>
                                                 <div class="sw-text-wrapper">
                                                     <div class="subtitle">Panduan Hidroponik untuk Pemula</div>
@@ -171,13 +171,13 @@
 
                                             <div class="spacer-single"></div>
                                         </div>
-                                        
+
                                     </div>
                                 </div>
                                 <div class="sw-overlay op-3"></div>
                             </div>
-                        </div>                        
-                        <!-- Slides -->                      
+                        </div>
+                        <!-- Slides -->
                     </div>
 
                     <!-- If we need navigation buttons -->
@@ -188,7 +188,7 @@
                 </div>
             </section>
 
-            
+
 
             <section>
                 <div class="container">
@@ -206,8 +206,8 @@
                         <div class="col-lg-6">
                             <div class="ps-lg-3">
                                 <div class="subtitle id-color wow fadeInUp" data-wow-delay=".2s">Welcome to HydroSpace</div>
-                                <h2 class="text-uppercase wow fadeInUp" data-wow-delay=".4s">Berkebun Modern <span class="id-color-2">dengan Hidroponik</span></h2>  
-                                <p class="wow fadeInUp" data-wow-delay=".6s">HydroSpace hadir untuk mengedukasi dan memudahkan siapa saja dalam memulai berkebun modern dengan hidroponik. Dengan informasi yang lengkap dan akses mudah ke berbagai kebutuhan, kami membantu pemula agar lebih percaya diri dalam bercocok tanam secara efisien dan praktis. Temukan solusi terbaik untuk perjalanan hidroponikmu, dari pembelajaran hingga penerapan nyata.</p>  
+                                <h2 class="text-uppercase wow fadeInUp" data-wow-delay=".4s">Berkebun Modern <span class="id-color-2">dengan Hidroponik</span></h2>
+                                <p class="wow fadeInUp" data-wow-delay=".6s">HydroSpace hadir untuk mengedukasi dan memudahkan siapa saja dalam memulai berkebun modern dengan hidroponik. Dengan informasi yang lengkap dan akses mudah ke berbagai kebutuhan, kami membantu pemula agar lebih percaya diri dalam bercocok tanam secara efisien dan praktis. Temukan solusi terbaik untuk perjalanan hidroponikmu, dari pembelajaran hingga penerapan nyata.</p>
                                 <a class="btn-main btn-line wow fadeInUp" href="services.html" data-wow-delay=".6s">Layanan Kami</a>
                             </div>
                         </div>
@@ -232,18 +232,18 @@
                             </div>
                         </div>
 
-                        <div class="col-lg-4 col-sm-6" id="mid-service">                        
+                        <div class="col-lg-4 col-sm-6" id="mid-service">
                             <div class="hover overflow-hidden relative text-light text-center wow fadeInRight" data-wow-delay=".6s">
                                 <img src="images/services/2.webp" class="hover-scale-1-1 w-100" alt="" style="height: 570px;">
                                 <img src="images/logo-icon.webp" class="abs abs-centered w-20 z-2" alt="">
                                 <div class="abs bg-color op-5 z-1 top-0 w-100 h-100 hover-op-0"></div>
                             </div>
-                            
+
                             <div class="p-lg-5 p-4 bg-dark-2 wow fadeInRight">
                                 <h4 class="fs-24 mb-3">Belajar Hidroponik, Kapan Saja</h4>
                                 <p>Tingkatkan pengetahuanmu dengan panduan lengkap dan mudah dipahami! Tonton video edukasi dan mulai hidroponik dengan langkah yang benar.</p>
                                 <a class="btn-main btn-line" href="services.html" data-wow-delay=".6s">Tonton Video</a>
-                            </div>  
+                            </div>
                         </div>
 
                         <div class="col-lg-4 col-sm-6">
@@ -268,7 +268,7 @@
                         <div class="col-lg-6">
                             <div class="subtitle wow fadeInUp">Kenapa Memilih HydroSpace?</div>
                             <h2 class="text-uppercase mb-4 wow fadeInUp" data-wow-delay=".2s">Komitmen Kami <br><span class="id-color-2">Pertanian Modern</span></h2>
-                            <p class="wow fadeInUp">Komitmen kami untuk menghadirkan pengalaman bercocok tanam hidroponik yang lebih mudah, efisien, dan dapat diakses oleh siapa saja. Kami percaya bahwa inovasi dan edukasi adalah kunci untuk menjadikan hidroponik solusi pertanian modern yang berkelanjutan.</p>                            
+                            <p class="wow fadeInUp">Komitmen kami untuk menghadirkan pengalaman bercocok tanam hidroponik yang lebih mudah, efisien, dan dapat diakses oleh siapa saja. Kami percaya bahwa inovasi dan edukasi adalah kunci untuk menjadikan hidroponik solusi pertanian modern yang berkelanjutan.</p>
                         </div>
 
                         <div class="col-lg-6">
@@ -283,7 +283,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 wow fadeInUp">
                                     <div class="relative h-100 bg-dark-2 text-light padding30 rounded-1">
                                         <img src="images/logo-icon.webp" class="w-50px mb-3" alt="">
@@ -294,7 +294,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 wow fadeInUp">
                                     <div class="relative h-100 bg-dark-2 text-light padding30 rounded-1">
                                         <img src="images/logo-icon.webp" class="w-50px mb-3" alt="">
@@ -305,7 +305,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
                                 <div class="col-md-6 wow fadeInUp">
                                     <div class="relative h-100 bg-color-2 text-light padding30 rounded-1">
                                         <img src="images/logo-icon.webp" class="w-50px mb-3" alt="">
@@ -319,7 +319,7 @@
 
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
             </section>
@@ -334,7 +334,7 @@
                                     <i class="icofont-quote-left text-white fs-32 mb-4"></i>
                                     <p>"Saya selalu ingin mencoba hidroponik, tapi bingung harus mulai dari mana. Berkat HydroSpace, semuanya jadi lebih mudah! Panduannya jelas, sekarang saya bisa menanam sayuran sendiri di rumah."
                                     </p>
-                                    
+
                                     <div class="de-rating-ext mb-3">
                                         <span class="d-stars">
                                             <i class="fa fa-star"></i>
@@ -352,7 +352,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                                                
+
                                 <div class="item p-2 fs-18">
                                     <i class="icofont-quote-left text-white fs-32 mb-4"></i>
                                     <p>"Dulu saya pikir butuh lahan luas untuk berkebun, ternyata tidak! HydroSpace membantu saya memulai hidroponik di rumah dengan cara yang praktis dan ramah lingkungan. Terima kasih HydroSpace!"
@@ -375,7 +375,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                                                
+
                                 <div class="item p-2 fs-18">
                                     <i class="icofont-quote-left text-white fs-32 mb-4"></i>
                                     <p>"HydroSpace tidak hanya membantu saya memahami hidroponik, tapi juga membuka peluang usaha baru. Sekarang saya bisa panen sayuran segar sendiri dan menjualnya ke pelanggan!"
@@ -398,7 +398,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                                                
+
                                 <div class="item p-2 fs-18">
                                     <i class="icofont-quote-left text-white fs-32 mb-4"></i>
                                     <p>"Belajar hidroponik di kampus saja tidak cukup. Dengan HydroSpace, saya bisa mendapatkan edukasi tambahan yang aplikatif dan langsung dipraktikkan di rumah. Sangat membantu!"
@@ -421,7 +421,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                                                
+
                                 <div class="item p-2 fs-18">
                                     <i class="icofont-quote-left text-white fs-32 mb-4"></i>
                                     <p>"Our garden was in desperate need of a makeover, and this team exceeded all our expectations. They listened carefully to our ideas and transformed our outdoor space into a peaceful retreat we now enjoy every day."
@@ -444,7 +444,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+
 
                             </div>
                         </div>
@@ -459,7 +459,7 @@
                         <div class="col-lg-8 text-center">
                             <div class="subtitle wow fadeInUp">E-commerce</div>
                             <h2 class="text-uppercase mb-4 wow fadeInUp" data-wow-delay=".2s">Best <span class="id-color-2">Sellers</span></h2>
-                        </div>                        
+                        </div>
                     </div>
                     <div class="row g-4 mb-4">
                         <div class="col-lg-12">
@@ -487,7 +487,7 @@
                                             <div class="atr__main-price">
                                                 Rp190.000
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <!-- product item end -->
@@ -514,7 +514,7 @@
                                             <div class="atr__main-price">
                                                 Rp195.000
                                             </div>
-                                            
+
                                         </div>
                                     </div>
                                     <!-- product item end -->
@@ -541,10 +541,10 @@
                                             <div class="atr__main-price">
                                                 Rp295.000
                                             </div>
-                                            
+
                                         </div>
                                     </div>
-                                    <!-- product item end -->                                                                         
+                                    <!-- product item end -->
 
                                     <!-- product item begin -->
                                     <div class="item">
@@ -568,13 +568,13 @@
                                             <div class="atr__main-price">
                                                 Rp515.000
                                             </div>
-                                            
+
                                         </div>
                                     </div>
-                                    <!-- product item end -->                                                                         
+                                    <!-- product item end -->
 
                                 </div>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                     <div class="spacer-20"></div>
@@ -592,7 +592,7 @@
                         <div class="col-lg-8 text-center">
                             <div class="subtitle wow fadeInUp">Video Edukasi</div>
                             <h2 class="text-uppercase mb-4 wow fadeInUp" data-wow-delay=".2s">Most <span class="id-color-2">Viewed</span></h2>
-                        </div>                        
+                        </div>
                     </div>
 
                     <div class="row g-4">
@@ -665,7 +665,7 @@
 
         </div>
         <!-- content end -->
-        
+
         <!-- footer begin -->
         <footer class="section-dark">
             <div class="container relative z-2">
@@ -688,7 +688,7 @@
                             <div class="col-lg-6 col-sm-6">
                                 <div class="widget">
                                     <h5>Perusahaan</h5>
-                                    <ul>                                        
+                                    <ul>
                                         <li><a href="index.html">Beranda</a></li>
                                         <li><a href="about.html">Tentang Kami</a></li>
                                         <li><a href="blog.html">Tim Kami</a></li>
@@ -721,7 +721,7 @@
                             <div class="spacer-20"></div>
 
                             <div class="fw-bold text-white"><i class="icofont-envelope me-2 id-color-2"></i>Hubungi Kami</div>
-                            penyungoding@gmail.com                            
+                            penyungoding@gmail.com
                         </div>
                     </div>
                 </div>
@@ -773,7 +773,7 @@
             <h5>Kontak Kami</h5>
             <div><i class="icofont-clock-time me-2 op-5"></i>Senin - Jum'at 08.00 - 18.00</div>
             <div><i class="icofont-location-pin me-2 op-5"></i>Jl. Raya Pajajaran, Kota Bogor, Jawa Barat 16128</div>
-            <div><i class="icofont-envelope me-2 op-5"></i>penyungoding@gmail.com</div>    
+            <div><i class="icofont-envelope me-2 op-5"></i>penyungoding@gmail.com</div>
 
             <div class="spacer-30-line"></div>
 
