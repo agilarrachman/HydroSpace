@@ -52,9 +52,9 @@
                             <li><a class="menu-item active" href="/">Beranda</a></li>
                             <li><a class="menu-item" href="/produk">Produk</a></li>
                             <li><a class="menu-item" href="projects.html">Edukasi</a></li>
-                            <li><a class="menu-item" href="about.html">HydroBot</a></li>
+                            <li><a class="menu-item" href="/hydrobot#ai" id="consultationLink">HydroBot</a></li>
                             <li><a class="menu-item" href="about.html">Tentang Kami</a></li>
-                            <li><a class="menu-item" href="team.html">Our Team</a></li>
+                            <li><a class="menu-item" href="team.html">Tim Kami</a></li>
                             <li><a class="menu-item" href="contact.html">Kontak</a></li>
                         </ul>
                         <!-- mainmenu end -->

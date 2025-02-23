@@ -2,22 +2,22 @@
 <html lang="zxx">
 
 <head>
-    <title>Gardyn — Garden and Landscape Website Template</title>
+    <title>HydroSpace</title>
     <link rel="icon" href="images/icon.webp" type="image/gif" sizes="16x16">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" >
-    <meta content="Gardyn — Garden and Landscape Website Template" name="description" >
-    <meta content="" name="keywords" >
-    <meta content="" name="author" >
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="HydroSpace" name="description">
+    <meta content="" name="keywords">
+    <meta content="" name="author">
     <!-- CSS Files
     ================================================== -->
     <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
-    <link href="css/plugins.css" rel="stylesheet" type="text/css" >
-    <link href="css/swiper.css" rel="stylesheet" type="text/css" >
-    <link href="css/style.css" rel="stylesheet" type="text/css" >
-    <link href="css/coloring.css" rel="stylesheet" type="text/css" >
+    <link href="css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/coloring.css" rel="stylesheet" type="text/css">
     <!-- color scheme -->
-    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css" >
+    <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 
     <style>
         #mainmenu li a.active {
@@ -52,69 +52,69 @@
                 <div class="v-center relative">
 
                     <div class="swiper">
-                      <!-- Additional required wrapper -->
-                      <div class="swiper-wrapper">
+                        <!-- Additional required wrapper -->
+                        <div class="swiper-wrapper">
 
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="swiper-inner" data-bgimage="url(images/slider/1.jpg)" style="background-position: bottom !important; background-size: cover;">
-                                <div class="sw-caption z-1000">
-                                    <div class="container">
-                                        <div class="row g-4 align-items-center">
+                            <!-- Slides -->
+                            <div class="swiper-slide">
+                                <div class="swiper-inner" data-bgimage="url(images/slider/1.jpg)" style="background-position: bottom !important; background-size: cover;">
+                                    <div class="sw-caption z-1000">
+                                        <div class="container">
+                                            <div class="row g-4 align-items-center">
 
-                                            <div class="spacer-double"></div>
+                                                <div class="spacer-double"></div>
 
-                                            <div class="col-lg-6 offset-lg-6">
-                                                <div class="spacer-single"></div>
-                                                <div class="sw-text-wrapper">
-                                                    <div class="subtitle">Solusi Berkebun Modern</div>
-                                                    <h2 class="slider-title mb-4">Nikmati kemudahan bercocok tanam di rumah tanpa butuh lahan luas!</h2>
-                                                    <a class="btn-main mb10 mb-3" href="projects.html">Belanja Sekarang</a>
+                                                <div class="col-lg-6 offset-lg-6">
+                                                    <div class="spacer-single"></div>
+                                                    <div class="sw-text-wrapper">
+                                                        <div class="subtitle">Solusi Berkebun Modern</div>
+                                                        <h2 class="slider-title mb-4">Nikmati kemudahan bercocok tanam di rumah tanpa butuh lahan luas!</h2>
+                                                        <a class="btn-main mb10 mb-3" href="projects.html">Belanja Sekarang</a>
+                                                    </div>
                                                 </div>
+
+                                                <div class="spacer-single"></div>
                                             </div>
 
-                                            <div class="spacer-single"></div>
                                         </div>
-
                                     </div>
+                                    <div class="sw-overlay op-3"></div>
                                 </div>
-                                <div class="sw-overlay op-3"></div>
                             </div>
-                        </div>
-                        <!-- Slides -->
+                            <!-- Slides -->
 
-                        <!-- Slides -->
-                        <div class="swiper-slide">
-                            <div class="swiper-inner" data-bgimage="url(images/slider/2.jpg)">
-                                <div class="sw-caption z-1000">
-                                    <div class="container">
-                                        <div class="row g-4 align-items-center">
+                            <!-- Slides -->
+                            <div class="swiper-slide">
+                                <div class="swiper-inner" data-bgimage="url(images/slider/2.jpg)">
+                                    <div class="sw-caption z-1000">
+                                        <div class="container">
+                                            <div class="row g-4 align-items-center">
 
-                                            <div class="spacer-double"></div>
+                                                <div class="spacer-double"></div>
 
-                                            <div class="col-lg-6">
-                                                <div class="spacer-single"></div>
-                                                <div class="sw-text-wrapper">
-                                                    <div class="subtitle">Panduan Hidroponik untuk Pemula</div>
-                                                    <h2 class="slider-title mb-4">Tonton video edukasi hidroponik dan mulai bercocok tanam dengan mudah!</h2>
-                                                    <a class="btn-main mb10 mb-3" href="projects.html">Tonton Sekarang</a>
+                                                <div class="col-lg-6">
+                                                    <div class="spacer-single"></div>
+                                                    <div class="sw-text-wrapper">
+                                                        <div class="subtitle">Panduan Hidroponik untuk Pemula</div>
+                                                        <h2 class="slider-title mb-4">Tonton video edukasi hidroponik dan mulai bercocok tanam dengan mudah!</h2>
+                                                        <a class="btn-main mb10 mb-3" href="projects.html">Tonton Sekarang</a>
+                                                    </div>
                                                 </div>
+
+                                                <div class="spacer-single"></div>
                                             </div>
 
-                                            <div class="spacer-single"></div>
                                         </div>
-
                                     </div>
+                                    <div class="sw-overlay op-3"></div>
                                 </div>
-                                <div class="sw-overlay op-3"></div>
                             </div>
+                            <!-- Slides -->
                         </div>
-                        <!-- Slides -->
-                    </div>
 
-                    <!-- If we need navigation buttons -->
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                        <!-- If we need navigation buttons -->
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
 
                     </div>
                 </div>
@@ -256,6 +256,47 @@
                 </div>
             </section>
 
+            <!-- Chatbot Section Start -->
+            <div class="chatbot section" id="ai" style="margin-bottom: 140px;">
+                <div class="container">
+                    <div class="d-flex flex-column flex-md-row gap-2 gap-lg-5 justify-content-between">
+                        <div class="col-md-5">
+                            <img src="/images/logo-white.webp" alt="HydroSpace Logo" style="width: 200px;" class="mb-3">
+                            <h2 class="mb-2 text-wrap">Konsultasi Chatbot AI <br><span class="id-color-2">seputar Hidroponik</span></h2>
+                            <p class="text-wrap">HydroBot adalah asisten virtual cerdas yang siap membantumu menjawab pertanyaan dan mengatasi kesulitan seputar hidroponik. Dari pemilihan sistem tanam, perawatan tanaman, hingga solusi saat menghadapi kendala, HydroBot memberikan panduan cepat dan akurat kapan saja. Dengan teknologi AI, chatbot ini dirancang untuk memudahkan perjalanan hidroponikmu, baik sebagai pemula maupun yang ingin mengoptimalkan hasil panen.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <form id="ask">
+                                <!-- Chat Window -->
+                                <div class="chat-window d-flex flex-column" id="chat-window">
+                                    <div class="chat h-100">
+                                        <div class="chat-bubble bot text-wrap lh-1">
+                                            <h5 style="font-weight: 800;">HydroBot</h5>
+                                            Halo, HydroMates! 🌱🤖 Aku HydroBot, asisten virtualmu di dunia hidroponik. Ada yang bisa aku bantu hari ini? 😊
+                                        </div>
+                                        <div class="chat-bubble user text-wrap lh-1">
+                                            <h5 style="font-weight: 800;">User</h5>
+                                            Apa itu hidroponik?
+                                        </div>
+                                    </div>
+
+                                    <!-- Chat Input -->
+                                    <div class="chat-input my-0">
+                                        <input id="question" name="question" type="text" placeholder="Ketik pertanyaan disini.." required />
+                                        <button type="submit">
+                                            <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Chatbot Section End -->
+
             <section class="jarallax">
                 <img src="images/background/2.webp" class="jarallax-img" alt="">
                 <div class="container relative z-2">
@@ -356,7 +397,7 @@
 
                                 <div class="item p-2 fs-18">
                                     <i class="icofont-quote-left text-white fs-32 mb-4"></i>
-                                    <p>"Our garden was in desperate need of a makeover, and this team exceeded all our expectations. They listened carefully to our ideas and transformed our outdoor space into a peaceful retreat we now enjoy every day."
+                                    <p>"Dengan jadwal kerja yang padat, saya pikir berkebun akan sulit. Tapi berkat HydroSpace, saya bisa menanam sayuran hidroponik sendiri di rumah dengan mudah dan efisien. Hasilnya segar dan lebih sehat untuk keluarga!"
                                     </p>
 
                                     <div class="de-rating-ext mb-3">
@@ -371,7 +412,7 @@
                                     <div class="de-flex align-items-center justify-content-start">
                                         <img class="z-2 w-60px circle" alt="" src="images/testimonial/5.webp">
                                         <div class="d-inline ms-3 fs-15">
-                                            <h5 class="fs-15 mb-0">John Smith</h5>
+                                            <h5 class="fs-15 mb-0">Budi Setiawan</h5>
                                             <span>Customer</span>
                                         </div>
                                     </div>
@@ -535,7 +576,8 @@
                                 <img src="images/thumbnail/tips menanam bayam.jpeg" class="hover-scale-1-1 w-100" alt="">
                                 <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
                                     <div class="mb-3">Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!</div>
-                                                                    </div>
+                                    <b>Klik untuk menonton!</b>
+                                </div>
                                 <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
                                 <div class="abs z-2 bottom-0 w-100 hover-op-0">
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
@@ -561,7 +603,8 @@
                                 <img src="images/thumbnail/instalasi hidroponik.jpeg" class="hover-scale-1-1 w-100" alt="">
                                 <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
                                     <div class="mb-3">Pelajari cara memasang sistem hidroponik NFT (Nutrient Film Technique) dengan benar! Video ini membahas alat dan bahan yang dibutuhkan, cara merakit pipa, memasang pompa, hingga memastikan aliran nutrisi berjalan optimal. Cocok untuk pemula yang ingin memulai hidroponik modern dengan hasil maksimal!</div>
-                                                                    </div>
+                                    <b>Klik untuk menonton!</b>
+                                </div>
                                 <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
                                 <div class="abs z-2 bottom-0 w-100 hover-op-0">
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">

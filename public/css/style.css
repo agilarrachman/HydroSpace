@@ -22156,6 +22156,83 @@ border-radius:20px 0 0 20px;
   color:rgb(103, 103, 103);
 }
 
+/* Container Chatbot styling */
+.chat-window {
+    padding: 15px;
+    height: 400px;
+    border-radius: 10px;  
+    background-color: white;
+    font-size: 16px;
+}
 
+.chat-window .chat{
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Chat bubble styling */
+.chat-bubble {
+    padding: 10px 15px;
+    border-radius: 15px;
+    margin: 5px 0; /* Mengatur margin untuk jarak antar chat */
+    max-width: 80%;
+    display: inline-block;
+}
+
+.chat-bubble.user {
+    background-color: var(--secondary-color);
+    color: white;
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.chat-bubble.user h5 {
+    color: white;
+}
+
+.chat-bubble.bot {
+    background-color: var(--primary-color);
+    color: white;
+    align-self: flex-start;
+}
+
+/* Chatbot styling Start */
+.chat-input {
+    display: flex;    
+    padding-top: 10px;
+}
+
+.chat-input input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #4682A9;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.chat-input button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.chat-input button:hover {
+    background-color: var(--bg-dark-3);
+}
+
+@media (max-width: 1024px) { /* Tablet ke bawah */
+  .chatbot{
+    margin-top: 140px;
+  }
+  
+  .chat-window {
+    height: 600px;
+  }
+}
+/* Chatbot styling End */
 
 /* Adjusment End */
