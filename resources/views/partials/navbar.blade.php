@@ -51,7 +51,7 @@
                         <ul id="mainmenu">
                             <li><a class="menu-item {{ ($active === 'Beranda') ? 'active' : '' }}" href="/">Beranda</a></li>
                             <li><a class="menu-item {{ ($active === 'Produk') ? 'active' : '' }}" href="/produk">Produk</a></li>
-                            <li><a class="menu-item {{ ($active === 'Edukasi') ? 'active' : '' }}" href="projects.html">Edukasi</a></li>
+                            <li><a class="menu-item {{ ($active === 'Edukasi') ? 'active' : '' }}" href="/edukasi">Edukasi</a></li>
                             <li><a class="menu-item {{ ($active === 'HydroBot') ? 'active' : '' }}" href="/hydrobot#ai" id="consultationLink">HydroBot</a></li>
                             <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="about.html">Tentang Kami</a></li>
                             <li><a class="menu-item {{ ($active === 'Tim') ? 'active' : '' }}" href="team.html">Tim Kami</a></li>

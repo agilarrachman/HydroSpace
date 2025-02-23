@@ -22228,11 +22228,18 @@ border-radius:20px 0 0 20px;
   .chatbot{
     margin-top: 140px;
   }
-  
+
   .chat-window {
     height: 600px;
   }
 }
 /* Chatbot styling End */
+
+/* Halaman Katalog Video Start */
+#video img{
+  max-height: 403px;
+  object-fit: cover;
+}
+/* Halaman Katalog Video End */
 
 /* Adjusment End */
