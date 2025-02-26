@@ -16,9 +16,33 @@ Route::get('/produk', function () {
     ]);
 });
 
+Route::get('/edukasi', function () {
+    return view('videos', [
+        "active" => "Edukasi"
+    ]);
+});
+
+Route::get('/edukasi/slug', function () {
+    return view('viewVideo', [
+        "active" => "Edukasi"
+    ]);
+});
+
 Route::get('/hydrobot', function () {
     return view('index', [
         "title" => "HydroBot — HydroSpace",
         "active" => "HydroBot"
+    ]);
+});
+
+Route::get('/tentang', function () {
+    return view('about', [
+        "active" => "Tentang"
+    ]);
+});
+
+Route::get('/kontak', function () {
+    return view('contact', [
+        "active" => "Kontak"
     ]);
 });

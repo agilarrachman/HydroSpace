@@ -22228,11 +22228,50 @@ border-radius:20px 0 0 20px;
   .chatbot{
     margin-top: 140px;
   }
-  
+
   .chat-window {
     height: 600px;
   }
 }
 /* Chatbot styling End */
+
+/* Halaman Katalog Video Start */
+.dropdown-toggle::after {
+    display: none !important;
+}
+
+.ripple-wave {
+    display: none !important;
+}
+
+.dropdown-menu {
+    position: absolute !important;
+    transform: translate(0, 50px) !important;
+    z-index: 1050; /* Pastikan dropdown tetap di atas elemen lain */
+}
+
+.btn,
+.btn-primary {
+    background-color: var(--primary-color);
+}
+
+.btn:hover,
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+}
+
+#video img{
+  max-height: 403px;
+  object-fit: cover;
+}
+/* Halaman Katalog Video End */
+
+/* Halaman Video Start */
+.thumbnail,.video {
+    aspect-ratio: 16 / 9 !important;
+    width: 100%;
+    object-fit: cover;
+}
+/* Halaman Video End */
 
 /* Adjusment End */
