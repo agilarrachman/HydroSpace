@@ -2,7 +2,7 @@
 <html lang="zxx">
 
 <head>
-    <title>HydroSpace | Kontak</title>
+    <title>{{ $title }}</title>
     <link rel="icon" href="images/icon.webp" type="image/gif" sizes="16x16">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -17,13 +17,6 @@
     <link href="css/coloring.css" rel="stylesheet" type="text/css">
     <!-- color scheme -->
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
-
-    <style>
-        #mainmenu li a.active {
-            color: white !important;
-            border-bottom: 2px solid white;
-        }
-    </style>
 </head>
 
 <body>

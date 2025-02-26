@@ -1,4 +1,11 @@
 <!-- header begin -->
+<style>
+    #mainmenu li a.active {
+        color: #354e33 !important;
+        border-bottom: 2px solid #354e33;
+    }
+</style>
+
 <header class="header-light transparent">
     <div id="topbar">
         <div class="container">
@@ -53,7 +60,7 @@
                             <li><a class="menu-item {{ ($active === 'Produk') ? 'active' : '' }}" href="/produk">Produk</a></li>
                             <li><a class="menu-item {{ ($active === 'Edukasi') ? 'active' : '' }}" href="/edukasi">Edukasi</a></li>
                             <li><a class="menu-item {{ ($active === 'HydroBot') ? 'active' : '' }}" href="/hydrobot#ai" id="consultationLink">HydroBot</a></li>
-                            <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="/tentang">Tentang Kami</a></li>                    
+                            <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="/tentang">Tentang Kami</a></li>
                             <li><a class="menu-item {{ ($active === 'Kontak') ? 'active' : '' }}" href="/kontak">Kontak</a></li>
                         </ul>
                         <!-- mainmenu end -->
