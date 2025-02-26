@@ -3,7 +3,7 @@
     <div class="container relative z-2">
         <div class="row gx-5">
             <div class="col-lg-4 col-sm-6">
-                <img src="images/logo-white.webp" class="w-150px" alt="">
+                <img src="/images/logo-white.webp" class="w-150px" alt="">
                 <div class="spacer-20"></div>
                 <p>HydroSpace adalah platform yang mendukung berkebun modern dengan hidroponik. Kami menghadirkan edukasi, kemudahan, dan solusi bagi siapa saja yang ingin mulai bercocok tanam tanpa lahan luas.</p>
 
@@ -74,6 +74,6 @@
             </div>
         </div>
     </div>
-    <img src="images/misc/silhuette-1-black.webp" class="abs bottom-0 op-3" alt="">
+    <img src="/images/misc/silhuette-1-black.webp" class="abs bottom-0 op-3" alt="">
 </footer>
 <!-- footer end -->
