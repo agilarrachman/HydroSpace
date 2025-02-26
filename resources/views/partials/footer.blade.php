@@ -21,10 +21,9 @@
                         <div class="widget">
                             <h5>Perusahaan</h5>
                             <ul>
-                                <li><a href="index.html">Beranda</a></li>
-                                <li><a href="about.html">Tentang Kami</a></li>
-                                <li><a href="blog.html">Tim Kami</a></li>
-                                <li><a href="contact.html">Kontak</a></li>
+                                <li><a href="/">Beranda</a></li>
+                                <li><a href="/tentang">Tentang Kami</a></li>
+                                <li><a href="/kontak">Kontak</a></li>
                             </ul>
                         </div>
                     </div>
@@ -33,8 +32,8 @@
                             <h5>Layanan Kami</h5>
                             <ul>
                                 <li><a href="service-single.html">E-commerce Hidroponik</a></li>
-                                <li><a href="service-single.html">Video Edukasi</a></li>
-                                <li><a href="service-single.html">HydroBot Asisten Virtual</a></li>
+                                <li><a href="/edukasi">Video Edukasi</a></li>
+                                <li><a href="/chatbot#ai">HydroBot Asisten Virtual</a></li>
                             </ul>
                         </div>
                     </div>

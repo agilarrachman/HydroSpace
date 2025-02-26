@@ -2,7 +2,7 @@
 <html lang="zxx">
 
 <head>
-    <title>HydroSpace</title>
+    <title>HydroSpace | Beranda</title>
     <link rel="icon" href="images/icon.webp" type="image/gif" sizes="16x16">
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -22,7 +22,6 @@
     <style>
         #mainmenu li a.active {
             color: white !important;
-            font-weight: 700;
             border-bottom: 2px solid white;
         }
     </style>
@@ -583,7 +582,7 @@
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
                                         <div class="col-11 d-flex flex-column flex-lg-row">
                                             <div class="me-5">
-                                                Kategori Penanaman
+                                                🌱 Pemilihan & Perawatan Tanaman
                                                 <h5>Panduan Praktis Menanam Sawi Hidroponik</h5>
                                             </div>
                                         </div>
@@ -610,12 +609,8 @@
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
                                         <div class="col-11 d-flex flex-column flex-lg-row">
                                             <div class="me-5">
-                                                Judul
+                                                🛠️ Instalasi & Perakitan Sistem
                                                 <h5>Panduan Instalasi Sistem NFT Hidroponik</h5>
-                                            </div>
-                                            <div>
-                                                Kategori
-                                                <h5>Instalasi</h5>
                                             </div>
                                         </div>
 

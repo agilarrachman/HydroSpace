@@ -40,8 +40,8 @@
                         <!-- logo begin -->
                         <div id="logo">
                             <a href="index.html">
-                                <img class="logo-main" src="images/logo-white.webp" alt="">
-                                <img class="logo-mobile" src="images/logo-white.webp" alt="">
+                                <img class="logo-main" src="/images/logo-white.webp" alt="">
+                                <img class="logo-mobile" src="/images/logo-white.webp" alt="">
                             </a>
                         </div>
                         <!-- logo end -->
@@ -53,9 +53,8 @@
                             <li><a class="menu-item {{ ($active === 'Produk') ? 'active' : '' }}" href="/produk">Produk</a></li>
                             <li><a class="menu-item {{ ($active === 'Edukasi') ? 'active' : '' }}" href="/edukasi">Edukasi</a></li>
                             <li><a class="menu-item {{ ($active === 'HydroBot') ? 'active' : '' }}" href="/hydrobot#ai" id="consultationLink">HydroBot</a></li>
-                            <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="about.html">Tentang Kami</a></li>
-                            <li><a class="menu-item {{ ($active === 'Tim') ? 'active' : '' }}" href="team.html">Tim Kami</a></li>
-                            <li><a class="menu-item {{ ($active === 'Kontak') ? 'active' : '' }}" href="contact.html">Kontak</a></li>
+                            <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="/tentang">Tentang Kami</a></li>                    
+                            <li><a class="menu-item {{ ($active === 'Kontak') ? 'active' : '' }}" href="/kontak">Kontak</a></li>
                         </ul>
                         <!-- mainmenu end -->
                     </div>
