@@ -67,7 +67,7 @@
                     </div>
                     <div class="de-flex-col">
                         <div class="menu_side_area">
-                            <a href="/signin" class="btn-main">Sign In</a>
+                            <a href="/signin" class="btn-main">Masuk</a>
                             <span id="menu-btn"></span>
                         </div>
 

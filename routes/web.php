@@ -9,21 +9,21 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/produk', function () {
+Route::get('/product', function () {
     return view('produk', [
         "title" => "HydroSpace | Produk",
         "active" => "Produk"
     ]);
 });
 
-Route::get('/edukasi', function () {
+Route::get('/education', function () {
     return view('videos', [
         "title" => "HydroSpace | Edukasi",
         "active" => "Edukasi"
     ]);
 });
 
-Route::get('/edukasi/slug', function () {
+Route::get('/education/slug', function () {
     return view('viewVideo', [
         "title" => "HydroSpace | Edukasi",
         "active" => "Edukasi"
@@ -53,13 +53,13 @@ Route::get('/kontak', function () {
 
 Route::get('/signin', function () {
     return view('signin', [
-        "title" => "HydroSpace | Sign In"
+        "title" => "HydroSpace | Masuk"
     ]);
 });
 
 Route::get('/signup', function () {
     return view('signup', [
-        "title" => "HydroSpace | Sign Up"
+        "title" => "HydroSpace | Registrasi"
     ]);
 });
 
