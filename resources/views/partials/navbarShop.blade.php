@@ -66,14 +66,21 @@
                         <!-- mainmenu end -->
                     </div>
                     <div class="de-flex-col">
-                        <div class="menu_side_area">
-                            <a href="/signin" class="btn-main">Masuk</a>
-                            <span id="menu-btn"></span>
-                        </div>
+                        <div class="de-flex-col">
 
-                        <div id="btn-extra">
-                            <span style="border-bottom: solid 2px #354e33;"></span>
-                            <span style="border-bottom: solid 2px #354e33;"></span>                            
+                            <div class="d-flex">
+                                <a class="de-icon-counter" href="#">
+                                    <div class="d-counter">0</div>
+                                    <img src="/images/ui/order.svg" class="" alt="">
+                                </a>
+
+                                <div id="btn-cart" class="de-icon-counter">
+                                    <div class="d-counter">5</div>
+                                    <img src="/images/ui/cart.svg" class="" alt="">
+                                </div>
+                            </div>
+
+                            <span id="menu-btn"></span>
                         </div>
                     </div>
                 </div>

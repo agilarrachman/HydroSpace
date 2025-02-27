@@ -13524,9 +13524,23 @@ i.bg-color-secondary {
   margin-bottom: 20px;
 }
 
-.atr__images img{
+.recommendation .atr__images img{
   width: 100%;
   height: 320px;
+  background: var(--bg-light);
+  object-fit: cover;
+}
+
+.owl-carousel .atr__images img{
+  width: 321.5px;
+  height: 321.5px;
+  background: var(--bg-light);
+  object-fit: cover;
+}
+
+#products .atr__images img{
+  width: 235px;
+  height: 235px;
   background: var(--bg-light);
   object-fit: cover;
 }
@@ -13676,6 +13690,8 @@ i.bg-color-secondary {
 .de__cart-item img{
   position: absolute;
   width: 64px;
+  height: 64px;
+  object-fit: cover;
   margin: 0 15px;
   background: var(--bg-light);
   padding: 5px;
@@ -13883,7 +13899,6 @@ input[type="range"]::-moz-range-thumb {
 /* owl sync begin */
 #sync1 .item {
   background: var(--bg-light);
-  padding: 40px;
   margin: 5px;
   color: #FFF;
   -webkit-border-radius: 3px;
@@ -13894,7 +13909,6 @@ input[type="range"]::-moz-range-thumb {
 
 #sync2 .item {
   background: var(--bg-light);
-  padding: 10px 0px;
   margin: 5px;
   color: #FFF;
   -webkit-border-radius: 3px;
@@ -22273,5 +22287,17 @@ border-radius:20px 0 0 20px;
     object-fit: cover;
 }
 /* Halaman Video End */
+
+/* Halaman Detail Produk Start */
+#sync1 img {
+    height: 574px;
+    object-fit: cover;
+}
+
+#sync2 img {
+    height: 122px;
+    object-fit: cover;
+}
+/* Halaman Detail Produk End */
 
 /* Adjusment End */

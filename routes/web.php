@@ -9,21 +9,28 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/product', function () {
-    return view('produk', [
+Route::get('/produk', function () {
+    return view('products', [
         "title" => "HydroSpace | Produk",
         "active" => "Produk"
     ]);
 });
 
-Route::get('/education', function () {
+Route::get('/produk/slug', function () {
+    return view('viewProduct', [
+        "title" => "HydroSpace | Produk",
+        "active" => "Produk"
+    ]);
+});
+
+Route::get('/edukasi', function () {
     return view('videos', [
         "title" => "HydroSpace | Edukasi",
         "active" => "Edukasi"
     ]);
 });
 
-Route::get('/education/slug', function () {
+Route::get('/edukasi/slug', function () {
     return view('viewVideo', [
         "title" => "HydroSpace | Edukasi",
         "active" => "Edukasi"
@@ -63,7 +70,7 @@ Route::get('/signup', function () {
     ]);
 });
 
-Route::get('/forgot-password', function () {
+Route::get('/lupa-password', function () {
     return view('forgotPassword', [
         "title" => "HydroSpace | Lupa Password"
     ]);
