@@ -67,7 +67,7 @@
                     </div>
                     <div class="de-flex-col">
                         <div class="menu_side_area">
-                            <a href="contact.html" class="btn-main btn-line">Sign In</a>
+                            <a href="/signin" class="btn-main btn-line">Sign In</a>
                             <span id="menu-btn"></span>
                         </div>
 

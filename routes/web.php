@@ -50,3 +50,27 @@ Route::get('/kontak', function () {
         "active" => "Kontak"
     ]);
 });
+
+Route::get('/signin', function () {
+    return view('signin', [
+        "title" => "HydroSpace | Sign In"
+    ]);
+});
+
+Route::get('/signup', function () {
+    return view('signup', [
+        "title" => "HydroSpace | Sign Up"
+    ]);
+});
+
+Route::get('/forgot-password', function () {
+    return view('forgotPassword', [
+        "title" => "HydroSpace | Lupa Password"
+    ]);
+});
+
+Route::get('/create-profile', function () {
+    return view('createProfile', [
+        "title" => "HydroSpace | Buat Profil"
+    ]);
+});
