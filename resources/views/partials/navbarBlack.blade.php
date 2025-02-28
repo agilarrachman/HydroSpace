@@ -67,13 +67,13 @@
                     </div>
                     <div class="de-flex-col">
                         <div class="menu_side_area">
-                            <a href="contact.html" class="btn-main">Sign In</a>
+                            <a href="/signin" class="btn-main">Masuk</a>
                             <span id="menu-btn"></span>
                         </div>
 
                         <div id="btn-extra">
-                            <span></span>
-                            <span></span>
+                            <span style="border-bottom: solid 2px #354e33;"></span>
+                            <span style="border-bottom: solid 2px #354e33;"></span>                            
                         </div>
                     </div>
                 </div>
