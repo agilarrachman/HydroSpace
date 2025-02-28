@@ -82,6 +82,22 @@
                             </a>
                         </li>
 
+                                                <!-- Customer -->
+                        <li class="menu-item">
+                            <a href="order.html" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-user"></i>
+                                <div data-i18n="Basic">Kustomer</div>
+                            </a>
+                        </li>
+
+                        <!-- Admin -->
+                        <li class="menu-item">
+                            <a href="order.html" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-group"></i>
+                                <div data-i18n="Basic">Admin</div>
+                            </a>
+                        </li>
+
                         <!-- Chat -->
                         <li class="menu-item">
                             <a href="cards-basic.html" class="menu-link">
@@ -98,6 +114,14 @@
                             </a>
                         </li>
 
+                        <!-- Category -->
+                        <li class="menu-item">
+                            <a href="cards-basic.html" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-category"></i>
+                                <div data-i18n="Basic">Kategori</div>
+                            </a>
+                        </li>
+
                         <!-- Video -->
                         <li class="menu-item">
                             <a href="cards-basic.html" class="menu-link">
@@ -106,16 +130,24 @@
                             </a>
                         </li>
 
-                        <!-- Profile -->
+                        <!-- Order -->
                         <li class="menu-item">
+                            <a href="order.html" class="menu-link">
+                                <i class="menu-icon tf-icons bx bx-cart"></i>
+                                <div data-i18n="Basic">Order</div>
+                            </a>
+                        </li>
+
+                        <!-- Setting -->
+                        <li class="menu-item mt-auto">
                             <a href="profile.html" class="menu-link">
-                                <i class="menu-icon tf-icons bx bx-user"></i>
-                                <div data-i18n="Profile">Profile</div>
+                                <i class="menu-icon tf-icons bx bx-cog"></i>
+                                <div data-i18n="Profile">Pengaturan</div>
                             </a>
                         </li>
 
                         <!-- Log -->
-                        <li class="menu-item mt-auto">
+                        <li class="menu-item">
                             <a href="/" class="menu-link">
                                 <i class="menu-icon tf-icons bx bx-log-out"></i>
                                 <div data-i18n="Logout">Log Out</div>
@@ -215,27 +247,24 @@
                         <div class="container-xxl flex-grow-1 container-p-y">
                             <div class="row">
                                 <div class="col-xl-6 mb-4 order-0">
-                                    <div class="card">
-                                        <div class="d-flex align-items-end row">
-                                            <div class="col-sm-7">
-                                                <div class="card-body">
-                                                    <h5 class="card-title text-primary">Selamat Datang, John Doe! 👋</h5>
-                                                    <p class="mb-4">
-                                                        You have done <span class="fw-medium">72%</span> more sales today. Check your new badge in
-                                                        your profile.
-                                                    </p>
-
-                                                    <!-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a> -->
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-5 text-center text-sm-left">
-                                                <div class="card-body pb-0 px-0 px-md-4">
+                                    <div class="card h-100 d-flex align-items-center justify-content-center">
+                                        <div class="d-flex align-items-center row">
+                                            <div class="col-sm-4 text-center text-sm-left">
+                                                <div class="card-body px-0 px-md-4">
                                                     <img
-                                                        src="../assets/img/illustrations/man-with-laptop-light.png"
-                                                        height="140"
-                                                        alt="View Badge User"
+                                                        src="{{ asset('images/dashboard/hero-dashboard.png') }}"
+                                                        height="100"
                                                         data-app-dark-img="illustrations/man-with-laptop-dark.png"
                                                         data-app-light-img="illustrations/man-with-laptop-light.png" />
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title mb-2">Selamat Datang, John Doe! 👋</h5>
+                                                    <p class="mb-0">
+                                                        Pantau perkembangan penjualan dan kelola data dengan mudah disini.
+                                                    </p>
+                                                    {{-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -243,7 +272,7 @@
                                 </div>
 
                                 <div class="col-xl-2 col-lg-4 col-md-12 col-6 mb-4">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <div class="card-body">
                                             <div class="card-title d-flex align-items-start justify-content-between">
                                                 <div class="avatar flex-shrink-0">
@@ -257,7 +286,7 @@
                                 </div>
 
                                 <div class="col-xl-2 col-lg-4 col-md-12 col-6 mb-4">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <div class="card-body">
                                             <div class="card-title d-flex align-items-start justify-content-between">
                                                 <div class="avatar flex-shrink-0">
@@ -271,7 +300,7 @@
                                 </div>
 
                                 <div class="col-xl-2 col-lg-4 col-md-12 mb-4">
-                                    <div class="card">
+                                    <div class="card h-100">
                                         <div class="card-body">
                                             <div class="card-title d-flex align-items-start justify-content-between">
                                                 <div class="avatar flex-shrink-0">
@@ -295,8 +324,8 @@
                                             </div>
                                         </div>
                                         <div class="card-body pt-3">
-                                            <ul class="p-0 m-0">
-                                                <li class="d-flex mb-4 pb-1">
+                                            <ul class="p-0 m-0 d-flex flex-column h-100">
+                                                <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                     <div class="avatar flex-shrink-0 me-3">
                                                         <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
                                                     </div>
@@ -310,7 +339,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="d-flex mb-4 pb-1">
+                                                <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                     <div class="avatar flex-shrink-0 me-3">
                                                         <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
                                                     </div>
@@ -324,7 +353,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="d-flex mb-4 pb-1">
+                                                <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                     <div class="avatar flex-shrink-0 me-3">
                                                         <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
                                                     </div>
@@ -338,7 +367,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="d-flex mb-4 pb-1">
+                                                <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                     <div class="avatar flex-shrink-0 me-3">
                                                         <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
                                                     </div>
@@ -352,7 +381,7 @@
                                                         </div>
                                                     </div>
                                                 </li>
-                                                <li class="d-flex mb-4 pb-1">
+                                                <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                     <div class="avatar flex-shrink-0 me-3">
                                                         <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
                                                     </div>
