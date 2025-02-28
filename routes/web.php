@@ -50,3 +50,10 @@ Route::get('/kontak', function () {
         "active" => "Kontak"
     ]);
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard', [
+        "title" => "HydroSpace | Dashboard",
+        "active" => "Dashboard"
+    ]);
+});
