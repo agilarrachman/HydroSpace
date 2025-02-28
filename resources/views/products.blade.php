@@ -881,6 +881,568 @@
                                 </div>
                                 <!-- product item end -->
 
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🌱 Bibit & Benih</label>
+
+                                        <h3>Bibit Sawi</h3>
+                                        <div class="atr__main-price">
+                                            Rp20.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🌱 Bibit & Benih</label>
+
+                                        <h3>Bibit Sawi</h3>
+                                        <div class="atr__main-price">
+                                            Rp20.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🌱 Bibit & Benih</label>
+
+                                        <h3>Bibit Sawi</h3>
+                                        <div class="atr__main-price">
+                                            Rp20.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🌱 Bibit & Benih</label>
+
+                                        <h3>Bibit Sawi</h3>
+                                        <div class="atr__main-price">
+                                            Rp20.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/nutrisi/nutrisi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">💧 Nutrisi Tanaman</label>
+
+                                        <h3>Nutrisi Hidroponik AB</h3>
+                                        <div class="atr__main-price">
+                                            Rp100.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/nutrisi/nutrisi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">💧 Nutrisi Tanaman</label>
+
+                                        <h3>Nutrisi Hidroponik AB</h3>
+                                        <div class="atr__main-price">
+                                            Rp100.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/nutrisi/nutrisi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">💧 Nutrisi Tanaman</label>
+
+                                        <h3>Nutrisi Hidroponik AB</h3>
+                                        <div class="atr__main-price">
+                                            Rp100.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/nutrisi/nutrisi.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">💧 Nutrisi Tanaman</label>
+
+                                        <h3>Nutrisi Hidroponik AB</h3>
+                                        <div class="atr__main-price">
+                                            Rp100.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/alat/netpot.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🛠️ Peralatan Hidroponik</label>
+
+                                        <h3>NetPot Hidroponik 5cm</h3>
+                                        <div class="atr__main-price">
+                                            Rp1.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/alat/netpot.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🛠️ Peralatan Hidroponik</label>
+
+                                        <h3>NetPot Hidroponik 5cm</h3>
+                                        <div class="atr__main-price">
+                                            Rp1.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/alat/netpot.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🛠️ Peralatan Hidroponik</label>
+
+                                        <h3>NetPot Hidroponik 5cm</h3>
+                                        <div class="atr__main-price">
+                                            Rp1.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/alat/netpot.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">🛠️ Peralatan Hidroponik</label>
+
+                                        <h3>NetPot Hidroponik 5cm</h3>
+                                        <div class="atr__main-price">
+                                            Rp1.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/aksesori-pendukung/phmeter.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">⚙️ Aksesori & Pendukung</label>
+
+                                        <h3>PH Meter TDS & EC Meter</h3>
+                                        <div class="atr__main-price">
+                                            Rp75.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/aksesori-pendukung/phmeter.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">⚙️ Aksesori & Pendukung</label>
+
+                                        <h3>PH Meter TDS & EC Meter</h3>
+                                        <div class="atr__main-price">
+                                            Rp75.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/aksesori-pendukung/phmeter.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">⚙️ Aksesori & Pendukung</label>
+
+                                        <h3>PH Meter TDS & EC Meter</h3>
+                                        <div class="atr__main-price">
+                                            Rp75.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/aksesori-pendukung/phmeter.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">⚙️ Aksesori & Pendukung</label>
+
+                                        <h3>PH Meter TDS & EC Meter</h3>
+                                        <div class="atr__main-price">
+                                            Rp75.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/paket/paket.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">📦 Paket Hidroponik</label>
+
+                                        <h3>Paket Hidroponik Wick 9 Lubang 1 Bak</h3>
+                                        <div class="atr__main-price">
+                                            Rp50.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/paket/paket.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">📦 Paket Hidroponik</label>
+
+                                        <h3>Paket Hidroponik Wick 9 Lubang 1 Bak</h3>
+                                        <div class="atr__main-price">
+                                            Rp50.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/paket/paket.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">📦 Paket Hidroponik</label>
+
+                                        <h3>Paket Hidroponik Wick 9 Lubang 1 Bak</h3>
+                                        <div class="atr__main-price">
+                                            Rp50.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <!-- product item begin -->
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
+                                            </div>
+                                            <a href="/produk/slug">
+                                                <img class="atr__image-main p-2" src="images/shop/paket/paket.png">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                            </div>
+                                        </div>
+
+                                        <label for="cat_4">📦 Paket Hidroponik</label>
+
+                                        <h3>Paket Hidroponik Wick 9 Lubang 1 Bak</h3>
+                                        <div class="atr__main-price">
+                                            Rp50.000
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <!-- product item end -->
+
+                                <div class="col-lg-12 pt-4 text-center">
+                                    <div class="d-inline-block">
+                                        <nav aria-label="Page navigation example">
+                                            <ul class="pagination">
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Previous">
+                                                        <span aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
+                                                    </a>
+                                                </li>
+                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                                                <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
+                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="#" aria-label="Next">
+                                                        <span aria-hidden="true"><i class="fa fa-chevron-right"></i></span>
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>

@@ -22128,6 +22128,24 @@ border-radius:20px 0 0 20px;
 }
 
 /* Adjusment Start */
+.profile-picture img{
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 100px;
+}
+
+.profile-picture{
+  color: white;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.3s ease-in-out;
+}
+
+.profile-picture:hover{
+  color: white;
+  border-bottom: 2px solid white;
+}
+
 .hover.overflow-hidden.relative.text-light.text-center.wow.fadeInRight img {
     max-width: 570px;
     max-height: 570px;    

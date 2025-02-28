@@ -66,10 +66,15 @@
                         <!-- mainmenu end -->
                     </div>
                     <div class="de-flex-col">
-                        <div class="menu_side_area">
+                        <a href="/profil" class="profile-picture">
+                            <img src="/images/team/3.jpg" class="me-2" alt="profile-picture">
+                            Agil ArRachman
+                        </a>
+
+                        <!-- <div class="menu_side_area">
                             <a href="/signin" class="btn-main btn-line">Masuk</a>
                             <span id="menu-btn"></span>
-                        </div>
+                        </div> -->
 
                         <div id="btn-extra">
                             <span></span>
