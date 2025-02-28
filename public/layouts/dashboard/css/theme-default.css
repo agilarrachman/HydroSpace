@@ -581,7 +581,7 @@ a {
 }
 a:hover {
   color: #546453;
-  text-decoration: underline;
+  /* text-decoration: underline; */
 }
 
 .fill-primary {
