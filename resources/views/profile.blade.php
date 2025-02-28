@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="{{ asset('layouts/dashboard/css/theme-default.css') }}" class="template-customizer-theme-css" />
   <link rel="stylesheet" href="{{ asset('layouts/dashboard/css/demo.css') }}" />
 
-  <!-- Vendors CSS -->g
+  <!-- Vendors CSS -->
   <link rel="stylesheet" href="{{ asset('layouts/dashboard/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
   <link rel="stylesheet" href="{{ asset('layouts/dashboard/libs/apex-charts/apex-charts.css') }}" />
 
@@ -39,7 +39,34 @@
   <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
 
+
+  <link href="{{ asset('css/plugins.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('css/styleProfile.css') }}" rel="stylesheet" type="text/css">
+  <link href="{{ asset('css/coloring.css') }}" rel="stylesheet" type="text/css">
+  <!-- color scheme -->
+  <link id="colors" href="{{ asset('css/colors/scheme-01.css') }}" rel="stylesheet" type="text/css">
+
   <style>
+    .form-control:disabled {
+      color: #354e33;
+      background-color: #fff;
+      opacity: 1;
+    }
+
+    .form-select:disabled {
+      color: #354e33;
+      background-color: #fff;
+    }
+
+    .form-check-input[disabled]~.form-check-label,
+    .form-check-input:disabled~.form-check-label {
+      opacity: 1;
+    }
+
+    .form-check-input:disabled {
+      opacity: 1;
+    }
+
     .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
       background-color: rgba(53, 78, 51, 0.16) !important;
       color: #354e33;
@@ -49,8 +76,41 @@
       background-color: #354e33;
     }
 
+    .app-brand {
+      align-items: start;
+      gap: 16px;
+    }
+
+    .menu .app-brand.demo {
+      height: auto;
+    }
+
     .app-brand .layout-menu-toggle {
       background-color: #354e33 !important;
+    }
+
+    .back-link {
+      margin: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 500px;
+      color: white;
+      text-decoration: none;
+      font-size: 24px;
+      border: 2px solid #354e33;
+      transition: background 0.3s;
+    }
+
+    .back-link:hover {
+      background-color: rgb(222, 222, 222);
+    }
+
+    .back-link i {
+      font-size: 24px;
+      color: #354e33;
     }
   </style>
 </head>
@@ -62,8 +122,11 @@
       <!-- Menu -->
 
       <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-        <div class="app-brand demo">
-          <a href="index.html" class="app-brand-link">
+        <div class="app-brand demo d-flex flex-column mb-3">
+          <a href="/" class="back-link">
+            <i class='bx bx-arrow-back'></i>
+          </a>
+          <a href="/" class="app-brand-link">
             <img style="max-width: 165px !important;" src="{{ asset('images/logo-black.webp') }}" alt="">
           </a>
 
@@ -78,8 +141,24 @@
           <!-- Dashboards -->
           <li class="menu-item active">
             <a href="cards-basic.html" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-home-circle"></i>
-              <div data-i18n="Basic">Dashboard</div>
+              <i class="menu-icon tf-icons bx bx-user"></i>
+              <div data-i18n="Profile">Lihat Profil</div>
+            </a>
+          </li>
+
+          <!-- Update Profile -->
+          <li class="menu-item">
+            <a href="cards-basic.html" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-edit"></i>
+              <div data-i18n="Update Profile">Perbarui Profil</div>
+            </a>
+          </li>
+
+          <!-- My Orders -->
+          <li class="menu-item">
+            <a href="cards-basic.html" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-notepad"></i>
+              <div data-i18n="Orders">Pesanan Saya</div>
             </a>
           </li>
 
@@ -91,27 +170,11 @@
             </a>
           </li>
 
-          <!-- Product -->
+          <!-- Forgot Password -->
           <li class="menu-item">
             <a href="cards-basic.html" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-box"></i>
-              <div data-i18n="Basic">Produk</div>
-            </a>
-          </li>
-
-          <!-- Video -->
-          <li class="menu-item">
-            <a href="cards-basic.html" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-video"></i>
-              <div data-i18n="Basic">Video</div>
-            </a>
-          </li>
-
-          <!-- Profile -->
-          <li class="menu-item">
-            <a href="profile.html" class="menu-link">
-              <i class="menu-icon tf-icons bx bx-user"></i>
-              <div data-i18n="Profile">Profile</div>
+              <i class="menu-icon tf-icons bx bx-key"></i>
+              <div data-i18n="Forgot Password">Lupa Password</div>
             </a>
           </li>
 
@@ -120,6 +183,14 @@
             <a href="/" class="menu-link">
               <i class="menu-icon tf-icons bx bx-log-out"></i>
               <div data-i18n="Logout">Log Out</div>
+            </a>
+          </li>
+
+          <!-- Log -->
+          <li class="menu-item">
+            <a href="/" class="menu-link">
+              <i class="menu-icon tf-icons bx bx-trash"></i>
+              <div data-i18n="Delete Account">Hapus Akun</div>
             </a>
           </li>
         </ul>
@@ -140,7 +211,7 @@
           </div>
 
           <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <h5 class="mb-0">Hai, John Doe!</h5>
+            <h5 class="mb-0">Hai, Agil ArRachman!</h5>
 
             <ul class="navbar-nav flex-row align-items-center ms-auto">
 
@@ -148,7 +219,7 @@
               <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                   <div class="avatar avatar-online">
-                    <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                    <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
                   </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
@@ -157,12 +228,12 @@
                       <div class="d-flex">
                         <div class="flex-shrink-0 me-3">
                           <div class="avatar avatar-online">
-                            <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
                           </div>
                         </div>
                         <div class="flex-grow-1">
-                          <span class="fw-medium d-block">John Doe</span>
-                          <small class="text-muted">Admin</small>
+                          <span class="fw-medium d-block">Agil ArRachman</span>
+                          <small class="text-muted">agil.arrachman</small>
                         </div>
                       </div>
                     </a>
@@ -213,194 +284,144 @@
         <div class="content-wrapper">
           <!-- Content -->
 
-          <div class="container-xxl flex-grow-1 container-p-y">
-            <div class="row">
-              <div class="col-xl-6 mb-4 order-0">
-                <div class="card">
-                  <div class="d-flex align-items-end row">
-                    <div class="col-sm-7">
-                      <div class="card-body">
-                        <h5 class="card-title text-primary">Selamat Datang, John Doe! 👋</h5>
-                        <p class="mb-4">
-                          You have done <span class="fw-medium">72%</span> more sales today. Check your new badge in
-                          your profile.
-                        </p>
+          <div class="container col-12 col-lg-8 mx-auto mx-lg-0 container-p-y mt-5">
+            {{-- navbar --}}
+            @include('partials.navbarProfile')
+            {{-- navbar end --}}
 
-                        <!-- <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a> -->
-                      </div>
+            <h3 class="fw-bold">Lihat Profil</h3>
+            <form id="formAuthentication" class="mb-3" action="index.html">
+              <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
+                <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
+                <!-- <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)"> -->
+                @error('foto_profil')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
+                <!-- <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar profil dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div> -->
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col-lg-6">
+                  <label for="username" class="form-label">Email</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="email"
+                    name="email"
+                    placeholder="Masukkan email"
+                    value="agil.arrachman19@gmail.com"
+                    autofocus disabled />
+                </div>
+                <div class="col-lg-6">
+                  <label for="nama" class="form-label">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nama"
+                    name="nama"
+                    value="Agil ArRachman"
+                    placeholder="Masukkan nama lengkap" disabled />
+                </div>
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col-lg-3">
+                  <label for="nama" class="form-label">Jenis Kelamin</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input
+                        name="jenis-kelamin"
+                        class="form-check-input"
+                        type="radio"
+                        value="Pria"
+                        id="pria"
+                        checked disabled />
+                      <label class="form-check-label" for="pria"> Pria </label>
                     </div>
-                    <div class="col-sm-5 text-center text-sm-left">
-                      <div class="card-body pb-0 px-0 px-md-4">
-                        <img
-                          src="../assets/img/illustrations/man-with-laptop-light.png"
-                          height="140"
-                          alt="View Badge User"
-                          data-app-dark-img="illustrations/man-with-laptop-dark.png"
-                          data-app-light-img="illustrations/man-with-laptop-light.png" />
-                      </div>
+                    <div class="form-check">
+                      <input
+                        name="jenis-kelamin"
+                        class="form-check-input"
+                        type="radio"
+                        value=""
+                        id="wanita" disabled />
+                      <label class="form-check-label" for="wanita"> Wanita </label>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-xl-2 col-lg-4 col-md-12 col-6 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="card-title d-flex align-items-start justify-content-between">
-                      <div class="avatar flex-shrink-0">
-                        <span class="avatar-initial rounded bg-label-success"><i class="bx bx-dollar-circle"></i></span>
-                      </div>
-                    </div>
-                    <span class="fw-medium d-block mb-1">Pendapatan</span>
-                    <h3 class="card-title mt-2 mb-1">Rp98,1 jt</h3>
-                  </div>
+                <div class="col-lg-5">
+                  <label for="nohp" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    value="agil.arrachman"
+                    placeholder="Masukkan username" disabled />
+                </div>
+                <div class="col-lg-4">
+                  <label for="nohp" class="form-label">Nomor Handphone</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="nohp"
+                    name="nohp"
+                    value="081234567890"
+                    placeholder="Masukkan nomor handphone" disabled />
                 </div>
               </div>
-
-              <div class="col-xl-2 col-lg-4 col-md-12 col-6 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="card-title d-flex align-items-start justify-content-between">
-                      <div class="avatar flex-shrink-0">
-                        <span class="avatar-initial rounded bg-label-warning"><i class="bx bx-leaf"></i></span>
-                      </div>
-                    </div>
-                    <span class="fw-medium d-block mb-1">Jumlah Produk</span>
-                    <h3 class="card-title text-nowrap mt-2 mb-1">132</h3>
+              <div class="address">
+                <div class="row g-3 mb-3">
+                  <div class="col-lg-6">
+                    <label for="provinsi" class="form-label">Provinsi</label>
+                    <select class="form-select" id="provinsi" aria-label="Default select example" disabled>
+                      <option selected>Provinsi</option>
+                      <option value="Jawa Barat" selected>Jawa Barat</option>
+                      <option value="Jawa Timur">Jawa Timur</option>
+                      <option value="Jawa Tengah">Jawa Tengah</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-6">
+                    <label for="kota" class="form-label">Kota</label>
+                    <select class="form-select" id="kota" aria-label="Default select example" disabled>
+                      <option selected>Kota</option>
+                      <option value="Kota Bogor" selected>Kota Bogor</option>
+                      <option value="Kabupaten Bogor">Kabupaten Bogor</option>
+                      <option value="Sukabumi">Sukabumi</option>
+                    </select>
                   </div>
                 </div>
-              </div>
-
-              <div class="col-xl-2 col-lg-4 col-md-12 mb-4">
-                <div class="card">
-                  <div class="card-body">
-                    <div class="card-title d-flex align-items-start justify-content-between">
-                      <div class="avatar flex-shrink-0">
-                        <span class="avatar-initial rounded bg-label-danger"><i class="bx bx-transfer"></i></span>
-                      </div>
-                    </div>
-                    <span class="fw-medium d-block mb-1">Transaksi</span>
-                    <h3 class="card-title mt-2 mb-1">41</h3>
+                <div class="row g-3 mb-3">
+                  <div class="col-lg-4">
+                    <label for="kecamatan" class="form-label">Kecamatan</label>
+                    <select class="form-select" id="kecamatan" aria-label="Default select example" disabled>
+                      <option selected>Kecamatan</option>
+                      <option value="Bogor Tengah" selected>Bogor Tengah</option>
+                      <option value="Bogor Selatan">Bogor Selatan</option>
+                      <option value="Bogor Utara">Bogor Utara</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="kelurahan" class="form-label">Kelurahan</label>
+                    <select class="form-select" id="kelurahan" aria-label="Default select example" disabled>
+                      <option selected>Kelurahan</option>
+                      <option value="Cidangiang" selected>Cidangiang</option>
+                      <option value="Babakan">Babakan</option>
+                      <option value="Sempur">Sempur</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-4">
+                    <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
+                    <input type="number" class="form-control" id="nohp" name="nohp" placeholder="Kode Pos" value="123456" disabled />
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <div class="row">
-              <!-- Order Statistics -->
-              <div class="col-md-6 col-lg-4 col-xl-4 order-1 order-lg-0 mb-4">
-                <div class="card h-100">
-                  <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                    <div class="card-title mb-0">
-                      <h5 class="m-0 me-2">Produk Terlaris</h5>
-                    </div>
-                  </div>
-                  <div class="card-body pt-3">
-                    <ul class="p-0 m-0">
-                      <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                          <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                          <div class="me-2">
-                            <h6 class="mb-0">Tomat Apel</h6>
-                            <small class="text-muted">Kategori Bibit Sayur</small>
-                          </div>
-                          <div class="user-progress">
-                            <small class="fw-medium">Rp12,5 jt</small>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                          <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                          <div class="me-2">
-                            <h6 class="mb-0">Tomat Apel</h6>
-                            <small class="text-muted">Kategori Bibit Sayur</small>
-                          </div>
-                          <div class="user-progress">
-                            <small class="fw-medium">Rp12,5 jt</small>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                          <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                          <div class="me-2">
-                            <h6 class="mb-0">Tomat Apel</h6>
-                            <small class="text-muted">Kategori Bibit Sayur</small>
-                          </div>
-                          <div class="user-progress">
-                            <small class="fw-medium">Rp12,5 jt</small>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                          <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                          <div class="me-2">
-                            <h6 class="mb-0">Tomat Apel</h6>
-                            <small class="text-muted">Kategori Bibit Sayur</small>
-                          </div>
-                          <div class="user-progress">
-                            <small class="fw-medium">Rp12,5 jt</small>
-                          </div>
-                        </div>
-                      </li>
-                      <li class="d-flex mb-4 pb-1">
-                        <div class="avatar flex-shrink-0 me-3">
-                          <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                        </div>
-                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                          <div class="me-2">
-                            <h6 class="mb-0">Tomat Apel</h6>
-                            <small class="text-muted">Kategori Bibit Sayur</small>
-                          </div>
-                          <div class="user-progress">
-                            <small class="fw-medium">Rp12,5 jt</small>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                <div class="mb-3">
+                  <label for="alamat" class="form-label">Alamat Lengkap</label>
+                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;" disabled>Jalan Ciwaluya No 14 Kost Zam-zam</textarea>
                 </div>
               </div>
-              <!--/ Order Statistics -->
-
-              <!-- Expense Overview -->
-              <div class="col-md-6 col-lg-8 order-0 order-lg-1 mb-4">
-                <div class="card h-100">
-                  <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-                    <h5 class="m-0 me-2">Grafik Pendapatan</h5>
-                    <div class="dropdown">
-                      <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                        Pilih Periode
-                      </button>
-                      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <li><a class="dropdown-item" href="#">Tahunan</a></li>
-                        <li><a class="dropdown-item" href="#">Bulanan</a></li>
-                        <li><a class="dropdown-item" href="#">Harian</a></li>
-                      </ul>
-                    </div>
-                  </div>
-                  <div class="card-body px-0">
-                    <div class="tab-content p-0">
-                      <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
-                        <div id="incomeChart" style="height: 350px;"></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!--/ Expense Overview -->
-
-            </div>
+              <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->
+            </form>
           </div>
           <!-- / Content -->
 
@@ -438,6 +459,11 @@
 
   <!-- Place this tag in your head or just before your close body tag. -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  <!-- Javascript Files
+    ================================================== -->
+  <script src="{{ asset('js/plugins.js') }}"></script>
+  <!-- <script src="{{ asset('js/designesia.js') }}"></script> -->
 </body>
 
 </html>
