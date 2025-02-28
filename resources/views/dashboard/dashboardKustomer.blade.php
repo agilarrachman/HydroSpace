@@ -103,8 +103,8 @@
                                                 <th>Avatar</th>
                                                 <th>Username</th>
                                                 <th>Email</th>
-                                                <th>Password</th>
-                                                <th>Actions</th>
+                                                <th>Bergabung</th>
+                                                <th>Aksi</th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
@@ -115,7 +115,7 @@
                                                 </td>
                                                 <td>barryallen</td>
                                                 <td>barryallen@gmail.com</td>
-                                                <td>{{ Str::random(10) }}</td>
+                                                <td>12-25-2025</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -135,7 +135,7 @@
                                                 </td>
                                                 <td>johndoe</td>
                                                 <td>johndoe@gmail.com</td>
-                                                <td>{{ Str::random(10) }}</td>
+                                                <td>12-28-2025</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -155,7 +155,7 @@
                                                 </td>
                                                 <td>asepsurasep</td>
                                                 <td>binkasep@gmail.com</td>
-                                                <td>{{ Str::random(10) }}</td>
+                                                <td>12-31-2025</td>
                                                 <td>
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
