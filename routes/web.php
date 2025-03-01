@@ -58,13 +58,6 @@ Route::get('/kontak', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard', [
-        "title" => "HydroSpace | Dashboard",
-        "active" => "Dashboard"
-    ]);
-});
-
 Route::get('/profil', function () {
     return view('profile', [
         "title" => "HydroSpace | Profil",
@@ -95,3 +88,28 @@ Route::get('/create-profile', function () {
         "title" => "HydroSpace | Buat Profil"
     ]);
 });
+
+// DASHBOARD ROUTE
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index', [
+        "title" => "HydroSpace | Dashboard",
+        "active" => "Dashboard"
+    ]);
+});
+
+Route::get('/dashboard/admin', function () {
+    return view('dashboard.dashboardAdmin', [
+        "title" => "HydroSpace | Admin",
+        "active" => "Admin"
+    ]);
+});
+
+Route::get('/dashboard/kustomer', function () {
+    return view('dashboard.dashboardKustomer', [
+        "title" => "HydroSpace | Kustomer",
+        "active" => "Kustomer"
+    ]);
+});
+
+// END DASHBOARD ROUTE

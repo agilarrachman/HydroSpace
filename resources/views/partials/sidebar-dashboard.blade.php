@@ -15,25 +15,25 @@
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item {{ request()->is('dashboard') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="/dashboard" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
                 <div data-i18n="Basic">Dashboard</div>
             </a>
         </li>
 
-         <!-- Customer -->
-        <li class="menu-item {{ request()->is('dashboard/kustomer') ? 'active' : '' }}">
-            <a href="order.html" class="menu-link">
+        <!-- Admin -->
+        <li class="menu-item {{ request()->is('dashboard/admin') ? 'active' : '' }}">
+            <a href="/dashboard/admin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Basic">Kustomer</div>
+                <div data-i18n="Basic">Admin</div>
             </a>
         </li>
 
-        <!-- Admin -->
-        <li class="menu-item {{ request()->is('dashboard/admin') ? 'active' : '' }}">
-            <a href="order.html" class="menu-link">
+         <!-- Customer -->
+        <li class="menu-item {{ request()->is('dashboard/kustomer') ? 'active' : '' }}">
+            <a href="/dashboard/kustomer" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
-                <div data-i18n="Basic">Admin</div>
+                <div data-i18n="Basic">Kustomer</div>
             </a>
         </li>
 
