@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                            <h5 class="mb-0">Daftar Admin</h5>
+                            <h5 class="mb-0">Dashboard</h5>
 
                             <div class="avatar avatar-online">
                                 <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
