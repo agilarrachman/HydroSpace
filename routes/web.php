@@ -58,6 +58,13 @@ Route::get('/kontak', function () {
     ]);
 });
 
+Route::get('/dashboard', function () {
+    return view('dashboard', [
+        "title" => "HydroSpace | Dashboard",
+        "active" => "Dashboard"
+    ]);
+});
+
 Route::get('/profil', function () {
     return view('profile', [
         "title" => "HydroSpace | Profil",
