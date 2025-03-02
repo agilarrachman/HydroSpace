@@ -66,10 +66,10 @@
                         <!-- mainmenu end -->
                     </div>
                     <div class="de-flex-col">
-                        <div class="de-flex-col">
+                        <div class="d-flex">
 
                             <div class="d-flex">
-                                <a class="de-icon-counter" href="#">
+                                <a class="de-icon-counter" href="/pesanan">
                                     <div class="d-counter">0</div>
                                     <img src="/images/ui/order.svg" class="" alt="">
                                 </a>
@@ -80,7 +80,7 @@
                                 </div>
                             </div>
 
-                            <span id="menu-btn"></span>
+                            <span id="menu-btn" class="my-auto"></span>
                         </div>
                     </div>
                 </div>

@@ -3243,6 +3243,14 @@ header.header-light .h-phone span{
   background: none;
 }
 
+#recipient_order_form input[type="text"], #recipient_order_form select, #recipient_order_form input[type="number"], #recipient_order_form textarea {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: solid 1px rgba(0,0,0,0.25);
+  height: auto;
+  background: none;
+}
+
 #contact_form textarea{
   height: 178px;
 }
@@ -22317,5 +22325,13 @@ border-radius:20px 0 0 20px;
     object-fit: cover;
 }
 /* Halaman Detail Produk End */
+
+/* Halaman Buat Pesanan Start */
+.image-product{
+  width: 100px;
+  height: 100px;
+  background-color: var(--bg-light);
+}
+/* Halaman Buat Pesanan End */
 
 /* Adjusment End */

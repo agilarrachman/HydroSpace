@@ -143,7 +143,7 @@ body {
   padding: 0;
   line-height: 1.7em;
   word-spacing: 0px;
-  background: var(--background);
+  background: #F5F5F9;
 }
 
 body.no-scroll {
@@ -4113,7 +4113,7 @@ a.btn-line,
   display: inline-block;
   font-family: var(--title-font);
   text-align: center;
-  color: #fff;
+  color: var(--priamry-color);
   outline: 0;
   font-weight: 600;
   text-decoration: none;
@@ -4123,7 +4123,6 @@ a.btn-line,
   border-radius:30px;
   -moz-border-radius:30px;
   -webkit-border-radius:30px;
-  text-transform: uppercase;
 }
 
 
@@ -4181,12 +4180,14 @@ a.btn-sc img {
 a.btn-line,
 a.btn-line:hover {
   background: none;
-  color: #35404e;
-  border: solid 1px rgba(255, 255, 255, .35);
+  color: var(--primary-color);
+  border: solid 1px var(--primary-color);
 }
 
 a.btn-line:hover {
   border: solid 1px rgba(255, 255, 255, 0);
+  background-color: #cccccc !important;
+  color: var(--primary-color) !important;
 }
 
 .text-light .btn-line{
@@ -22197,7 +22198,7 @@ border-radius:20px 0 0 20px;
 }
 
 .chat-bubble.user {
-    background-color: var(--secondary-color);
+    background-color: var(--bg-color);
     color: white;
     margin-left: auto;
     align-self: flex-end;
@@ -22301,5 +22302,82 @@ border-radius:20px 0 0 20px;
     object-fit: cover;
 }
 /* Halaman Detail Produk End */
+
+/* Sidebar Start */
+button.menu-link{
+  width: 85%;
+  box-sizing: border-box;
+}
+
+button.menu-link:hover{
+  background-color: rgba(67, 89, 113, 0.04) !important;
+}
+/* Sidebar End */
+
+/* Halaman Pesanan Saya Start */
+.image-product{
+  width: 100px;
+  height: 100px;
+  background-color: var(--bg-light);
+}
+
+.status.payment{
+  width: fit-content;
+  background-color: #F6D2D2;
+  color: red;
+}
+
+.status.process{
+  width: fit-content;
+  background-color: var(--bg-light);
+}
+
+.status.done{
+  width: fit-content;
+  background-color: var(--primary-color);
+  color: white;
+}
+/* Halaman Pesanan Saya End */
+
+/* Halaman Chat Start */
+.admin .profile-picture{
+  background-color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+}
+
+.admin .profile-picture img{
+  width: 20px;
+  object-fit: contain;
+}
+
+.chat-bubble.user {
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    margin-left: auto;
+    align-self: flex-end;
+}
+
+.chat-bubble.user h5 {
+    color: var(--primary-color);
+}
+
+.user img{
+  width: 40px;
+  height: 40px;
+  border-radius: 100px;
+  object-fit: contain;
+}
+
+@media (min-width: 992px) {
+  .h-lg-90 {
+    height: 90% !important;
+  }
+}
+/* Halaman Chat End */
 
 /* Adjusment End */

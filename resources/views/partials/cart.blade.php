@@ -134,7 +134,9 @@
             <!-- cart item end -->
         </div>
 
-        <button class="btn-primary w-100 rounded-20 py-2 mt-3">Checkout</button>
+        <a href="/checkout">
+            <button class="btn-primary w-100 rounded-20 py-2 mt-3">Checkout</button>
+        </a>
 
     </div>
 </div>

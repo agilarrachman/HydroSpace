@@ -6,11 +6,11 @@
     }
 
     .profile-picture {
-        color: #354e33;
+        color: white;
     }
 </style>
 
-<header class="header-light clone smaller transparent d-none d-lg-block">
+<header class="header clone smaller transparent d-none d-lg-block">
     <div class="container ms-auto me-0" style="max-width: 83%;">
         <div class="row">
             <div class="col-md-12">
@@ -28,8 +28,10 @@
                         <!-- mainmenu end -->
                     </div>
                     <div class="de-flex-col">
-                        <a href="/profil" class="profile-picture">
-                            <img src="/images/team/3.jpg" class="me-2" alt="profile-picture">
+                        <a href="/profil" class="profile-picture d-flex gap-2 align-items-center">
+                            <div class="avatar avatar-online">
+                                <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
                             Agil ArRachman
                         </a>
 
@@ -38,10 +40,6 @@
                             <span id="menu-btn"></span>
                         </div> -->
 
-                        <div id="btn-extra">
-                            <span style="border-bottom: solid 2px #354e33;"></span>
-                            <span style="border-bottom: solid 2px #354e33;"></span>
-                        </div>
                     </div>
                 </div>
             </div>

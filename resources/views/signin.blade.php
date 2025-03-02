@@ -58,7 +58,7 @@
 
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
-        <!-- Register -->
+        <!-- Login -->
         <div class="card">
           <div class="card-body">
             <!-- Logo -->
