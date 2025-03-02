@@ -175,9 +175,23 @@ Route::get('/dashboard/product', function () {
     ]);
 });
 
+Route::get('/dashboard/product/slug', function () {
+    return view('dashboard.productDetail', [
+        "title" => "HydroSpace | Bibit Sawi",
+        "active" => "Produk"
+    ]);
+});
+
 Route::get('/dashboard/product/create', function () {
     return view('dashboard.createProduct', [
         "title" => "HydroSpace | Tambah Produk",
+        "active" => "Produk"
+    ]);
+});
+
+Route::get('/dashboard/product/update', function () {
+    return view('dashboard.updateProduct', [
+        "title" => "HydroSpace | Update Produk",
         "active" => "Produk"
     ]);
 });
