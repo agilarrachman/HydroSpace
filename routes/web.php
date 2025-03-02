@@ -126,4 +126,11 @@ Route::get('/dashboard/admin/create', function () {
     ]);
 });
 
+Route::get('/dashboard/produk', function () {
+    return view('dashboard.products', [
+        "title" => "HydroSpace | Daftar Produk",
+        "active" => "Produk"
+    ]);
+});
+
 // END DASHBOARD ROUTE

@@ -1,7 +1,7 @@
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="/" class="app-brand-link">
             <img style="max-width: 165px !important;" src="{{ asset('images/logo-black.webp') }}" alt="">
         </a>
 
@@ -39,7 +39,7 @@
 
         <!-- Chat -->
         <li class="menu-item {{ request()->is('dashboard/chat*') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="/dashboard/chat" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-chat"></i>
                 <div data-i18n="Basic">Chat</div>
             </a>
@@ -47,7 +47,7 @@
 
         <!-- Product -->
         <li class="menu-item {{ request()->is('dashboard/produk*') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="/dashboard/produk" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Basic">Produk</div>
             </a>
@@ -55,7 +55,7 @@
 
         <!-- Category -->
         <li class="menu-item {{ request()->is('dashboard/kategori*') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="/dashboard/kategori" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Basic">Kategori</div>
             </a>
@@ -63,7 +63,7 @@
 
         <!-- Video -->
         <li class="menu-item {{ request()->is('dashboard/video*') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+            <a href="/dashboard/video" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-video"></i>
                 <div data-i18n="Basic">Video</div>
             </a>
@@ -71,7 +71,7 @@
 
         <!-- Order -->
         <li class="menu-item {{ request()->is('dashboard/order*') ? 'active' : '' }}">
-            <a href="order.html" class="menu-link">
+            <a href="/dashboard/order" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cart"></i>
                 <div data-i18n="Basic">Order</div>
             </a>
@@ -79,7 +79,7 @@
 
         <!-- Setting -->
         <li class="menu-item mt-auto {{ request()->is('dashboard/pengaturan*') ? 'active' : '' }}">
-            <a href="pengaturan.html" class="menu-link">
+            <a href="/dashboard/pengaturan" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Basic">Pengaturan</div>
             </a>
