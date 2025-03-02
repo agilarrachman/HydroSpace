@@ -90,7 +90,7 @@
                         <!-- Content -->
 
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <a href="#" class="btn btn-primary mb-4">
+                            <a href="admin/create" class="btn btn-primary mb-4">
                                 <i class="bx bx-plus-circle me-2"></i> Tambah Admin
                             </a>
 

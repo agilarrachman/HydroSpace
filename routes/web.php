@@ -119,4 +119,11 @@ Route::get('/dashboard/kustomer/create', function () {
     ]);
 });
 
+Route::get('/dashboard/admin/create', function () {
+    return view('dashboard.createAdmin', [
+        "title" => "HydroSpace | Tambah Admin",
+        "active" => "Admin"
+    ]);
+});
+
 // END DASHBOARD ROUTE
