@@ -228,7 +228,7 @@
 
                   <div class="product d-flex gap-3">
                     <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
                     </div>
                     <div class="d-info d-flex flex-grow-1 justify-content-between">
                       <div class="d-flex flex-column">
@@ -244,7 +244,7 @@
 
                   <div class="product d-flex gap-3">
                     <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
                     </div>
                     <div class="d-info d-flex flex-grow-1 justify-content-between">
                       <div class="d-flex flex-column">
@@ -260,7 +260,7 @@
 
                   <div class="product d-flex gap-3">
                     <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
                     </div>
                     <div class="d-info d-flex flex-grow-1 justify-content-between">
                       <div class="d-flex flex-column">
@@ -311,7 +311,7 @@
 
                   <div class="product d-flex gap-3">
                     <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
                     </div>
                     <div class="d-info d-flex flex-grow-1 justify-content-between">
                       <div class="d-flex flex-column">
@@ -362,7 +362,7 @@
 
                   <div class="product d-flex gap-3">
                     <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
                     </div>
                     <div class="d-info d-flex flex-grow-1 justify-content-between">
                       <div class="d-flex flex-column">
@@ -378,7 +378,7 @@
 
                   <div class="product d-flex gap-3">
                     <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
                     </div>
                     <div class="d-info d-flex flex-grow-1 justify-content-between">
                       <div class="d-flex flex-column">

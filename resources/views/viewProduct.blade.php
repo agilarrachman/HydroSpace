@@ -49,7 +49,7 @@
                             <ul class="crumb m-0">
                                 <li><a href="/">Beranda</a></li>
                                 <li><a href="/produk">Produk</a></li>
-                                <li class="active">Bibit Sawi</li>
+                                <li class="active">bibit-sawi</li>
                             </ul>
                         </div>
                     </div>
@@ -61,27 +61,27 @@
                     <div class="row gy-4 gx-5">
                         <div class="col-md-6">
                             <div id="sync1" class="owl-carousel owl-theme">
-                                <div class="item" style="padding: 40px;"><img src="/images/shop/bibit-benih/bibit sawi.png" class="w-100 p-5" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi2.png" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi3.jpg" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi4.webp" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi5.jpg" class="w-100" alt=""></div>
+                                <div class="item" style="padding: 40px;"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-5" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div>
                             </div>
 
                             <div id="sync2" class="owl-carousel owl-theme">
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi.png" class="w-100 p-4" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi2.png" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi3.jpg" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi4.webp" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit sawi5.jpg" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-4" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div>
                             </div>
 
                         </div>
 
                         <div class="col-md-6">
                             <label for="cat_4">🌱 Bibit & Benih</label>
-                            <h2 class="fs-40">Bibit Sawi</h2 class="fs-48">
-                            <p class="col-lg-10">Dapatkan bibit sawi berkualitas tinggi yang siap tumbuh dengan cepat dan subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat, Anda bisa menikmati panen sawi segar dalam waktu singkat.
+                            <h2 class="fs-40">bibit-sawi</h2 class="fs-48">
+                            <p class="col-lg-10">Dapatkan bibit-sawi berkualitas tinggi yang siap tumbuh dengan cepat dan subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat, Anda bisa menikmati panen sawi segar dalam waktu singkat.
                                 <br><br>🔹 <b>Keunggulan:</b>
                                 <br>✅ Pertumbuhan cepat & hasil melimpah
                                 <br>✅ Cocok untuk hidroponik & kebun konvensional

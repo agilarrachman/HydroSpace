@@ -77,7 +77,7 @@
                                                     Sale
                                                 </div>
                                                 <a href="/produk/slug">
-                                                    <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                    <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                                 </a>
                                                 <div class="atr__extra-menu">
                                                     <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -87,7 +87,7 @@
 
                                             <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                            <h3>Bibit Sawi</h3>
+                                            <h3>bibit-sawi</h3>
                                             <div class="atr__main-price">
                                                 Rp20.000
                                             </div>
@@ -349,7 +349,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -359,7 +359,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
@@ -376,7 +376,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -386,7 +386,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
@@ -403,7 +403,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -413,7 +413,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
@@ -430,7 +430,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -440,7 +440,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
@@ -889,7 +889,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -899,7 +899,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
@@ -916,7 +916,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -926,7 +926,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
@@ -943,7 +943,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -953,7 +953,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
@@ -970,7 +970,7 @@
                                                 Sale
                                             </div>
                                             <a href="/produk/slug">
-                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit sawi.png">
+                                                <img class="atr__image-main p-5" src="images/shop/bibit-benih/bibit-sawi.png">
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
@@ -980,7 +980,7 @@
 
                                         <label for="cat_4">🌱 Bibit & Benih</label>
 
-                                        <h3>Bibit Sawi</h3>
+                                        <h3>bibit-sawi</h3>
                                         <div class="atr__main-price">
                                             Rp20.000
                                         </div>
