@@ -130,3 +130,56 @@ Route::get('/create-profile', function () {
         "title" => "HydroSpace | Buat Profil"
     ]);
 });
+
+// DASHBOARD ROUTE
+
+Route::get('/dashboard', function () {
+    return view('dashboard.index', [
+        "title" => "HydroSpace | Dashboard",
+        "active" => "Dashboard"
+    ]);
+});
+
+Route::get('/dashboard/admin', function () {
+    return view('dashboard.admin', [
+        "title" => "HydroSpace | Admin",
+        "active" => "Admin"
+    ]);
+});
+
+Route::get('/dashboard/kustomer', function () {
+    return view('dashboard.customer', [
+        "title" => "HydroSpace | Kustomer",
+        "active" => "Kustomer"
+    ]);
+});
+
+Route::get('/dashboard/kustomer/create', function () {
+    return view('dashboard.createCustomer', [
+        "title" => "HydroSpace | Tambah Kustomer",
+        "active" => "Kustomer"
+    ]);
+});
+
+Route::get('/dashboard/admin/create', function () {
+    return view('dashboard.createAdmin', [
+        "title" => "HydroSpace | Tambah Admin",
+        "active" => "Admin"
+    ]);
+});
+
+Route::get('/dashboard/produk', function () {
+    return view('dashboard.products', [
+        "title" => "HydroSpace | Daftar Produk",
+        "active" => "Produk"
+    ]);
+});
+
+Route::get('/dashboard/produk/create', function () {
+    return view('dashboard.createProduct', [
+        "title" => "HydroSpace | Tambah Produk",
+        "active" => "Produk"
+    ]);
+});
+
+// END DASHBOARD ROUTE
