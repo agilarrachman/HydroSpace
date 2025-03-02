@@ -1,7 +1,7 @@
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
-        <a href="index.html" class="app-brand-link">
+        <a href="/" class="app-brand-link">
             <img style="max-width: 165px !important;" src="{{ asset('images/logo-black.webp') }}" alt="">
         </a>
 
@@ -22,7 +22,7 @@
         </li>
 
         <!-- Admin -->
-        <li class="menu-item {{ request()->is('dashboard/admin') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/admin*') ? 'active' : '' }}">
             <a href="/dashboard/admin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Admin</div>
@@ -30,7 +30,7 @@
         </li>
 
          <!-- Customer -->
-        <li class="menu-item {{ request()->is('dashboard/kustomer') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/kustomer*') ? 'active' : '' }}">
             <a href="/dashboard/kustomer" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div data-i18n="Basic">Kustomer</div>
@@ -38,48 +38,48 @@
         </li>
 
         <!-- Chat -->
-        <li class="menu-item {{ request()->is('dashboard/chat') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/chat*') ? 'active' : '' }}">
+            <a href="/dashboard/chat" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-chat"></i>
                 <div data-i18n="Basic">Chat</div>
             </a>
         </li>
 
         <!-- Product -->
-        <li class="menu-item {{ request()->is('dashboard/produk') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/produk*') ? 'active' : '' }}">
+            <a href="/dashboard/produk" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Basic">Produk</div>
             </a>
         </li>
 
         <!-- Category -->
-        <li class="menu-item {{ request()->is('dashboard/kategori') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/kategori*') ? 'active' : '' }}">
+            <a href="/dashboard/kategori" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Basic">Kategori</div>
             </a>
         </li>
 
         <!-- Video -->
-        <li class="menu-item {{ request()->is('dashboard/video') ? 'active' : '' }}">
-            <a href="cards-basic.html" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/video*') ? 'active' : '' }}">
+            <a href="/dashboard/video" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-video"></i>
                 <div data-i18n="Basic">Video</div>
             </a>
         </li>
 
         <!-- Order -->
-        <li class="menu-item {{ request()->is('dashboard/order') ? 'active' : '' }}">
-            <a href="order.html" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/order*') ? 'active' : '' }}">
+            <a href="/dashboard/order" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cart"></i>
                 <div data-i18n="Basic">Order</div>
             </a>
         </li>
 
         <!-- Setting -->
-        <li class="menu-item mt-auto {{ request()->is('dashboard/pengaturan') ? 'active' : '' }}">
-            <a href="pengaturan.html" class="menu-link">
+        <li class="menu-item mt-auto {{ request()->is('dashboard/pengaturan*') ? 'active' : '' }}">
+            <a href="/dashboard/pengaturan" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Basic">Pengaturan</div>
             </a>
