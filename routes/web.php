@@ -65,6 +65,13 @@ Route::get('/chat', function () {
     ]);
 });
 
+Route::get('/dashboard/chat', function () {
+    return view('dashboard.chat', [
+        "title" => "HydroSpace | Chat Customer",
+        "active" => "Chat Customer"
+    ]);
+});
+
 Route::get('/profil', function () {
     return view('profile', [
         "title" => "HydroSpace | Profil",
@@ -179,6 +186,20 @@ Route::get('/dashboard/produk/create', function () {
     return view('dashboard.createProduct', [
         "title" => "HydroSpace | Tambah Produk",
         "active" => "Produk"
+    ]);
+});
+
+Route::get('/dashboard/orders', function () {
+    return view('dashboard.orders', [
+        "title" => "HydroSpace | Daftar Pesanan",
+        "active" => "Pesanan"
+    ]);
+});
+
+Route::get('/dashboard/orders/id', function () {
+    return view('dashboard.orderDetail', [
+        "title" => "HydroSpace | Detail Pesanan",
+        "active" => "Pesanan"
     ]);
 });
 
