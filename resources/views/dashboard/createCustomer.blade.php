@@ -130,6 +130,16 @@
                                                 </div>
                                                 <div class="row g-2 mb-3">
                                                     <div class="col-lg-6">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" class="form-control" id="email" name="email" placeholder="Masukkan email" />
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <label for="password" class="form-label">Password</label>
+                                                        <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password" />
+                                                    </div>
+                                                </div>
+                                                <div class="row g-2 mb-3">
+                                                    <div class="col-lg-6">
                                                         <label for="nama" class="form-label">Jenis Kelamin</label>
                                                         <div class="d-flex gap-3">
                                                             <div class="form-check">
