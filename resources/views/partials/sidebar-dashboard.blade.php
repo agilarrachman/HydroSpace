@@ -22,7 +22,7 @@
         </li>
 
         <!-- Admin -->
-        <li class="menu-item {{ request()->is('dashboard/admin') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/admin*') ? 'active' : '' }}">
             <a href="/dashboard/admin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Admin</div>
@@ -30,7 +30,7 @@
         </li>
 
          <!-- Customer -->
-        <li class="menu-item {{ request()->is('dashboard/kustomer') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/kustomer*') ? 'active' : '' }}">
             <a href="/dashboard/kustomer" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div data-i18n="Basic">Kustomer</div>
@@ -38,7 +38,7 @@
         </li>
 
         <!-- Chat -->
-        <li class="menu-item {{ request()->is('dashboard/chat') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/chat*') ? 'active' : '' }}">
             <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-chat"></i>
                 <div data-i18n="Basic">Chat</div>
@@ -46,7 +46,7 @@
         </li>
 
         <!-- Product -->
-        <li class="menu-item {{ request()->is('dashboard/produk') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/produk*') ? 'active' : '' }}">
             <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Basic">Produk</div>
@@ -54,7 +54,7 @@
         </li>
 
         <!-- Category -->
-        <li class="menu-item {{ request()->is('dashboard/kategori') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/kategori*') ? 'active' : '' }}">
             <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Basic">Kategori</div>
@@ -62,7 +62,7 @@
         </li>
 
         <!-- Video -->
-        <li class="menu-item {{ request()->is('dashboard/video') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/video*') ? 'active' : '' }}">
             <a href="cards-basic.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-video"></i>
                 <div data-i18n="Basic">Video</div>
@@ -70,7 +70,7 @@
         </li>
 
         <!-- Order -->
-        <li class="menu-item {{ request()->is('dashboard/order') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/order*') ? 'active' : '' }}">
             <a href="order.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cart"></i>
                 <div data-i18n="Basic">Order</div>
@@ -78,7 +78,7 @@
         </li>
 
         <!-- Setting -->
-        <li class="menu-item mt-auto {{ request()->is('dashboard/pengaturan') ? 'active' : '' }}">
+        <li class="menu-item mt-auto {{ request()->is('dashboard/pengaturan*') ? 'active' : '' }}">
             <a href="pengaturan.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Basic">Pengaturan</div>

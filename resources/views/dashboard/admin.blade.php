@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                            <h5 class="mb-0">Daftar Kustomer</h5>
+                            <h5 class="mb-0">Daftar Admin</h5>
 
                             <div class="avatar avatar-online">
                                 <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
@@ -90,7 +90,9 @@
                         <!-- Content -->
 
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <a href="#" class="btn btn-primary mb-4">Tambah Kustomer</a>
+                            <a href="#" class="btn btn-primary mb-4">
+                                <i class="bx bx-plus-circle me-2"></i> Tambah Admin
+                            </a>
 
                             <!-- Striped Rows -->
                             <div class="card">
