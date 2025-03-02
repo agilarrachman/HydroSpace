@@ -217,4 +217,32 @@ Route::get('/dashboard/category/update', function () {
     ]);
 });
 
+Route::get('/dashboard/video', function () {
+    return view('dashboard.videos', [
+        "title" => "HydroSpace | Daftar Video",
+        "active" => "Video"
+    ]);
+});
+
+Route::get('/dashboard/video/slug', function () {
+    return view('dashboard.videoDetail', [
+        "title" => "HydroSpace | Panduan Instalasi Sistem NFT Hidroponik",
+        "active" => "Video"
+    ]);
+});
+
+Route::get('/dashboard/video/create', function () {
+    return view('dashboard.createVideo', [
+        "title" => "HydroSpace | Tambah Video",
+        "active" => "Video"
+    ]);
+});
+
+Route::get('/dashboard/video/update', function () {
+    return view('dashboard.updateVideo', [
+        "title" => "HydroSpace | Update Video",
+        "active" => "Video"
+    ]);
+});
+
 // END DASHBOARD ROUTE
