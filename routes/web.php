@@ -196,4 +196,25 @@ Route::get('/dashboard/product/update', function () {
     ]);
 });
 
+Route::get('/dashboard/category', function () {
+    return view('dashboard.categories', [
+        "title" => "HydroSpace | Daftar Kategori",
+        "active" => "Kategori"
+    ]);
+});
+
+Route::get('/dashboard/category/create', function () {
+    return view('dashboard.createCategory', [
+        "title" => "HydroSpace | Tambah Kategori",
+        "active" => "Kategori"
+    ]);
+});
+
+Route::get('/dashboard/category/update', function () {
+    return view('dashboard.updateCategory', [
+        "title" => "HydroSpace | Update Kategori",
+        "active" => "Kategori"
+    ]);
+});
+
 // END DASHBOARD ROUTE
