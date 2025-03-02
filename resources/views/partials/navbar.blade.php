@@ -66,8 +66,10 @@
                         <!-- mainmenu end -->
                     </div>
                     <div class="de-flex-col">
-                        <a href="/profil" class="profile-picture">
-                            <img src="/images/team/3.jpg" class="me-2" alt="profile-picture">
+                        <a href="/profil" class="profile-picture d-flex gap-2 align-items-center">
+                            <div class="avatar avatar-online">
+                                <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
                             Agil ArRachman
                         </a>
 

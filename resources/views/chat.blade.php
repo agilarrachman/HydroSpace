@@ -210,124 +210,67 @@
         <div class="content-wrapper">
 
           <!-- Content -->
-          <div class="container col-12 col-lg-8 mx-auto mx-lg-0 container-p-y mt-lg-5 mt-1">
-            {{-- navbar --}}
+          <div class="container col-12 col-lg-8 mx-auto mx-lg-0 container-p-y mt-lg-5 mt-1 d-flex flex-column h-lg-90" style="height: 100%;">
+            {{-- Navbar --}}
             @include('partials.navbarProfile')
-            {{-- navbar end --}}
+            {{-- Navbar end --}}
 
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
-            <form id="formAuthentication" class="mb-3" action="index.html">
-              <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
-                <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
-                <!-- <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)"> -->
-                @error('foto_profil')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-                @enderror
-                <!-- <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar profil dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div> -->
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-lg-6">
-                  <label for="username" class="form-label">Email</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Masukkan email"
-                    value="agil.arrachman19@gmail.com"
-                    autofocus disabled />
-                </div>
-                <div class="col-lg-6">
-                  <label for="nama" class="form-label">Nama Lengkap</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nama"
-                    name="nama"
-                    value="Agil ArRachman"
-                    placeholder="Masukkan nama lengkap" disabled />
-                </div>
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-lg-3">
-                  <label for="nama" class="form-label">Jenis Kelamin</label>
-                  <div class="d-flex gap-3">
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value="Pria"
-                        id="pria"
-                        checked disabled />
-                      <label class="form-check-label" for="pria"> Pria </label>
+
+            <!-- Chat Section Start -->
+            <div class="chat section flex-grow-1 d-flex flex-column overflow-auto border" id="ai">
+
+              <div class="container h-100 px-0">
+                <form id="ask" class="h-100">
+                  <!-- Chat Window -->
+                  <div class="chat-window d-flex flex-column h-100 overflow-auto" id="chat-window">
+
+                    <div class="chat h-100">
+
+                      <div class="admin d-flex gap-2">
+                        <div class="profile-picture">
+                          <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
+                        </div>
+                        <div class="chat-bubble bot text-wrap lh-1">
+                          <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
+                          Halo, HydroMates! Apakah ada yang bisa saya bantu?
+                        </div>
+                      </div>
+
+                      <div class="user d-flex gap-2">
+                        <div class="chat-bubble user text-wrap lh-1">
+                          <h5 class="mb-1" style="font-weight: 800;">User</h5>
+                          Kok pesanan saya lama banget yahhhh
+                        </div>
+                        <img src="{{ asset('images/team/3.jpg') }}" alt="User" />
+                      </div>
+
+                      <div class="admin d-flex gap-2">
+                        <div class="profile-picture">
+                          <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
+                        </div>
+                        <div class="chat-bubble bot text-wrap lh-1">
+                          <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
+                          Sebentar ya kaa
+                        </div>
+                      </div>
+
                     </div>
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value=""
-                        id="wanita" disabled />
-                      <label class="form-check-label" for="wanita"> Wanita </label>
+
+                    <!-- Chat Input -->
+                    <div class="chat-input my-0">
+                      <input id="question" name="question" type="text" placeholder="Ketik pesan.." required />
+                      <button type="submit">
+                        <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
+                        </svg>
+                      </button>
                     </div>
                   </div>
-                </div>
-                <div class="col-lg-5">
-                  <label for="nohp" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    name="username"
-                    value="agil.arrachman"
-                    placeholder="Masukkan username" disabled />
-                </div>
-                <div class="col-lg-4">
-                  <label for="nohp" class="form-label">Nomor Handphone</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="nohp"
-                    name="nohp"
-                    value="081234567890"
-                    placeholder="Masukkan nomor handphone" disabled />
-                </div>
+                </form>
               </div>
-              <div class="address mt-2">
-                <div class="row g-3 mb-3">
-                  <div class="col-lg-6">
-                    <label for="provinsi" class="form-label">Provinsi</label>
-                    <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="Jawa Barat" disabled />
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="kota" class="form-label">Kota</label>
-                    <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="Kota Bogor" disabled />
-                  </div>
-                </div>
-                <div class="row g-3 mb-3">
-                  <div class="col-lg-4">
-                    <label for="kecamatan" class="form-label">Kecamatan</label>
-                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="Bogor Tengah" disabled />
-                  </div>
-                  <div class="col-lg-4">
-                    <label for="kelurahan" class="form-label">Kelurahan</label>
-                    <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="Cidangiang" disabled />
-                  </div>
-                  <div class="col-lg-4">
-                    <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
-                    <input type="number" class="form-control" id="kodePos" name="kodePos" placeholder="Kode Pos" value="123456" disabled />
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="alamat" class="form-label">Alamat Lengkap</label>
-                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;" disabled>Jalan Ciwaluya No 14 Kost Zam-zam</textarea>
-                </div>
-              </div>
-              <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->
-            </form>
+            </div>
+            <!-- Chatbot Section End -->
           </div>
           <!-- / Content -->
 

@@ -58,10 +58,52 @@ Route::get('/kontak', function () {
     ]);
 });
 
+Route::get('/chat', function () {
+    return view('chat', [
+        "title" => "HydroSpace | Chat Admin HydroSpace",
+        "active" => "Chat Admin HydroSpace"
+    ]);
+});
+
 Route::get('/profil', function () {
     return view('profile', [
         "title" => "HydroSpace | Profil",
-        "active" => "Profil"
+        "active" => "Lihat Profil"
+    ]);
+});
+
+Route::get('/perbarui-profil', function () {
+    return view('updateProfile', [
+        "title" => "HydroSpace | Update Profil",
+        "active" => "Perbarui Profil"
+    ]);
+});
+
+Route::get('/lupa-password-profil', function () {
+    return view('forgotPasswordProfile', [
+        "title" => "HydroSpace | Lupa Password",
+        "active" => "Lupa Password"
+    ]);
+});
+
+Route::get('/checkout', function () {
+    return view('checkout', [
+        "title" => "HydroSpace | Buat Pesanan",
+        "active" => "Buat Pesanan",
+    ]);
+});
+
+Route::get('/pesanan', function () {
+    return view('orders', [
+        "title" => "HydroSpace | Pesanan Saya",
+        "active" => "Pesanan Saya",
+    ]);
+});
+
+Route::get('/pesanan/id', function () {
+    return view('orderDetail', [
+        "title" => "HydroSpace | Pesanan Saya",
+        "active" => "Pesanan Saya",
     ]);
 });
 

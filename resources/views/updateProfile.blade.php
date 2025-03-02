@@ -119,9 +119,9 @@
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-      {{-- sidebar --}}
+      {{-- navbar --}}
       @include('partials.sidebarProfile')
-      {{-- sidebar end --}}
+      {{-- navbar end --}}
 
       <!-- Layout container -->
       <div class="layout-page">
@@ -208,8 +208,8 @@
 
         <!-- Content wrapper -->
         <div class="content-wrapper">
-
           <!-- Content -->
+
           <div class="container col-12 col-lg-8 mx-auto mx-lg-0 container-p-y mt-lg-5 mt-1">
             {{-- navbar --}}
             @include('partials.navbarProfile')
@@ -218,14 +218,14 @@
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
             <form id="formAuthentication" class="mb-3" action="index.html">
               <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
-                <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
-                <!-- <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)"> -->
+                <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0 mb-3" style="width: 140px; height: 140px; object-fit: cover;">
+                <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)">
                 @error('foto_profil')
                 <div class="invalid-feedback">
                   {{ $message }}
                 </div>
                 @enderror
-                <!-- <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar profil dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div> -->
+                <div id="rulesProfileImage" class="form-text">Silakan unggah gambar profil dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div>
               </div>
               <div class="row g-2 mb-3">
                 <div class="col-lg-6">
@@ -237,7 +237,7 @@
                     name="email"
                     placeholder="Masukkan email"
                     value="agil.arrachman19@gmail.com"
-                    autofocus disabled />
+                    autofocus />
                 </div>
                 <div class="col-lg-6">
                   <label for="nama" class="form-label">Nama Lengkap</label>
@@ -247,7 +247,7 @@
                     id="nama"
                     name="nama"
                     value="Agil ArRachman"
-                    placeholder="Masukkan nama lengkap" disabled />
+                    placeholder="Masukkan nama lengkap" />
                 </div>
               </div>
               <div class="row g-2 mb-3">
@@ -261,7 +261,7 @@
                         type="radio"
                         value="Pria"
                         id="pria"
-                        checked disabled />
+                        checked />
                       <label class="form-check-label" for="pria"> Pria </label>
                     </div>
                     <div class="form-check">
@@ -270,7 +270,7 @@
                         class="form-check-input"
                         type="radio"
                         value=""
-                        id="wanita" disabled />
+                        id="wanita" />
                       <label class="form-check-label" for="wanita"> Wanita </label>
                     </div>
                   </div>
@@ -283,7 +283,7 @@
                     id="username"
                     name="username"
                     value="agil.arrachman"
-                    placeholder="Masukkan username" disabled />
+                    placeholder="Masukkan username" />
                 </div>
                 <div class="col-lg-4">
                   <label for="nohp" class="form-label">Nomor Handphone</label>
@@ -293,51 +293,69 @@
                     id="nohp"
                     name="nohp"
                     value="081234567890"
-                    placeholder="Masukkan nomor handphone" disabled />
+                    placeholder="Masukkan nomor handphone" />
                 </div>
               </div>
-              <div class="address mt-2">
+              <div class="address">
                 <div class="row g-3 mb-3">
                   <div class="col-lg-6">
                     <label for="provinsi" class="form-label">Provinsi</label>
-                    <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="Jawa Barat" disabled />
+                    <select class="form-select" id="provinsi" aria-label="Default select example">
+                      <option selected>Provinsi</option>
+                      <option value="Jawa Barat" selected>Jawa Barat</option>
+                      <option value="Jawa Timur">Jawa Timur</option>
+                      <option value="Jawa Tengah">Jawa Tengah</option>
+                    </select>
                   </div>
                   <div class="col-lg-6">
                     <label for="kota" class="form-label">Kota</label>
-                    <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="Kota Bogor" disabled />
+                    <select class="form-select" id="kota" aria-label="Default select example">
+                      <option selected>Kota</option>
+                      <option value="Kota Bogor" selected>Kota Bogor</option>
+                      <option value="Kabupaten Bogor">Kabupaten Bogor</option>
+                      <option value="Sukabumi">Sukabumi</option>
+                    </select>
                   </div>
                 </div>
                 <div class="row g-3 mb-3">
                   <div class="col-lg-4">
                     <label for="kecamatan" class="form-label">Kecamatan</label>
-                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="Bogor Tengah" disabled />
+                    <select class="form-select" id="kecamatan" aria-label="Default select example">
+                      <option selected>Kecamatan</option>
+                      <option value="Bogor Tengah" selected>Bogor Tengah</option>
+                      <option value="Bogor Selatan">Bogor Selatan</option>
+                      <option value="Bogor Utara">Bogor Utara</option>
+                    </select>
                   </div>
                   <div class="col-lg-4">
                     <label for="kelurahan" class="form-label">Kelurahan</label>
-                    <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="Cidangiang" disabled />
+                    <select class="form-select" id="kelurahan" aria-label="Default select example">
+                      <option selected>Kelurahan</option>
+                      <option value="Cidangiang" selected>Cidangiang</option>
+                      <option value="Babakan">Babakan</option>
+                      <option value="Sempur">Sempur</option>
+                    </select>
                   </div>
                   <div class="col-lg-4">
                     <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
-                    <input type="number" class="form-control" id="kodePos" name="kodePos" placeholder="Kode Pos" value="123456" disabled />
+                    <input type="number" class="form-control" id="nohp" name="nohp" placeholder="Kode Pos" value="123456" />
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="alamat" class="form-label">Alamat Lengkap</label>
-                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;" disabled>Jalan Ciwaluya No 14 Kost Zam-zam</textarea>
+                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;">Jalan Ciwaluya No 14 Kost Zam-zam</textarea>
                 </div>
               </div>
-              <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->
+              <button class="btn btn-primary d-grid w-100" type="submit">Perbarui</button>
             </form>
           </div>
           <!-- / Content -->
 
           <div class="content-backdrop fade"></div>
-
         </div>
         <!-- Content wrapper -->
       </div>
       <!-- / Layout page -->
-
     </div>
 
     <!-- Overlay -->

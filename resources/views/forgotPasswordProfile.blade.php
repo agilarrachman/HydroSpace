@@ -119,9 +119,9 @@
   <!-- Layout wrapper -->
   <div class="layout-wrapper layout-content-navbar">
     <div class="layout-container">
-      {{-- sidebar --}}
+      {{-- navbar --}}
       @include('partials.sidebarProfile')
-      {{-- sidebar end --}}
+      {{-- navbar end --}}
 
       <!-- Layout container -->
       <div class="layout-page">
@@ -208,136 +208,36 @@
 
         <!-- Content wrapper -->
         <div class="content-wrapper">
-
           <!-- Content -->
-          <div class="container col-12 col-lg-8 mx-auto mx-lg-0 container-p-y mt-lg-5 mt-1">
+
+          <div class="container col-12 col-lg-5 mx-auto mx-lg-0 container-p-y mt-lg-5 mt-1">
             {{-- navbar --}}
             @include('partials.navbarProfile')
             {{-- navbar end --}}
 
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
+            <p class="mb-4">Masukkan email kamu untuk mengirimkan link reset password</p>
             <form id="formAuthentication" class="mb-3" action="index.html">
-              <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
-                <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
-                <!-- <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)"> -->
-                @error('foto_profil')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-                @enderror
-                <!-- <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar profil dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div> -->
+              <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="Masukkan email"
+                  autofocus />
               </div>
-              <div class="row g-2 mb-3">
-                <div class="col-lg-6">
-                  <label for="username" class="form-label">Email</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="email"
-                    placeholder="Masukkan email"
-                    value="agil.arrachman19@gmail.com"
-                    autofocus disabled />
-                </div>
-                <div class="col-lg-6">
-                  <label for="nama" class="form-label">Nama Lengkap</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nama"
-                    name="nama"
-                    value="Agil ArRachman"
-                    placeholder="Masukkan nama lengkap" disabled />
-                </div>
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-lg-3">
-                  <label for="nama" class="form-label">Jenis Kelamin</label>
-                  <div class="d-flex gap-3">
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value="Pria"
-                        id="pria"
-                        checked disabled />
-                      <label class="form-check-label" for="pria"> Pria </label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value=""
-                        id="wanita" disabled />
-                      <label class="form-check-label" for="wanita"> Wanita </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-5">
-                  <label for="nohp" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    name="username"
-                    value="agil.arrachman"
-                    placeholder="Masukkan username" disabled />
-                </div>
-                <div class="col-lg-4">
-                  <label for="nohp" class="form-label">Nomor Handphone</label>
-                  <input
-                    type="number"
-                    class="form-control"
-                    id="nohp"
-                    name="nohp"
-                    value="081234567890"
-                    placeholder="Masukkan nomor handphone" disabled />
-                </div>
-              </div>
-              <div class="address mt-2">
-                <div class="row g-3 mb-3">
-                  <div class="col-lg-6">
-                    <label for="provinsi" class="form-label">Provinsi</label>
-                    <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="Jawa Barat" disabled />
-                  </div>
-                  <div class="col-lg-6">
-                    <label for="kota" class="form-label">Kota</label>
-                    <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="Kota Bogor" disabled />
-                  </div>
-                </div>
-                <div class="row g-3 mb-3">
-                  <div class="col-lg-4">
-                    <label for="kecamatan" class="form-label">Kecamatan</label>
-                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="Bogor Tengah" disabled />
-                  </div>
-                  <div class="col-lg-4">
-                    <label for="kelurahan" class="form-label">Kelurahan</label>
-                    <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="Cidangiang" disabled />
-                  </div>
-                  <div class="col-lg-4">
-                    <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
-                    <input type="number" class="form-control" id="kodePos" name="kodePos" placeholder="Kode Pos" value="123456" disabled />
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <label for="alamat" class="form-label">Alamat Lengkap</label>
-                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;" disabled>Jalan Ciwaluya No 14 Kost Zam-zam</textarea>
-                </div>
-              </div>
-              <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->
+              <button class="btn btn-primary d-grid w-100">Kirm Link Reset</button>
             </form>
           </div>
           <!-- / Content -->
 
           <div class="content-backdrop fade"></div>
-
         </div>
         <!-- Content wrapper -->
       </div>
       <!-- / Layout page -->
-
     </div>
 
     <!-- Overlay -->
@@ -371,7 +271,6 @@
   <!-- Javascript Files
     ================================================== -->
   <script src="{{ asset('js/plugins.js') }}"></script>
-  <!-- <script src="{{ asset('js/designesia.js') }}"></script> -->
 </body>
 
 </html>
