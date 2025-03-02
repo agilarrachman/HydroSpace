@@ -147,14 +147,14 @@ Route::get('/dashboard/admin', function () {
     ]);
 });
 
-Route::get('/dashboard/kustomer', function () {
+Route::get('/dashboard/customer', function () {
     return view('dashboard.customer', [
         "title" => "HydroSpace | Kustomer",
         "active" => "Kustomer"
     ]);
 });
 
-Route::get('/dashboard/kustomer/create', function () {
+Route::get('/dashboard/customer/create', function () {
     return view('dashboard.createCustomer', [
         "title" => "HydroSpace | Tambah Kustomer",
         "active" => "Kustomer"
@@ -168,14 +168,14 @@ Route::get('/dashboard/admin/create', function () {
     ]);
 });
 
-Route::get('/dashboard/produk', function () {
+Route::get('/dashboard/product', function () {
     return view('dashboard.products', [
         "title" => "HydroSpace | Daftar Produk",
         "active" => "Produk"
     ]);
 });
 
-Route::get('/dashboard/produk/create', function () {
+Route::get('/dashboard/product/create', function () {
     return view('dashboard.createProduct', [
         "title" => "HydroSpace | Tambah Produk",
         "active" => "Produk"

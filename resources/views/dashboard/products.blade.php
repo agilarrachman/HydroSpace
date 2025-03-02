@@ -91,7 +91,7 @@
 
                         <div class="container-xxl flex-grow-1 container-p-y">
                             <div class="d-flex justify-content-between mb-4">
-                                <a href="produk/create" class="btn btn-primary">
+                                <a href="product/create" class="btn btn-primary">
                                     <i class="bx bx-plus-circle me-2"></i> Tambah Produk
                                 </a>
                                 <form action="" method="GET" class="d-flex">

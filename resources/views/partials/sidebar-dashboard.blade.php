@@ -31,7 +31,7 @@
 
          <!-- Customer -->
         <li class="menu-item {{ request()->is('dashboard/kustomer*') ? 'active' : '' }}">
-            <a href="/dashboard/kustomer" class="menu-link">
+            <a href="/dashboard/customer" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
                 <div data-i18n="Basic">Kustomer</div>
             </a>
@@ -47,7 +47,7 @@
 
         <!-- Product -->
         <li class="menu-item {{ request()->is('dashboard/produk*') ? 'active' : '' }}">
-            <a href="/dashboard/produk" class="menu-link">
+            <a href="/dashboard/product" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Basic">Produk</div>
             </a>
@@ -55,7 +55,7 @@
 
         <!-- Category -->
         <li class="menu-item {{ request()->is('dashboard/kategori*') ? 'active' : '' }}">
-            <a href="/dashboard/kategori" class="menu-link">
+            <a href="/dashboard/category" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Basic">Kategori</div>
             </a>
