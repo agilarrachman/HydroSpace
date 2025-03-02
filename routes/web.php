@@ -147,14 +147,14 @@ Route::get('/dashboard/admin', function () {
     ]);
 });
 
-Route::get('/dashboard/kustomer', function () {
+Route::get('/dashboard/customer', function () {
     return view('dashboard.customer', [
         "title" => "HydroSpace | Kustomer",
         "active" => "Kustomer"
     ]);
 });
 
-Route::get('/dashboard/kustomer/create', function () {
+Route::get('/dashboard/customer/create', function () {
     return view('dashboard.createCustomer', [
         "title" => "HydroSpace | Tambah Kustomer",
         "active" => "Kustomer"
@@ -168,17 +168,80 @@ Route::get('/dashboard/admin/create', function () {
     ]);
 });
 
-Route::get('/dashboard/produk', function () {
+Route::get('/dashboard/product', function () {
     return view('dashboard.products', [
         "title" => "HydroSpace | Daftar Produk",
         "active" => "Produk"
     ]);
 });
 
-Route::get('/dashboard/produk/create', function () {
+Route::get('/dashboard/product/slug', function () {
+    return view('dashboard.productDetail', [
+        "title" => "HydroSpace | Bibit Sawi",
+        "active" => "Produk"
+    ]);
+});
+
+Route::get('/dashboard/product/create', function () {
     return view('dashboard.createProduct', [
         "title" => "HydroSpace | Tambah Produk",
         "active" => "Produk"
+    ]);
+});
+
+Route::get('/dashboard/product/update', function () {
+    return view('dashboard.updateProduct', [
+        "title" => "HydroSpace | Update Produk",
+        "active" => "Produk"
+    ]);
+});
+
+Route::get('/dashboard/category', function () {
+    return view('dashboard.categories', [
+        "title" => "HydroSpace | Daftar Kategori",
+        "active" => "Kategori"
+    ]);
+});
+
+Route::get('/dashboard/category/create', function () {
+    return view('dashboard.createCategory', [
+        "title" => "HydroSpace | Tambah Kategori",
+        "active" => "Kategori"
+    ]);
+});
+
+Route::get('/dashboard/category/update', function () {
+    return view('dashboard.updateCategory', [
+        "title" => "HydroSpace | Update Kategori",
+        "active" => "Kategori"
+    ]);
+});
+
+Route::get('/dashboard/video', function () {
+    return view('dashboard.videos', [
+        "title" => "HydroSpace | Daftar Video",
+        "active" => "Video"
+    ]);
+});
+
+Route::get('/dashboard/video/slug', function () {
+    return view('dashboard.videoDetail', [
+        "title" => "HydroSpace | Panduan Instalasi Sistem NFT Hidroponik",
+        "active" => "Video"
+    ]);
+});
+
+Route::get('/dashboard/video/create', function () {
+    return view('dashboard.createVideo', [
+        "title" => "HydroSpace | Tambah Video",
+        "active" => "Video"
+    ]);
+});
+
+Route::get('/dashboard/video/update', function () {
+    return view('dashboard.updateVideo', [
+        "title" => "HydroSpace | Update Video",
+        "active" => "Video"
     ]);
 });
 

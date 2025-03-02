@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                            <h5 class="mb-0">Tambah Data Produk</h5>
+                            <h5 class="mb-0">Edit Data Produk</h5>
 
                             <div class="avatar avatar-online">
                                 <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
