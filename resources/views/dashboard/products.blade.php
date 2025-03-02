@@ -90,9 +90,19 @@
                         <!-- Content -->
 
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <a href="produk/create" class="btn btn-primary mb-4">
-                                <i class="bx bx-plus-circle me-2"></i> Tambah Produk
-                            </a>
+                            <div class="d-flex justify-content-between mb-4">
+                                <a href="produk/create" class="btn btn-primary">
+                                    <i class="bx bx-plus-circle me-2"></i> Tambah Produk
+                                </a>
+                                <form action="" method="GET" class="d-flex">
+                                    <div class="input-group">
+                                        <input type="text" name="query" class="form-control outline-secondary" placeholder="Cari produk...">
+                                        <span class="input-group-text">
+                                            <i class="bx bx-search"></i>
+                                        </span>
+                                    </div>
+                                </form>
+                            </div>
 
                             <!-- Striped Rows -->
                             <div class="card">
