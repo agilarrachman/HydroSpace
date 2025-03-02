@@ -9,6 +9,7 @@
     <meta content="Gardyn — Plants Store" name="description">
     <meta content="" name="keywords">
     <meta content="" name="author">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- CSS Files
     ================================================== -->
     <link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="bootstrap">
@@ -17,6 +18,11 @@
     <link href="/css/coloring.css" rel="stylesheet" type="text/css">
     <!-- color scheme -->
     <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
+
+    <!-- Midtrans -->
+
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-XWPVRwTXXJ0A8RT_"></script>
+
 
     <style>
         .header-light.transparent {
@@ -120,7 +126,7 @@
                                 <input id="read" name="read" type="checkbox" value="Ya">
                                 <label for="read">Saya telah membaca ketentuan pemesanan</label>
                             </div>
-                            <input type='submit' id='send_message' value='Buat Pesanan' class="btn-main w-100">
+                            <input type='submit' id='pay-button' value='Buat Pesanan' class="btn-main w-100">
                         </div>
                     </div>
 
@@ -215,6 +221,44 @@
     ================================================== -->
     <script src="/js/plugins.js"></script>
     <script src="/js/designesia.js"></script>
+
+    <script type="text/javascript">
+        document.getElementById('pay-button').addEventListener('click', function() {
+            fetch('/place-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        amount: 60000,
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.token) {
+                        window.snap.pay(data.token, {
+                            onSuccess: function(result) {
+                            },
+                            onPending: function(result) {
+                                console.log("Payment pending:", result);
+                                alert("Menunggu pembayaran...");
+                            },
+                            onError: function(result) {
+                                console.log("Payment failed:", result);
+                                alert("Pembayaran gagal!");
+                            },
+                            onClose: function() {
+                                alert("Anda menutup popup pembayaran sebelum menyelesaikan transaksi.");
+                            }
+                        });
+                    } else {
+                        alert("Terjadi kesalahan: " + (data.error || "Tidak dapat memproses pembayaran"));
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
 
 </body>
 

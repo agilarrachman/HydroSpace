@@ -183,3 +183,7 @@ Route::get('/dashboard/produk/create', function () {
 });
 
 // END DASHBOARD ROUTE
+
+use App\Http\Controllers\MidtransController;
+
+Route::post('/place-order', [MidtransController::class, 'placeOrder']);
