@@ -84,10 +84,10 @@
                     <!-- / Navbar -->
 
                     <!-- Content wrapper -->
-                    <div class="content-wrapper d-flex justify-content-between">
+                    <div>
                         <!-- Content -->
 
-                        <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="container-xxl container-p-y">
                             <div class="row justify-content-between align-items-center">
                                 <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="bx bx-right-arrow-alt me-2"></i> Kategori Produk</h5>
                                 <div class="d-flex mb-4 col-lg-6 justify-content-end">
@@ -205,7 +205,7 @@
                             <!--/ Striped Rows -->
                         </div>
 
-                        <div class="container-xxl flex-grow-1 container-p-y">
+                        <div class="container-xxl container-p-y">
                             <div class="row justify-content-between align-items-center">
                                 <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="bx bx-right-arrow-alt me-2"></i> Kategori Video</h5>
                                 <div class="d-flex mb-4 col-lg-6 justify-content-end">
@@ -306,6 +306,7 @@
                             </div>
                             <!--/ Striped Rows -->
                         </div>
+
                         <!-- / Content -->
 
                         <div class="content-backdrop fade"></div>
