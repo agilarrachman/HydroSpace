@@ -70,8 +70,8 @@
         </li>
 
         <!-- Order -->
-        <li class="menu-item {{ request()->is('dashboard/order*') ? 'active' : '' }}">
-            <a href="/dashboard/order" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/orders*') ? 'active' : '' }}">
+            <a href="/dashboard/orders" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cart"></i>
                 <div data-i18n="Basic">Order</div>
             </a>
