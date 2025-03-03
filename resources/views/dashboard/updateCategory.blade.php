@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                            <h5 class="mb-0">Tambah Data Produk</h5>
+                            <h5 class="mb-0">Edit Data Kategori</h5>
 
                             <div class="avatar avatar-online">
                                 <img src="{{ asset('assets/img/avatars/1.png') }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -90,86 +90,29 @@
                         <!-- Content -->
 
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <a href="/dashboard/product" class="btn btn-primary">
+                            <a href="/dashboard/category" class="btn btn-primary">
                                 <i class="bx bx-arrow-back me-2"></i>Kembali
                             </a>
                             <div class="authentication-wrapper authentication-basic container-p-y">
                                 <div class="authentication-inner" style="max-width: 100%;">
-                                    <!-- Create Product -->
+                                    <!-- Edit Category -->
                                     <div class="card">
                                         <div class="card-body">
                                             <form id="formAuthentication" class="mb-3" action="index.html" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="col d-flex flex-column mx-auto">
-                                                    <label for="images" class="form-label">Upload Images</label>
-                                                    <div id="imageInputs" class="d-flex flex-wrap">
-                                                        <div class="input-group mb-3 me-2" style="flex: 1 1 18%;">
-                                                            <input type="file" name="images[]" class="form-control @error('images') is-invalid @enderror" accept="image/*">
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
-                                                                <i class="bx bx-plus-circle"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                    @error('images')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                    @enderror
-                                                    <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar produk dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div>
-                                                </div>
                                                 <div class="mb-3">
-                                                    <label for="nama_produk" class="form-label">Nama Produk</label>
-                                                    <input type="text" class="form-control" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="kategori" class="form-label">Kategori</label>
-                                                    <select class="form-select" id="kategori" name="kategori">
-                                                        <option value="kategori1">Kategori 1</option>
-                                                        <option value="kategori2">Kategori 2</option>
-                                                        <option value="kategori3">Kategori 3</option>
-                                                    </select>
+                                                    <label for="nama_kategori" class="form-label">Nama Kategori</label>
+                                                    <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" placeholder="Masukkan nama kategori" />
                                                 </div>
                                                 <div class="mb-3">
                                                     <label for="slug" class="form-label">Slug</label>
                                                     <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug" />
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="stok" class="form-label">Stok</label>
-                                                    <input type="number" class="form-control" id="stok" name="stok" placeholder="Masukkan stok" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="deskripsi_produk" class="form-label">Deskripsi Produk</label>
-                                                    <textarea class="form-control" id="deskripsi_produk" name="deskripsi_produk" rows="3" placeholder="Masukkan deskripsi produk"></textarea>
-                                                </div>
                                                 <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
                                             </form>
-
-                                            <script>
-                                                function addImageInput() {
-                                                    const imageInputs = document.getElementById('imageInputs');
-                                                    const newInput = document.createElement('div');
-                                                    newInput.classList.add('input-group', 'mb-3', 'me-2');
-                                                    newInput.style.flex = '1 1 18%';
-                                                    newInput.innerHTML = `
-                                                        <input type="file" name="images[]" class="form-control" accept="image/*">
-                                                        <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
-                                                            <i class="bx bx-minus-circle"></i>
-                                                        </button>
-                                                    `;
-                                                    if (imageInputs.children.length < 5) {
-                                                        imageInputs.insertBefore(newInput, imageInputs.lastElementChild);
-                                                    } else {
-                                                        alert('Maksimal 5 gambar.');
-                                                    }
-                                                }
-
-                                                function removeImageInput(button) {
-                                                    button.parentElement.remove();
-                                                }
-                                            </script>
                                         </div>
                                     </div>
-                                    <!-- /Create Product -->
+                                    <!-- /Edit Category -->
                                 </div>
                             </div>
                         </div>

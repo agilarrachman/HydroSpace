@@ -75,7 +75,7 @@
                         </div>
 
                         <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                            <h5 class="mb-0">Daftar Produk</h5>
+                            <h5 class="mb-0">Daftar Kategori</h5>
 
                             <div class="avatar avatar-online">
                                 <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
@@ -91,8 +91,8 @@
 
                         <div class="container-xxl flex-grow-1 container-p-y">
                             <div class="d-flex justify-content-between mb-4">
-                                <a href="product/create" class="btn btn-primary">
-                                    <i class="bx bx-plus-circle me-2"></i> Tambah Produk
+                                <a href="category/create" class="btn btn-primary">
+                                    <i class="bx bx-plus-circle me-2"></i> Tambah Kategori
                                 </a>
                                 <form action="" method="GET" class="d-flex">
                                     <div class="input-group">
@@ -111,32 +111,23 @@
                                         <thead>
                                             <tr>
                                                 <th class="text-center"><strong>#</strong></th>
-                                                <th><strong>Gambar</strong></th>
-                                                <th><strong>Nama Produk</strong></th>
-                                                <th><strong>Kategori</strong></th>
-                                                <th><strong>Harga Produk</strong></th>
-                                                <th class="text-center"><strong>Stok Produk</strong></th>
+                                                <th><strong>Nama Kategori</strong></th>
+                                                <th><strong>Slug</strong></th>
                                                 <th class="text-center"><strong>Aksi</strong></th>
                                             </tr>
                                         </thead>
                                         <tbody class="table-border-bottom-0">
                                             <tr>
                                                 <td class="text-center">1</td>
-                                                <td>
-                                                    <img src="{{ asset('images/shop/paket/paket.png') }}" alt="Paket Hidroponik 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                                </td>
-                                                <td>Paket Hidroponik Wick 9 Lubang 1 Bak</td>
                                                 <td>📦 Paket Hidroponik</td>
-                                                <td>Rp 500.000</td>
-                                                <td class="text-center">20</td>
+                                                <td>paket-hidroponik</td>
                                                 <td class="text-center">
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                            <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
                                                     </div>
@@ -144,21 +135,15 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">2</td>
-                                                <td>
-                                                    <img src="{{ asset('images/shop/aksesori-pendukung/phmeter.png') }}" alt="Aksesori 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                                </td>
-                                                <td>PH Meter TDS & EC Meter</td>
                                                 <td>⚙️ Aksesori & Pendukung</td>
-                                                <td>Rp 150.000</td>
-                                                <td class="text-center">50</td>
+                                                <td>aksesori-pendukung</td>
                                                 <td class="text-center">
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                            <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
                                                     </div>
@@ -166,21 +151,15 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">3</td>
-                                                <td>
-                                                    <img src="{{ asset('images/shop/alat/netpot.png') }}" alt="Peralatan Hidroponik 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                                </td>
-                                                <td>Netpot Hidroponik 5cm</td>
                                                 <td>🛠️ Peralatan Hidroponik</td>
-                                                <td>Rp 300.000</td>
-                                                <td class="text-center">30</td>
+                                                <td>peralatan-hidroponik</td>
                                                 <td class="text-center">
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                            <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
                                                     </div>
@@ -188,21 +167,15 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">4</td>
-                                                <td>
-                                                    <img src="{{ asset('images/shop/nutrisi/nutrisi.png') }}" alt="Nutrisi Tanaman 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                                </td>
-                                                <td>Nutrisi Hidroponik AB</td>
                                                 <td>💧 Nutrisi Tanaman</td>
-                                                <td>Rp 100.000</td>
-                                                <td class="text-center">40</td>
+                                                <td>nutrisi-tanaman</td>
                                                 <td class="text-center">
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                            <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
                                                     </div>
@@ -210,65 +183,15 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-center">5</td>
-                                                <td>
-                                                    <img src="{{ asset('images/shop/bibit-benih/bibit-sawi.png') }}" alt="Bibit & Benih 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                                </td>
-                                                <td>Bibit Sawi</td>
                                                 <td>🌱 Bibit & Benih</td>
-                                                <td>Rp 50.000</td>
-                                                <td class="text-center">100</td>
+                                                <td>bibit-benih</td>
                                                 <td class="text-center">
                                                     <div class="dropdown">
                                                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                             <i class="bx bx-dots-vertical-rounded"></i>
                                                         </button>
                                                         <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                            <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">6</td>
-                                                <td>
-                                                    <img src="{{ asset('images/shop/paket/paket.png') }}" alt="Paket Hidroponik 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                                </td>
-                                                <td>Paket Hidroponik Wick 9 Lubang 1 Bak</td>
-                                                <td>📦 Paket Hidroponik</td>
-                                                <td>Rp 500.000</td>
-                                                <td class="text-center">20</td>
-                                                <td class="text-center">
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                            <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="text-center">7</td>
-                                                <td>
-                                                    <img src="{{ asset('images/shop/aksesori-pendukung/phmeter.png') }}" alt="Aksesori 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                                </td>
-                                                <td>PH Meter TDS & EC Meter</td>
-                                                <td>⚙️ Aksesori & Pendukung</td>
-                                                <td>Rp 150.000</td>
-                                                <td class="text-center">50</td>
-                                                <td class="text-center">
-                                                    <div class="dropdown">
-                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                            <i class="bx bx-dots-vertical-rounded"></i>
-                                                        </button>
-                                                        <div class="dropdown-menu">
-                                                            <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                            <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                             <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
                                                         </div>
                                                     </div>
