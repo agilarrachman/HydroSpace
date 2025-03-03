@@ -207,6 +207,8 @@ Route::get('/dashboard/orders/id', function () {
     return view('dashboard.orderDetail', [
         "title" => "HydroSpace | Detail Pesanan",
         "active" => "Pesanan"
+    ]);
+});
 
 Route::get('/dashboard/product/update', function () {
     return view('dashboard.updateProduct', [
