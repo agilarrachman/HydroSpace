@@ -263,7 +263,6 @@ Route::get('/dashboard/video/update', function () {
     return view('dashboard.updateVideo', [
         "title" => "HydroSpace | Update Video",
         "active" => "Video"
-
     ]);
 });
 

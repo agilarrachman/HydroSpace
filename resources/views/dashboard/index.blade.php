@@ -274,6 +274,35 @@
                                 <!--/ Expense Overview -->
 
                             </div>
+
+                            <div class="row">
+
+                                <!-- Expense Overview -->
+                                <div class="col-12 order-2 mb-4">
+                                    <div class="card h-100 d-flex align-items-center justify-content-center flex-row">
+                                        <div class="card-header pb-0 d-flex justify-content-between align-items-center col-4">
+                                            {{-- <h5 class="m-0 me-2">Grafik Pendapatan</h5>
+                                            <div class="dropdown">
+                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                                    Pilih Periode
+                                                </button>
+                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                    <li><a class="dropdown-item" href="#">Tahunan</a></li>
+                                                    <li><a class="dropdown-item" href="#">Bulanan</a></li>
+                                                    <li><a class="dropdown-item" href="#">Harian</a></li>
+                                                </ul>
+                                            </div> --}}
+                                            <h1>Aku Mau Main</h1>
+                                        </div>
+                                        <div class="card-body px-0 col-8">
+                                            <H5>Yoidatata</H5>
+                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias tenetur praesentium eum velit saepe similique inventore sapiente accusamus, sint nam animi, corporis natus facilis a.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/ Expense Overview -->
+
+                            </div>
                         </div>
                         <!-- / Content -->
 
