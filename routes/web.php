@@ -154,9 +154,30 @@ Route::get('/dashboard/admin', function () {
     ]);
 });
 
+Route::get('/dashboard/admin/slug', function () {
+    return view('dashboard.adminDetail', [
+        "title" => "HydroSpace | Detail Admin",
+        "active" => "Admin"
+    ]);
+});
+
 Route::get('/dashboard/customer', function () {
     return view('dashboard.customer', [
         "title" => "HydroSpace | Kustomer",
+        "active" => "Kustomer"
+    ]);
+});
+
+Route::get('/dashboard/customer/slug', function () {
+    return view('dashboard.customerDetail', [
+        "title" => "HydroSpace | Detail Kustomer",
+        "active" => "Kustomer"
+    ]);
+});
+
+Route::get('/dashboard/customer/slug/edit', function () {
+    return view('dashboard.updateCustomer', [
+        "title" => "HydroSpace | Edit Data Kustomer",
         "active" => "Kustomer"
     ]);
 });
