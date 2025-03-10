@@ -38,6 +38,10 @@
         <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
         <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
 
+        {{-- TRIX Editor --}}
+        <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+        <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+
         <style>
             .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
                 background-color: rgba(53, 78, 51, 0.16) !important;
@@ -138,8 +142,12 @@
                                                     <input type="number" class="form-control" id="stok" name="stok" placeholder="Masukkan stok" />
                                                 </div>
                                                 <div class="mb-3">
-                                                    <label for="deskripsi_produk" class="form-label">Deskripsi Produk</label>
-                                                    <textarea class="form-control" id="deskripsi_produk" name="deskripsi_produk" rows="3" placeholder="Masukkan deskripsi produk"></textarea>
+                                                    <label for="description" class="form-label">Product Description</label>
+                                                    @error('description')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                    <input id="description" type="hidden" name="description" value="{{ old('description') }}">
+                                                    <trix-editor input="description"></trix-editor>
                                                 </div>
                                                 <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
                                             </form>
