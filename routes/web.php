@@ -224,9 +224,16 @@ Route::get('/dashboard/category', function () {
     ]);
 });
 
-Route::get('/dashboard/category/create', function () {
-    return view('dashboard.createCategory', [
-        "title" => "HydroSpace | Tambah Kategori",
+Route::get('/dashboard/category-product/create', function () {
+    return view('dashboard.createCategoryProduct', [
+        "title" => "HydroSpace | Tambah Kategori Produk",
+        "active" => "Kategori"
+    ]);
+});
+
+Route::get('/dashboard/category-video/create', function () {
+    return view('dashboard.createCategoryVideo', [
+        "title" => "HydroSpace | Tambah Kategori Video",
         "active" => "Kategori"
     ]);
 });
