@@ -272,36 +272,35 @@
                                     </div>
                                 </div>
                                 <!--/ Expense Overview -->
-
                             </div>
 
-                            <div class="row">
-
-                                <!-- Expense Overview -->
-                                <div class="col-12 order-2 mb-4">
-                                    <div class="card h-100 d-flex align-items-center justify-content-center flex-row">
-                                        <div class="card-header pb-0 d-flex justify-content-between align-items-center col-4">
-                                            {{-- <h5 class="m-0 me-2">Grafik Pendapatan</h5>
-                                            <div class="dropdown">
-                                                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    Pilih Periode
-                                                </button>
-                                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                    <li><a class="dropdown-item" href="#">Tahunan</a></li>
-                                                    <li><a class="dropdown-item" href="#">Bulanan</a></li>
-                                                    <li><a class="dropdown-item" href="#">Harian</a></li>
-                                                </ul>
-                                            </div> --}}
-                                            <h1>Aku Mau Main</h1>
-                                        </div>
-                                        <div class="card-body px-0 col-8">
-                                            <H5>Yoidatata</H5>
-                                            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Molestias tenetur praesentium eum velit saepe similique inventore sapiente accusamus, sint nam animi, corporis natus facilis a.</p>
-                                        </div>
-                                    </div>
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-4">
+                                    <h3>Kirim Pesan Kamu</h3>
+                                    <p>Punya pertanyaan, saran, atau sekadar ingin menyapa? Kami siap mendengar! Isi formulir di bawah ini, dan kami akan segera merespons pesan Kamu.</p>
                                 </div>
-                                <!--/ Expense Overview -->
-
+                                <div class="col-md-6 mb-4">
+                                    <form action="" method="POST">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="nama" class="form-label">Nama</label>
+                                            <input type="text" class="form-control" id="nama" name="nama" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email" name="email" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="no_telepon" class="form-label">No Telepon</label>
+                                            <input type="text" class="form-control" id="no_telepon" name="no_telepon" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="pesan" class="form-label">Pesan</label>
+                                            <textarea class="form-control" id="pesan" name="pesan" rows="4" required></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Kirim</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                         <!-- / Content -->
