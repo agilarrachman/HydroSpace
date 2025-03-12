@@ -76,32 +76,33 @@
 
                         <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
                             <h5 class="mb-0">Daftar Kategori</h5>
-
                             <div class="avatar avatar-online">
                                 <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                         </div>
                     </nav>
-
                     <!-- / Navbar -->
 
                     <!-- Content wrapper -->
-                    <div class="content-wrapper">
+                    <div>
                         <!-- Content -->
 
-                        <div class="container-xxl flex-grow-1 container-p-y">
-                            <div class="d-flex justify-content-between mb-4">
-                                <a href="category/create" class="btn btn-primary">
-                                    <i class="bx bx-plus-circle me-2"></i> Tambah Kategori
-                                </a>
-                                <form action="" method="GET" class="d-flex">
-                                    <div class="input-group">
-                                        <input type="text" name="query" class="form-control outline-secondary" placeholder="Cari produk...">
-                                        <span class="input-group-text">
-                                            <i class="bx bx-search"></i>
-                                        </span>
-                                    </div>
-                                </form>
+                        <div class="container-xxl container-p-y">
+                            <div class="row justify-content-between align-items-center">
+                                <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="bx bx-right-arrow-alt me-2"></i> Kategori Produk</h5>
+                                <div class="d-flex mb-4 col-lg-6 justify-content-end">
+                                    <a href="category-product/create" class="btn btn-primary me-2">
+                                        <i class="bx bx-plus-circle me-2"></i> Tambah Kategori
+                                    </a>
+                                    <form action="" method="GET" class="d-flex">
+                                        <div class="input-group">
+                                            <input type="text" name="query" class="form-control outline-secondary" placeholder="Cari kategori produk">
+                                            <span class="input-group-text">
+                                                <i class="bx bx-search"></i>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
 
                             <!-- Striped Rows -->
@@ -202,8 +203,110 @@
                                 </div>
                             </div>
                             <!--/ Striped Rows -->
-
                         </div>
+
+                        <div class="container-xxl container-p-y">
+                            <div class="row justify-content-between align-items-center">
+                                <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="bx bx-right-arrow-alt me-2"></i> Kategori Video</h5>
+                                <div class="d-flex mb-4 col-lg-6 justify-content-end">
+                                    <a href="category-video/create" class="btn btn-primary me-2">
+                                        <i class="bx bx-plus-circle me-2"></i> Tambah Kategori
+                                    </a>
+                                    <form action="" method="GET" class="d-flex">
+                                        <div class="input-group">
+                                            <input type="text" name="query" class="form-control outline-secondary" placeholder="Cari kategori video">
+                                            <span class="input-group-text">
+                                                <i class="bx bx-search"></i>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Striped Rows -->
+                            <div class="card">
+                                <div class="table-responsive text-nowrap">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="text-center"><strong>#</strong></th>
+                                                <th><strong>Nama Kategori</strong></th>
+                                                <th><strong>Slug</strong></th>
+                                                <th class="text-center"><strong>Aksi</strong></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="table-border-bottom-0">
+                                            <tr>
+                                                <td class="text-center">1</td>
+                                                <td>🎯 Tips dan Trik</td>
+                                                <td>tips-dan-trik</td>
+                                                <td class="text-center">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">2</td>
+                                                <td>💧 Nutrisi & Pemberian Pupuk</td>
+                                                <td>nutrisi-pemberian-pupuk</td>
+                                                <td class="text-center">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">3</td>
+                                                <td>🛠️ Instalasi & Perakitan Sistem</td>
+                                                <td>instalasi-perakitan-sistem</td>
+                                                <td class="text-center">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-center">4</td>
+                                                <td>🌱 Pemilihan & Perawatan Tanaman</td>
+                                                <td>pemilihan-perawatan-tanaman</td>
+                                                <td class="text-center">
+                                                    <div class="dropdown">
+                                                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                                            <i class="bx bx-dots-vertical-rounded"></i>
+                                                        </button>
+                                                        <div class="dropdown-menu">
+                                                            <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                            <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <!--/ Striped Rows -->
+                        </div>
+
                         <!-- / Content -->
 
                         <div class="content-backdrop fade"></div>
