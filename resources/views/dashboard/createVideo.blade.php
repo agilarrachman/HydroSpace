@@ -131,40 +131,93 @@
                                                 <textarea class="form-control" id="description" name="description" rows="3" placeholder="Enter description"></textarea>
                                             </div>
                                             <div class="objective g-2 mb-3">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <label for="objective1" class="form-label">Objektive 1</label>
+                                                <div class="row g-2">
+                                                    <div class="col-lg-6 mb-3">
+                                                        <label for="objective1" class="form-label">Objektif 1</label>
                                                         <div class="form-floating mb-3">
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
-                                                                id="floatingInput"
-                                                                placeholder="John Doe"
-                                                                aria-describedby="floatingInputHelp" />
-                                                            <label for="floatingInput">Name</label>
+                                                                id="floatingHeading"
+                                                                placeholder="Masukkan judul objektif video"
+                                                                aria-describedby="floatingHeadingHelp" />
+                                                            <label for="floatingHeading">Judul Objektif</label>
                                                         </div>
                                                         <div class="form-floating">
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
-                                                                id="floatingInput"
-                                                                placeholder="John Doe"
-                                                                aria-describedby="floatingInputHelp" />
-                                                            <label for="floatingInput">Name</label>
+                                                                id="floatingDescription"
+                                                                placeholder="Jelaskan secara singkat tujuan dari video ini"
+                                                                aria-describedby="floatingDescriptionHelp" />
+                                                            <label for="floatingDescription">Deskripsi Objektif</label>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-6">
+                                                    <div class="col-lg-6 mb-3">
+                                                        <label for="objective1" class="form-label">Objektif 2</label>
+                                                        <div class="form-floating mb-3">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="floatingHeading"
+                                                                placeholder="Masukkan judul objektif video"
+                                                                aria-describedby="floatingHeadingHelp" />
+                                                            <label for="floatingHeading">Judul Objektif</label>
+                                                        </div>
                                                         <div class="form-floating">
                                                             <input
                                                                 type="text"
                                                                 class="form-control"
-                                                                id="floatingInput"
-                                                                placeholder="John Doe"
-                                                                aria-describedby="floatingInputHelp" />
-                                                            <label for="floatingInput">Name</label>
+                                                                id="floatingDescription"
+                                                                placeholder="Jelaskan secara singkat tujuan dari video ini"
+                                                                aria-describedby="floatingDescriptionHelp" />
+                                                            <label for="floatingDescription">Deskripsi Objektif</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 mb-3">
+                                                        <label for="objective1" class="form-label">Objektif 3</label>
+                                                        <div class="form-floating mb-3">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="floatingHeading"
+                                                                placeholder="Masukkan judul objektif video"
+                                                                aria-describedby="floatingHeadingHelp" />
+                                                            <label for="floatingHeading">Judul Objektif</label>
+                                                        </div>
+                                                        <div class="form-floating">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="floatingDescription"
+                                                                placeholder="Jelaskan secara singkat tujuan dari video ini"
+                                                                aria-describedby="floatingDescriptionHelp" />
+                                                            <label for="floatingDescription">Deskripsi Objektif</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 mb-3">
+                                                        <label for="objective1" class="form-label">Objektif 4</label>
+                                                        <div class="form-floating mb-3">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="floatingHeading"
+                                                                placeholder="Masukkan judul objektif video"
+                                                                aria-describedby="floatingHeadingHelp" />
+                                                            <label for="floatingHeading">Judul Objektif</label>
+                                                        </div>
+                                                        <div class="form-floating">
+                                                            <input
+                                                                type="text"
+                                                                class="form-control"
+                                                                id="floatingDescription"
+                                                                placeholder="Jelaskan secara singkat tujuan dari video ini"
+                                                                aria-describedby="floatingDescriptionHelp" />
+                                                            <label for="floatingDescription">Deskripsi Objektif</label>
                                                         </div>
                                                     </div>
                                                 </div>
+
                                             </div>
                                             <button class="btn btn-primary d-grid w-100" type="submit">Submit</button>
                                         </form>

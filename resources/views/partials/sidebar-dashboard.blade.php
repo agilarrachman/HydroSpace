@@ -29,7 +29,7 @@
             </a>
         </li>
 
-         <!-- Customer -->
+        <!-- Customer -->
         <li class="menu-item {{ request()->is('dashboard/customer*') ? 'active' : '' }}">
             <a href="/dashboard/customer" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
@@ -77,11 +77,12 @@
             </a>
         </li>
 
-        <!-- Setting -->
-        <li class="menu-item mt-auto {{ request()->is('dashboard/pengaturan*') ? 'active' : '' }}">
-            <a href="/dashboard/pengaturan" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="Basic">Pengaturan</div>
+        <!-- Profile -->
+
+        <li class="menu-item mt-auto {{ request()->is('dashboard/admin*') ? 'active' : '' }}">
+            <a href="/dashboard/admin" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Basic">Profil Kamu</div>
             </a>
         </li>
 
@@ -91,6 +92,12 @@
                 <i class="menu-icon tf-icons bx bx-log-out"></i>
                 <div data-i18n="Logout">Log Out</div>
             </a>
+        </li>
+        <li class="menu-item">
+            <button class="menu-link border-0 mx-3 px-3 bg-transparent" onclick="return confirm('Apakah kamu yakin akan keluar dari akun kamu?')">
+                <i class="menu-icon tf-icons bx bx-trash"></i>
+                <div data-i18n="Delete Account">Hapus Akun</div>
+            </button>
         </li>
     </ul>
 </aside>
