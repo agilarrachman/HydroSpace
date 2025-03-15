@@ -78,11 +78,18 @@
         </li>
 
         <!-- Profile -->
-
         <li class="menu-item mt-auto {{ request()->is('dashboard/profile*') ? 'active' : '' }}">
             <a href="/dashboard/profile" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Profil</div>
+            </a>
+        </li>
+
+        <!-- Update Password -->
+        <li class="menu-item {{ request()->is('dashboard/update-password*') ? 'active' : '' }}">
+            <a href="/dashboard/update-password" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-key"></i>
+                <div data-i18n="Basic">Ubah Password</div>
             </a>
         </li>
 
