@@ -291,7 +291,20 @@ Route::get('/dashboard/video/update', function () {
     return view('dashboard.updateVideo', [
         "title" => "HydroSpace | Update Video",
         "active" => "Video"
+    ]);
+});
 
+Route::get('/dashboard/profile', function () {
+    return view('dashboard.profile', [
+        "title" => "HydroSpace | Profile",
+        "active" => "Profile"
+    ]);
+});
+
+Route::get('/dashboard/profile/update', function () {
+    return view('dashboard.updateProfile', [
+        "title" => "HydroSpace | Update Profile",
+        "active" => "Profile"
     ]);
 });
 
