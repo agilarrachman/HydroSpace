@@ -169,7 +169,7 @@
                                             </div>
                                         </div>
                                         <div class="card-body pt-3">
-                                            <ul class="p-0 m-0 d-flex flex-column h-100">
+                                            <ul class="p-0 m-0 d-flex flex-column h-100 gap-3">
                                                 <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                     <div class="avatar flex-shrink-0 me-3">
                                                         <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
@@ -273,6 +273,94 @@
                                 </div>
                                 <!--/ Expense Overview -->
 
+                            </div>
+
+                            <div class="row">
+                                <div class="d-flex flex-nowrap overflow-auto gap-4">
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                        <div class="card h-100">
+                                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">John Doe</h6>
+                                                        <small class="text-muted">john.doe@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-3">
+                                                <p class="mb-0">
+                                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                        <div class="card h-100">
+                                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">John Doe</h6>
+                                                        <small class="text-muted">john.doe@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-3">
+                                                <p class="mb-0">
+                                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                        <div class="card h-100">
+                                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">John Doe</h6>
+                                                        <small class="text-muted">john.doe@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-3">
+                                                <p class="mb-0">
+                                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                        <div class="card h-100">
+                                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">John Doe</h6>
+                                                        <small class="text-muted">john.doe@example.com</small>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body pt-3">
+                                                <p class="mb-0">
+                                                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- / Content -->
