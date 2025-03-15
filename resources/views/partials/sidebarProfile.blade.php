@@ -49,10 +49,10 @@
         </li>
 
         <!-- Forgot Password -->
-        <li class="menu-item {{ ($active === 'Lupa Password') ? 'active' : '' }}">
+        <li class="menu-item {{ ($active === 'Ubah Password') ? 'active' : '' }}">
             <a href="/lupa-password-profil" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-key"></i>
-                <div data-i18n="Forgot Password">Lupa Password</div>
+                <div data-i18n="Forgot Password">Ubah Password</div>
             </a>
         </li>
 

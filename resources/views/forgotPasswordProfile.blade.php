@@ -216,19 +216,24 @@
             {{-- navbar end --}}
 
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
-            <p class="mb-4">Masukkan email kamu untuk mengirimkan link reset password</p>
-            <form id="formAuthentication" class="mb-3" action="index.html">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="Masukkan email"
-                  autofocus />
-              </div>
-              <button class="btn btn-primary d-grid w-100">Kirm Link Reset</button>
+            <p class="mb-4">Masukkan password lama dan password baru untuk memperbarui password kamu</p>
+            <form id="formAuthentication" class="mb-3" action="#" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="mb-3">
+                    <label for="current_password" class="form-label">Password Lama</label>
+                    <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Masukkan password lama" required />
+                </div>
+                <div class="mb-3">
+                    <label for="new_password" class="form-label">Password Baru</label>
+                    <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Masukkan password baru" required />
+                </div>
+                <div class="mb-3">
+                    <label for="confirm_password" class="form-label">Konfirmasi Password Baru</label>
+                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Konfirmasi password baru" required />
+                </div>
+                <div class="d-flex">
+                    <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
+                </div>
             </form>
           </div>
           <!-- / Content -->
