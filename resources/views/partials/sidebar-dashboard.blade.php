@@ -78,11 +78,18 @@
         </li>
 
         <!-- Profile -->
-
-        <li class="menu-item mt-auto {{ request()->is('dashboard/admin*') ? 'active' : '' }}">
-            <a href="/dashboard/admin" class="menu-link">
+        <li class="menu-item mt-auto {{ request()->is('dashboard/profile*') ? 'active' : '' }}">
+            <a href="/dashboard/profile" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Basic">Profil Kamu</div>
+                <div data-i18n="Basic">Profil</div>
+            </a>
+        </li>
+
+        <!-- Update Password -->
+        <li class="menu-item {{ request()->is('dashboard/update-password*') ? 'active' : '' }}">
+            <a href="/dashboard/update-password" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-key"></i>
+                <div data-i18n="Basic">Ubah Password</div>
             </a>
         </li>
 
@@ -93,12 +100,12 @@
                 <div data-i18n="Logout">Log Out</div>
             </a>
         </li>
-        <li class="menu-item">
+        {{-- <li class="menu-item">
             <button class="menu-link border-0 mx-3 px-3 bg-transparent" onclick="return confirm('Apakah kamu yakin akan keluar dari akun kamu?')">
                 <i class="menu-icon tf-icons bx bx-trash"></i>
                 <div data-i18n="Delete Account">Hapus Akun</div>
             </button>
-        </li>
+        </li> --}}
     </ul>
 </aside>
 <!-- / Menu -->

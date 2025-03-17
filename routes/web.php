@@ -89,7 +89,7 @@ Route::get('/perbarui-profil', function () {
 Route::get('/lupa-password-profil', function () {
     return view('forgotPasswordProfile', [
         "title" => "HydroSpace | Lupa Password",
-        "active" => "Lupa Password"
+        "active" => "Ubah Password"
     ]);
 });
 
@@ -291,7 +291,27 @@ Route::get('/dashboard/video/update', function () {
     return view('dashboard.updateVideo', [
         "title" => "HydroSpace | Update Video",
         "active" => "Video"
+    ]);
+});
 
+Route::get('/dashboard/profile', function () {
+    return view('dashboard.profile', [
+        "title" => "HydroSpace | Profile",
+        "active" => "Profile"
+    ]);
+});
+
+Route::get('/dashboard/profile/update', function () {
+    return view('dashboard.updateProfile', [
+        "title" => "HydroSpace | Update Profile",
+        "active" => "Profile"
+    ]);
+});
+
+Route::get('/dashboard/update-password', function () {
+    return view('dashboard.updatePassword', [
+        "title" => "HydroSpace | Ubah Password",
+        "active" => "Profile"
     ]);
 });
 
