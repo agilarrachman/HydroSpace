@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -114,27 +116,23 @@ Route::get('/pesanan/id', function () {
     ]);
 });
 
-Route::get('/signin', function () {
+Route::get('/masuk', function () {
     return view('signin', [
         "title" => "HydroSpace | Masuk"
     ]);
 });
 
-Route::get('/signup', function () {
-    return view('signup', [
-        "title" => "HydroSpace | Registrasi"
-    ]);
-});
+Route::get('/registrasi', [UserController::class, 'regist']);
+Route::post('/registrasi', [UserController::class, 'createAccount']);
+Route::get('/buat-profil', [UserController::class, 'showCreateProfile']);
+Route::post('/buat-profil', [UserController::class, 'storeCustomer']);
+Route::get('/get-cities/{provinceId}', [LocationController::class, 'getCities']);
+Route::get('/get-districts/{cityId}', [LocationController::class, 'getDistricts']);
+Route::get('/get-villages/{districtId}', [LocationController::class, 'getVillages']);
 
 Route::get('/lupa-password', function () {
     return view('forgotPassword', [
         "title" => "HydroSpace | Lupa Password"
-    ]);
-});
-
-Route::get('/create-profile', function () {
-    return view('createProfile', [
-        "title" => "HydroSpace | Buat Profil"
     ]);
 });
 

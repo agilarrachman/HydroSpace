@@ -71,6 +71,20 @@
             <h4 class="mb-2">Selamat Datang! 👋</h4>
             <p class="mb-4">Masuk ke akun Kamu dan mulai perjalanan hidroponik yang lebih mudah dan menyenangkan</p>
 
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+              {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if(session()->has('loginError'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              {{ session('loginError') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+            
             <form id="formAuthentication" class="mb-3" action="index.html">
               <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
@@ -113,7 +127,7 @@
 
             <p class="text-center">
               <span>Belum punya akun?</span>
-              <a href="/signup">
+              <a href="/registrasi">
                 <span>Registrasi</span>
               </a>
             </p>

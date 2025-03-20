@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html
   lang="en"
   class="light-style layout-wide customizer-hide"
@@ -43,14 +42,11 @@
 
   <!-- Helpers -->
   <script src="../assets/vendor/js/helpers.js"></script>
-  <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../assets/js/config.js"></script>
 </head>
 
 <body>
   <!-- Content -->
-
   <div class="container-xxl">
     <img src="images/logo-wm.webp" alt="" style="position: absolute; top: 0; left: 0; width: 200px; height: 200px; transform: scale(-1, -1);">
 
@@ -59,6 +55,7 @@
         <!-- Register Card -->
         <div class="card">
           <div class="card-body">
+
             <!-- Logo -->
             <div class="app-brand justify-content-center">
               <a href="/" class="app-brand-link gap-2">
@@ -69,30 +66,75 @@
             <h4 class="mb-2">Mulai Perjalananmu! 🚀</h4>
             <p class="mb-4">Daftar sekarang dan jelajahi dunia hidroponik dengan mudah bersama HydroSpace</p>
 
-            <form id="formAuthentication" class="mb-3" action="index.html">
+            <!-- Tampilkan Alert Jika Session Tidak Ditemukan -->
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{ session('error') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            <!-- Form Registrasi -->
+            <form id="formAuthentication" class="mb-3" action="/registrasi" method="POST">
+              @csrf
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input
                   type="email"
-                  class="form-control"
+                  class="form-control @error('email') is-invalid @enderror"
                   id="email"
-                  placeholder="name@example.com" autofocus/>
+                  name="email"
+                  placeholder="name@example.com"
+                  value="{{ old('email') }}"
+                  autofocus />
+                @error('email')
+                <div class="invalid-feedback">
+                  {{ $message }}
+                </div>
+                @enderror
               </div>
+
               <div class="mb-3 form-password-toggle">
                 <label class="form-label" for="password">Password</label>
                 <div class="input-group input-group-merge">
                   <input
                     type="password"
                     id="password"
-                    class="form-control"
+                    class="form-control @error('password') is-invalid @enderror"
                     name="password"
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                     aria-describedby="password" />
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  @error('password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                </div>
+                <div id="rulesPassword" class="form-text">Password harus memiliki panjang antara 3-8 karakter</div>
+              </div>
+
+              <div class="mb-3 form-password-toggle">
+                <label class="form-label" for="confirm-password">Konfirmasi Password</label>
+                <div class="input-group input-group-merge">
+                  <input
+                    type="password"
+                    id="confirm-password"
+                    class="form-control @error('confirm-password') is-invalid @enderror"
+                    name="confirm-password"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    aria-describedby="error_confirm-password" />
+                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  @error('confirm-password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
               </div>
 
-              <button class="btn btn-primary d-grid w-100" style="margin-top: 30px;">Registrasi</button>
+
+              <button class="btn btn-primary d-grid w-100" style="margin-top: 30px;" type="submit">Registrasi</button>
             </form>
 
             <p class="text-center">
@@ -109,29 +151,15 @@
 
     <img src="images/logo-wm.webp" alt="" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;">
   </div>
-
   <!-- / Content -->
 
   <!-- Core JS -->
-  <!-- build:js assets/vendor/js/core.js -->
-
   <script src="../assets/vendor/libs/jquery/jquery.js"></script>
   <script src="../assets/vendor/libs/popper/popper.js"></script>
   <script src="../assets/vendor/js/bootstrap.js"></script>
   <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
   <script src="../assets/vendor/js/menu.js"></script>
-
-  <!-- endbuild -->
-
-  <!-- Vendors JS -->
-
-  <!-- Main JS -->
   <script src="../assets/js/main.js"></script>
-
-  <!-- Page JS -->
-
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>

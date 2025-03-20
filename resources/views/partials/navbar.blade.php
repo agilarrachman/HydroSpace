@@ -66,17 +66,17 @@
                         <!-- mainmenu end -->
                     </div>
                     <div class="de-flex-col">
-                        <a href="/profil" class="profile-picture d-flex gap-2 align-items-center">
+                        <!-- <a href="/profil" class="profile-picture d-flex gap-2 align-items-center">
                             <div class="avatar avatar-online">
                                 <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                             Agil ArRachman
-                        </a>
+                        </a> -->
 
-                        <!-- <div class="menu_side_area">
+                        <div class="menu_side_area">
                             <a href="/signin" class="btn-main btn-line">Masuk</a>
                             <span id="menu-btn"></span>
-                        </div> -->
+                        </div>
 
                         <div id="btn-extra">
                             <span></span>
