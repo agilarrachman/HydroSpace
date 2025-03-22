@@ -78,45 +78,60 @@
             </div>
             @endif
 
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              {{ session('error') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
             @if(session()->has('loginError'))
             <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
               {{ session('loginError') }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
-            
-            <form id="formAuthentication" class="mb-3" action="index.html">
+
+            <form id="formAuthentication" class="mb-3" action="/masuk" method="POST">
+              @csrf
               <div class="mb-3">
-                <label for="username" class="form-label">Username</label>
+                <label for="email" class="form-label">Email</label>
                 <input
-                  type="text"
-                  class="form-control"
-                  id="username"
-                  name="username"
-                  placeholder="Masukkan username"
+                  type="email"
+                  class="form-control @error('email') is-invalid @enderror"
+                  id="email"
+                  name="email"
+                  placeholder="name@example.com"
+                  value="{{ old('email') }}"
                   autofocus />
-              </div>
-              <div class="mb-3 form-password-toggle">
-                <div class="d-flex justify-content-between">
-                  <label class="form-label" for="password">Password</label>
-                  <a href="/lupa-password">
-                    <small>Lupa Password?</small>
-                  </a>
+                @error('email')
+                <div class="invalid-feedback">
+                  {{ $message }}
                 </div>
+                @enderror
+              </div>
+
+              <div class="mb-3 form-password-toggle">
+                <label class="form-label" for="password">Password</label>
                 <div class="input-group input-group-merge">
                   <input
                     type="password"
                     id="password"
-                    class="form-control"
+                    class="form-control @error('password') is-invalid @enderror"
                     name="password"
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                     aria-describedby="password" />
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  @error('password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
               </div>
               <div class="mb-3">
                 <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="remember-me" />
+                  <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me" />
                   <label class="form-check-label" for="remember-me"> Ingat Saya </label>
                 </div>
               </div>

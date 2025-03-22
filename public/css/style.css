@@ -22149,8 +22149,14 @@ border-radius:20px 0 0 20px;
   transition: border-bottom 0.3s ease-in-out;
 }
 
+#mainmenu li a:hover{
+  color: white;
+  border-bottom: 2px solid white;
+}
+
 .profile-picture:hover{
   color: white;
+  padding-bottom: 10px;
   border-bottom: 2px solid white;
 }
 

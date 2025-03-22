@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('phone_number');
             $table->enum('gender', ['Pria', 'Wanita']);
             $table->enum('role', ['Admin', 'Customer'])->default('Customer');
-            $table->string('profile_picture')->default('default profile picture.jpg');
+            $table->string('profile_picture')->default('profile_picture/default profile picture.jpg');
             $table->string('province')->nullable();
             $table->string('city')->nullable();
             $table->string('district')->nullable();

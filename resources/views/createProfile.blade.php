@@ -99,7 +99,7 @@
                                 </div>
                                 <div class="col-lg-6">
                                     <label for="phone_number" class="form-label">Nomor Handphone</label>
-                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" placeholder="Masukkan nomor handphone" required value="{{ old('phone_number') }}" />
+                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" placeholder="Cth: 081234567890" required value="{{ old('phone_number') }}" />
                                     @error('phone_number')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -115,7 +115,9 @@
                                         <select class="form-select" id="province" name="province" onchange="loadCities(this.value)">
                                             <option selected disabled>Pilih Provinsi</option>
                                             @foreach ($provinces as $province)
-                                            <option value="{{ $province->id }}">{{ $province->name }}</option>
+                                            <option value="{{ $province->id }}" {{ old('province') == $province->id ? 'selected' : '' }}>
+                                                {{ $province->name }}
+                                            </option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -123,6 +125,11 @@
                                         <label for="city" class="form-label">Kota</label>
                                         <select class="form-select" id="city" name="city" onchange="loadDistricts(this.value)">
                                             <option selected disabled>Pilih Kota</option>
+                                            @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}" {{ old('city') == $city->id ? 'selected' : '' }}>
+                                                {{ $city->name }}
+                                            </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -131,18 +138,29 @@
                                         <label for="district" class="form-label">Kecamatan</label>
                                         <select class="form-select" id="district" name="district" onchange="loadVillages(this.value)">
                                             <option selected disabled>Pilih Kecamatan</option>
+                                            @foreach ($districts as $district)
+                                            <option value="{{ $district->id }}" {{ old('district') == $district->id ? 'selected' : '' }}>
+                                                {{ $district->name }}
+                                            </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="village" class="form-label">Kelurahan</label>
                                         <select class="form-select" id="village" name="village">
                                             <option selected disabled>Pilih Kelurahan</option>
+                                            @foreach ($villages as $village)
+                                            <option value="{{ $village->id }}" {{ old('village') == $village->id ? 'selected' : '' }}>
+                                                {{ $village->name }}
+                                            </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
                                 <div class="mb-3">
                                     <label for="full_address" class="form-label">Alamat Lengkap</label>
-                                    <textarea class="form-control" id="full_address" name="full_address" rows="3" style="min-height: 200px;">{{ old('full_address') }}</textarea>
+                                    <textarea class="form-control" id="full_address" name="full_address" rows="3" style="min-height: 200px;" placeholder="Masukkan alamat lengkap Anda, termasuk patokan, gang, nomor rumah, hingga link Google Maps jika tersedia. 
+Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)">{{ old('full_address') }}</textarea>
                                 </div>
                             </div>
 
@@ -239,7 +257,6 @@
                 })
                 .catch(error => console.error('Error:', error));
         }
-    </script>
     </script>
 </body>
 

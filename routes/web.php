@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
@@ -74,20 +75,6 @@ Route::get('/dashboard/chat', function () {
     ]);
 });
 
-Route::get('/profil', function () {
-    return view('profile', [
-        "title" => "HydroSpace | Profil",
-        "active" => "Lihat Profil"
-    ]);
-});
-
-Route::get('/perbarui-profil', function () {
-    return view('updateProfile', [
-        "title" => "HydroSpace | Update Profil",
-        "active" => "Perbarui Profil"
-    ]);
-});
-
 Route::get('/lupa-password-profil', function () {
     return view('forgotPasswordProfile', [
         "title" => "HydroSpace | Lupa Password",
@@ -116,19 +103,27 @@ Route::get('/pesanan/id', function () {
     ]);
 });
 
-Route::get('/masuk', function () {
-    return view('signin', [
-        "title" => "HydroSpace | Masuk"
-    ]);
-});
-
-Route::get('/registrasi', [UserController::class, 'regist']);
-Route::post('/registrasi', [UserController::class, 'createAccount']);
-Route::get('/buat-profil', [UserController::class, 'showCreateProfile']);
-Route::post('/buat-profil', [UserController::class, 'storeCustomer']);
+Route::get('/masuk', [AuthenticationController::class, 'login']);
+Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
+Route::post('/keluar', [AuthenticationController::class, 'logout']);
+Route::get('/registrasi', [AuthenticationController::class, 'regist']);
+Route::post('/registrasi', [AuthenticationController::class, 'createAccount']);
+Route::get('/buat-profil', [AuthenticationController::class, 'showCreateProfile']);
+Route::post('/buat-profil', [AuthenticationController::class, 'storeCustomer']);
 Route::get('/get-cities/{provinceId}', [LocationController::class, 'getCities']);
 Route::get('/get-districts/{cityId}', [LocationController::class, 'getDistricts']);
 Route::get('/get-villages/{districtId}', [LocationController::class, 'getVillages']);
+
+Route::middleware(['role:Customer'])->group(function () {
+    Route::resource('/profil', UserController::class)->parameters([
+        'profil' => 'user'
+    ]);
+});
+
+// Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
+//     Route::get('/', [AdminController::class, 'index'])->name('dashboard.index');
+//     Route::get('/settings', [AdminController::class, 'settings'])->name('dashboard.settings');
+// });
 
 Route::get('/lupa-password', function () {
     return view('forgotPassword', [

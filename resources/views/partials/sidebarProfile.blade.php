@@ -1,3 +1,9 @@
+<style>
+    a:hover {
+        color: #697a8d !important;
+    }
+</style>
+
 <!-- Menu -->
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo d-flex flex-column mb-3">
@@ -18,7 +24,7 @@
     <ul class="menu-inner py-1">
         <!-- Dashboards -->
         <li class="menu-item {{ ($active === 'Lihat Profil') ? 'active' : '' }}">
-            <a href="/profil" class="menu-link">
+            <a href="/profil/{{ auth()->user()->username }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Profile">Lihat Profil</div>
             </a>
@@ -26,7 +32,7 @@
 
         <!-- Update Profile -->
         <li class="menu-item {{ ($active === 'Perbarui Profil') ? 'active' : '' }}">
-            <a href="/perbarui-profil" class="menu-link">
+            <a href="/profil/{{ auth()->user()->username }}/edit" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-edit"></i>
                 <div data-i18n="Update Profile">Perbarui Profil</div>
             </a>
@@ -58,18 +64,25 @@
 
         <!-- Log -->
         <li class="menu-item mt-auto">
-            <button class="menu-link border-0 mx-3 px-3 bg-transparent" onclick="return confirm('Apakah kamu yakin akan keluar dari akun kamu?')">
-                <i class="menu-icon tf-icons bx bx-log-out"></i>
-                <p class="m-0">Log Out</p>
-            </button>
+            <form action="/keluar" method="post" class="ms-2">
+                @csrf
+                <button class="menu-link border-0 mx-4 px-0 bg-transparent" type="submit" onclick="return confirm('Apakah kamu yakin akan keluar dari akun kamu?')">
+                    <i class="menu-icon tf-icons bx bx-log-out"></i>
+                    <p class="m-0">Log Out</p>
+                </button>
+            </form>
         </li>
 
         <!-- Log -->
         <li class="menu-item">
-            <button class="menu-link border-0 mx-3 px-3 bg-transparent" onclick="return confirm('Apakah kamu yakin akan keluar dari akun kamu?')">
-                <i class="menu-icon tf-icons bx bx-trash"></i>
-                <div data-i18n="Delete Account">Hapus Akun</div>
-            </button>
+            <form action="/profil/{{ auth()->user()->username }}" method="post" class="ms-2">
+                @method('delete')
+                @csrf
+                <button class="menu-link border-0 mx-4 px-0 bg-transparent" onclick="return confirm('Apakah kamu yakin akan menghapus akun kamu?')">
+                    <i class="menu-icon tf-icons bx bx-trash"></i>
+                    <div data-i18n="Delete Account">Hapus Akun</div>
+                </button>
+            </form>
         </li>
     </ul>
 </aside>
