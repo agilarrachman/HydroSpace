@@ -44,6 +44,8 @@ class AuthenticationController extends Controller
             // Redirect ke halaman utama jika role adalah User
             return redirect()->intended('/');
         }
+
+        return back()->with('loginError', 'Login Gagal! Email atau password salah.');
     }
 
     public function logout()

@@ -13,6 +13,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'role' => \App\Http\Middleware\CheckRole::class,
+            'blockAdmin' => \App\Http\Middleware\BlockAdminAccess::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

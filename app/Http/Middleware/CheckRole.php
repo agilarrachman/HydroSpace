@@ -20,6 +20,16 @@ class CheckRole
             return redirect('/masuk')->with('error', 'Harap login terlebih dahulu!');
         }
 
+        $userRole = Auth::user()->role;
+        $currentPath = $request->path();
+
+        if ($userRole === 'Admin') {
+            // Pastikan admin hanya bisa mengakses "/dashboard/*"
+            if (!str_starts_with($currentPath, 'dashboard')) {
+                abort(403, 'Anda tidak memiliki akses ke halaman ini.');
+            }
+        }
+
         if (Auth::user()->role !== $role) {
             return redirect('/')->with('error', 'Anda tidak memiliki akses ke halaman ini.');
         }

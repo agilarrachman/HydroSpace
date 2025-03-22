@@ -1,71 +1,84 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('index', [
-        "title" => "HydroSpace | Beranda",
-        "active" => "Beranda"
-    ]);
-});
+Route::get('/masuk', [AuthenticationController::class, 'login']);
+Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
+Route::get('/registrasi', [AuthenticationController::class, 'regist']);
+Route::post('/registrasi', [AuthenticationController::class, 'createAccount']);
+Route::get('/buat-profil', [AuthenticationController::class, 'showCreateProfile']);
+Route::post('/buat-profil', [AuthenticationController::class, 'storeCustomer']);
+Route::get('/get-cities/{provinceId}', [LocationController::class, 'getCities']);
+Route::get('/get-districts/{cityId}', [LocationController::class, 'getDistricts']);
+Route::get('/get-villages/{districtId}', [LocationController::class, 'getVillages']);
 
-Route::get('/produk', function () {
-    return view('products', [
-        "title" => "HydroSpace | Produk",
-        "active" => "Produk"
-    ]);
-});
+Route::middleware(['blockAdmin'])->group(function () {
+    Route::get('/', function () {
+        return view('index', [
+            "title" => "HydroSpace | Beranda",
+            "active" => "Beranda"
+        ]);
+    });
 
-Route::get('/produk/slug', function () {
-    return view('viewProduct', [
-        "title" => "HydroSpace | Produk",
-        "active" => "Produk"
-    ]);
-});
+    Route::get('/produk', function () {
+        return view('products', [
+            "title" => "HydroSpace | Produk",
+            "active" => "Produk"
+        ]);
+    });
 
-Route::get('/edukasi', function () {
-    return view('videos', [
-        "title" => "HydroSpace | Edukasi",
-        "active" => "Edukasi"
-    ]);
-});
+    Route::get('/produk/slug', function () {
+        return view('viewProduct', [
+            "title" => "HydroSpace | Produk",
+            "active" => "Produk"
+        ]);
+    });
 
-Route::get('/edukasi/slug', function () {
-    return view('viewVideo', [
-        "title" => "HydroSpace | Edukasi",
-        "active" => "Edukasi"
-    ]);
-});
+    Route::get('/edukasi', function () {
+        return view('videos', [
+            "title" => "HydroSpace | Edukasi",
+            "active" => "Edukasi"
+        ]);
+    });
 
-Route::get('/hydrobot', function () {
-    return view('index', [
-        "title" => "HydroSpace | HydroBot",
-        "active" => "HydroBot"
-    ]);
-});
+    Route::get('/edukasi/slug', function () {
+        return view('viewVideo', [
+            "title" => "HydroSpace | Edukasi",
+            "active" => "Edukasi"
+        ]);
+    });
 
-Route::get('/tentang', function () {
-    return view('about', [
-        "title" => "HydroSpace | Tentang Kami",
-        "active" => "Tentang"
-    ]);
-});
+    Route::get('/hydrobot', function () {
+        return view('index', [
+            "title" => "HydroSpace | HydroBot",
+            "active" => "HydroBot"
+        ]);
+    });
 
-Route::get('/kontak', function () {
-    return view('contact', [
-        "title" => "HydroSpace | Kontak",
-        "active" => "Kontak"
-    ]);
-});
+    Route::get('/tentang', function () {
+        return view('about', [
+            "title" => "HydroSpace | Tentang Kami",
+            "active" => "Tentang"
+        ]);
+    });
 
-Route::get('/chat', function () {
-    return view('chat', [
-        "title" => "HydroSpace | Chat Admin HydroSpace",
-        "active" => "Chat Admin HydroSpace"
-    ]);
+    Route::get('/kontak', function () {
+        return view('contact', [
+            "title" => "HydroSpace | Kontak",
+            "active" => "Kontak"
+        ]);
+    });
+
+    Route::get('/chat', function () {
+        return view('chat', [
+            "title" => "HydroSpace | Chat Admin HydroSpace",
+            "active" => "Chat Admin HydroSpace"
+        ]);
+    });
 });
 
 Route::get('/dashboard/chat', function () {
@@ -75,68 +88,63 @@ Route::get('/dashboard/chat', function () {
     ]);
 });
 
-Route::get('/lupa-password-profil', function () {
-    return view('forgotPasswordProfile', [
-        "title" => "HydroSpace | Lupa Password",
-        "active" => "Ubah Password"
-    ]);
-});
-
-Route::get('/checkout', function () {
-    return view('checkout', [
-        "title" => "HydroSpace | Buat Pesanan",
-        "active" => "Buat Pesanan",
-    ]);
-});
-
-Route::get('/pesanan', function () {
-    return view('orders', [
-        "title" => "HydroSpace | Pesanan Saya",
-        "active" => "Pesanan Saya",
-    ]);
-});
-
-Route::get('/pesanan/id', function () {
-    return view('orderDetail', [
-        "title" => "HydroSpace | Pesanan Saya",
-        "active" => "Pesanan Saya",
-    ]);
-});
-
-Route::get('/masuk', [AuthenticationController::class, 'login']);
-Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
-Route::post('/keluar', [AuthenticationController::class, 'logout']);
-Route::get('/registrasi', [AuthenticationController::class, 'regist']);
-Route::post('/registrasi', [AuthenticationController::class, 'createAccount']);
-Route::get('/buat-profil', [AuthenticationController::class, 'showCreateProfile']);
-Route::post('/buat-profil', [AuthenticationController::class, 'storeCustomer']);
-Route::get('/get-cities/{provinceId}', [LocationController::class, 'getCities']);
-Route::get('/get-districts/{cityId}', [LocationController::class, 'getDistricts']);
-Route::get('/get-villages/{districtId}', [LocationController::class, 'getVillages']);
-
 Route::middleware(['role:Customer'])->group(function () {
     Route::resource('/profil', UserController::class)->parameters([
         'profil' => 'user'
     ]);
+
+    Route::post('/keluar', [AuthenticationController::class, 'logout']);
+
+    Route::get('/lupa-password-profil', function () {
+        return view('forgotPasswordProfile', [
+            "title" => "HydroSpace | Lupa Password",
+            "active" => "Ubah Password"
+        ]);
+    });
+
+    Route::get('/checkout', function () {
+        return view('checkout', [
+            "title" => "HydroSpace | Buat Pesanan",
+            "active" => "Buat Pesanan",
+        ]);
+    });
+
+    Route::get('/pesanan', function () {
+        return view('orders', [
+            "title" => "HydroSpace | Pesanan Saya",
+            "active" => "Pesanan Saya",
+        ]);
+    });
+
+    Route::get('/pesanan/id', function () {
+        return view('orderDetail', [
+            "title" => "HydroSpace | Pesanan Saya",
+            "active" => "Pesanan Saya",
+        ]);
+    });
 });
 
-// Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
-//     Route::get('/', [AdminController::class, 'index'])->name('dashboard.index');
-//     Route::get('/settings', [AdminController::class, 'settings'])->name('dashboard.settings');
-// });
+Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
+    Route::get('/', function () {
+        return view('dashboard.index', [
+            "title" => "HydroSpace | Dashboard",
+            "active" => "Dashboard"
+        ]);
+    });
+
+    Route::resource('/admin', AdminController::class)->parameters([
+        'admin' => 'user'
+    ]);
+    Route::resource('/profile', AdminController::class)->parameters([
+        'profile' => 'user'
+    ]);
+
+    Route::post('/keluar', [AdminController::class, 'logout']);
+});
 
 Route::get('/lupa-password', function () {
     return view('forgotPassword', [
         "title" => "HydroSpace | Lupa Password"
-    ]);
-});
-
-// DASHBOARD ROUTE
-
-Route::get('/dashboard', function () {
-    return view('dashboard.index', [
-        "title" => "HydroSpace | Dashboard",
-        "active" => "Dashboard"
     ]);
 });
 
@@ -284,20 +292,6 @@ Route::get('/dashboard/video/update', function () {
     return view('dashboard.updateVideo', [
         "title" => "HydroSpace | Update Video",
         "active" => "Video"
-    ]);
-});
-
-Route::get('/dashboard/profile', function () {
-    return view('dashboard.profile', [
-        "title" => "HydroSpace | Profile",
-        "active" => "Profile"
-    ]);
-});
-
-Route::get('/dashboard/profile/update', function () {
-    return view('dashboard.updateProfile', [
-        "title" => "HydroSpace | Update Profile",
-        "active" => "Profile"
     ]);
 });
 

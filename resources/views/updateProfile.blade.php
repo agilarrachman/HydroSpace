@@ -175,22 +175,32 @@
                   <label for="username" class="form-label">Email</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control @error('username') is-invalid @enderror"
                     id="email"
                     name="email"
                     placeholder="Masukkan email"
                     value="{{ old('email', $customer->email) }}"
                     autofocus />
+                  @error('email')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
                 <div class="col-lg-6">
                   <label for="name" class="form-label">name Lengkap</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control @error('username') is-invalid @enderror"
                     id="name"
                     name="name"
                     value="{{ old('name', $customer->name) }}"
                     placeholder="Masukkan nama lengkap" />
+                  @error('name')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
               </div>
               <div class="row g-2 mb-3">
@@ -228,16 +238,26 @@
                     name="username"
                     value="{{ old('username', $customer->username) }}"
                     placeholder="Masukkan username" />
+                  @error('username')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
                 <div class="col-lg-4">
                   <label for="phone_number" class="form-label">Nomor Handphone</label>
                   <input
                     type="number"
-                    class="form-control"
+                    class="form-control @error('phone_number') is-invalid @enderror"
                     id="phone_number"
                     name="phone_number"
                     value="{{ old('phone_number', $customer->phone_number) }}"
                     placeholder="Cth: 081234567890" />
+                  @error('phone_number')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
               </div>
               <div class="address">

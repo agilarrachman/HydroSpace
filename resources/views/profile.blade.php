@@ -189,45 +189,6 @@
                     autofocus disabled />
                 </div>
                 <div class="col-lg-6">
-                  <label for="nama" class="form-label">Nama Lengkap</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nama"
-                    name="nama"
-                    value="{{ $customer->name }}"
-                    placeholder="Masukkan nama lengkap" disabled />
-                </div>
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-lg-3">
-                  <label for="nama" class="form-label">Jenis Kelamin</label>
-                  <div class="d-flex gap-3">
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value="Pria"
-                        id="pria"
-                        {{ ($customer->gender ?? '') == 'Pria' ? 'checked' : '' }}
-                        disabled />
-                      <label class="form-check-label" for="pria"> Pria </label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value=""
-                        id="wanita"
-                        {{ old('gender', $customer->gender) == 'Wanita' ? 'checked' : '' }}
-                        disabled />
-                      <label class="form-check-label" for="wanita"> Wanita </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-5">
                   <label for="nohp" class="form-label">Username</label>
                   <input
                     type="text"
@@ -237,7 +198,23 @@
                     value="{{ $customer->username }}"
                     placeholder="Masukkan username" disabled />
                 </div>
-                <div class="col-lg-4">
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col-lg-6">
+                  <label for="nama" class="form-label">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nama"
+                    name="nama"
+                    value="{{ $customer->name }}"
+                    placeholder="Masukkan nama lengkap" disabled />
+                </div>
+                <div class="col-lg-3 mb-3">
+                  <label for="gender" class="form-label">Jenis Kelamin</label>
+                  <input type="text" class="form-control" id="gender" name="gender" value="{{ $customer->gender }}" readonly>
+                </div>
+                <div class="col-lg-3">
                   <label for="nohp" class="form-label">Nomor Handphone</label>
                   <input
                     type="number"
