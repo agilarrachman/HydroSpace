@@ -79,7 +79,7 @@
                         <h5 class="mb-0">Daftar Admin</h5>
 
                         <div class="avatar avatar-online">
-                            <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
                         </div>
                     </div>
                 </nav>
@@ -91,7 +91,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="admin/create" class="btn btn-primary mb-4">
+                        <a href="/dashboard/admins/create" class="btn btn-primary mb-4">
                             <i class="bx bx-plus-circle me-2"></i> Tambah Admin
                         </a>
 
@@ -111,69 +111,38 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
+                                        @foreach ($admins as $admin)
                                         <tr>
-                                            <td>1</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
+                                                <img src="{{ asset('../storage/' . $admin->profile_picture) }}" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
                                             </td>
-                                            <td>barryallen</td>
-                                            <td>barryallen@gmail.com</td>
-                                            <td>12-25-2025</td>
+                                            <td>{{ $admin->username }}</td>
+                                            <td>{{ $admin->email }}</td>
+                                            <td>{{ $admin->created_at->format('d/m/Y') }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="admin/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        <a class="dropdown-item" href="/dashboard/admins/{{ $admin->username }}"><i class="bx bx-show me-1"></i> Lihat</a>
+                                                        <a class="dropdown-item" href="/dashboard/admins/{{ $admin->username }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                            <form action="/dashboard/admins/{{ $admin->username }}" method="post">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus akun kamu?')">
+                                                                    <i class="bx bx-trash me-2"></i>
+                                                                    <div data-i18n="Delete Account">Delete</div>
+                                                                </button>
+                                                            </form>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>
-                                                <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
-                                            </td>
-                                            <td>johndoe</td>
-                                            <td>johndoe@gmail.com</td>
-                                            <td>12-28-2025</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="admin/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>
-                                                <img src="{{ asset('assets/img/avatars/5.png') }}" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
-                                            </td>
-                                            <td>asepsurasep</td>
-                                            <td>binkasep@gmail.com</td>
-                                            <td>12-31-2025</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="admin/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

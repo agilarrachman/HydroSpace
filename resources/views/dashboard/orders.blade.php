@@ -72,8 +72,6 @@
             color: white;
             margin-bottom: 0;
         }
-
-        
     </style>
 </head>
 
@@ -101,7 +99,7 @@
                         <h5 class="mb-0">Daftar {{ $active }}</h5>
 
                         <div class="avatar avatar-online">
-                            <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
                         </div>
                     </div>
                 </nav>

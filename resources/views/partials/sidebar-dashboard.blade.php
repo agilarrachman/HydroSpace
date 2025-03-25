@@ -23,7 +23,7 @@
 
         <!-- Admin -->
         <li class="menu-item {{ request()->is('dashboard/admin*') ? 'active' : '' }}">
-            <a href="/dashboard/admin" class="menu-link">
+            <a href="/dashboard/admins" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Admin</div>
             </a>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
@@ -144,5 +146,73 @@ class AuthenticationController extends Controller
         session()->forget(['email', 'password']);
 
         return redirect('/masuk')->with('success', 'Registrasi berhasil! Harap login terlebih dahulu');
+    }
+
+    public function showForgotPasswordForm()
+    {
+        return view('forgotPassword', [
+            "title" => "HydroSpace | Lupa Password"
+        ]);
+    }
+
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        // Validasi email
+        $request->validate([
+            'email' => 'required|email'
+        ]);
+
+        // Cek apakah email ada di database
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return back()->with('error', 'Email yang kamu masukkan belum terdaftar pada sistem kami.');
+        }
+
+        // Generate token reset password
+        $token = Password::createToken($user);
+        $resetUrl = url('/reset-password/' . $token . '?email=' . urlencode($request->email));
+
+        // Kirim email dengan template
+        Mail::send('emails.resetPassword', ['resetUrl' => $resetUrl], function ($message) use ($request) {
+            $message->to($request->email)
+                ->subject('Reset Password HydroSpace');
+        });
+
+        return back()->with('success', 'Link reset password telah dikirim ke email Anda.');
+    }
+
+    public function showResetPasswordForm($token)
+    {
+        // Menampilkan halaman reset password dengan token
+        return view('resetPassword', [
+            'token' => $token,
+            'title' => 'HydroSpace | Reset Password'
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        // Validasi input
+        $request->validate([
+            'email' => 'required|email|exists:users,email',
+            'password' => 'required|string|min:3|max:8',
+            'confirm_password' => 'required|string|min:3|max:8|same:password',
+            'token' => 'required'
+        ]);
+
+        // Reset password menggunakan token
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill(['password' => Hash::make($password)])->save();
+            }
+        );
+
+        // Redirect berdasarkan status reset password
+        return $status === Password::PASSWORD_RESET
+            ? redirect('/masuk')->with('success', 'Password berhasil direset, silakan login.')
+            : back()->with('error', 'Token tidak valid atau kedaluwarsa.');
     }
 }

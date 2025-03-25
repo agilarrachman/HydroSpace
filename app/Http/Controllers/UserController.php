@@ -10,6 +10,7 @@ use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -146,5 +147,35 @@ class UserController extends Controller
 
         // Redirect ke halaman depan dengan pesan sukses
         return redirect('/');
+    }
+
+    public function updatePassword(Request $request, User $user)
+    {
+
+        // Validasi data input untuk password baru
+        $validatedData = $request->validate([
+            'current_password' => 'required|string|min:3|max:8',
+            'password' => 'required|string|min:3|max:8',
+            'confirm_password' => 'required|string|min:3|max:8|same:password',
+        ], [
+            'confirm_password.confirmed' => 'Password dan Konfirmasi Password tidak cocok.',
+        ]);
+
+        // Cek apakah current_password cocok dengan password lama
+        if (!Hash::check($validatedData['current_password'], $user->password)) {
+            return back()->with('false', 'Password lama tidak sesuai, Mohon masukkan password lama dengan benar!');
+        }
+
+        // Update password
+        $user->update([
+            'password' => Hash::make($validatedData['password']),
+        ]);
+
+        Auth::logout();
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        // Redirect dengan pesan sukses
+        return redirect('/masuk')->with('success', 'Password telah berhasil diupdate, Silakan login kembali!');
     }
 }

@@ -210,30 +210,50 @@
         <div class="content-wrapper">
           <!-- Content -->
 
-          <div class="container col-12 col-lg-5 mx-auto mx-lg-0 container-p-y mt-lg-5 mt-1">
+          <div class="container col-12 col-lg-8 mx-auto mx-lg-0 container-p-y mt-lg-5 mt-1">
             {{-- navbar --}}
             @include('partials.navbarProfile')
             {{-- navbar end --}}
 
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
             <p class="mb-4">Masukkan password lama dan password baru untuk memperbarui password kamu</p>
-            <form id="formAuthentication" class="mb-3" action="#" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="mb-3">
-                    <label for="current_password" class="form-label">Password Lama</label>
-                    <input type="password" class="form-control" id="current_password" name="current_password" placeholder="Masukkan password lama" required />
+
+            @if(session()->has('false'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              {{ session('false') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            <form id="formAuthentication" class="mb-3" action="/update-password/{{ auth()->user()->username }}" method="POST">
+              @method('put')
+              @csrf
+              <div class="mb-3">
+                <label for="current_password" class="form-label">Password Lama</label>
+                <input type="password" class="form-control @error('current_password') is-invalid @enderror" id="current_password" name="current_password" placeholder="Masukkan password lama" required />
+                @error('current_password')
+                <div class="invalid-feedback">
+                  {{ $message }}
                 </div>
-                <div class="mb-3">
-                    <label for="new_password" class="form-label">Password Baru</label>
-                    <input type="password" class="form-control" id="new_password" name="new_password" placeholder="Masukkan password baru" required />
+                @enderror
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password Baru</label>
+                <input type="password" class="form-control" id="password" name="password" placeholder="Masukkan password baru" required />
+                <div id="rulesPassword" class="form-text">Password harus memiliki panjang antara 3-8 karakter</div>
+              </div>
+              <div class="mb-3">
+                <label for="confirm_password" class="form-label">Konfirmasi Password Baru</label>
+                <input type="password" class="form-control @error('confirm_password') is-invalid @enderror" id="confirm_password" name="confirm_password" placeholder="Konfirmasi password baru" required />
+                @error('confirm_password')
+                <div class="invalid-feedback">
+                  {{ $message }}
                 </div>
-                <div class="mb-3">
-                    <label for="confirm_password" class="form-label">Konfirmasi Password Baru</label>
-                    <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="Konfirmasi password baru" required />
-                </div>
-                <div class="d-flex">
-                    <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
-                </div>
+                @enderror
+              </div>
+              <div class="d-flex">
+                <button class="btn btn-primary d-grid w-100" type="submit" onclick="return confirm('Apakah kamu yakin akan mengubah password kamu? Jika iya kamu akan diarahkan ke halaman Login untuk masuk kembali')">Konfirmasi</button>
+              </div>
             </form>
           </div>
           <!-- / Content -->

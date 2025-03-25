@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
@@ -8,6 +9,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
 Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
+Route::get('/lupa-password', [AuthenticationController::class, 'showForgotPasswordForm']);
+Route::post('/lupa-password', [AuthenticationController::class, 'sendResetLinkEmail']);
+Route::get('/reset-password/{token}', [AuthenticationController::class, 'showResetPasswordForm'])
+    ->name('password.reset');
+Route::put('/reset-password', [AuthenticationController::class, 'resetPassword']);
 Route::get('/registrasi', [AuthenticationController::class, 'regist']);
 Route::post('/registrasi', [AuthenticationController::class, 'createAccount']);
 Route::get('/buat-profil', [AuthenticationController::class, 'showCreateProfile']);
@@ -95,12 +101,14 @@ Route::middleware(['role:Customer'])->group(function () {
 
     Route::post('/keluar', [AuthenticationController::class, 'logout']);
 
-    Route::get('/lupa-password-profil', function () {
-        return view('forgotPasswordProfile', [
-            "title" => "HydroSpace | Lupa Password",
+    Route::get('/update-password', function () {
+        return view('updatePassword', [
+            "title" => "HydroSpace | Ubah Password",
             "active" => "Ubah Password"
         ]);
     });
+
+    Route::put('/update-password/{user:username}', [UserController::class, 'updatePassword']);
 
     Route::get('/checkout', function () {
         return view('checkout', [
@@ -132,34 +140,24 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
         ]);
     });
 
-    Route::resource('/admin', AdminController::class)->parameters([
-        'admin' => 'user'
+    Route::resource('/admins', AdminController::class)->parameters([
+        'admins' => 'user'
     ]);
-    Route::resource('/profile', AdminController::class)->parameters([
+
+    Route::resource('/profile', AdminProfileController::class)->parameters([
         'profile' => 'user'
     ]);
 
     Route::post('/keluar', [AdminController::class, 'logout']);
-});
+    
+    Route::get('/update-password', function () {
+        return view('dashboard.updatePassword', [
+            "title" => "HydroSpace | Ubah Password",
+            "active" => "Profile"
+        ]);
+    });
 
-Route::get('/lupa-password', function () {
-    return view('forgotPassword', [
-        "title" => "HydroSpace | Lupa Password"
-    ]);
-});
-
-Route::get('/dashboard/admin', function () {
-    return view('dashboard.admin', [
-        "title" => "HydroSpace | Admin",
-        "active" => "Admin"
-    ]);
-});
-
-Route::get('/dashboard/admin/slug', function () {
-    return view('dashboard.adminDetail', [
-        "title" => "HydroSpace | Detail Admin",
-        "active" => "Admin"
-    ]);
+    Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
 });
 
 Route::get('/dashboard/customer', function () {
@@ -187,13 +185,6 @@ Route::get('/dashboard/customer/create', function () {
     return view('dashboard.createCustomer', [
         "title" => "HydroSpace | Tambah Kustomer",
         "active" => "Kustomer"
-    ]);
-});
-
-Route::get('/dashboard/admin/create', function () {
-    return view('dashboard.createAdmin', [
-        "title" => "HydroSpace | Tambah Admin",
-        "active" => "Admin"
     ]);
 });
 
@@ -292,13 +283,6 @@ Route::get('/dashboard/video/update', function () {
     return view('dashboard.updateVideo', [
         "title" => "HydroSpace | Update Video",
         "active" => "Video"
-    ]);
-});
-
-Route::get('/dashboard/update-password', function () {
-    return view('dashboard.updatePassword', [
-        "title" => "HydroSpace | Ubah Password",
-        "active" => "Profile"
     ]);
 });
 

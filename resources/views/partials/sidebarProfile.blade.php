@@ -56,7 +56,7 @@
 
         <!-- Forgot Password -->
         <li class="menu-item {{ ($active === 'Ubah Password') ? 'active' : '' }}">
-            <a href="/lupa-password-profil" class="menu-link">
+            <a href="/update-password" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-key"></i>
                 <div data-i18n="Forgot Password">Ubah Password</div>
             </a>

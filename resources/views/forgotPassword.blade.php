@@ -68,7 +68,23 @@
             <!-- /Logo -->
             <h4 class="mb-2">Lupa Password? 🔒</h4>
             <p class="mb-4">Tenang, kami bantu reset aksesmu agar bisa kembali ke HydroSpace</p>
-            <form id="formAuthentication" class="mb-3" action="index.html">
+
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+              {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            @if(session()->has('error'))
+            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+              {{ session('error') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
+            <form id="formAuthentication" class="mb-3" action="/lupa-password" method="POST">
+              @csrf
               <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
                 <input
@@ -82,7 +98,7 @@
               <button class="btn btn-primary d-grid w-100">Kirm Link Reset</button>
             </form>
             <div class="text-center">
-              <a href="/signin" class="d-flex align-items-center justify-content-center">
+              <a href="/masuk" class="d-flex align-items-center justify-content-center">
                 <i class="bx bx-chevron-left scaleX-n1-rtl bx-sm"></i>
                 Kembali untuk Masuk
               </a>

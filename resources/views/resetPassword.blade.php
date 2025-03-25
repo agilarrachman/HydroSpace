@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html
   lang="en"
   class="light-style layout-wide customizer-hide"
@@ -18,7 +17,7 @@
 
   <meta name="description" content="" />
 
-  <link rel="icon" href="images/icon.webp" type="image/gif" sizes="16x16">
+  <link rel="icon" href="/images/icon.webp" type="image/gif" sizes="16x16">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -43,24 +42,20 @@
 
   <!-- Helpers -->
   <script src="../assets/vendor/js/helpers.js"></script>
-
-  <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
   <script src="../assets/js/config.js"></script>
-
-  <!-- Bootstrap -->
 </head>
 
 <body>
   <!-- Content -->
-
   <div class="container-xxl">
-    <img src="images/logo-wm.webp" alt="" style="position: absolute; top: 0; left: 0; width: 200px; height: 200px; transform: scale(-1, -1);">
+    <img src="/images/logo-wm.webp" alt="" style="position: absolute; top: 0; left: 0; width: 200px; height: 200px; transform: scale(-1, -1);">
 
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
-        <!-- Login -->
+        <!-- Register Card -->
         <div class="card">
           <div class="card-body">
+
             <!-- Logo -->
             <div class="app-brand justify-content-center">
               <a href="/" class="app-brand-link gap-2">
@@ -68,56 +63,27 @@
               </a>
             </div>
             <!-- /Logo -->
-            <h4 class="mb-2">Selamat Datang! 👋</h4>
-            <p class="mb-4">Masuk ke akun Kamu dan mulai perjalanan hidroponik yang lebih mudah dan menyenangkan</p>
+            <h4 class="mb-2">Reset Password! 🔒</h4>
+            <p class="mb-4">Silakan masukkan password baru Kamu untuk mengatur ulang kata sandi akun Kamu</p>
 
-            @if(session()->has('success'))
-            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
-              {{ session('success') }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
-            @if(session()->has('error'))
-            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <!-- Tampilkan Alert Jika Session Tidak Ditemukan -->
+            @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
               {{ session('error') }}
               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             @endif
 
-            @if(session()->has('loginError'))
-            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
-              {{ session('loginError') }}
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-            @endif
-
-            <form id="formAuthentication" class="mb-3" action="/masuk" method="POST">
+            <!-- Form Registrasi -->
+            <form id="formAuthentication" class="mb-3" action="/reset-password" method="POST">
+              @method('put')
               @csrf
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control @error('email') is-invalid @enderror"
-                  id="email"
-                  name="email"
-                  placeholder="name@example.com"
-                  value="{{ old('email') }}"
-                  autofocus />
-                @error('email')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-                @enderror
-              </div>
+
+              <input type="hidden" name="email" value="{{ request('email') }}">
+              <input type="hidden" name="token" value="{{ request('token') }}">
 
               <div class="mb-3 form-password-toggle">
-                <div class="d-flex justify-content-between">
-                  <label class="form-label" for="password">Password</label>
-                  <a href="/lupa-password">
-                    <small>Lupa Password?</small>
-                  </a>
-                </div>
+                <label class="form-label" for="password">Password</label>
                 <div class="input-group input-group-merge">
                   <input
                     type="password"
@@ -133,55 +99,48 @@
                   </div>
                   @enderror
                 </div>
+                <div id="rulesPassword" class="form-text">Password harus memiliki panjang antara 3-8 karakter</div>
               </div>
-              <div class="mb-3">
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me" />
-                  <label class="form-check-label" for="remember-me"> Ingat Saya </label>
+
+              <div class="mb-3 form-password-toggle">
+                <label class="form-label" for="confirm_password">Konfirmasi Password</label>
+                <div class="input-group input-group-merge">
+                  <input
+                    type="password"
+                    id="confirm_password"
+                    class="form-control @error('confirm_password') is-invalid @enderror"
+                    name="confirm_password"
+                    placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                    aria-describedby="error_confirm_password" />
+                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  @error('confirm_password')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
               </div>
-              <div class="mb-3">
-                <button class="btn btn-primary d-grid w-100" type="submit">Masuk</button>
-              </div>
-            </form>
 
-            <p class="text-center">
-              <span>Belum punya akun?</span>
-              <a href="/registrasi">
-                <span>Registrasi</span>
-              </a>
-            </p>
+
+              <button class="btn btn-primary d-grid w-100" style="margin-top: 30px;" type="submit">Konfirmasi</button>
+            </form>
           </div>
         </div>
-        <!-- /Register -->
+        <!-- Register Card -->
       </div>
     </div>
 
-    <img src="images/logo-wm.webp" alt="" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;">
+    <img src="/images/logo-wm.webp" alt="" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;">
   </div>
-
   <!-- / Content -->
 
   <!-- Core JS -->
-  <!-- build:js assets/vendor/js/core.js -->
-
   <script src="../assets/vendor/libs/jquery/jquery.js"></script>
   <script src="../assets/vendor/libs/popper/popper.js"></script>
   <script src="../assets/vendor/js/bootstrap.js"></script>
   <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
   <script src="../assets/vendor/js/menu.js"></script>
-
-  <!-- endbuild -->
-
-  <!-- Vendors JS -->
-
-  <!-- Main JS -->
   <script src="../assets/js/main.js"></script>
-
-  <!-- Page JS -->
-
-  <!-- Place this tag in your head or just before your close body tag. -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>

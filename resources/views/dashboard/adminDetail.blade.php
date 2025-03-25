@@ -99,7 +99,7 @@
                         <h5 class="mb-0">Detail Admin</h5>
 
                         <div class="avatar avatar-online">
-                            <img src="/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
                         </div>
                     </div>
                 </nav>
@@ -114,7 +114,7 @@
                         <a href="/dashboard/admin" class="btn btn-primary mb-4">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
-                        
+
                         <div class="card p-4">
                             <form id="formAuthentication" class="mb-3" action="index.html">
                                 <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">

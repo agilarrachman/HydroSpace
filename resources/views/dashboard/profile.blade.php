@@ -123,7 +123,14 @@
                                                 <img src="{{ asset('../storage/' . $admin->profile_picture) }}" height="175" class="profile_picture rounded-circle" />
                                             </div>
                                             <div class="d-flex pb-4 gap-2 justify-content-center">
-                                                <a href="#" class="btn btn-outline-danger"><i class="bx bx-trash me-2"></i>Hapus Akun</a>
+                                                <form action="/dashboard/profile/{{ auth()->user()->username }}" method="post" class="ms-2">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-outline-danger" onclick="return confirm('Apakah kamu yakin akan menghapus akun kamu?')">
+                                                        <i class="bx bx-trash me-2"></i>
+                                                        <div data-i18n="Delete Account">Hapus Akun</div>
+                                                    </button>
+                                                </form>                                                
                                                 <a href="/dashboard/profile/{{ auth()->user()->username }}/edit" class="btn btn-primary"><i class="bx bx-edit me-2"></i>Edit Akun</a>
                                             </div>
                                         </div>

@@ -8,18 +8,14 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Hash;
 
-class AdminController extends Controller
+class AdminProfileController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('dashboard.admin', [
-            "title" => "HydroSpace | Admin",
-            "active" => "Admin",
-            'admins' => User::where('role', 'Admin')->get(),
-        ]);
+        //
     }
 
     /**
@@ -27,10 +23,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('dashboard.createAdmin', [
-            "title" => "HydroSpace | Tambah Admin",
-            "active" => "Admin"
-        ]);
+        //
     }
 
     /**
@@ -46,10 +39,10 @@ class AdminController extends Controller
      */
     public function show(User $user)
     {
-        return view('dashboard.adminDetail', [
-            "title" => "HydroSpace | Detail Admin",
-            "active" => "Admin",
-            "user" => $user
+        return view('dashboard.profile', [
+            "title" => "HydroSpace | Profile",
+            "active" => "Profile",
+            "admin" => $user
         ]);
     }
 
@@ -152,7 +145,7 @@ class AdminController extends Controller
         ]);
 
         // Cek apakah current_password cocok dengan password lama
-        if (!Hash::check($validatedData['current_password'], $user->password)) {            
+        if (!Hash::check($validatedData['current_password'], $user->password)) {
             return back()->with('false', 'Password lama tidak sesuai, Mohon masukkan password lama dengan benar!');
         }
 
