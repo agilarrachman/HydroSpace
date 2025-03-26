@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Daftar Kustomer</h5>
+                        <h5 class="mb-0">Daftar Pelanggan</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -91,9 +91,23 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/customer/create" class="btn btn-primary mb-4">
-                            <i class="bx bx-plus-circle me-2"></i>Tambah Kustomer
+                        <a href="/dashboard/customers/create" class="btn btn-primary mb-4">
+                            <i class="bx bx-plus-circle me-2"></i>Tambah Pelanggan
                         </a>
+
+                        @if(session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+
+                        @if(session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
 
                         <!-- Striped Rows -->
                         <div class="card">
@@ -111,69 +125,38 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
+                                        @foreach ($customers as $customer)
                                         <tr>
-                                            <td>1</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="../assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
+                                                <img src="{{ asset('../storage/' . $customer->profile_picture) }}" alt="Avatar" class="rounded-circle object-fit-cover" style="height: 100%; height: 40px; width: 40px;" />
                                             </td>
-                                            <td>barryallen</td>
-                                            <td>barryallen@gmail.com</td>
-                                            <td>12-25-2025</td>
+                                            <td>{{ $customer->username }}</td>
+                                            <td>{{ $customer->email }}</td>
+                                            <td>{{ $customer->created_at->format('d/m/Y') }}</td>
                                             <td>
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="customer/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="customer/slug/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        <a class="dropdown-item" href="/dashboard/customers/{{ $customer->username }}"><i class="bx bx-show me-1"></i> Lihat</a>
+                                                        <a class="dropdown-item" href="/dashboard/customers/{{ $customer->username }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                            <form action="/dashboard/customers/{{ $customer->username }}" method="post">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data pelanggan ini?')">
+                                                                    <i class="bx bx-trash me-2"></i>
+                                                                    <div data-i18n="Delete Account">Delete</div>
+                                                                </button>
+                                                            </form>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>
-                                                <img src="{{ asset('assets/img/avatars/1.png') }}" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
-                                            </td>
-                                            <td>johndoe</td>
-                                            <td>johndoe@gmail.com</td>
-                                            <td>12-28-2025</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="customer/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="/customer/slug/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>
-                                                <img src="{{ asset('assets/img/avatars/5.png') }}" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
-                                            </td>
-                                            <td>asepsurasep</td>
-                                            <td>binkasep@gmail.com</td>
-                                            <td>12-31-2025</td>
-                                            <td>
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="customer/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="/customer/slug/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

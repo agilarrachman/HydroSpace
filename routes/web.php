@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use Illuminate\Support\Facades\Route;
@@ -144,11 +145,15 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
         'admins' => 'user'
     ]);
 
+    Route::resource('/customers', CustomerController::class)->parameters([
+        'customers' => 'user'
+    ]);
+
     Route::resource('/profile', AdminProfileController::class)->parameters([
         'profile' => 'user'
     ]);
 
-    Route::post('/keluar', [AdminController::class, 'logout']);
+    Route::post('/keluar', [AdminProfileController::class, 'logout']);
     
     Route::get('/update-password', function () {
         return view('dashboard.updatePassword', [
@@ -158,34 +163,6 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
-});
-
-Route::get('/dashboard/customer', function () {
-    return view('dashboard.customer', [
-        "title" => "HydroSpace | Kustomer",
-        "active" => "Kustomer"
-    ]);
-});
-
-Route::get('/dashboard/customer/slug', function () {
-    return view('dashboard.customerDetail', [
-        "title" => "HydroSpace | Detail Kustomer",
-        "active" => "Kustomer"
-    ]);
-});
-
-Route::get('/dashboard/customer/slug/edit', function () {
-    return view('dashboard.updateCustomer', [
-        "title" => "HydroSpace | Edit Data Kustomer",
-        "active" => "Kustomer"
-    ]);
-});
-
-Route::get('/dashboard/customer/create', function () {
-    return view('dashboard.createCustomer', [
-        "title" => "HydroSpace | Tambah Kustomer",
-        "active" => "Kustomer"
-    ]);
 });
 
 Route::get('/dashboard/product', function () {

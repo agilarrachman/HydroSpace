@@ -22,7 +22,7 @@
         </li>
 
         <!-- Admin -->
-        <li class="menu-item {{ request()->is('dashboard/admin*') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/admins*') ? 'active' : '' }}">
             <a href="/dashboard/admins" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Admin</div>
@@ -30,10 +30,10 @@
         </li>
 
         <!-- Customer -->
-        <li class="menu-item {{ request()->is('dashboard/customer*') ? 'active' : '' }}">
-            <a href="/dashboard/customer" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/customers*') ? 'active' : '' }}">
+            <a href="/dashboard/customers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
-                <div data-i18n="Basic">Kustomer</div>
+                <div data-i18n="Basic">Pelanggan</div>
             </a>
         </li>
 

@@ -65,7 +65,7 @@
                             <div class="row g-2 mb-3">
                                 <div class="col-lg-6">
                                     <label for="username" class="form-label">Username</label>
-                                    <input type="text" name="username" class="form-control  @error('username') is-invalid @enderror" id="username" placeholder="Masukkan username" autofocus required value="{{ old('username') }}">
+                                    <input type="text" name="username" class="form-control @error('username') is-invalid @enderror" id="username" placeholder="Masukkan username" autofocus required value="{{ old('username') }}">
                                     @error('username')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -88,11 +88,11 @@
                                     <label for="gender" class="form-label">Jenis Kelamin</label>
                                     <div class="d-flex gap-3">
                                         <div class="form-check">
-                                            <input name="gender" class="form-check-input" type="radio" value="Pria" id="Pria" checked />
+                                            <input name="gender" class="form-check-input" type="radio" value="Pria" id="Pria" {{ old('gender', 'Pria') == 'Pria' ? 'checked' : '' }} />
                                             <label class="form-check-label" for="Pria"> Pria </label>
                                         </div>
                                         <div class="form-check">
-                                            <input name="gender" class="form-check-input" type="radio" value="Wanita" id="Wanita" />
+                                            <input name="gender" class="form-check-input" type="radio" value="Wanita" id="Wanita" {{ old('gender', 'Pria') == 'Wanita' ? 'checked' : '' }} />
                                             <label class="form-check-label" for="Wanita"> Wanita </label>
                                         </div>
                                     </div>

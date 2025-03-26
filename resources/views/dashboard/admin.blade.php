@@ -95,6 +95,20 @@
                             <i class="bx bx-plus-circle me-2"></i> Tambah Admin
                         </a>
 
+                        @if(session()->has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+
+                        @if(session()->has('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('error') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+
                         <!-- Striped Rows -->
                         <div class="card">
                             {{-- <h5 class="card-header">Striped rows</h5> --}}
@@ -127,12 +141,11 @@
                                                     </button>
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="/dashboard/admins/{{ $admin->username }}"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="/dashboard/admins/{{ $admin->username }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                         <a class="dropdown-item" href="javascript:void(0);">
                                                             <form action="/dashboard/admins/{{ $admin->username }}" method="post">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus akun kamu?')">
+                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data admin ini?')">
                                                                     <i class="bx bx-trash me-2"></i>
                                                                     <div data-i18n="Delete Account">Delete</div>
                                                                 </button>

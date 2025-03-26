@@ -4,23 +4,24 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
-class UserController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-
     public function index()
     {
-        //
+        return view('dashboard.customer', [
+            "title" => "HydroSpace | Pelanggan",
+            "active" => "Pelanggan",
+            'customers' => User::where('role', 'Customer')->get(),
+        ]);
     }
 
     /**
@@ -28,13 +29,54 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $provinces = Province::all();
+        $cities = City::all();
+        $districts = District::all();
+        $villages = Village::all();
+
+        return view('dashboard.createCustomer', [
+            "title" => "HydroSpace | Tambah Pelanggan",
+            "active" => "Pelanggan",
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'districts' => $districts,
+            'villages' => $villages,
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {}
+    public function store(Request $request)
+    {
+        $validatedData = $request->validate([
+            'profile_picture' => 'image|file|max:5000',
+            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:users,username',
+            'gender' => 'required|string|in:Pria,Wanita',
+            'phone_number' => ['required', 'string', 'regex:/^08[0-9]{8,11}$/'],
+            'email' => 'required|email:dns|unique:users,email',
+            'password' => 'required|min:3|max:8',
+            'province' => 'nullable|integer',
+            'city' => 'nullable|integer',
+            'district' => 'nullable|integer',
+            'village' => 'nullable|integer',
+            'full_address' => 'nullable|string',
+            'role' => 'required|in:Admin,Customer'
+        ]);
+
+        // Jika ada file profile_picture, simpan ke storage
+        if ($request->file('profile_picture')) {
+            $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
+        } else {
+            // Jika tidak ada file, gunakan default profile picture
+            $validatedData['profile_picture'] = 'profile_picture/default profile picture.jpg';
+        }
+
+        User::create($validatedData);
+
+        return redirect('/dashboard/customers')->with('success', 'Data Pelanggan berhasil ditambahkan!');
+    }
 
     /**
      * Display the specified resource.
@@ -46,14 +88,14 @@ class UserController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('profile', [
-            "title" => "HydroSpace | Profil",
-            "active" => "Lihat Profil",
+        return view('dashboard.customerDetail', [
+            "title" => "HydroSpace | Detail Pelanggan",
+            "active" => "Pelanggan",
             'customer' => $user,
             'provinces' => $provinces,
             'cities' => $cities,
             'districts' => $districts,
-            'villages' => $villages, 
+            'villages' => $villages,
         ]);
     }
 
@@ -67,10 +109,10 @@ class UserController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('updateProfile', [
-            "title" => "HydroSpace | Perbarui Profil",
-            "active" => "Perbarui Profil",
-            'customer' => $user,
+        return view('dashboard.updateCustomer', [
+            "title" => "HydroSpace | Edit Data Pelanggan",
+            "active" => "Pelanggan",
+            "customer" => $user,
             'provinces' => $provinces,
             'cities' => $cities,
             'districts' => $districts,
@@ -120,7 +162,7 @@ class UserController extends Controller
 
         // Redirect back to the profile page with a success message
         $redirectUsername = $validatedData['username'] ?? $user->username;
-        return redirect('/profil/' . $redirectUsername)->with('success', 'Profil kamu berhasil diperbarui!');
+        return redirect('/dashboard/customers/' . $redirectUsername)->with('success', 'Profil pelanggan berhasil diperbarui!');
     }
 
     /**
@@ -128,14 +170,6 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        // Ambil user yang sedang login
-        $currentUser = Auth::user();
-
-        // Pastikan user yang sedang login sama dengan user yang akan dihapus
-        if ($currentUser->id !== $user->id) {
-            return response()->json(['error' => 'Unauthorized'], 403);
-        }
-
         // Hapus foto profil user jika ada
         if ($user->profile_picture && $user->profile_picture !== 'profile_picture/default profile picture.jpg') {
             Storage::disk('public')->delete($user->profile_picture);
@@ -145,36 +179,6 @@ class UserController extends Controller
         $user->delete();
 
         // Redirect ke halaman depan dengan pesan sukses
-        return redirect('/');
-    }
-
-    public function updatePassword(Request $request, User $user)
-    {
-
-        // Validasi data input untuk password baru
-        $validatedData = $request->validate([
-            'current_password' => 'required|string|min:3|max:8',
-            'password' => 'required|string|min:3|max:8',
-            'confirm_password' => 'required|string|min:3|max:8|same:password',
-        ], [
-            'confirm_password.confirmed' => 'Password dan Konfirmasi Password tidak cocok.',
-        ]);
-
-        // Cek apakah current_password cocok dengan password lama
-        if (!Hash::check($validatedData['current_password'], $user->password)) {
-            return back()->with('false', 'Password lama tidak sesuai, Mohon masukkan password lama dengan benar!');
-        }
-
-        // Update password
-        $user->update([
-            'password' => Hash::make($validatedData['password']),
-        ]);
-
-        Auth::logout();
-        request()->session()->invalidate();
-        request()->session()->regenerateToken();
-
-        // Redirect dengan pesan sukses
-        return redirect('/masuk')->with('success', 'Password telah berhasil diupdate, Silakan login kembali!');
+        return redirect('/dashboard/customers')->with('success', 'Akun pelanggan telah berhasil dihapus!');
     }
 }

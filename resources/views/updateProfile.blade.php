@@ -172,7 +172,7 @@
               </div>
               <div class="row g-2 mb-3">
                 <div class="col-lg-6">
-                  <label for="username" class="form-label">Email</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
                     class="form-control @error('username') is-invalid @enderror"
@@ -188,49 +188,7 @@
                   @enderror
                 </div>
                 <div class="col-lg-6">
-                  <label for="name" class="form-label">name Lengkap</label>
-                  <input
-                    type="text"
-                    class="form-control @error('username') is-invalid @enderror"
-                    id="name"
-                    name="name"
-                    value="{{ old('name', $customer->name) }}"
-                    placeholder="Masukkan nama lengkap" />
-                  @error('name')
-                  <div class="invalid-feedback">
-                    {{ $message }}
-                  </div>
-                  @enderror
-                </div>
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-lg-3">
-                  <label for="gender" class="form-label">Jenis Kelamin</label>
-                  <div class="d-flex gap-3">
-                    <div class="form-check">
-                      <input
-                        name="gender"
-                        class="form-check-input"
-                        type="radio"
-                        value="Pria"
-                        id="Pria"
-                        {{ old('gender', $customer->gender) == 'Pria' ? 'checked' : '' }} />
-                      <label class="form-check-label" for="pria"> Pria </label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        name="gender"
-                        class="form-check-input"
-                        type="radio"
-                        value="Wanita"
-                        id="Wanita"
-                        {{ old('gender', $customer->gender) == 'Wanita' ? 'checked' : '' }} />
-                      <label class="form-check-label" for="wanita"> Wanita </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-5">
-                  <label for="phone_number" class="form-label">Username</label>
+                  <label for="username" class="form-label">Username</label>
                   <input
                     type="text"
                     class="form-control"
@@ -244,7 +202,49 @@
                   </div>
                   @enderror
                 </div>
-                <div class="col-lg-4">
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col-lg-6">
+                  <label for="name" class="form-label">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    class="form-control @error('username') is-invalid @enderror"
+                    id="name"
+                    name="name"
+                    value="{{ old('name', $customer->name) }}"
+                    placeholder="Masukkan nama lengkap" />
+                  @error('name')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                </div>
+                <div class="col-lg-3">
+                  <label for="gender" class="form-label">Jenis Kelamin</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input
+                        name="gender"
+                        class="form-check-input"
+                        type="radio"
+                        value="Pria"
+                        id="Pria"
+                        {{ old('gender', $customer->gender) == 'Pria' ? 'checked' : '' }} />
+                      <label class="form-check-label" for="Pria"> Pria </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        name="gender"
+                        class="form-check-input"
+                        type="radio"
+                        value="Wanita"
+                        id="Wanita"
+                        {{ old('gender', $customer->gender) == 'Wanita' ? 'checked' : '' }} />
+                      <label class="form-check-label" for="Wanita"> Wanita </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
                   <label for="phone_number" class="form-label">Nomor Handphone</label>
                   <input
                     type="number"
@@ -315,7 +315,7 @@
 Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)">{{ old('full_address', $customer->full_address) }}</textarea>
                 </div>
               </div>
-              <button class="btn btn-primary d-grid w-100" type="submit">Perbarui</button>
+              <button class="btn btn-primary d-grid w-100" type="submit" onclick="return confirm('Apakah kamu yakin akan mengubah profil Kamu?')">Simpan Perubahan</button>
             </form>
           </div>
           <!-- / Content -->

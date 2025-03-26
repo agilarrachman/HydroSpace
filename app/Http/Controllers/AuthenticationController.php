@@ -28,7 +28,7 @@ class AuthenticationController extends Controller
     {
         $credentials = $request->validate([
             'email' => 'required|email:dns',
-            'password' => 'required'
+            'password' => 'required|min:3|max:8'
         ]);
 
         // Periksa apakah checkbox "Remember Me" dicentang
@@ -119,7 +119,6 @@ class AuthenticationController extends Controller
 
     public function storeCustomer(Request $request)
     {
-
         $validatedData = $request->validate([
             'profile_picture' => 'image|file|max:5000',
             'name' => 'required|string|max:255',
@@ -180,7 +179,7 @@ class AuthenticationController extends Controller
                 ->subject('Reset Password HydroSpace');
         });
 
-        return back()->with('success', 'Link reset password telah dikirim ke email Anda.');
+        return back()->with('success', 'Link reset password telah dikirim ke email Kamu.');
     }
 
     public function showResetPasswordForm($token)
