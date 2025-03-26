@@ -99,7 +99,7 @@
                         <h5 class="mb-0">Detail Admin</h5>
 
                         <div class="avatar avatar-online">
-                            <img src="/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
                         </div>
                     </div>
                 </nav>
@@ -111,15 +111,15 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/admin" class="btn btn-primary mb-4">
+                        <a href="/dashboard/admins" class="btn btn-primary mb-4">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
-                        
+
                         <div class="card p-4">
                             <form id="formAuthentication" class="mb-3" action="index.html">
                                 <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
                                     <label for="foto_profil" class="form-label fw-bold">Foto Profil</label>
-                                    <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
+                                    <img id="profileImagePreview" src="{{ asset('../storage/' . $admin->profile_picture) }}" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
                                     <!-- <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)"> -->
                                     @error('foto_profil')
                                     <div class="invalid-feedback">
@@ -129,7 +129,7 @@
                                     <!-- <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar profil dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div> -->
                                 </div>
                                 <div class="row g-2 mb-3">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label for="username" class="form-label">Email</label>
                                         <input
                                             type="text"
@@ -137,54 +137,40 @@
                                             id="email"
                                             name="email"
                                             placeholder="Masukkan email"
-                                            value="agil.arrachman19@gmail.com"
+                                            value="{{ $admin->email }}"
                                             autofocus disabled />
                                     </div>
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label for="nama" class="form-label">Nama Lengkap</label>
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="nama"
                                             name="nama"
-                                            value="Agil ArRachman"
+                                            value="{{ $admin->name }}"
                                             placeholder="Masukkan nama lengkap" disabled />
                                     </div>
-                                </div>
-                                <div class="row g-2 mb-3">
-                                    <div class="col-lg-3">
-                                        <label for="nama" class="form-label">Jenis Kelamin</label>
-                                        <div class="d-flex gap-3">
-                                            <div class="form-check">
-                                                <input
-                                                    name="jenis-kelamin"
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    value="Pria"
-                                                    id="pria"
-                                                    checked disabled />
-                                                <label class="form-check-label" for="pria"> Pria </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input
-                                                    name="jenis-kelamin"
-                                                    class="form-check-input"
-                                                    type="radio"
-                                                    value=""
-                                                    id="wanita" disabled />
-                                                <label class="form-check-label" for="wanita"> Wanita </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-5">
+                                    <div class="col-lg-4">
                                         <label for="nohp" class="form-label">Username</label>
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="username"
                                             name="username"
-                                            value="agil.arrachman"
+                                            value="{{ $admin->username }}"
                                             placeholder="Masukkan username" disabled />
+                                    </div>
+                                </div>
+                                <div class="row g-2 mb-3">
+                                    <div class="col-lg-4">
+                                        <label for="gender" class="form-label">Jenis Kelamin</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="gender"
+                                            name="gender"
+                                            value="{{ $admin->gender }}"
+                                            placeholder="Masukkan Jenis Kelamin" disabled />
                                     </div>
                                     <div class="col-lg-4">
                                         <label for="nohp" class="form-label">Nomor Handphone</label>
@@ -193,8 +179,17 @@
                                             class="form-control"
                                             id="nohp"
                                             name="nohp"
-                                            value="081234567890"
+                                            value="{{ $admin->phone_number }}"
                                             placeholder="Masukkan nomor handphone" disabled />
+                                    </div>
+                                    <div class="col-lg-4 mb-3">
+                                        <label for="date_joined" class="form-label">Tanggal Bergabung</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="date_joined"
+                                            name="date_joined"
+                                            value="{{ $admin->created_at->format('d/m/Y') }}" disabled>
                                     </div>
                                 </div>
                                 <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->

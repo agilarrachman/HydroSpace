@@ -1,11 +1,3 @@
-<!-- header begin -->
-<style>
-    #mainmenu li a.active {
-        color: #354e33 !important;
-        border-bottom: 2px solid #354e33;
-    }
-</style>
-
 <header class="header-light transparent">
     <div id="topbar">
         <div class="container">
@@ -68,6 +60,7 @@
                     <div class="de-flex-col">
                         <div class="d-flex">
 
+                            @auth
                             <div class="d-flex">
                                 <a class="de-icon-counter" href="/pesanan">
                                     <div class="d-counter">0</div>
@@ -79,6 +72,12 @@
                                     <img src="/images/ui/cart.svg" class="" alt="">
                                 </div>
                             </div>
+                            @else
+                            <div class="menu_side_area">
+                                <a href="/masuk" class="btn-main btn-line">Masuk</a>
+                                <span id="menu-btn"></span>
+                            </div>
+                            @endauth
 
                             <span id="menu-btn" class="my-auto"></span>
                         </div>

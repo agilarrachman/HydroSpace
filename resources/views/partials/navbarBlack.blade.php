@@ -5,7 +5,7 @@
         border-bottom: 2px solid #354e33;
     }
 
-    .profile-picture{
+    .profile-picture {
         color: #354e33;
     }
 </style>
@@ -70,15 +70,19 @@
                         <!-- mainmenu end -->
                     </div>
                     <div class="de-flex-col">
-                        <a href="/profil" class="profile-picture">
-                            <img src="/images/team/3.jpg" class="me-2" alt="profile-picture">
-                            Agil ArRachman
+                        @auth
+                        <a href="/profil/{{ auth()->user()->username }}" class="profile-picture d-flex gap-2 align-items-center">
+                            <div class="avatar avatar-online">
+                                <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 rounded-circle" />
+                            </div>
+                            {{ auth()->user()->username }}
                         </a>
-
-                        <!-- <div class="menu_side_area">
-                            <a href="/signin" class="btn-main">Masuk</a>
+                        @else
+                        <div class="menu_side_area">
+                            <a href="/masuk" class="btn-main btn-line">Masuk</a>
                             <span id="menu-btn"></span>
-                        </div> -->
+                        </div>
+                        @endauth
 
                         <div id="btn-extra">
                             <span style="border-bottom: solid 2px #354e33;"></span>

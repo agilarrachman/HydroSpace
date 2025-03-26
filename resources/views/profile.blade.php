@@ -136,71 +136,12 @@
             </a>
           </div>
 
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <h5 class="mb-0">Hai, Agil ArRachman!</h5>
+          <div class="navbar-nav-right w-100 d-flex justify-content-between align-items-center" id="navbar-collapse">
+            <h5 class="mb-0">Hai, {{ auth()->user()->username }}!</h5>
 
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-              <!-- User -->
-              <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                  <div class="avatar avatar-online">
-                    <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
-                  </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar avatar-online">
-                            <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <span class="fw-medium d-block">Agil ArRachman</span>
-                          <small class="text-muted">agil.arrachman</small>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-user me-2"></i>
-                      <span class="align-middle">My Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="d-flex align-items-center align-middle">
-                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                        <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);">
-                      <i class="bx bx-power-off me-2"></i>
-                      <span class="align-middle">Log Out</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <!--/ User -->
-            </ul>
+            <div class="avatar avatar">
+              <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 my-auto rounded-circle object-fit-cover" />
+            </div>
           </div>
         </nav>
 
@@ -216,9 +157,17 @@
             {{-- navbar end --}}
 
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
+
+            @if(session()->has('success'))
+            <div class="alert alert-success alert-dismissible fade show col-lg-10" role="alert">
+              {{ session('success') }}
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            @endif
+
             <form id="formAuthentication" class="mb-3" action="index.html">
               <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
-                <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
+                <img id="profileImagePreview" src="{{ asset('../storage/' . $customer->profile_picture) }}" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
                 <!-- <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)"> -->
                 @error('foto_profil')
                 <div class="invalid-feedback">
@@ -236,9 +185,21 @@
                     id="email"
                     name="email"
                     placeholder="Masukkan email"
-                    value="agil.arrachman19@gmail.com"
+                    value="{{ $customer->email }}"
                     autofocus disabled />
                 </div>
+                <div class="col-lg-6">
+                  <label for="nohp" class="form-label">Username</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    name="username"
+                    value="{{ $customer->username }}"
+                    placeholder="Masukkan username" disabled />
+                </div>
+              </div>
+              <div class="row g-2 mb-3">
                 <div class="col-lg-6">
                   <label for="nama" class="form-label">Nama Lengkap</label>
                   <input
@@ -246,53 +207,21 @@
                     class="form-control"
                     id="nama"
                     name="nama"
-                    value="Agil ArRachman"
+                    value="{{ $customer->name }}"
                     placeholder="Masukkan nama lengkap" disabled />
                 </div>
-              </div>
-              <div class="row g-2 mb-3">
+                <div class="col-lg-3 mb-3">
+                  <label for="gender" class="form-label">Jenis Kelamin</label>
+                  <input type="text" class="form-control" id="gender" name="gender" value="{{ $customer->gender }}" readonly>
+                </div>
                 <div class="col-lg-3">
-                  <label for="nama" class="form-label">Jenis Kelamin</label>
-                  <div class="d-flex gap-3">
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value="Pria"
-                        id="pria"
-                        checked disabled />
-                      <label class="form-check-label" for="pria"> Pria </label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value=""
-                        id="wanita" disabled />
-                      <label class="form-check-label" for="wanita"> Wanita </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-5">
-                  <label for="nohp" class="form-label">Username</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="username"
-                    name="username"
-                    value="agil.arrachman"
-                    placeholder="Masukkan username" disabled />
-                </div>
-                <div class="col-lg-4">
                   <label for="nohp" class="form-label">Nomor Handphone</label>
                   <input
                     type="number"
                     class="form-control"
                     id="nohp"
                     name="nohp"
-                    value="081234567890"
+                    value="{{ $customer->phone_number }}"
                     placeholder="Masukkan nomor handphone" disabled />
                 </div>
               </div>
@@ -300,30 +229,26 @@
                 <div class="row g-3 mb-3">
                   <div class="col-lg-6">
                     <label for="provinsi" class="form-label">Provinsi</label>
-                    <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="Jawa Barat" disabled />
+                    <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="{{ $provinces->firstWhere('id', $customer->province)->name }}" disabled />
                   </div>
                   <div class="col-lg-6">
                     <label for="kota" class="form-label">Kota</label>
-                    <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="Kota Bogor" disabled />
+                    <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="{{ $cities->firstWhere('id', $customer->city)->name }}" disabled />
                   </div>
                 </div>
                 <div class="row g-3 mb-3">
-                  <div class="col-lg-4">
+                  <div class="col-lg-6">
                     <label for="kecamatan" class="form-label">Kecamatan</label>
-                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="Bogor Tengah" disabled />
+                    <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="{{ $districts->firstWhere('id', $customer->district)->name }}" disabled />
                   </div>
-                  <div class="col-lg-4">
+                  <div class="col-lg-6">
                     <label for="kelurahan" class="form-label">Kelurahan</label>
-                    <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="Cidangiang" disabled />
-                  </div>
-                  <div class="col-lg-4">
-                    <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
-                    <input type="number" class="form-control" id="kodePos" name="kodePos" placeholder="Kode Pos" value="123456" disabled />
+                    <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="{{ $villages->firstWhere('id', $customer->village)->name }}" disabled />
                   </div>
                 </div>
                 <div class="mb-3">
                   <label for="alamat" class="form-label">Alamat Lengkap</label>
-                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;" disabled>Jalan Ciwaluya No 14 Kost Zam-zam</textarea>
+                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;" disabled>{{ $customer->full_address }}</textarea>
                 </div>
               </div>
               <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->

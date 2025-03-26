@@ -22,18 +22,18 @@
         </li>
 
         <!-- Admin -->
-        <li class="menu-item {{ request()->is('dashboard/admin*') ? 'active' : '' }}">
-            <a href="/dashboard/admin" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/admins*') ? 'active' : '' }}">
+            <a href="/dashboard/admins" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Admin</div>
             </a>
         </li>
 
         <!-- Customer -->
-        <li class="menu-item {{ request()->is('dashboard/customer*') ? 'active' : '' }}">
-            <a href="/dashboard/customer" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/customers*') ? 'active' : '' }}">
+            <a href="/dashboard/customers" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-group"></i>
-                <div data-i18n="Basic">Kustomer</div>
+                <div data-i18n="Basic">Pelanggan</div>
             </a>
         </li>
 
@@ -79,7 +79,7 @@
 
         <!-- Profile -->
         <li class="menu-item mt-auto {{ request()->is('dashboard/profile*') ? 'active' : '' }}">
-            <a href="/dashboard/profile" class="menu-link">
+            <a href="/dashboard/profile/{{ auth()->user()->username }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Basic">Profil</div>
             </a>
@@ -95,17 +95,14 @@
 
         <!-- Log -->
         <li class="menu-item">
-            <a href="/" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-log-out"></i>
-                <div data-i18n="Logout">Log Out</div>
-            </a>
+            <form action="/dashboard/keluar" method="post" class="ms-2">
+                @csrf
+                <button class="menu-link border-0 w-100 mx-4 px-0 bg-transparent" type="submit" onclick="return confirm('Apakah kamu yakin akan keluar dari akun kamu?')">
+                    <i class="menu-icon tf-icons bx bx-log-out"></i>
+                    <p class="m-0">Log Out</p>
+                </button>
+            </form>
         </li>
-        {{-- <li class="menu-item">
-            <button class="menu-link border-0 mx-3 px-3 bg-transparent" onclick="return confirm('Apakah kamu yakin akan keluar dari akun kamu?')">
-                <i class="menu-icon tf-icons bx bx-trash"></i>
-                <div data-i18n="Delete Account">Hapus Akun</div>
-            </button>
-        </li> --}}
     </ul>
 </aside>
 <!-- / Menu -->

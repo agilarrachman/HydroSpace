@@ -136,71 +136,12 @@
             </a>
           </div>
 
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <h5 class="mb-0">Hai, Agil ArRachman!</h5>
+          <div class="navbar-nav-right w-100 d-flex justify-content-between align-items-center" id="navbar-collapse">
+            <h5 class="mb-0">Hai, {{ auth()->user()->username }}!</h5>
 
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-              <!-- User -->
-              <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                  <div class="avatar avatar-online">
-                    <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
-                  </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar avatar-online">
-                            <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <span class="fw-medium d-block">Agil ArRachman</span>
-                          <small class="text-muted">agil.arrachman</small>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-user me-2"></i>
-                      <span class="align-middle">My Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="d-flex align-items-center align-middle">
-                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                        <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);">
-                      <i class="bx bx-power-off me-2"></i>
-                      <span class="align-middle">Log Out</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <!--/ User -->
-            </ul>
+            <div class="avatar avatar">
+              <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 my-auto rounded-circle object-fit-cover" />
+            </div>
           </div>
         </nav>
 
@@ -216,11 +157,13 @@
             {{-- navbar end --}}
 
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
-            <form id="formAuthentication" class="mb-3" action="index.html">
+            <form id="formAuthentication" class="mb-3" action="/profil/{{ auth()->user()->username }}" method="post" enctype="multipart/form-data">
+              @method('put')
+              @csrf
               <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
-                <img id="profileImagePreview" src="/images/team/3.jpg" alt="" class="rounded-circle mx-auto mx-lg-0 mb-3" style="width: 140px; height: 140px; object-fit: cover;">
-                <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)">
-                @error('foto_profil')
+                <img id="profileImagePreview" src="{{ asset('../storage/' . $customer->profile_picture) }}" alt="" class="rounded-circle mx-auto mx-lg-0 mb-3" style="width: 140px; height: 140px; object-fit: cover;">
+                <input type="file" name="profile_picture" id="profile_picture" class="form-control mx-auto @error('profile_picture') is-invalid @enderror" accept="image/*" onchange="previewImage(event)">
+                @error('profile_picture')
                 <div class="invalid-feedback">
                   {{ $message }}
                 </div>
@@ -229,124 +172,150 @@
               </div>
               <div class="row g-2 mb-3">
                 <div class="col-lg-6">
-                  <label for="username" class="form-label">Email</label>
+                  <label for="email" class="form-label">Email</label>
                   <input
                     type="text"
-                    class="form-control"
+                    class="form-control @error('username') is-invalid @enderror"
                     id="email"
                     name="email"
                     placeholder="Masukkan email"
-                    value="agil.arrachman19@gmail.com"
+                    value="{{ old('email', $customer->email) }}"
                     autofocus />
+                  @error('email')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
                 <div class="col-lg-6">
-                  <label for="nama" class="form-label">Nama Lengkap</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="nama"
-                    name="nama"
-                    value="Agil ArRachman"
-                    placeholder="Masukkan nama lengkap" />
-                </div>
-              </div>
-              <div class="row g-2 mb-3">
-                <div class="col-lg-3">
-                  <label for="nama" class="form-label">Jenis Kelamin</label>
-                  <div class="d-flex gap-3">
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value="Pria"
-                        id="pria"
-                        checked />
-                      <label class="form-check-label" for="pria"> Pria </label>
-                    </div>
-                    <div class="form-check">
-                      <input
-                        name="jenis-kelamin"
-                        class="form-check-input"
-                        type="radio"
-                        value=""
-                        id="wanita" />
-                      <label class="form-check-label" for="wanita"> Wanita </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-5">
-                  <label for="nohp" class="form-label">Username</label>
+                  <label for="username" class="form-label">Username</label>
                   <input
                     type="text"
                     class="form-control"
                     id="username"
                     name="username"
-                    value="agil.arrachman"
+                    value="{{ old('username', $customer->username) }}"
                     placeholder="Masukkan username" />
+                  @error('username')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
-                <div class="col-lg-4">
-                  <label for="nohp" class="form-label">Nomor Handphone</label>
+              </div>
+              <div class="row g-2 mb-3">
+                <div class="col-lg-6">
+                  <label for="name" class="form-label">Nama Lengkap</label>
+                  <input
+                    type="text"
+                    class="form-control @error('username') is-invalid @enderror"
+                    id="name"
+                    name="name"
+                    value="{{ old('name', $customer->name) }}"
+                    placeholder="Masukkan nama lengkap" />
+                  @error('name')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
+                </div>
+                <div class="col-lg-3">
+                  <label for="gender" class="form-label">Jenis Kelamin</label>
+                  <div class="d-flex gap-3">
+                    <div class="form-check">
+                      <input
+                        name="gender"
+                        class="form-check-input"
+                        type="radio"
+                        value="Pria"
+                        id="Pria"
+                        {{ old('gender', $customer->gender) == 'Pria' ? 'checked' : '' }} />
+                      <label class="form-check-label" for="Pria"> Pria </label>
+                    </div>
+                    <div class="form-check">
+                      <input
+                        name="gender"
+                        class="form-check-input"
+                        type="radio"
+                        value="Wanita"
+                        id="Wanita"
+                        {{ old('gender', $customer->gender) == 'Wanita' ? 'checked' : '' }} />
+                      <label class="form-check-label" for="Wanita"> Wanita </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <label for="phone_number" class="form-label">Nomor Handphone</label>
                   <input
                     type="number"
-                    class="form-control"
-                    id="nohp"
-                    name="nohp"
-                    value="081234567890"
-                    placeholder="Masukkan nomor handphone" />
+                    class="form-control @error('phone_number') is-invalid @enderror"
+                    id="phone_number"
+                    name="phone_number"
+                    value="{{ old('phone_number', $customer->phone_number) }}"
+                    placeholder="Cth: 081234567890" />
+                  @error('phone_number')
+                  <div class="invalid-feedback">
+                    {{ $message }}
+                  </div>
+                  @enderror
                 </div>
               </div>
               <div class="address">
                 <div class="row g-3 mb-3">
                   <div class="col-lg-6">
-                    <label for="provinsi" class="form-label">Provinsi</label>
-                    <select class="form-select" id="provinsi" aria-label="Default select example">
-                      <option selected>Provinsi</option>
-                      <option value="Jawa Barat" selected>Jawa Barat</option>
-                      <option value="Jawa Timur">Jawa Timur</option>
-                      <option value="Jawa Tengah">Jawa Tengah</option>
+                    <label for="province" class="form-label">Provinsi</label>
+                    <select class="form-select" id="province" name="province" onchange="loadCities(this.value)">
+                      <option selected disabled>Pilih Provinsi</option>
+                      @foreach ($provinces as $province)
+                      <option value="{{ $province->id }}" {{ old('province', $customer->province) == $province->id ? 'selected' : '' }}>
+                        {{ $province->name }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                   <div class="col-lg-6">
-                    <label for="kota" class="form-label">Kota</label>
-                    <select class="form-select" id="kota" aria-label="Default select example">
-                      <option selected>Kota</option>
-                      <option value="Kota Bogor" selected>Kota Bogor</option>
-                      <option value="Kabupaten Bogor">Kabupaten Bogor</option>
-                      <option value="Sukabumi">Sukabumi</option>
+                    <label for="city" class="form-label">Kota</label>
+                    <select class="form-select" id="city" name="city" onchange="loadDistricts(this.value)">
+                      <option selected disabled>Pilih Kota</option>
+                      @foreach ($cities as $city)
+                      <option value="{{ $city->id }}" {{ old('city', $customer->city) == $city->id ? 'selected' : '' }}>
+                        {{ $city->name }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
                 <div class="row g-3 mb-3">
-                  <div class="col-lg-4">
-                    <label for="kecamatan" class="form-label">Kecamatan</label>
-                    <select class="form-select" id="kecamatan" aria-label="Default select example">
-                      <option selected>Kecamatan</option>
-                      <option value="Bogor Tengah" selected>Bogor Tengah</option>
-                      <option value="Bogor Selatan">Bogor Selatan</option>
-                      <option value="Bogor Utara">Bogor Utara</option>
+                  <div class="col-lg-6">
+                    <label for="district" class="form-label">Kecamatan</label>
+                    <select class="form-select" id="district" name="district" onchange="loadVillages(this.value)">
+                      <option selected disabled>Pilih Kecamatan</option>
+                      @foreach ($districts as $district)
+                      <option value="{{ $district->id }}" {{ old('district', $customer->district) == $district->id ? 'selected' : '' }}>
+                        {{ $district->name }}
+                      </option>
+                      @endforeach
                     </select>
                   </div>
-                  <div class="col-lg-4">
-                    <label for="kelurahan" class="form-label">Kelurahan</label>
-                    <select class="form-select" id="kelurahan" aria-label="Default select example">
-                      <option selected>Kelurahan</option>
-                      <option value="Cidangiang" selected>Cidangiang</option>
-                      <option value="Babakan">Babakan</option>
-                      <option value="Sempur">Sempur</option>
+                  <div class="col-lg-6">
+                    <label for="village" class="form-label">Kelurahan</label>
+                    <select class="form-select" id="village" name="village">
+                      <option selected disabled>Pilih Kelurahan</option>
+                      @foreach ($villages as $village)
+                      <option value="{{ $village->id }}" {{ old('village', $customer->village) == $village->id ? 'selected' : '' }}>
+                        {{ $village->name }}
+                      </option>
+                      @endforeach
                     </select>
-                  </div>
-                  <div class="col-lg-4">
-                    <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
-                    <input type="number" class="form-control" id="nohp" name="nohp" placeholder="Kode Pos" value="123456" />
                   </div>
                 </div>
                 <div class="mb-3">
-                  <label for="alamat" class="form-label">Alamat Lengkap</label>
-                  <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;">Jalan Ciwaluya No 14 Kost Zam-zam</textarea>
+                  <label for="full_address" class="form-label">Alamat Lengkap</label>
+                  <textarea class="form-control" id="full_address" name="full_address" rows="3" style="min-height: 200px;" placeholder="Masukkan alamat lengkap Anda, termasuk patokan, gang, nomor rumah, hingga link Google Maps jika tersedia. 
+Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)">{{ old('full_address', $customer->full_address) }}</textarea>
                 </div>
               </div>
-              <button class="btn btn-primary d-grid w-100" type="submit">Perbarui</button>
+              <button class="btn btn-primary d-grid w-100" type="submit" onclick="return confirm('Apakah kamu yakin akan mengubah profil Kamu?')">Simpan Perubahan</button>
             </form>
           </div>
           <!-- / Content -->
@@ -390,6 +359,76 @@
     ================================================== -->
   <script src="{{ asset('js/plugins.js') }}"></script>
   <!-- <script src="{{ asset('js/designesia.js') }}"></script> -->
+
+  <script>
+    // Menampilkan Preview Profile Image
+    function previewImage(event) {
+      var reader = new FileReader(); // Create FileReader object
+
+      reader.onload = function() {
+        var output = document.getElementById('profileImagePreview'); // Get the image preview element
+        output.src = reader.result; // Set the src attribute with the file's data
+      };
+
+      reader.readAsDataURL(event.target.files[0]); // Read the file as a data URL
+    }
+
+    function loadCities(provinceId) {
+      // Reset Kota, Kecamatan, dan Kelurahan
+      let citySelect = document.getElementById('city');
+      let districtSelect = document.getElementById('district');
+      let villageSelect = document.getElementById('village');
+
+      citySelect.innerHTML = '<option selected disabled>Pilih Kota</option>';
+      districtSelect.innerHTML = '<option selected disabled>Pilih Kecamatan</option>';
+      villageSelect.innerHTML = '<option selected disabled>Pilih Kelurahan</option>';
+
+      // Fetch data kota berdasarkan provinsi
+      fetch(`/get-cities/${provinceId}`)
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(city => {
+            citySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function loadDistricts(cityId) {
+      // Reset Kecamatan dan Kelurahan
+      let districtSelect = document.getElementById('district');
+      let villageSelect = document.getElementById('village');
+
+      districtSelect.innerHTML = '<option selected disabled>Pilih Kecamatan</option>';
+      villageSelect.innerHTML = '<option selected disabled>Pilih Kelurahan</option>';
+
+      // Fetch data kecamatan berdasarkan kota
+      fetch(`/get-districts/${cityId}`)
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(district => {
+            districtSelect.innerHTML += `<option value="${district.id}">${district.name}</option>`;
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function loadVillages(districtId) {
+      // Reset Kelurahan
+      let villageSelect = document.getElementById('village');
+      villageSelect.innerHTML = '<option selected disabled>Pilih Kelurahan</option>';
+
+      // Fetch data kelurahan berdasarkan kecamatan
+      fetch(`/get-villages/${districtId}`)
+        .then(response => response.json())
+        .then(data => {
+          data.forEach(village => {
+            villageSelect.innerHTML += `<option value="${village.id}">${village.name}</option>`;
+          });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+  </script>
 </body>
 
 </html>

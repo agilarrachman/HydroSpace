@@ -17,7 +17,7 @@
 
   <meta name="description" content="" />
 
-  <link rel="icon" href="images/icon.webp" type="image/gif" sizes="16x16">
+  <link rel="icon" href="/images/icon.webp" type="image/gif" sizes="16x16">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -48,7 +48,7 @@
 <body>
   <!-- Content -->
   <div class="container-xxl">
-    <img src="images/logo-wm.webp" alt="" style="position: absolute; top: 0; left: 0; width: 200px; height: 200px; transform: scale(-1, -1);">
+    <img src="/images/logo-wm.webp" alt="" style="position: absolute; top: 0; left: 0; width: 200px; height: 200px; transform: scale(-1, -1);">
 
     <div class="authentication-wrapper authentication-basic container-p-y">
       <div class="authentication-inner">
@@ -63,8 +63,8 @@
               </a>
             </div>
             <!-- /Logo -->
-            <h4 class="mb-2">Mulai Perjalananmu! 🚀</h4>
-            <p class="mb-4">Daftar sekarang dan jelajahi dunia hidroponik dengan mudah bersama HydroSpace</p>
+            <h4 class="mb-2">Reset Password! 🔒</h4>
+            <p class="mb-4">Silakan masukkan password baru Kamu untuk mengatur ulang kata sandi akun Kamu</p>
 
             <!-- Tampilkan Alert Jika Session Tidak Ditemukan -->
             @if (session('error'))
@@ -75,24 +75,12 @@
             @endif
 
             <!-- Form Registrasi -->
-            <form id="formAuthentication" class="mb-3" action="/registrasi" method="POST">
+            <form id="formAuthentication" class="mb-3" action="/reset-password" method="POST">
+              @method('put')
               @csrf
-              <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  class="form-control @error('email') is-invalid @enderror"
-                  id="email"
-                  name="email"
-                  placeholder="name@example.com"
-                  value="{{ old('email') }}"
-                  autofocus />
-                @error('email')
-                <div class="invalid-feedback">
-                  {{ $message }}
-                </div>
-                @enderror
-              </div>
+
+              <input type="hidden" name="email" value="{{ request('email') }}">
+              <input type="hidden" name="token" value="{{ request('token') }}">
 
               <div class="mb-3 form-password-toggle">
                 <label class="form-label" for="password">Password</label>
@@ -115,17 +103,17 @@
               </div>
 
               <div class="mb-3 form-password-toggle">
-                <label class="form-label" for="confirm-password">Konfirmasi Password</label>
+                <label class="form-label" for="confirm_password">Konfirmasi Password</label>
                 <div class="input-group input-group-merge">
                   <input
                     type="password"
-                    id="confirm-password"
-                    class="form-control @error('confirm-password') is-invalid @enderror"
-                    name="confirm-password"
+                    id="confirm_password"
+                    class="form-control @error('confirm_password') is-invalid @enderror"
+                    name="confirm_password"
                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                    aria-describedby="error_confirm-password" />
+                    aria-describedby="error_confirm_password" />
                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  @error('confirm-password')
+                  @error('confirm_password')
                   <div class="invalid-feedback">
                     {{ $message }}
                   </div>
@@ -134,22 +122,15 @@
               </div>
 
 
-              <button class="btn btn-primary d-grid w-100" style="margin-top: 30px;" type="submit">Registrasi</button>
+              <button class="btn btn-primary d-grid w-100" style="margin-top: 30px;" type="submit">Konfirmasi</button>
             </form>
-
-            <p class="text-center">
-              <span>Sudah punya akun?</span>
-              <a href="/signin">
-                <span>Masuk</span>
-              </a>
-            </p>
           </div>
         </div>
         <!-- Register Card -->
       </div>
     </div>
 
-    <img src="images/logo-wm.webp" alt="" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;">
+    <img src="/images/logo-wm.webp" alt="" style="position: absolute; bottom: 0; right: 0; width: 200px; height: 200px;">
   </div>
   <!-- / Content -->
 
