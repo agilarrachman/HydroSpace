@@ -121,15 +121,16 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
+                                        @foreach ($products as $product)
                                         <tr>
-                                            <td class="text-center">1</td>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ asset('images/shop/paket/paket.png') }}" alt="Paket Hidroponik 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
+                                                <img src="{{ asset('images/shop/bibit-benih/' . $product->picture1) }}" alt="{{ $product->picture1 }}" class="rounded-circle" style="height: 100%; max-height: 60px;" />
                                             </td>
-                                            <td>Paket Hidroponik Wick 9 Lubang 1 Bak</td>
-                                            <td>📦 Paket Hidroponik</td>
-                                            <td>Rp 500.000</td>
-                                            <td class="text-center">20</td>
+                                            <td>{{ $product->name }}</td>
+                                            <td>{{ $product->category->name }}</td>
+                                            <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                                            <td class="text-center">{{ $product->stock }}</td>
                                             <td class="text-center">
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -143,138 +144,7 @@
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td>
-                                                <img src="{{ asset('images/shop/aksesori-pendukung/phmeter.png') }}" alt="Aksesori 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                            </td>
-                                            <td>PH Meter TDS & EC Meter</td>
-                                            <td>⚙️ Aksesori & Pendukung</td>
-                                            <td>Rp 150.000</td>
-                                            <td class="text-center">50</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td>
-                                                <img src="{{ asset('images/shop/alat/netpot.png') }}" alt="Peralatan Hidroponik 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                            </td>
-                                            <td>Netpot Hidroponik 5cm</td>
-                                            <td>🛠️ Peralatan Hidroponik</td>
-                                            <td>Rp 300.000</td>
-                                            <td class="text-center">30</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td>
-                                                <img src="{{ asset('images/shop/nutrisi/nutrisi.png') }}" alt="Nutrisi Tanaman 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                            </td>
-                                            <td>Nutrisi Hidroponik AB</td>
-                                            <td>💧 Nutrisi Tanaman</td>
-                                            <td>Rp 100.000</td>
-                                            <td class="text-center">40</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">5</td>
-                                            <td>
-                                                <img src="{{ asset('images/shop/bibit-benih/bibit-sawi.png') }}" alt="Bibit & Benih 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                            </td>
-                                            <td>Bibit Sawi</td>
-                                            <td>🌱 Bibit & Benih</td>
-                                            <td>Rp 50.000</td>
-                                            <td class="text-center">100</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">6</td>
-                                            <td>
-                                                <img src="{{ asset('images/shop/paket/paket.png') }}" alt="Paket Hidroponik 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                            </td>
-                                            <td>Paket Hidroponik Wick 9 Lubang 1 Bak</td>
-                                            <td>📦 Paket Hidroponik</td>
-                                            <td>Rp 500.000</td>
-                                            <td class="text-center">20</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">7</td>
-                                            <td>
-                                                <img src="{{ asset('images/shop/aksesori-pendukung/phmeter.png') }}" alt="Aksesori 1" class="rounded-circle" style="height: 100%; max-height: 60px;" />
-                                            </td>
-                                            <td>PH Meter TDS & EC Meter</td>
-                                            <td>⚙️ Aksesori & Pendukung</td>
-                                            <td>Rp 150.000</td>
-                                            <td class="text-center">50</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="product/slug"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="product/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

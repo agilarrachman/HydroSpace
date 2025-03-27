@@ -10,14 +10,16 @@ class Product extends Model
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function admins()
     {
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    public function productCategories()
+    public function category()
     {
-        return $this->belongsTo(ProductCategory::class, 'product_categories');
+        return $this->belongsTo(ProductCategory::class);
     }
 
     public function orderItems()

@@ -13,7 +13,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+            return view('dashboard.products', [
+                "title" => "HydroSpace | Daftar Produk",
+                "active" => "Produk",
+                "products" => Product::all()
+            ]);
     }
 
     /**
@@ -21,7 +25,10 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.createProduct', [
+            "title" => "HydroSpace | Tambah Produk",
+            "active" => "Produk"
+        ]);
     }
 
     /**
@@ -29,7 +36,7 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        dd($request->all());
     }
 
     /**
@@ -37,7 +44,10 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('dashboard.productDetail.show', [
+            "title" => "HydroSpace | Bibit Sawi",
+            "active" => "Produk"
+        ]);
     }
 
     /**
@@ -45,7 +55,10 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('dashboard.updateProduct', [
+            "title" => "HydroSpace | Update Produk",
+            "active" => "Produk"
+        ]);
     }
 
     /**

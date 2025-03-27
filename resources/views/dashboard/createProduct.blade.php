@@ -103,25 +103,24 @@
                                 <!-- Create Product -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST" enctype="multipart/form-data">
+                                        <form id="formAuthentication" class="mb-3" action="dashboard/product" method="POST" enctype="multipart/form-data">
                                             @csrf
+
                                             <div class="col d-flex flex-column mx-auto">
                                                 <label for="images" class="form-label">Upload Images</label>
                                                 <div id="imageInputs" class="d-flex flex-wrap">
                                                     <div class="input-group mb-3 me-2" style="flex: 1 1 18%;">
-                                                        <input type="file" name="images[]" class="form-control @error('images') is-invalid @enderror" accept="image/*">
+                                                        <input type="file" name="picture1" class="form-control" accept="image/*">
                                                         <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
                                                             <i class="bx bx-plus-circle"></i>
                                                         </button>
                                                     </div>
                                                 </div>
-                                                @error('images')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
+                                                <div id="rulesProfileImage" class="form-text mb-4">
+                                                    Silakan unggah gambar produk dengan format jpeg, png, jpg, gif dan ukuran maks 5MB.
                                                 </div>
-                                                @enderror
-                                                <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar produk dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div>
                                             </div>
+
                                             <div class="mb-3">
                                                 <label for="nama_produk" class="form-label">Nama Produk</label>
                                                 <input type="text" class="form-control" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" />
@@ -156,20 +155,23 @@
                                         <script>
                                             function addImageInput() {
                                                 const imageInputs = document.getElementById('imageInputs');
+                                                const inputCount = imageInputs.children.length; // Hitung jumlah input
+
+                                                if (inputCount >= 5) {
+                                                    alert('Maksimal 5 gambar.');
+                                                    return;
+                                                }
+
                                                 const newInput = document.createElement('div');
                                                 newInput.classList.add('input-group', 'mb-3', 'me-2');
                                                 newInput.style.flex = '1 1 18%';
                                                 newInput.innerHTML = `
-                                                        <input type="file" name="images[]" class="form-control" accept="image/*">
-                                                        <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
-                                                            <i class="bx bx-minus-circle"></i>
-                                                        </button>
-                                                    `;
-                                                if (imageInputs.children.length < 5) {
-                                                    imageInputs.insertBefore(newInput, imageInputs.lastElementChild);
-                                                } else {
-                                                    alert('Maksimal 5 gambar.');
-                                                }
+                                                    <input type="file" name="picture${inputCount + 1}" class="form-control" accept="image/*">
+                                                    <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
+                                                        <i class="bx bx-minus-circle"></i>
+                                                    </button>
+                                                `;
+                                                imageInputs.appendChild(newInput);
                                             }
 
                                             function removeImageInput(button) {

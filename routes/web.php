@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
@@ -154,7 +155,7 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     ]);
 
     Route::post('/keluar', [AdminProfileController::class, 'logout']);
-    
+
     Route::get('/update-password', function () {
         return view('dashboard.updatePassword', [
             "title" => "HydroSpace | Ubah Password",
@@ -165,26 +166,7 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
 });
 
-Route::get('/dashboard/product', function () {
-    return view('dashboard.products', [
-        "title" => "HydroSpace | Daftar Produk",
-        "active" => "Produk"
-    ]);
-});
-
-Route::get('/dashboard/product/slug', function () {
-    return view('dashboard.productDetail', [
-        "title" => "HydroSpace | Bibit Sawi",
-        "active" => "Produk"
-    ]);
-});
-
-Route::get('/dashboard/product/create', function () {
-    return view('dashboard.createProduct', [
-        "title" => "HydroSpace | Tambah Produk",
-        "active" => "Produk"
-    ]);
-});
+Route::resource('/dashboard/product', ProductController::class)->middleware(['role:Admin']);
 
 Route::get('/dashboard/orders', function () {
     return view('dashboard.orders', [
@@ -197,13 +179,6 @@ Route::get('/dashboard/orders/id', function () {
     return view('dashboard.orderDetail', [
         "title" => "HydroSpace | Detail Pesanan",
         "active" => "Pesanan"
-    ]);
-});
-
-Route::get('/dashboard/product/update', function () {
-    return view('dashboard.updateProduct', [
-        "title" => "HydroSpace | Update Produk",
-        "active" => "Produk"
     ]);
 });
 
