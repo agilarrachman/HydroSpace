@@ -7,6 +7,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -39,7 +40,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreProductRequest $request)
+    public function store(Request $request)
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
@@ -52,33 +53,26 @@ class ProductController extends Controller
         ]);
 
         if ($request->file('picture1')) {
-            $validatedData['image'] = $request->file('picture1')->store('product_images');
+            $validatedData['picture1'] = $request->file('picture1')->store('product_images', 'public');
+        } else {
+            throw new \Exception('The picture1 field is required.');
         }
 
-        if ($request->file('picture2')) {
-            $validatedData['image2'] = $request->file('picture2')->store('product_images');
-        }
-
-        if ($request->file('picture3')) {
-            $validatedData['image3'] = $request->file('picture3')->store('product_images');
-        }
-
-        if ($request->file('picture4')) {
-            $validatedData['image4'] = $request->file('picture4')->store('product_images');
-        }
-
-        if ($request->file('picture5')) {
-            $validatedData['image5'] = $request->file('picture5')->store('product_images');
+        foreach (['picture2', 'picture3', 'picture4', 'picture5'] as $optionalPicture) {
+            if ($request->file($optionalPicture)) {
+                $validatedData[$optionalPicture] = $request->file($optionalPicture)->store('product_images', 'public');
+            } else {
+                unset($validatedData[$optionalPicture]);
+            }
         }
 
         $validatedData['user_id'] = Auth::user()->id;
 
-        // Debugging the validated data
-        dd($validatedData);
+        // dd($validatedData);
 
-        // Product::create($validatedData);
+        Product::create($validatedData);
 
-        // return redirect('/dashboard/product')->with('success', 'Product has been added');
+        return redirect('/dashboard/products')->with('success', 'Produk berhasil ditambahkan!');
     }
 
     /**

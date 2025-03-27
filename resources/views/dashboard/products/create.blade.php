@@ -107,12 +107,22 @@
                                             @csrf
                                             <div class="col d-flex flex-column mx-auto">
                                                 <label for="images" class="form-label">Upload Images</label>
+
                                                 <div id="imageInputs" class="d-flex flex-wrap">
-                                                    <div class="input-group mb-3 me-2" style="flex: 1 1 18%;">
-                                                        <input type="file" name="picture1" class="form-control" accept="image/*">
+                                                    <div class="input-group mb-2 me-2" style="flex: 1 1 45%;">
+                                                        <!-- Div pratinjau gambar awalnya disembunyikan -->
+                                                        <div class="me-2 img-container" style="height: 75px; width: 75px; object-fit: cover; display: none;">
+                                                            <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%;">
+                                                        </div>
+                                                        <input style="border-radius: 6px 0px 0px 6px;" type="file" id="image" name="picture1" class="py-4 form-control @error('picture1') is-invalid @enderror" accept="image/*" required onchange="previewImage(this)">
                                                         <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
                                                             <i class="bx bx-plus-circle"></i>
                                                         </button>
+                                                        @error('picture1')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
                                                     </div>
                                                 </div>
                                                 <div id="rulesProfileImage" class="form-text mb-4">
@@ -122,7 +132,7 @@
 
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Nama Produk</label>
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama produk" required/>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama produk" value="{{ old('name') }}" required/>
                                                 @error('name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -132,7 +142,7 @@
 
                                             <div class="mb-3">
                                                 <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug" required/>
+                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug" value="{{ old('slug') }}" required/>
                                                 @error('slug')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -142,18 +152,23 @@
 
                                             <div class="mb-3">
                                                 <label for="category" class="form-label">Kategori</label>
-                                                <select class="form-select" id="category" name="category_id" placeholder="Pilih kategori" required>
-                                                    <option selected>Pilih kategori</option>
+                                                <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id" placeholder="Pilih kategori" required>
+                                                    <option selected disabled>Pilih kategori</option>
                                                     @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
                                                     @endforeach
                                                 </select>
+                                                @error('category_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
 
                                             <div class="row mb-3">
                                                 <div class="col-md-6 mb-3 mb-md-0">
                                                     <label for="stock" class="form-label">Stok</label>
-                                                    <input type="number" class="form-control" id="stock" name="stock" placeholder="Masukkan stok" required/>
+                                                    <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" placeholder="Masukkan stok" value="{{ old('stock') }}" required/>
                                                     @error('stock')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
@@ -163,7 +178,7 @@
 
                                                 <div class="col-md-6">
                                                     <label for="price" class="form-label">Harga</label>
-                                                    <input type="number" class="form-control" id="price" name="price" placeholder="Masukkan harga" required/>
+                                                    <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Masukkan harga" value="{{ old('price') }}" required/>
                                                     @error('price')
                                                         <div class="invalid-feedback">
                                                             {{ $message }}
@@ -174,10 +189,10 @@
 
                                             <div class="mb-3">
                                                 <label for="description" class="form-label">Product Description</label>
-                                                <input id="description" type="hidden" name="description" value="{{ old('description') }}">
+                                                <input id="description" type="hidden" name="description" value="{{ old('description') }}" class="@error('description') is-invalid @enderror">
                                                 <trix-editor input="description"></trix-editor>
                                                 @error('description')
-                                                <p class="text-danger">{{ $message }}</p>
+                                                    <p class="text-danger">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                             <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
@@ -194,19 +209,43 @@
                                                 }
 
                                                 const newInput = document.createElement('div');
-                                                newInput.classList.add('input-group', 'mb-3', 'me-2');
-                                                newInput.style.flex = '1 1 18%';
+                                                newInput.classList.add('input-group', 'mb-2', 'me-2');
+                                                newInput.style.flex = '1 1 45%';
+
                                                 newInput.innerHTML = `
-                                                    <input type="file" name="picture${inputCount + 1}" class="form-control" accept="image/*">
+                                                    <div class="me-2 img-container" style="height: 75px; width: 75px; object-fit: cover; display: none;">
+                                                        <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%;">
+                                                    </div>
+                                                    <input type="file" name="picture${inputCount + 1}" class="form-control" accept="image/*" required onchange="previewImage(this)">
                                                     <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
                                                         <i class="bx bx-minus-circle"></i>
                                                     </button>
                                                 `;
+
                                                 imageInputs.appendChild(newInput);
                                             }
 
                                             function removeImageInput(button) {
                                                 button.parentElement.remove();
+                                            }
+
+                                            function previewImage(input) {
+                                                const file = input.files[0];
+                                                const imgContainer = input.previousElementSibling; // Ambil div container gambar
+                                                const imgPreview = imgContainer.querySelector('.img-preview');
+
+                                                if (file) {
+                                                    imgContainer.style.display = 'block'; // Tampilkan div gambar jika ada file
+                                                    const reader = new FileReader();
+                                                    reader.readAsDataURL(file);
+
+                                                    reader.onload = function (event) {
+                                                        imgPreview.src = event.target.result;
+                                                    };
+                                                } else {
+                                                    imgContainer.style.display = 'none'; // Sembunyikan div gambar jika tidak ada file
+                                                    imgPreview.src = "";
+                                                }
                                             }
                                         </script>
                                     </div>

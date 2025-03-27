@@ -125,7 +125,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ asset('images/shop/bibit-benih/' . $product->picture1) }}" alt="{{ $product->picture1 }}" class="rounded-circle" style="height: 100%; max-height: 60px;" />
+                                                <img src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}" style="height: 100%; max-height: 75px;" />
                                             </td>
                                             <td>{{ $product->name }}</td>
                                             <td>{{ $product->category->name }}</td>
