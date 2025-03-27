@@ -164,9 +164,9 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
-});
 
-Route::resource('/dashboard/product', ProductController::class)->middleware(['role:Admin']);
+    Route::resource('/products', ProductController::class);
+});
 
 Route::get('/dashboard/orders', function () {
     return view('dashboard.orders', [

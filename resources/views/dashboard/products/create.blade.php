@@ -95,7 +95,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/product" class="btn btn-primary">
+                        <a href="/dashboard/products" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -103,9 +103,8 @@
                                 <!-- Create Product -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <form id="formAuthentication" class="mb-3" action="dashboard/product" method="POST" enctype="multipart/form-data">
+                                        <form class="mb-3" action="/dashboard/products" method="post" enctype="multipart/form-data">
                                             @csrf
-
                                             <div class="col d-flex flex-column mx-auto">
                                                 <label for="images" class="form-label">Upload Images</label>
                                                 <div id="imageInputs" class="d-flex flex-wrap">
@@ -122,32 +121,64 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="nama_produk" class="form-label">Nama Produk</label>
-                                                <input type="text" class="form-control" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" />
+                                                <label for="name" class="form-label">Nama Produk</label>
+                                                <input type="text" class="form-control" id="name" name="name" placeholder="Masukkan nama produk" required/>
+                                                @error('name')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="kategori" class="form-label">Kategori</label>
-                                                <select class="form-select" id="kategori" name="kategori">
-                                                    <option value="kategori1">Kategori 1</option>
-                                                    <option value="kategori2">Kategori 2</option>
-                                                    <option value="kategori3">Kategori 3</option>
-                                                </select>
-                                            </div>
+
                                             <div class="mb-3">
                                                 <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug" />
+                                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug" required/>
+                                                @error('slug')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
                                             </div>
+
                                             <div class="mb-3">
-                                                <label for="stok" class="form-label">Stok</label>
-                                                <input type="number" class="form-control" id="stok" name="stok" placeholder="Masukkan stok" />
+                                                <label for="category" class="form-label">Kategori</label>
+                                                <select class="form-select" id="category" name="category_id" placeholder="Pilih kategori" required>
+                                                    <option selected>Pilih kategori</option>
+                                                    @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
+
+                                            <div class="row mb-3">
+                                                <div class="col-md-6 mb-3 mb-md-0">
+                                                    <label for="stock" class="form-label">Stok</label>
+                                                    <input type="number" class="form-control" id="stock" name="stock" placeholder="Masukkan stok" required/>
+                                                    @error('stock')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+
+                                                <div class="col-md-6">
+                                                    <label for="price" class="form-label">Harga</label>
+                                                    <input type="number" class="form-control" id="price" name="price" placeholder="Masukkan harga" required/>
+                                                    @error('price')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
+                                            </div>
+
                                             <div class="mb-3">
                                                 <label for="description" class="form-label">Product Description</label>
+                                                <input id="description" type="hidden" name="description" value="{{ old('description') }}">
+                                                <trix-editor input="description"></trix-editor>
                                                 @error('description')
                                                 <p class="text-danger">{{ $message }}</p>
                                                 @enderror
-                                                <input id="description" type="hidden" name="description" value="{{ old('description') }}">
-                                                <trix-editor input="description"></trix-editor>
                                             </div>
                                             <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
                                         </form>
