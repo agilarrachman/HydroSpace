@@ -63,7 +63,7 @@
 
         <!-- Video -->
         <li class="menu-item {{ request()->is('dashboard/video*') ? 'active' : '' }}">
-            <a href="/dashboard/video" class="menu-link">
+            <a href="/dashboard/videos" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-video"></i>
                 <div data-i18n="Basic">Video</div>
             </a>

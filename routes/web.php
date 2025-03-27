@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
@@ -163,6 +164,8 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
+
+    Route::resource('/dashboard/videos', VideoController::class);
 });
 
 Route::get('/dashboard/product', function () {
@@ -232,34 +235,6 @@ Route::get('/dashboard/category/update', function () {
     return view('dashboard.updateCategory', [
         "title" => "HydroSpace | Update Kategori",
         "active" => "Kategori"
-    ]);
-});
-
-Route::get('/dashboard/video', function () {
-    return view('dashboard.videos', [
-        "title" => "HydroSpace | Daftar Video",
-        "active" => "Video"
-    ]);
-});
-
-Route::get('/dashboard/video/slug', function () {
-    return view('dashboard.videoDetail', [
-        "title" => "HydroSpace | Panduan Instalasi Sistem NFT Hidroponik",
-        "active" => "Video"
-    ]);
-});
-
-Route::get('/dashboard/video/create', function () {
-    return view('dashboard.createVideo', [
-        "title" => "HydroSpace | Tambah Video",
-        "active" => "Video"
-    ]);
-});
-
-Route::get('/dashboard/video/update', function () {
-    return view('dashboard.updateVideo', [
-        "title" => "HydroSpace | Update Video",
-        "active" => "Video"
     ]);
 });
 

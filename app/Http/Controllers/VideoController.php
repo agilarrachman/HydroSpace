@@ -13,7 +13,11 @@ class VideoController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.videos', [
+            "title" => "HydroSpace | Daftar Video",
+            "active" => "Video",
+            'videos' => Video::with(['admin', 'videoCategories', 'videoProducts'])->get(),
+        ]);
     }
 
     /**
@@ -21,7 +25,10 @@ class VideoController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.createVideo', [
+            "title" => "HydroSpace | Tambah Video",
+            "active" => "Video"
+        ]);
     }
 
     /**
@@ -37,7 +44,10 @@ class VideoController extends Controller
      */
     public function show(Video $video)
     {
-        //
+        return view('dashboard.videoDetail', [
+            "title" => "HydroSpace | Panduan Instalasi Sistem NFT Hidroponik",
+            "active" => "Video"
+        ]);
     }
 
     /**
@@ -45,7 +55,10 @@ class VideoController extends Controller
      */
     public function edit(Video $video)
     {
-        //
+        return view('dashboard.updateVideo', [
+            "title" => "HydroSpace | Update Video",
+            "active" => "Video"
+        ]);
     }
 
     /**
