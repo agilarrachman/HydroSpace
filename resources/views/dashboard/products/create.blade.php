@@ -111,8 +111,8 @@
                                                 <div id="imageInputs" class="d-flex flex-wrap">
                                                     <div class="input-group mb-2 me-2" style="flex: 1 1 45%;">
                                                         <!-- Div pratinjau gambar awalnya disembunyikan -->
-                                                        <div class="me-2 img-container" style="height: 75px; width: 75px; object-fit: cover; display: none;">
-                                                            <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%;">
+                                                        <div class="me-2 img-container" style="height: 75px; width: 100px; display: none;">
+                                                            <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%; object-fit: cover;">
                                                         </div>
                                                         <input style="border-radius: 6px 0px 0px 6px;" type="file" id="image" name="picture1" class="py-4 form-control @error('picture1') is-invalid @enderror" accept="image/*" required onchange="previewImage(this)">
                                                         <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
@@ -213,10 +213,10 @@
                                                 newInput.style.flex = '1 1 45%';
 
                                                 newInput.innerHTML = `
-                                                    <div class="me-2 img-container" style="height: 75px; width: 75px; object-fit: cover; display: none;">
-                                                        <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%;">
+                                                    <div class="me-2 img-container" style="height: 75px; width: 100px; display: none;">
+                                                        <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%; object-fit: cover;">
                                                     </div>
-                                                    <input type="file" name="picture${inputCount + 1}" class="form-control" accept="image/*" required onchange="previewImage(this)">
+                                                    <input style="border-radius: 6px 0px 0px 6px;" type="file" name="picture${inputCount + 1}" class="py-4 form-control" accept="image/*" required onchange="previewImage(this)">
                                                     <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
                                                         <i class="bx bx-minus-circle"></i>
                                                     </button>
