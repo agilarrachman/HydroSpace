@@ -166,6 +166,8 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
 
     Route::resource('/products', ProductController::class);
+
+    Route::get('/Product/checkSlug', [ProductController::class, 'checkSlug']);
 });
 
 Route::get('/dashboard/orders', function () {

@@ -132,7 +132,8 @@
 
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Nama Produk</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama produk" value="{{ old('name') }}" required/>
+                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Masukkan nama produk" value="{{ old('name') }}" required/>
+                                                <div class="form-text">Tekan tab setelah menuliskan nama produk untuk membuat slug secara otomatis</div>
                                                 @error('name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -142,7 +143,7 @@
 
                                             <div class="mb-3">
                                                 <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug" value="{{ old('slug') }}" required/>
+                                                <input type="text" id="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" placeholder="Masukkan slug" value="{{ old('slug') }}" required/>
                                                 @error('slug')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
@@ -247,6 +248,17 @@
                                                     imgPreview.src = "";
                                                 }
                                             }
+
+                                            const name = document.querySelector('#name');
+                                            const slug = document.querySelector('#slug');
+
+                                            // Event listener for name field
+                                            name.addEventListener('change', function() {
+                                                fetch('/dashboard/Product/checkSlug?name=' + name.value)
+                                                    .then(response => response.json())
+                                                    .then(data => slug.value = data.slug)
+                                                    .catch(error => console.error('Error fetching slug:', error));
+                                            });
                                         </script>
                                     </div>
                                 </div>
