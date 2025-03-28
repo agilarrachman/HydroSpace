@@ -192,6 +192,13 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 });
 
+Route::get('/dashboard/video/slug', function () {
+    return view('dashboard.videoDetail', [
+        "title" => "HydroSpace | Panduan Instalasi Sistem NFT Hidroponik",
+        "active" => "Video"
+    ]);
+});
+
 Route::get('/dashboard/product', function () {
     return view('dashboard.products', [
         "title" => "HydroSpace | Daftar Produk",

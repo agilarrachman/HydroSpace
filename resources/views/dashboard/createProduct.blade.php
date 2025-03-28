@@ -95,7 +95,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/product" class="btn btn-primary">
+                        <a href="javascript:history.back()" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">

@@ -53,6 +53,12 @@
             background-color: #354e33 !important;
         }
     </style>
+
+    <link href="/css/plugins.css" rel="stylesheet" type="text/css">
+    <link href="/css/styleVideoDashboard.css" rel="stylesheet" type="text/css">
+    <link href="/css/coloring.css" rel="stylesheet" type="text/css">
+    <!-- color scheme -->
+    <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -99,74 +105,102 @@
                                 <!-- Create Video -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="row gy-4 gx-5">
-                                            <div class="col-12">
+                                        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-end mb-3">
+                                            <div class="col-lg-6">
                                                 <p class="col-lg-10 lead mb-0">🌱 Pemilihan & Perawatan Tanaman</p>
                                                 <h4 class="text-uppercase mb-3">Panduan Praktis Menanam Sawi Hidroponik</h1>
-                                                <div>
-                                                    <video width="100%" controls class="video-player" poster="{{ asset('images/thumbnail/tips menanam bayam.jpeg') }}" style="max-width: 900px; aspect-ratio: 16 / 9; object-fit: cover;">
-                                                        <source src="{{ asset('videos/1.mp4') }}" type="video/mp4">
-                                                        Your browser does not support the video tag.
-                                                    </video>
+
+                                                    <div class="relative overflow-hidden rounded-1">
+                                                        <!-- Thumbnail -->
+                                                        <div id="thumbnail" class="thumbnail relative overflow-hidden rounded-1" onclick="playVideo()">
+                                                            <div class="absolute start-0 w-100 abs-middle fs-36 text-white text-center z-2">
+                                                                <div class="player wow scaleIn"><span></span></div>
+                                                            </div>
+                                                            <div class="absolute w-100 h-100 top-0 bg-dark hover-op-05"></div>
+                                                            <img src="/images/thumbnail/tips menanam bayam.jpeg" class="w-100 hover-scale-1-1" alt="">
+                                                        </div>
+
+                                                        <!-- Video (Hidden by default) -->
+                                                        <video id="video" controls class="video w-100 rounded-1" style="display: none;" poster="/images/thumbnail/tips menanam bayam.jpeg">
+                                                            <source src="/videos/1.mp4" type="video/mp4">
+                                                            Browser Anda tidak mendukung pemutaran video.
+                                                        </video>
+                                                    </div>
+                                            </div>
+
+                                            <div class="col-lg-6 ps-lg-5 text-dark">
+                                                <div class="video-about">
+                                                    <div class="me-lg-3">
+                                                        <h5 class="text-uppercase">Tentang Video</h5>
+                                                        <p class="text-dark text-wrap fs-16 lh-1-5 fw-500">
+                                                            Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <hr class="my-1">
+                                                <div class="video-detail mt-4">
+                                                    <h5 class="text-uppercase mb-3">Video Details</h5>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="fw-bold">Durasi</div>
+                                                        <div>10 menit</div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="fw-bold">Tingkat Kesulitan</div>
+                                                        <div>Pemula</div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="fw-bold">Gaya Penyampaian</div>
+                                                        <div>Analisis & praktik langsung</div>
+                                                    </div>
+                                                    <div class="w-100 d-flex justify-content-between">
+                                                        <div class="col-4 fw-bold">Alat yang Dibutuhkan</div>
+                                                        <div class="text-wrap col-8 text-end ps-2">Netpot, Rockwool, Nutrisi AB Mix, pH meter</div>
+                                                    </div>
                                                 </div>
                                             </div>
+                                        </div>
 
-                                            <div class="col-12">
-                                                <h5 class="mb-0">Tentang Video</h5>
-                                                <p>Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!</p>
 
-                                                <h5 class="mb-2">Detail Video</h5>
-                                                <table class="table table-bordered mb-4">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>Durasi</th>
-                                                            <td>10 menit</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Tingkat Kesulitan</th>
-                                                            <td>Pemula</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Gaya Penyampaian</th>
-                                                            <td>Analisis & praktik langsung</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 1</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 2</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 3</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 4</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <a class="btn btn-warning me-2" href="/dashboard/video/update">
-                                                    <i class="bx bx-edit"></i> Edit
-                                                </a>
-                                                <a class="btn btn-danger" href="#">
-                                                    <i class="bx bx-trash"></i> Delete
-                                                </a>
-                                            </div>
+                                        <div class="col-12">
+                                            <h5 class="mb-4">OBJECTIVE VIDEO</h5>
+                                            <table class="table table-bordered mb-4">
+                                                <tbody>
+                                                    <tr>
+                                                        <th>Objective 1</th>
+                                                        <td>
+                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
+                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Objective 2</th>
+                                                        <td>
+                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
+                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Objective 3</th>
+                                                        <td>
+                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
+                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Objective 4</th>
+                                                        <td>
+                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
+                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <a class="btn btn-warning me-2" href="/dashboard/video/update">
+                                                <i class="bx bx-edit"></i> Edit
+                                            </a>
+                                            <a class="btn btn-danger" href="#">
+                                                <i class="bx bx-trash"></i> Delete
+                                            </a>
                                         </div>
                                     </div>
                                 </div>
@@ -210,6 +244,18 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script src="/js/plugins.js"></script>
+    <script src="/js/designesia.js"></script>
+
+    <script>
+        function playVideo() {
+            document.getElementById("thumbnail").style.display = "none"; // Sembunyikan thumbnail
+            let video = document.getElementById("video");
+            video.style.display = "block"; // Tampilkan video
+            video.play(); // Mulai video secara otomatis
+        }
+    </script>
 </body>
 
 </html>

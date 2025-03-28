@@ -111,7 +111,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/customers" class="btn btn-primary mb-4">
+                        <a href="javascript:history.back()" class="btn btn-primary mb-4">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
 
@@ -225,6 +225,21 @@
                                 </div>
                                 <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->
                             </form>
+
+                            <div class="button">
+                                <a class="btn btn-warning me-2" href="/dashboard/customers/{{ $customer->username }}/edit">
+                                    <i class="bx bx-edit"></i> Edit
+                                </a>
+                                <a class="btn btn-danger" href="javascript:void(0);">
+                                    <form action="/dashboard/customers/{{ $customer->username }}" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data pelanggan ini?')" style="color: #fff;">
+                                            <i class="bx bx-trash"></i>Delete
+                                        </button>
+                                    </form>
+                                </a>
+                            </div>
                         </div>
 
                     </div>
