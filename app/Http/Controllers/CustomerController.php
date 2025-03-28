@@ -15,12 +15,21 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $customers = User::where('role', 'Customer')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->input('search');
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%")
+                    ->orWhere('username', 'like', "%$search%");
+            })
+            ->get();
+
         return view('dashboard.customer', [
             "title" => "HydroSpace | Pelanggan",
             "active" => "Pelanggan",
-            'customers' => User::where('role', 'Customer')->get(),
+            "customers" => $customers
         ]);
     }
 

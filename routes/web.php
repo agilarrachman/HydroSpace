@@ -6,8 +6,11 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
+use App\Models\VideoCategory;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
 Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
@@ -164,8 +167,29 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
+    
+    Route::resource('/videos', VideoController::class);
+    Route::resource('/video-categories', VideoCategoryController::class);
+    Route::get('/videoCategories/checkSlug/', [VideoCategoryController::class, 'checkSlug']);
 
-    Route::resource('/dashboard/videos', VideoController::class);
+
+    Route::get('/categories', function (Request $request) {
+        // Ambil semua data video categories
+        $videoCategories = VideoCategory::query();
+
+        // Jika ada pencarian, lakukan filter berdasarkan nama atau slug
+        if ($request->has('searchVideoCategory')) {
+            $search = $request->input('searchVideoCategory');
+            $videoCategories->where('name', 'like', '%' . $search . '%')
+                ->orWhere('slug', 'like', '%' . $search . '%');
+        }
+
+        return view('dashboard.categories', [
+            "title" => "HydroSpace | Daftar Kategori",
+            "active" => "Kategori",
+            "videoCategories" => $videoCategories->get()
+        ]);
+    });
 });
 
 Route::get('/dashboard/product', function () {
@@ -210,23 +234,9 @@ Route::get('/dashboard/product/update', function () {
     ]);
 });
 
-Route::get('/dashboard/category', function () {
-    return view('dashboard.categories', [
-        "title" => "HydroSpace | Daftar Kategori",
-        "active" => "Kategori"
-    ]);
-});
-
 Route::get('/dashboard/category-product/create', function () {
     return view('dashboard.createCategoryProduct', [
         "title" => "HydroSpace | Tambah Kategori Produk",
-        "active" => "Kategori"
-    ]);
-});
-
-Route::get('/dashboard/category-video/create', function () {
-    return view('dashboard.createCategoryVideo', [
-        "title" => "HydroSpace | Tambah Kategori Video",
         "active" => "Kategori"
     ]);
 });

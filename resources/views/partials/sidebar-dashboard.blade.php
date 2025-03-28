@@ -54,15 +54,16 @@
         </li>
 
         <!-- Category -->
-        <li class="menu-item {{ request()->is('dashboard/category*') ? 'active' : '' }}">
-            <a href="/dashboard/category" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/categories*') || request()->is('dashboard/video-categories*') ? 'active' : '' }}">
+            <a href="/dashboard/categories" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-category"></i>
                 <div data-i18n="Basic">Kategori</div>
             </a>
         </li>
 
+
         <!-- Video -->
-        <li class="menu-item {{ request()->is('dashboard/video*') ? 'active' : '' }}">
+        <li class="menu-item {{ request()->is('dashboard/videos*') ? 'active' : '' }}">
             <a href="/dashboard/videos" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-video"></i>
                 <div data-i18n="Basic">Video</div>

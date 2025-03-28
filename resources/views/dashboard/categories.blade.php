@@ -210,19 +210,35 @@
                         <div class="row justify-content-between align-items-center">
                             <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="bx bx-right-arrow-alt me-2"></i> Kategori Video</h5>
                             <div class="d-flex mb-4 col-lg-6 justify-content-end">
-                                <a href="category-video/create" class="btn btn-primary me-2">
+                                <a href="/dashboard/video-categories/create" class="btn btn-primary me-2">
                                     <i class="bx bx-plus-circle me-2"></i> Tambah Kategori
                                 </a>
-                                <form action="" method="GET" class="d-flex">
+                                <form action="/dashboard/categories" class="d-flex">
                                     <div class="input-group">
-                                        <input type="text" name="query" class="form-control outline-secondary" placeholder="Cari kategori video">
-                                        <span class="input-group-text">
-                                            <i class="bx bx-search"></i>
-                                        </span>
+                                        <input type="text" name="searchVideoCategory" class="form-control outline-secondary" placeholder="Cari kategori video" value="{{ request('searchVideoCategory') }}">
+                                        <button class="border-none p-0" type="submit">
+                                            <span class="input-group-text h-100" style="border-top-left-radius: 0rem; border-top-right-radius: 0.375rem; border-bottom-right-radius: 0.375rem; border-bottom-left-radius: 0rem;">
+                                                <i class="bx bx-search"></i>
+                                            </span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+                        @if(session()->has('videoSuccess'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('videoSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+
+                        @if(session()->has('videoError'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('videoError') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
 
                         <!-- Striped Rows -->
                         <div class="card">
@@ -237,70 +253,33 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
+                                        @foreach ($videoCategories as $videoCategory)
                                         <tr>
-                                            <td class="text-center">1</td>
-                                            <td>🎯 Tips dan Trik</td>
-                                            <td>tips-dan-trik</td>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $videoCategory->name }}</td>
+                                            <td>{{ $videoCategory->slug }}</td>
                                             <td class="text-center">
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        <a class="dropdown-item" href="/dashboard/video-categories/{{ $videoCategory->slug }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                            <form action="/dashboard/video-categories/{{ $videoCategory->slug }}" method="post">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data kategori ini?')">
+                                                                    <i class="bx bx-trash me-2"></i>
+                                                                    <div data-i18n="Delete Account">Delete</div>
+                                                                </button>
+                                                            </form>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td>💧 Nutrisi & Pemberian Pupuk</td>
-                                            <td>nutrisi-pemberian-pupuk</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td>🛠️ Instalasi & Perakitan Sistem</td>
-                                            <td>instalasi-perakitan-sistem</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td>🌱 Pemilihan & Perawatan Tanaman</td>
-                                            <td>pemilihan-perawatan-tanaman</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

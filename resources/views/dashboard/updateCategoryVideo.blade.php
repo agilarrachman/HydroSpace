@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Tambah Kategori Video</h5>
+                        <h5 class="mb-0">Edit Data Kategori Video</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -96,14 +96,15 @@
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
                             <div class="authentication-inner" style="max-width: 100%;">
-                                <!-- Create Kategori -->
+                                <!-- Edit Category -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <form id="formAuthentication" class="mb-3" action="/dashboard/video-categories" method="POST">
+                                        <form id="formAuthentication" class="mb-3" action="/dashboard/video-categories/{{ $videoCategory->slug }}" method="POST">
+                                            @method('put')
                                             @csrf
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Nama Kategori</label>
-                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama kategori" style="color: black;" required value="{{ old('name') }}" autofocus />
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama kategori" style="color: black;" required value="{{ old('name', $videoCategory->name) }}" autofocus />
                                                 <div id="rulesSlug" class="form-text">Tekan tab setelah menuliskan nama kategori untuk membuat slug secara otomatis</div>
                                                 @error('name')
                                                 <div class="invalid-feedback">
@@ -113,18 +114,18 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug" style="color: black;" required value="{{ old('slug') }}" />
+                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug" style="color: black;" required value="{{ old('slug', $videoCategory->slug) }}" />
                                                 @error('slug')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
                                                 </div>
                                                 @enderror
                                             </div>
-                                            <button class="btn btn-primary d-grid w-100 mt-4" type="submit">Simpan</button>
+                                            <button class="btn btn-primary d-grid w-100 mt-4" type="submit" onclick="return confirm('Apakah kamu yakin akan mengubah data kategori ini?')">Simpan Perubahan</button>
                                         </form>
                                     </div>
                                 </div>
-                                <!-- /Create Product -->
+                                <!-- /Edit Category -->
                             </div>
                         </div>
                     </div>

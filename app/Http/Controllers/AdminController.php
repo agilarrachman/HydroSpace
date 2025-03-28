@@ -13,12 +13,21 @@ class AdminController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        $admins = User::where('role', 'Admin')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->input('search');
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%")
+                    ->orWhere('username', 'like', "%$search%");
+            })
+            ->get();
+
         return view('dashboard.admin', [
             "title" => "HydroSpace | Admin",
             "active" => "Admin",
-            'admins' => User::where('role', 'Admin')->get(),
+            "admins" => $admins
         ]);
     }
 
