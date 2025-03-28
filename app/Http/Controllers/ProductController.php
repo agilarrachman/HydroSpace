@@ -81,8 +81,9 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         return view('dashboard.products.show', [
-            "title" => "HydroSpace | Bibit Sawi",
-            "active" => "Produk"
+            "title" => $product->name . " | HydroSpace",
+            "active" => "Produk",
+            "product" => $product,
         ]);
     }
 

@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Produk Bibit Sawi</h5>
+                        <h5 class="mb-0">{{ $product->name }}</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -91,7 +91,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/product" class="btn btn-primary">
+                        <a href="/dashboard/products" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -103,21 +103,16 @@
                                             <div class="col-md-6">
                                                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                                                     <div class="carousel-inner">
-                                                        <div class="carousel-item active">
-                                                            <img src="{{ asset('images/shop/bibit-benih/bibit-sawi.png') }}" class="d-block w-100 h-100" alt="Product Image 1" style="object-fit: cover;">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img src="{{ asset('images/shop/bibit-benih/bibit-sawi2.png') }}" class="d-block w-100 h-100" alt="Product Image 2" style="object-fit: cover;">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img src="{{ asset('images/shop/bibit-benih/bibit-sawi3.jpg') }}" class="d-block w-100 h-100" alt="Product Image 3" style="object-fit: cover;">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img src="{{ asset('images/shop/bibit-benih/bibit-sawi4.webp') }}" class="d-block w-100 h-100" alt="Product Image 3" style="object-fit: cover;">
-                                                        </div>
-                                                        <div class="carousel-item">
-                                                            <img src="{{ asset('images/shop/bibit-benih/bibit-sawi5.jpg') }}" class="d-block w-100 h-100" alt="Product Image 3" style="object-fit: cover;">
-                                                        </div>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @php
+                                                                $picture = 'picture' . $i;
+                                                            @endphp
+                                                            @if (!empty($product->$picture))
+                                                                <div class="carousel-item {{ $i === 1 ? 'active' : '' }}" style="height: 625px">
+                                                                    <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2" style="object-fit: cover; height: 100%;">
+                                                                </div>
+                                                            @endif
+                                                        @endfor
                                                     </div>
                                                     <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
                                                         <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
@@ -128,44 +123,31 @@
                                                         <span class="visually-hidden">Next</span>
                                                     </button>
                                                 </div>
-                                                <div class="mt-3 d-flex justify-content-between">
-                                                    <img src="{{ asset('images/shop/bibit-benih/bibit-sawi.png') }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1;" onclick="changeCarouselImage(0)">
-                                                    <img src="{{ asset('images/shop/bibit-benih/bibit-sawi2.png') }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1;" onclick="changeCarouselImage(1)">
-                                                    <img src="{{ asset('images/shop/bibit-benih/bibit-sawi3.jpg') }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1;" onclick="changeCarouselImage(2)">
-                                                    <img src="{{ asset('images/shop/bibit-benih/bibit-sawi4.webp') }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1;" onclick="changeCarouselImage(3)">
-                                                    <img src="{{ asset('images/shop/bibit-benih/bibit-sawi5.jpg') }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1;" onclick="changeCarouselImage(4)">
+                                                <div class="mt-3 d-flex justify-content-center gap-2">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @php
+                                                            $picture = 'picture' . $i;
+                                                        @endphp
+                                                        @if (!empty($product->$picture))
+                                                            <img src="{{ asset('storage/' . $product->$picture) }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1; object-fit: cover;" onclick="changeCarouselImage({{ $i - 1 }})">
+                                                        @endif
+                                                    @endfor
                                                 </div>
                                             </div>
 
                                             <div class="col-md-6">
-                                                <label for="cat_4">🌱 Bibit & Benih</label>
-                                                <h2 class="fs-40">Bibit Sawi</h2>
-                                                <p class="col-lg-10">
-                                                    Dapatkan bibit sawi berkualitas tinggi yang siap tumbuh dengan cepat dan subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat, Anda bisa menikmati panen sawi segar dalam waktu singkat.
-                                                    <br><br>🔹 <b>Keunggulan:</b>
-                                                    <br>✅ Pertumbuhan cepat & hasil melimpah
-                                                    <br>✅ Cocok untuk hidroponik & kebun konvensional
-                                                    <br>✅ Tingkat keberhasilan tinggi & bebas hama
-                                                    <br><br>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit. <br>
-                                                    Berat Bersih: 50 gram (±5.000 butir biji). <br>
-                                                    Daya Tumbuh: ≥85% dengan perawatan yang tepat. <br>
-                                                    Masa Panen: 25-30 hari setelah semai. <br>
-                                                    Media Tanam: Cocok untuk hidroponik, tanah, atau polybag. <br>
-                                                    Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk mempercepat perkecambahan. <br>
-                                                    Kualitas Terjamin: Bebas dari hama & penyakit, siap tumbuh dengan optimal.
-                                                </p>
+                                                <label for="cat_4">{{ $product->category->name }}</label>
+                                                <h2 class="fs-40">{{ $product->name }}</h2>
+                                                <p class="col-lg-10">{!! $product->description !!}</p>
                                                 <div class="d-flex mb-4 align-items-center">
                                                     <div>
-                                                        <h3 class="fs-32 mb-0 me-2">Rp15.000</h3>
-                                                    </div>
-                                                    <div>
-                                                        <span class="fs-18 fw-600 px-3 rounded-20px bg-color-2 text-white">Sale</span>
+                                                        <h3 class="fs-32 mb-0 me-2">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
                                                     </div>
                                                 </div>
 
-                                                <div class="group mb-4">
-                                                    <h5 class="mb-3">Stok</h5>
-                                                    <p>100 pcs</p>
+                                                <div class="group mb-4 d-flex gap-2">
+                                                    <h5 class="mb-3">Tersisa</h5>
+                                                    <p>{{ $product->stock }}</p>
                                                 </div>
 
                                                 <a class="btn btn-warning me-2" href="/dashboard/product/update">
