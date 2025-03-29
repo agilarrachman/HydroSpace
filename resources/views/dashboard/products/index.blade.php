@@ -125,7 +125,7 @@
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}" style="height: 100%; max-height: 75px;" />
+                                                <img src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}" style="width: 75px; height: 75px; object-fit: cover;" />
                                             </td>
                                             <td>{{ $product->name }}</td>
                                             <td>{{ $product->category->name }}</td>
@@ -139,7 +139,13 @@
                                                     <div class="dropdown-menu">
                                                         <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}"><i class="bx bx-show me-1"></i> Lihat</a>
                                                         <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}" onclick="event.preventDefault(); if(confirm('Apakah Anda yakin?')) document.getElementById('delete-form-{{ $product->slug }}').submit();">
+                                                            <i class="bx bx-trash me-1"></i> Delete
+                                                        </a>
+                                                        <form id="delete-form-{{ $product->slug }}" action="/dashboard/products/{{ $product->slug }}" method="post" style="display: none;">
+                                                            @method('delete')
+                                                            @csrf
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </td>

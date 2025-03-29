@@ -159,7 +159,17 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        // Hapus semua gambar yang terkait dengan produk
+        foreach (['picture1', 'picture2', 'picture3', 'picture4', 'picture5'] as $pictureField) {
+            if ($product->$pictureField) {
+                Storage::disk('public')->delete($product->$pictureField);
+            }
+        }
+
+        // Hapus produk dari database
+        Product::destroy($product->id);
+
+        return redirect('/dashboard/products')->with('success', 'Produk berhasil dihapus!');
     }
 
     public function checkSlug(Request $request)
