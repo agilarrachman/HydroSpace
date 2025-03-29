@@ -8,6 +8,7 @@ use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -48,7 +49,6 @@ class ProductController extends Controller
             'price' => 'required|numeric|max:1000000',
             'description' => 'required',
             'stock' => 'required|numeric|min:1',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:5000',
             'category_id' => 'required|exists:product_categories,id'
         ]);
 
@@ -94,17 +94,65 @@ class ProductController extends Controller
     {
         return view('dashboard.products.edit', [
             "title" => "HydroSpace | Update Produk",
-            "active" => "Produk"
+            "active" => "Produk",
+            "product" => $product,
+            "categories" => ProductCategory::all()
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        //
+        $rules = [
+            'name' => 'required|string|max:255',
+            'slug' => 'required|string|max:255|unique:products,slug,' . $product->id,
+            'category_id' => 'required|exists:product_categories,id',
+            'stock' => 'required|integer|min:0',
+            'price' => 'required|numeric|min:0',
+            'description' => 'nullable|string',
+            'picture1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'picture2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'picture3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'picture4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'picture5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+        ];
+
+        if ($request->slug != $product->slug) {
+            $rules['slug'] = 'required|unique:products';
+        }
+
+        $validatedData = $request->validate($rules);
+
+        foreach (['picture1', 'picture2', 'picture3', 'picture4', 'picture5'] as $pictureField) {
+            if ($request->hasFile($pictureField)) {
+                // Hapus gambar lama jika ada
+                if ($product->$pictureField) {
+                    Storage::disk('public')->delete($product->$pictureField);
+                }
+                // Simpan gambar baru
+                $validatedData[$pictureField] = $request->file($pictureField)->store('product_images', 'public');
+            } elseif ($request->input($pictureField) === null && $pictureField !== 'picture1') {
+                // Jika gambar dihapus (input kosong) untuk selain picture1, hapus dari database dan storage
+                if ($product->$pictureField) {
+                    Storage::disk('public')->delete($product->$pictureField);
+                    $validatedData[$pictureField] = null;
+                }
+            }
+        }
+
+        // Jika picture1 tidak diunggah atau dihapus, gunakan gambar lama
+        if (!$request->hasFile('picture1') && $request->input('picture1') !== null) {
+            unset($validatedData['picture1']); // Jangan ubah field ini
+        }
+
+        // Update data produk
+        $product->update($validatedData);
+
+        return redirect('/dashboard/products')->with('success', 'Produk berhasil diperbarui!');
     }
+
 
     /**
      * Remove the specified resource from storage.

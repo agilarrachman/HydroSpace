@@ -168,8 +168,6 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::resource('/products', ProductController::class);
 
     Route::get('/Product/checkSlug', [ProductController::class, 'checkSlug']);
-
-    Route::get('/products/{product:slug}', [ProductController::class, 'show']);
 });
 
 Route::get('/dashboard/orders', function () {

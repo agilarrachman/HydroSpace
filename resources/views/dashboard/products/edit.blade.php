@@ -38,6 +38,8 @@
         <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
         <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
 
+        <x-head.tinymce-config/>
+
         <style>
             .bg-menu-theme .menu-inner > .menu-item.active > .menu-link {
                 background-color: rgba(53, 78, 51, 0.16) !important;
@@ -51,7 +53,18 @@
             .app-brand .layout-menu-toggle {
                 background-color: #354e33 !important;
             }
+
+            trix-editor {
+                pointer-events: none;
+            }
+
+            body.loaded trix-editor {
+                pointer-events: auto;
+            }
+
         </style>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.js"></script>
     </head>
 
     <body>
@@ -90,7 +103,7 @@
                         <!-- Content -->
 
                         <div class="container-xxl flex-grow-1 container-p-y">
-                            <a href="/dashboard/product" class="btn btn-primary">
+                            <a href="/dashboard/products" class="btn btn-primary">
                                 <i class="bx bx-arrow-back me-2"></i>Kembali
                             </a>
                             <div class="authentication-wrapper authentication-basic container-p-y">
@@ -98,74 +111,187 @@
                                     <!-- Create Product -->
                                     <div class="card">
                                         <div class="card-body">
-                                            <form id="formAuthentication" class="mb-3" action="index.html" method="POST" enctype="multipart/form-data">
+                                            <form class="mb-3" action="/dashboard/products/{{ $product->slug }}" method="post" enctype="multipart/form-data">
+                                                @method('put')
                                                 @csrf
                                                 <div class="col d-flex flex-column mx-auto">
                                                     <label for="images" class="form-label">Upload Images</label>
                                                     <div id="imageInputs" class="d-flex flex-wrap">
-                                                        <div class="input-group mb-3 me-2" style="flex: 1 1 18%;">
-                                                            <input type="file" name="images[]" class="form-control @error('images') is-invalid @enderror" accept="image/*">
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
-                                                                <i class="bx bx-plus-circle"></i>
-                                                            </button>
+                                                        {{-- Mengirim informasi data gambar lama --}}
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @php
+                                                                $picture = 'picture' . $i;
+                                                            @endphp
+                                                            @if ($product->$picture)
+                                                                <input type="hidden" name="oldImages[{{ $i }}]" value="{{ $product->$picture }}">
+                                                                <div class="input-group mb-2 me-2" style="flex: 1 1 45%;">
+                                                                    <div class="me-2 img-container" style="height: 75px; width: 100px; display: block;">
+                                                                        <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%; object-fit: cover;" src="{{ asset('storage/' . $product->$picture) }}">
+                                                                    </div>
+                                                                    <input style="border-radius: 6px 0px 0px 6px;" type="file" id="image{{ $i }}" name="picture{{ $i }}" class="py-4 form-control @error('picture' . $i) is-invalid @enderror" accept="image/*" onchange="previewImage(this); displayFileName(this);">
+                                                                    @if ($i === 1)
+                                                                        <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
+                                                                            <i class="bx bx-plus-circle"></i>
+                                                                        </button>
+                                                                    @else
+                                                                        <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
+                                                                            <i class="bx bx-minus-circle"></i>
+                                                                        </button>
+                                                                    @endif
+                                                                    @error('picture' . $i)
+                                                                        <div class="invalid-feedback">
+                                                                            {{ $message }}
+                                                                        </div>
+                                                                    @enderror
+                                                                </div>
+                                                            @endif
+                                                        @endfor
+                                                    </div>
+
+                                                    <div id="rulesProfileImage" class="form-text mb-4">
+                                                        Silakan unggah gambar produk dengan format jpeg, png, jpg, gif dan ukuran maks 5MB.
+                                                    </div>
+                                                </div>
+
+                                                <div class="mb-3">
+                                                    <label for="name" class="form-label">Nama Produk</label>
+                                                    <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Masukkan nama produk" value="{{ old('name', $product->name) }}" required/>
+                                                    <div class="form-text">Tekan tab setelah menuliskan nama produk untuk membuat slug secara otomatis</div>
+                                                    @error('name')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
                                                         </div>
-                                                    </div>
-                                                    @error('images')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
                                                     @enderror
-                                                    <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar produk dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div>
                                                 </div>
-                                                <div class="mb-3">
-                                                    <label for="nama_produk" class="form-label">Nama Produk</label>
-                                                    <input type="text" class="form-control" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" />
-                                                </div>
-                                                <div class="mb-3">
-                                                    <label for="kategori" class="form-label">Kategori</label>
-                                                    <select class="form-select" id="kategori" name="kategori">
-                                                        <option value="kategori1">Kategori 1</option>
-                                                        <option value="kategori2">Kategori 2</option>
-                                                        <option value="kategori3">Kategori 3</option>
-                                                    </select>
-                                                </div>
+
                                                 <div class="mb-3">
                                                     <label for="slug" class="form-label">Slug</label>
-                                                    <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug" />
+                                                    <input type="text" id="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" placeholder="Masukkan slug" value="{{ old('slug', $product->slug) }}" required/>
+                                                    @error('slug')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
+
                                                 <div class="mb-3">
-                                                    <label for="stok" class="form-label">Stok</label>
-                                                    <input type="number" class="form-control" id="stok" name="stok" placeholder="Masukkan stok" />
+                                                    <label for="category" class="form-label">Kategori</label>
+                                                    <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id" required>
+                                                        <option selected disabled>Pilih kategori</option>
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                                                {{ $category->name }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('category_id')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
                                                 </div>
+
+                                                <div class="row mb-3">
+                                                    <div class="col-md-6 mb-3 mb-md-0">
+                                                        <label for="stock" class="form-label">Stok</label>
+                                                        <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" placeholder="Masukkan stok" value="{{ old('stock', $product->stock) }}" required/>
+                                                        @error('stock')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    <div class="col-md-6">
+                                                        <label for="price" class="form-label">Harga</label>
+                                                        <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Masukkan harga" value="{{ old('price', $product->price) }}" required/>
+                                                        @error('price')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                </div>
+
+                                                {{-- <div class="mb-3">
+                                                    <label for="description" class="form-label">Product Description</label>
+                                                    <input id="description" type="hidden" name="description" value="{{ old('description', $product->description) }}" class="@error('description') is-invalid @enderror" disabled>
+                                                    <trix-editor input="description" autofocus="false"></trix-editor>
+                                                    @error('description')
+                                                    <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div> --}}
+
                                                 <div class="mb-3">
-                                                    <label for="deskripsi_produk" class="form-label">Deskripsi Produk</label>
-                                                    <textarea class="form-control" id="deskripsi_produk" name="deskripsi_produk" rows="3" placeholder="Masukkan deskripsi produk"></textarea>
+                                                    <textarea id="description" name="description">{{ old('description', $product->description) }}</textarea>
+                                                    @error('description')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
                                                 </div>
+
                                                 <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
                                             </form>
 
                                             <script>
                                                 function addImageInput() {
                                                     const imageInputs = document.getElementById('imageInputs');
+                                                    const inputCount = imageInputs.querySelectorAll('input[type="file"]').length; // Hitung hanya jumlah input file
+
+                                                    if (inputCount >= 5) {
+                                                        alert('Maksimal 5 gambar.');
+                                                        return;
+                                                    }
+
                                                     const newInput = document.createElement('div');
-                                                    newInput.classList.add('input-group', 'mb-3', 'me-2');
-                                                    newInput.style.flex = '1 1 18%';
+                                                    newInput.classList.add('input-group', 'mb-2', 'me-2');
+                                                    newInput.style.flex = '1 1 45%';
+
                                                     newInput.innerHTML = `
-                                                        <input type="file" name="images[]" class="form-control" accept="image/*">
+                                                        <div class="me-2 img-container" style="height: 75px; width: 100px; display: none;">
+                                                            <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%; object-fit: cover;">
+                                                        </div>
+                                                        <input style="border-radius: 6px 0px 0px 6px;" type="file" name="picture${inputCount + 1}" class="py-4 form-control" accept="image/*" required onchange="previewImage(this)">
                                                         <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
                                                             <i class="bx bx-minus-circle"></i>
                                                         </button>
                                                     `;
-                                                    if (imageInputs.children.length < 5) {
-                                                        imageInputs.insertBefore(newInput, imageInputs.lastElementChild);
-                                                    } else {
-                                                        alert('Maksimal 5 gambar.');
-                                                    }
+
+                                                    imageInputs.appendChild(newInput);
                                                 }
 
                                                 function removeImageInput(button) {
                                                     button.parentElement.remove();
                                                 }
+
+                                                function previewImage(input) {
+                                                    const file = input.files[0];
+                                                    const imgContainer = input.previousElementSibling; // Ambil div container gambar
+                                                    const imgPreview = imgContainer.querySelector('.img-preview');
+
+                                                    if (file) {
+                                                        imgContainer.style.display = 'block'; // Tampilkan div gambar jika ada file
+                                                        const reader = new FileReader();
+                                                        reader.readAsDataURL(file);
+
+                                                        reader.onload = function (event) {
+                                                            imgPreview.src = event.target.result;
+                                                        };
+                                                    } else {
+                                                        imgContainer.style.display = 'none'; // Sembunyikan div gambar jika tidak ada file
+                                                        imgPreview.src = "";
+                                                    }
+                                                }
+
+                                                const name = document.querySelector('#name');
+                                                const slug = document.querySelector('#slug');
+
+                                                // Event listener for name field
+                                                name.addEventListener('change', function() {
+                                                    fetch('/dashboard/Product/checkSlug?name=' + name.value)
+                                                        .then(response => response.json())
+                                                        .then(data => slug.value = data.slug)
+                                                        .catch(error => console.error('Error fetching slug:', error));
+                                                });
                                             </script>
                                         </div>
                                     </div>

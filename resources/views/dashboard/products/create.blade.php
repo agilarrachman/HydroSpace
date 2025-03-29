@@ -43,6 +43,8 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
+    <x-head.tinymce-config/>
+
     <style>
         .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
             background-color: rgba(53, 78, 51, 0.16) !important;
@@ -189,9 +191,7 @@
                                             </div>
 
                                             <div class="mb-3">
-                                                <label for="description" class="form-label">Product Description</label>
-                                                <input id="description" type="hidden" name="description" value="{{ old('description') }}" class="@error('description') is-invalid @enderror">
-                                                <trix-editor input="description"></trix-editor>
+                                                <textarea id="description" name="description">{{ old('description', $product->description) }}</textarea>
                                                 @error('description')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
