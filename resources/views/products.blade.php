@@ -169,26 +169,8 @@
                                 @endforeach
                                 <!-- product item end -->
 
-                                <div class="col-lg-12 pt-4 text-center">
-                                    <div class="d-inline-block">
-                                        <nav aria-label="Page navigation example">
-                                            <ul class="pagination">
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Previous">
-                                                        <span aria-hidden="true"><i class="fa fa-chevron-left"></i></span>
-                                                    </a>
-                                                </li>
-                                                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                                <li class="page-item active" aria-current="page"><a class="page-link" href="#">2</a></li>
-                                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                                <li class="page-item">
-                                                    <a class="page-link" href="#" aria-label="Next">
-                                                        <span aria-hidden="true"><i class="fa fa-chevron-right"></i></span>
-                                                    </a>
-                                                </li>
-                                            </ul>
-                                        </nav>
-                                    </div>
+                                <div class="d-flex justify-content-center align-items-center mt-4 pt-4">
+                                    {{ $products->links() }}
                                 </div>
                             </div>
                         </div>
