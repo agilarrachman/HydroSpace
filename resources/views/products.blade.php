@@ -67,7 +67,6 @@
                                     </div>
                                 </div>
 
-
                                 <div id="new-arrivals-carousel" class="owl-carousel owl-4-cols">
                                     <!-- product item begin -->
                                     <div class="item">
@@ -286,7 +285,6 @@
                                     <!-- product item end -->
                                 </div>
                             </div>
-
                         </div>
                     </div>
 

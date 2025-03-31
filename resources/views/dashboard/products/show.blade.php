@@ -150,12 +150,16 @@
                                                     <p>{{ $product->stock }}</p>
                                                 </div>
 
-                                                <a class="btn btn-warning me-2" href="/dashboard/product/update">
+                                                <a class="btn btn-warning me-2" href="/dashboard/products/{{ $product->slug }}/edit">
                                                     <i class="bx bx-edit"></i> Edit
                                                 </a>
-                                                <a class="btn btn-danger" href="#">
-                                                    <i class="bx bx-trash"></i> Delete
+                                                <a class="btn btn-danger" href="/dashboard/products/{{ $product->slug }}" onclick="event.preventDefault(); if(confirm('Apakah Anda yakin?')) document.getElementById('delete-form-{{ $product->slug }}').submit();">
+                                                    <i class="bx bx-trash me-1"></i> Hapus
                                                 </a>
+                                                <form id="delete-form-{{ $product->slug }}" action="/dashboard/products/{{ $product->slug }}" method="post" style="display: none;">
+                                                    @method('delete')
+                                                    @csrf
+                                                </form>
                                             </div>
                                         </div>
 

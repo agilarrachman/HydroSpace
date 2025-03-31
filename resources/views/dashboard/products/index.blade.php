@@ -140,7 +140,7 @@
                                                         <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}"><i class="bx bx-show me-1"></i> Lihat</a>
                                                         <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
                                                         <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}" onclick="event.preventDefault(); if(confirm('Apakah Anda yakin?')) document.getElementById('delete-form-{{ $product->slug }}').submit();">
-                                                            <i class="bx bx-trash me-1"></i> Delete
+                                                            <i class="bx bx-trash me-1"></i> Hapus
                                                         </a>
                                                         <form id="delete-form-{{ $product->slug }}" action="/dashboard/products/{{ $product->slug }}" method="post" style="display: none;">
                                                             @method('delete')
