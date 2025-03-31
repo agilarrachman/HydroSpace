@@ -181,11 +181,15 @@ class ProductController extends Controller
     // CUSTOMERS PRODUCTS
     public function customerIndex()
     {
+
+        $category = ProductCategory::where('slug', request('category'))->first();
+
         return view('products', [
-            "title" => "Produk HydroSpace",
+            "title" => $category ? $category->name : "Produk",
             "active" => "Produk",
-            "products" => Product::with('category')->latest()->filter(request(['search', 'category']))->paginate(1)->withQueryString(),
+            "products" => Product::with('category')->latest()->filter(request(['search', 'category']))->paginate(12)->withQueryString(),
             "categories" => ProductCategory::all(),
+            "currentCategory" => $category
         ]);
     }
 

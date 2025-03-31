@@ -106,7 +106,7 @@
 
             <section id="products" style="padding-top: 0;">
                 <div class="container">
-                    <h2 id="katalog-produk" class="text-uppercase text-center mb-5 wow fadeInUp" data-wow-delay=".2s">Katalog <span class="id-color-2">Produk</span></h2>
+                    <h2 id="katalog-produk" class="text-uppercase text-center mb-5 wow fadeInUp" data-wow-delay=".2s">Katalog {{ $currentCategory ? $currentCategory->name : 'Produk' }}</h2>
 
                     <div class="row g-4">
                         <div class="col-lg-3">
@@ -126,31 +126,14 @@
                             <div class="item_filter_group">
                                 <h4>Kategori</h4>
                                 <div class="de_form">
-                                    <div class="de_checkbox">
-                                        <input id="cat_1" name="cat_1" type="checkbox" value="cat_1">
-                                        <label for="cat_1">🌱 Bibit & Benih</label>
-                                    </div>
-
-                                    <div class="de_checkbox">
-                                        <input id="cat_2" name="cat_2" type="checkbox" value="cat_2">
-                                        <label for="cat_2">💧 Nutrisi Tanaman</label>
-                                    </div>
-
-                                    <div class="de_checkbox">
-                                        <input id="cat_3" name="cat_3" type="checkbox" value="cat_3">
-                                        <label for="cat_3">🛠️ Peralatan Hidroponik</label>
-                                    </div>
-
-                                    <div class="de_checkbox">
-                                        <input id="cat_4" name="cat_4" type="checkbox" value="cat_4">
-                                        <label for="cat_4">⚙️ Aksesori & Pendukung</label>
-                                    </div>
-
-                                    <div class="de_checkbox">
-                                        <input id="cat_5" name="cat_5" type="checkbox" value="cat_5">
-                                        <label for="cat_5">📦 Paket Set Hidroponik</label>
-                                    </div>
-
+                                    @foreach ($categories as $category)
+                                        <div class="de_checkbox">
+                                            <input id="cat_{{ $category->id }}" name="category" type="checkbox" value="{{ $category->slug }}"
+                                                onchange="if(this.checked) { window.location.href = '/produk?category=' + this.value; } else { window.location.href = '/produk'; }"
+                                                {{ request('category') == $category->slug ? 'checked' : '' }}>
+                                            <label for="cat_{{ $category->id }}">{{ $category->emoji }} {{ $category->name }}</label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
