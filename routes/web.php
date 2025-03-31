@@ -32,19 +32,23 @@ Route::middleware(['blockAdmin'])->group(function () {
         ]);
     });
 
-    Route::get('/produk', function () {
-        return view('products', [
-            "title" => "HydroSpace | Produk",
-            "active" => "Produk"
-        ]);
-    });
+    // Route::get('/produk', function () {
+    //     return view('products', [
+    //         "title" => "HydroSpace | Produk",
+    //         "active" => "Produk"
+    //     ]);
+    // });
 
-    Route::get('/produk/slug', function () {
-        return view('viewProduct', [
-            "title" => "HydroSpace | Produk",
-            "active" => "Produk"
-        ]);
-    });
+    Route::get('/produk', [ProductController::class, 'customerIndex']);
+
+    Route::get('/produk/{product:slug}', [ProductController::class, 'customerShow']);
+
+    // Route::get('/produk/slug', function () {
+    //     return view('viewProduct', [
+    //         "title" => "HydroSpace | Produk",
+    //         "active" => "Produk"
+    //     ]);
+    // });
 
     Route::get('/edukasi', function () {
         return view('videos', [

@@ -177,4 +177,25 @@ class ProductController extends Controller
         $slug = SlugService::createSlug(Product::class, 'slug', $request->name);
         return response()->json(['slug' => $slug]);
     }
+
+    // CUSTOMERS PRODUCTS
+    public function customerIndex()
+    {
+        return view('products', [
+            "title" => "Produk HydroSpace",
+            "active" => "Produk",
+            "products" => Product::all(),
+            "categories" => ProductCategory::all(),
+        ]);
+    }
+
+    public function customerShow(Product $product)
+    {
+        return view('viewProduct', [
+            "title" => $product->name . " | HydroSpace",
+            "active" => "Produk",
+            "product" => $product,
+            "categories" => ProductCategory::all(),
+        ]);
+    }
 }
