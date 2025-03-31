@@ -129,7 +129,7 @@
                                     @foreach ($categories as $category)
                                         <div class="de_checkbox">
                                             <input id="cat_{{ $category->id }}" name="category" type="checkbox" value="{{ $category->slug }}"
-                                                onchange="if(this.checked) { window.location.href = '/produk?category=' + this.value; + '#katalog-produk' } else { window.location.href = '/produk'; }"
+                                                onchange="if(this.checked) { window.location.href = '/produk?category=' + this.value + '#katalog-produk'; } else { window.location.href = '/produk'; }"
                                                 {{ request('category') == $category->slug ? 'checked' : '' }}>
                                             <label for="cat_{{ $category->id }}">{{ $category->emoji }} {{ $category->name }}</label>
                                         </div>
