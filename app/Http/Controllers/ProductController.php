@@ -184,7 +184,7 @@ class ProductController extends Controller
         return view('products', [
             "title" => "Produk HydroSpace",
             "active" => "Produk",
-            "products" => Product::all(),
+            "products" => Product::with('category')->latest()->filter(request(['search', 'category']))->paginate(1)->withQueryString(),
             "categories" => ProductCategory::all(),
         ]);
     }

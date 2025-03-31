@@ -106,15 +106,20 @@
 
             <section id="products" style="padding-top: 0;">
                 <div class="container">
-                    <h2 class="text-uppercase text-center mb-5 wow fadeInUp" data-wow-delay=".2s">Katalog <span class="id-color-2">Produk</span></h2>
+                    <h2 id="katalog-produk" class="text-uppercase text-center mb-5 wow fadeInUp" data-wow-delay=".2s">Katalog <span class="id-color-2">Produk</span></h2>
 
                     <div class="row g-4">
                         <div class="col-lg-3">
                             <div class="item_filter_group">
                                 <h4>Cari Produk</h4>
                                 <div class="serach-bar d-flex gap-2">
-                                    <input type="text" name="Name" id="name" class="de-quick-search py-2 w-100 rounded-20" placeholder="Cari...">
-                                    <button class="btn btn-secondary px-3 rounded-pill" type="submit"><i class="bi bi-search"></i></button>
+                                    {{-- <input type="text" name="Name" id="name" class="de-quick-search py-2 w-100 rounded-20" placeholder="Cari...">
+                                    <button class="btn btn-secondary px-3 rounded-pill" type="submit"><i class="bi bi-search"></i></button> --}}
+
+                                    <form action="/produk#katalog-produk" class="d-flex gap-2">
+                                        <input type="text" class="de-quick-search py-2 w-100 rounded-20" placeholder="Cari produk" name="search" value="{{ request('search') }}" required>
+                                        <button class="btn btn-secondary px-3 rounded-pill" type="submit"><i class="bi bi-search"></i></button>
+                                    </form>
                                 </div>
                             </div>
 
