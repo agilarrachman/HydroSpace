@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Panduan Praktis Menanam Sawi Hidroponik</h5>
+                        <h5 class="mb-0">Edit Data Kategori Video</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -91,86 +91,41 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/video" class="btn btn-primary">
+                        <a href="javascript:history.back()" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
                             <div class="authentication-inner" style="max-width: 100%;">
-                                <!-- Create Video -->
+                                <!-- Edit Category -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="row gy-4 gx-5">
-                                            <div class="col-12">
-                                                <p class="col-lg-10 lead mb-0">🌱 Pemilihan & Perawatan Tanaman</p>
-                                                <h4 class="text-uppercase mb-3">Panduan Praktis Menanam Sawi Hidroponik</h1>
-                                                <div>
-                                                    <video width="100%" controls class="video-player" poster="{{ asset('images/thumbnail/tips menanam bayam.jpeg') }}" style="max-width: 900px; aspect-ratio: 16 / 9; object-fit: cover;">
-                                                        <source src="{{ asset('videos/1.mp4') }}" type="video/mp4">
-                                                        Your browser does not support the video tag.
-                                                    </video>
+                                        <form id="formAuthentication" class="mb-3" action="/dashboard/video-categories/{{ $videoCategory->slug }}" method="POST">
+                                            @method('put')
+                                            @csrf
+                                            <div class="mb-3">
+                                                <label for="name" class="form-label">Nama Kategori</label>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama kategori" style="color: black;" required value="{{ old('name', $videoCategory->name) }}" autofocus />
+                                                <div id="rulesSlug" class="form-text">Tekan tab setelah menuliskan nama kategori untuk membuat slug secara otomatis</div>
+                                                @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
                                                 </div>
+                                                @enderror
                                             </div>
-
-                                            <div class="col-12">
-                                                <h5 class="mb-0">Tentang Video</h5>
-                                                <p>Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!</p>
-
-                                                <h5 class="mb-2">Detail Video</h5>
-                                                <table class="table table-bordered mb-4">
-                                                    <tbody>
-                                                        <tr>
-                                                            <th>Durasi</th>
-                                                            <td>10 menit</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Tingkat Kesulitan</th>
-                                                            <td>Pemula</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Gaya Penyampaian</th>
-                                                            <td>Analisis & praktik langsung</td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 1</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 2</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 3</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <th>Objective 4</th>
-                                                            <td>
-                                                                <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                                <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
-                                                            </td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                                <a class="btn btn-warning me-2" href="/dashboard/video/update">
-                                                    <i class="bx bx-edit"></i> Edit
-                                                </a>
-                                                <a class="btn btn-danger" href="#">
-                                                    <i class="bx bx-trash"></i> Delete
-                                                </a>
+                                            <div class="mb-3">
+                                                <label for="slug" class="form-label">Slug</label>
+                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug" style="color: black;" required value="{{ old('slug', $videoCategory->slug) }}" />
+                                                @error('slug')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
-                                        </div>
+                                            <button class="btn btn-primary d-grid w-100 mt-4" type="submit" onclick="return confirm('Apakah kamu yakin akan mengubah data kategori ini?')">Simpan Perubahan</button>
+                                        </form>
                                     </div>
                                 </div>
-                                <!-- /Create Video -->
+                                <!-- /Edit Category -->
                             </div>
                         </div>
                     </div>
@@ -210,6 +165,17 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script>
+        const name = document.querySelector('#name');
+        const slug = document.querySelector('#slug');
+
+        name.addEventListener('change', function() {
+            fetch('/dashboard/videoCategories/checkSlug?name=' + name.value)
+                .then(response => response.json())
+                .then(data => slug.value = data.slug)
+        });
+    </script>
 </body>
 
 </html>

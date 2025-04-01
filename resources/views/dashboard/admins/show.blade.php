@@ -96,7 +96,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Detail Pelanggan</h5>
+                        <h5 class="mb-0">Detail Admin</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -111,29 +111,15 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/customers" class="btn btn-primary mb-4">
+                        <a href="javascript:history.back()" class="btn btn-primary mb-4">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
-
-                        @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
-
-                        @if(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('error') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
 
                         <div class="card p-4">
                             <form id="formAuthentication" class="mb-3" action="index.html">
                                 <div class="col d-flex flex-column w-75 mb-3 mx-auto mx-lg-0">
                                     <label for="foto_profil" class="form-label fw-bold">Foto Profil</label>
-                                    <img id="profileImagePreview" src="{{ asset('../storage/' . $customer->profile_picture) }}" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
+                                    <img id="profileImagePreview" src="{{ asset('../storage/' . $admin->profile_picture) }}" alt="" class="rounded-circle mx-auto mx-lg-0" style="width: 140px; height: 140px; object-fit: cover;">
                                     <!-- <input type="file" name="foto_profil" id="foto_profil" class="form-control mx-auto @error('foto_profil') is-invalid @enderror" accept="image/*" onchange="previewImage(event)"> -->
                                     @error('foto_profil')
                                     <div class="invalid-feedback">
@@ -143,7 +129,7 @@
                                     <!-- <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar profil dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div> -->
                                 </div>
                                 <div class="row g-2 mb-3">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label for="username" class="form-label">Email</label>
                                         <input
                                             type="text"
@@ -151,76 +137,59 @@
                                             id="email"
                                             name="email"
                                             placeholder="Masukkan email"
-                                            value="{{ $customer->email }}"
+                                            value="{{ $admin->email }}"
                                             autofocus disabled />
                                     </div>
-                                    <div class="col-lg-6">
-                                        <label for="nohp" class="form-label">Username</label>
-                                        <input
-                                            type="text"
-                                            class="form-control"
-                                            id="username"
-                                            name="username"
-                                            value="{{ $customer->username }}"
-                                            placeholder="Masukkan username" disabled />
-                                    </div>
-                                </div>
-                                <div class="row g-2 mb-3">
-                                    <div class="col-lg-6">
+                                    <div class="col-lg-4">
                                         <label for="nama" class="form-label">Nama Lengkap</label>
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="nama"
                                             name="nama"
-                                            value="{{ $customer->name }}"
+                                            value="{{ $admin->name }}"
                                             placeholder="Masukkan nama lengkap" disabled />
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
+                                        <label for="nohp" class="form-label">Username</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="username"
+                                            name="username"
+                                            value="{{ $admin->username }}"
+                                            placeholder="Masukkan username" disabled />
+                                    </div>
+                                </div>
+                                <div class="row g-2 mb-3">
+                                    <div class="col-lg-4">
                                         <label for="gender" class="form-label">Jenis Kelamin</label>
                                         <input
                                             type="text"
                                             class="form-control"
                                             id="gender"
                                             name="gender"
-                                            value="{{ $customer->gender }}"
-                                            placeholder="Masukkan jenis kelamin" disabled />
+                                            value="{{ $admin->gender }}"
+                                            placeholder="Masukkan Jenis Kelamin" disabled />
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-4">
                                         <label for="nohp" class="form-label">Nomor Handphone</label>
                                         <input
                                             type="number"
                                             class="form-control"
                                             id="nohp"
                                             name="nohp"
-                                            value="{{ $customer->phone_number }}"
+                                            value="{{ $admin->phone_number }}"
                                             placeholder="Masukkan nomor handphone" disabled />
                                     </div>
-                                </div>
-                                <div class="address mt-2">
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="provinsi" class="form-label">Provinsi</label>
-                                            <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="{{ $provinces->firstWhere('id', $customer->province)->name }}" disabled />
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label for="kota" class="form-label">Kota</label>
-                                            <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="{{ $cities->firstWhere('id', $customer->city)->name }}" disabled />
-                                        </div>
-                                    </div>
-                                    <div class="row g-3 mb-3">
-                                        <div class="col-lg-6">
-                                            <label for="kecamatan" class="form-label">Kecamatan</label>
-                                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="{{ $districts->firstWhere('id', $customer->district)->name }}" disabled />
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <label for="kelurahan" class="form-label">Kelurahan</label>
-                                            <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="{{ $villages->firstWhere('id', $customer->village)->name }}" disabled />
-                                        </div>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="alamat" class="form-label">Alamat Lengkap</label>
-                                        <textarea class="form-control" id="alamat" rows="3" style="min-height: 200px;" disabled>{{ $customer->full_address }}</textarea>
+                                    <div class="col-lg-4 mb-3">
+                                        <label for="date_joined" class="form-label">Tanggal Bergabung</label>
+                                        <input
+                                            type="text"
+                                            class="form-control"
+                                            id="date_joined"
+                                            name="date_joined"
+                                            value="{{ $admin->created_at->format('d/m/Y') }}" disabled>
                                     </div>
                                 </div>
                                 <!-- <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button> -->

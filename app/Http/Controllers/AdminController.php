@@ -4,21 +4,28 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard.admin', [
+        $admins = User::where('role', 'Admin')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->input('search');
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%")
+                    ->orWhere('username', 'like', "%$search%");
+            })
+            ->paginate(10);
+
+        return view('dashboard.admins.index', [
             "title" => "HydroSpace | Admin",
             "active" => "Admin",
-            'admins' => User::where('role', 'Admin')->get(),
+            "admins" => $admins
         ]);
     }
 
@@ -27,7 +34,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('dashboard.createAdmin', [
+        return view('dashboard.admins.create', [
             "title" => "HydroSpace | Tambah Admin",
             "active" => "Admin"
         ]);
@@ -67,7 +74,7 @@ class AdminController extends Controller
      */
     public function show(User $user)
     {
-        return view('dashboard.adminDetail', [
+        return view('dashboard.admins.show', [
             "title" => "HydroSpace | Detail Admin",
             "active" => "Admin",
             "admin" => $user

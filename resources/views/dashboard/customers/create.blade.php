@@ -91,7 +91,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/customers" class="btn btn-primary">
+                        <a href="javascript:history.back()" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -125,16 +125,31 @@
                                             <div class="col-lg-6">
                                                 <label for="username" class="form-label">Username</label>
                                                 <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" placeholder="Masukkan username" required value="{{ old('username') }}" autofocus />
+                                                @error('username')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="name" class="form-label">Nama Lengkap</label>
                                                 <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama lengkap" required value="{{ old('name') }}" />
+                                                @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="row g-2 mb-3">
                                             <div class="col-lg-6">
                                                 <label for="email" class="form-label">Email</label>
                                                 <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="Masukkan email" required value="{{ old('email') }}" />
+                                                @error('email')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="password" class="form-label">Password</label>
@@ -164,6 +179,11 @@
                                             <div class="col-lg-6">
                                                 <label for="phone_number" class="form-label">Nomor Handphone</label>
                                                 <input type="number" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" placeholder="Cth: 081234567890" required value="{{ old('phone_number') }}" />
+                                                @error('phone_number')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="address">

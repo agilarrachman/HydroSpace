@@ -91,9 +91,22 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/customers/create" class="btn btn-primary mb-4">
-                            <i class="bx bx-plus-circle me-2"></i>Tambah Pelanggan
-                        </a>
+                        <div class="d-flex justify-content-between">
+                            <a href="/dashboard/customers/create" class="btn btn-primary mb-4">
+                                <i class="bx bx-plus-circle me-2"></i>Tambah Pelanggan
+                            </a>
+
+                            <form action="/dashboard/customers" class="d-flex" style="max-height: 39px;">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control outline-secondary" placeholder="Cari pelanggan" value="{{ request('search') }}">
+                                    <button class="border-none p-0" type="submit">
+                                        <span class="input-group-text h-100" style="border-top-left-radius: 0rem; border-top-right-radius: 0.375rem; border-bottom-right-radius: 0.375rem; border-bottom-left-radius: 0rem;">
+                                            <i class="bx bx-search"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
 
                         @if(session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -159,6 +172,12 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                <div class="pagination w-100 d-flex justify-content-center my-3">
+                                    <div class="d-flex justify-content-center">
+                                        {{ $customers->links('pagination::bootstrap-4') }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!--/ Striped Rows -->

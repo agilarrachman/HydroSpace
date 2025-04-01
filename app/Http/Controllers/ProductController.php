@@ -202,4 +202,10 @@ class ProductController extends Controller
             "categories" => ProductCategory::all(),
         ]);
     }
+
+    public function getProducts()
+    {
+        $products = Product::select('name', 'id')->get();
+        return response()->json($products);
+    }
 }

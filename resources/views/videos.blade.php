@@ -18,6 +18,24 @@
     <link href="css/coloring.css" rel="stylesheet" type="text/css">
     <!-- color scheme -->
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
+
+    <style>
+
+        .page-link:not(.active) {
+            font-weight: 300;
+            color: #223044;
+            text-align: center;
+        }
+
+        .page-item:not(.active) .page-link:hover {
+            color: #354e33 !important;
+            box-shadow: inset 0 0 0 2px #354e33 !important;
+        }
+
+        .page-item.disabled .page-link {
+            background-color: transparent !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -61,39 +79,40 @@
                     <div class="container mx-0 px-0 d-flex gap-1 gap-lg-3 flex-row align-items-center" style="margin-bottom: 4rem">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                💡 Semua Kategori <i class="bi bi-sort-down"></i>
+                                {{ request('category') ? $videoCategories->firstWhere('slug', request('category'))->name : '💡Semua Kategori' }}
+                                <i class="bi bi-sort-down ms-2"></i>
                             </button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">💡 Semua Kategori</a></li>
-                                <li><a class="dropdown-item" href="#">📖 Dasar-Dasar Hidroponik</a></li>
-                                <li><a class="dropdown-item" href="#">🛠️ Instalasi & Perakitan Sistem</a></li>
-                                <li><a class="dropdown-item" href="#">🌱 Pemilihan & Perawatan Tanaman</a></li>
-                                <li><a class="dropdown-item" href="#">💧 Nutrisi & Pemberian Pupuk</a></li>
-                                <li><a class="dropdown-item" href="#">🎯 Tips dan Trik Berkebun Hidroponik</a></li>
+                                <li><a class="dropdown-item" href="/edukasi">💡 Semua Kategori</a></li>
+                                @foreach ($videoCategories as $category)
+                                <li><a class="dropdown-item" href="?category={{ $category->slug }}">{{ $category->name }}</a></li>
+                                @endforeach
                             </ul>
                         </div>
-                        <form class="container m-0 p-0" action="/product" style="max-width: 525px !important">
-                            {{-- cari berdasarkan kategori --}}
-                            {{-- @if (request('category'))
-                             <input type="hidden" name="category" value="{{ request('category') }}">
-                            @endif --}}
+                        <form class="container m-0 p-0" action="/edukasi" method="get" style="max-width: 525px !important">
+                            {{-- Include category if it's selected --}}
+                            @if (request('category'))
+                            <input type="hidden" name="category" value="{{ request('category') }}">
+                            @endif
                             <div class="serach-bar d-flex gap-2">
-                                <input type="text" name="Name" id="name" class="de-quick-search ms-3 py-2 w-100 rounded-20" placeholder="Mau belajar apa hari ini?">
+                                <input type="text" name="search" id="name" class="de-quick-search ms-3 py-2 w-100 rounded-20" placeholder="Mau belajar apa hari ini?" value="{{ request('search') }}">
                                 <button class="btn btn-secondary px-3 rounded-pill" type="submit"><i class="bi bi-search"></i></button>
                             </div>
                         </form>
                     </div>
                 </div>
 
+
                 <div class="container-fluid">
                     <div class="row g-4">
 
+                        @foreach ($videos as $video)
                         <div class="col-lg-6" id="video">
                             <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".3s">
-                                <a href="/edukasi/slug" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/tips menanam bayam.jpeg" class="hover-scale-1-1 w-100" alt="">
+                                <a href="/edukasi/{{ $video->slug }}" class="abs w-100 h-100 z-5"></a>
+                                <img src="{{ asset('../storage/' . $video->thumbnail) }}" class="hover-scale-1-1 w-100" alt="" style="height: 403px;">
                                 <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!</div>
+                                    <div class="mb-3">{{ $video->description }}</div>
                                     <b>Klik untuk menonton!</b>
                                 </div>
                                 <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
@@ -101,8 +120,8 @@
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
                                         <div class="col-11 d-flex flex-column flex-lg-row">
                                             <div class="me-5">
-                                                🌱 Pemilihan & Perawatan Tanaman
-                                                <h5>Panduan Praktis Menanam Sawi Hidroponik</h5>
+                                                {{ $video->videoCategory->name }}
+                                                <h5>{{ $video->title }}</h5>
                                             </div>
                                         </div>
 
@@ -114,193 +133,11 @@
                                 <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
                             </div>
                         </div>
+                        @endforeach
 
-                        <div class="col-lg-6" id="video">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".6s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/instalasi hidroponik.jpeg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Pelajari cara memasang sistem hidroponik NFT (Nutrient Film Technique) dengan benar! Video ini membahas alat dan bahan yang dibutuhkan, cara merakit pipa, memasang pompa, hingga memastikan aliran nutrisi berjalan optimal. Cocok untuk pemula yang ingin memulai hidroponik modern dengan hasil maksimal!</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                🛠️ Instalasi & Perakitan Sistem
-                                                <h5>Panduan Instalasi Sistem NFT Hidroponik</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" id="video">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".3s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/Rahasia Nutrisi AB Mix untuk Pertumbuhan Optimal.jpg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Pelajari cara mencampur dan mengatur dosis AB Mix yang tepat agar tanaman hidroponik tumbuh subur. Kami juga membahas cara menjaga keseimbangan pH dan PPM dalam larutan nutrisi untuk hasil panen terbaik.</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                💧 Nutrisi & Pemberian Pupuk
-                                                <h5>Rahasia Nutrisi AB Mix untuk Pertumbuhan Optimal</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" id="video">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".6s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/5 Kesalahan Umum dalam Hidroponik & Cara Menghindarinya.jpg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Hindari kesalahan yang sering dilakukan pemula dalam berkebun hidroponik! Dari pengaturan air hingga pemilihan media tanam, video ini akan membantu Anda mencapai hasil yang lebih maksimal.</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                🎯 Tips dan Trik Berkebun Hidroponik
-                                                <h5>5 Kesalahan Umum dalam Hidroponik & Cara Menghindarinya</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" id="video">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".3s">
-                                <a href="/edukasi/slug" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/tips menanam bayam.jpeg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                🌱 Pemilihan & Perawatan Tanaman
-                                                <h5>Panduan Praktis Menanam Sawi Hidroponik</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" id="video">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".6s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/instalasi hidroponik.jpeg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Pelajari cara memasang sistem hidroponik NFT (Nutrient Film Technique) dengan benar! Video ini membahas alat dan bahan yang dibutuhkan, cara merakit pipa, memasang pompa, hingga memastikan aliran nutrisi berjalan optimal. Cocok untuk pemula yang ingin memulai hidroponik modern dengan hasil maksimal!</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                🛠️ Instalasi & Perakitan Sistem
-                                                <h5>Panduan Instalasi Sistem NFT Hidroponik</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" id="video">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".3s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/Rahasia Nutrisi AB Mix untuk Pertumbuhan Optimal.jpg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Pelajari cara mencampur dan mengatur dosis AB Mix yang tepat agar tanaman hidroponik tumbuh subur. Kami juga membahas cara menjaga keseimbangan pH dan PPM dalam larutan nutrisi untuk hasil panen terbaik.</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                💧 Nutrisi & Pemberian Pupuk
-                                                <h5>Rahasia Nutrisi AB Mix untuk Pertumbuhan Optimal</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-6" id="video">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".6s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/5 Kesalahan Umum dalam Hidroponik & Cara Menghindarinya.jpg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Hindari kesalahan yang sering dilakukan pemula dalam berkebun hidroponik! Dari pengaturan air hingga pemilihan media tanam, video ini akan membantu Anda mencapai hasil yang lebih maksimal.</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                🎯 Tips dan Trik Berkebun Hidroponik
-                                                <h5>5 Kesalahan Umum dalam Hidroponik & Cara Menghindarinya</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
+                        <div class="pagination w-100 d-flex justify-content-center mt-5">
+                            <div class="d-flex justify-content-center mt-4">
+                                {{ $videos->links('pagination::bootstrap-4') }}
                             </div>
                         </div>
 

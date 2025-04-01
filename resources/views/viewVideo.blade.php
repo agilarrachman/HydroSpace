@@ -43,10 +43,10 @@
                             <ul class="crumb">
                                 <li><a href="/">Beranda</a></li>
                                 <li><a href="/edukasi">Edukasi</a></li>
-                                <li class="active">Panduan Praktis Menanam Sawi Hidroponik</li>
+                                <li class="active">{{ $video->title }}</li>
                             </ul>
-                            <h1 class="text-uppercase">Panduan Praktis Menanam Sawi Hidroponik</h1>
-                            <p class="col-lg-10 lead">🌱 Pemilihan & Perawatan Tanaman</p>
+                            <h1 class="text-uppercase">{{ $video->title }}</h1>
+                            <p class="col-lg-10 lead">{{ $video->videoCategory->name }}</p>
                         </div>
                     </div>
                 </div>
@@ -63,12 +63,12 @@
                                     <div class="player wow scaleIn"><span></span></div>
                                 </div>
                                 <div class="absolute w-100 h-100 top-0 bg-dark hover-op-05"></div>
-                                <img src="/images/thumbnail/tips menanam bayam.jpeg" class="w-100 hover-scale-1-1" alt="">
+                                <img src="{{ asset('../storage/' . $video->thumbnail) }}" class="w-100 hover-scale-1-1" alt="">
                             </div>
 
                             <!-- Video (Hidden by default) -->
                             <video id="video" controls class="video w-100 rounded-1" style="display: none;" poster="/images/thumbnail/tips menanam bayam.jpeg">
-                                <source src="/videos/1.mp4" type="video/mp4">
+                                <source src="{{ asset('../storage/' . $video->video) }}" type="video/mp4">
                                 Browser Anda tidak mendukung pemutaran video.
                             </video>
                         </div>
@@ -79,28 +79,38 @@
                             <div class="me-lg-3">
                                 <h5 class="text-uppercase">Tentang Video</h5>
                                 <p class="text-dark text-wrap fs-16 lh-1-5 fw-500">
-                                    Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!
+                                    {{ $video->description }}
                                 </p>
                             </div>
                         </div>
                         <hr>
                         <div class="video-detail">
                             <h5 class="text-uppercase mb-4">Video Details</h5>
-                            <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex justify-content-between">
                                 <div class="fw-bold">Durasi</div>
-                                <div>10 menit</div>
+                                <div style="color: #798D7A;">{{ $video->duration }} Menit</div>
                             </div>
-                            <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex justify-content-between">
                                 <div class="fw-bold">Tingkat Kesulitan</div>
-                                <div>Pemula</div>
+                                <div style="color: #798D7A;">{{ $video->difficulty_level }}</div>
                             </div>
-                            <div class="d-flex justify-content-between mb-3">
+                            <div class="d-flex justify-content-between">
                                 <div class="fw-bold">Gaya Penyampaian</div>
-                                <div>Analisis & praktik langsung</div>
+                                <div style="color: #798D7A;">{{ $video->delivery_style }}</div>
                             </div>
-                            <div class="w-100 d-flex justify-content-between mb-3">
-                                <div class="col-3 fw-bold">Alat yang Dibutuhkan</div>
-                                <div class="text-wrap col-9 text-end ps-2">Netpot, Rockwool, Nutrisi AB Mix, pH meter, TDS meter</div>
+                            <div class="w-100 d-flex justify-content-between">
+                                <div class="col-4 fw-bold">Produk yang Dibutuhkan</div>
+                                <div class="text-wrap col-8 text-end ps-2">
+                                    @if ($video->videoProducts && $video->videoProducts->count())
+                                    @foreach ($video->videoProducts as $videoProduct)
+                                    @if ($videoProduct->product) <!-- Pastikan relasi product ada -->
+                                    <a href="#" style="text-decoration: none;">{{ $videoProduct->product->name }}</a>@if (!$loop->last), @endif
+                                    @endif
+                                    @endforeach
+                                    @else
+                                    <span style="color: #798D7A;">Tidak ada produk yang dibutuhkan</span>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -120,8 +130,8 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">01</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>Memilih Bibit Sawi yang Unggul</h4>
-                                    <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                    <h4>{{ $video->objective_heading1 }}</h4>
+                                    <p class="mb-0 text-wrap">{{ $video->objective_description1 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -131,8 +141,8 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">02</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>Menyiapkan Sistem Hidroponik dengan Benar</h4>
-                                    <p class="mb-0 text-wrap">Panduan memilih dan mengatur sistem hidroponik yang sesuai agar sawi tumbuh optimal tanpa kendala.</p>
+                                    <h4>{{ $video->objective_heading2 }}</h4>
+                                    <p class="mb-0 text-wrap">{{ $video->objective_description2 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -143,8 +153,8 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">03</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>Pemberian Nutrisi yang Tepat</h4>
-                                    <p class="mb-0 text-wrap">Menentukan kadar nutrisi AB Mix, pH, dan PPM yang ideal agar sawi berkembang dengan baik dan tidak mudah layu.</p>
+                                    <h4>{{ $video->objective_heading3 }}</h4>
+                                    <p class="mb-0 text-wrap">{{ $video->objective_description3 }}</p>
                                 </div>
                             </div>
                         </div>
@@ -155,8 +165,8 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">04</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>Teknik Panen dan Penyimpanan Sawi</h4>
-                                    <p class="mb-0 text-wrap">Cara memanen sawi hidroponik dengan benar agar tetap segar lebih lama dan siap dikonsumsi kapan saja.</p>
+                                    <h4>{{ $video->objective_heading4 }}</h4>
+                                    <p class="mb-0 text-wrap">{{ $video->objective_description4 }}</p>
                                 </div>
                             </div>
                         </div>

@@ -10,12 +10,14 @@ class VideoProduct extends Model
     /** @use HasFactory<\Database\Factories\VideoProductFactory> */
     use HasFactory;
 
-    public function videos()
+    protected $guarded = ['id'];
+
+    public function video()
     {
         return $this->belongsTo(Video::class, 'video_id');
     }
 
-    public function products()
+    public function product()
     {
         return $this->belongsTo(Product::class, 'product_id');
     }

@@ -15,12 +15,21 @@ class CustomerController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('dashboard.customer', [
+        $customers = User::where('role', 'Customer')
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $search = $request->input('search');
+                $query->where('name', 'like', "%$search%")
+                    ->orWhere('email', 'like', "%$search%")
+                    ->orWhere('username', 'like', "%$search%");
+            })
+            ->paginate(10);
+
+        return view('dashboard.customers.index', [
             "title" => "HydroSpace | Pelanggan",
             "active" => "Pelanggan",
-            'customers' => User::where('role', 'Customer')->get(),
+            "customers" => $customers
         ]);
     }
 
@@ -34,7 +43,7 @@ class CustomerController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('dashboard.createCustomer', [
+        return view('dashboard.customers.create', [
             "title" => "HydroSpace | Tambah Pelanggan",
             "active" => "Pelanggan",
             'provinces' => $provinces,
@@ -88,7 +97,7 @@ class CustomerController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('dashboard.customerDetail', [
+        return view('dashboard.customers.show', [
             "title" => "HydroSpace | Detail Pelanggan",
             "active" => "Pelanggan",
             'customer' => $user,
@@ -109,7 +118,7 @@ class CustomerController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('dashboard.updateCustomer', [
+        return view('dashboard.customers.edit', [
             "title" => "HydroSpace | Edit Data Pelanggan",
             "active" => "Pelanggan",
             "customer" => $user,

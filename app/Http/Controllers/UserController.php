@@ -110,7 +110,7 @@ class UserController extends Controller
         if ($request->file('profile_picture')) {
             // Simpan foto baru dan hapus foto lama (jika ada dan bukan gambar default)
             if ($user->profile_picture && $user->profile_picture !== 'profile_picture/default profile picture.jpg') {
-                Storage::delete('public/' . $user->profile_picture);
+                Storage::disk('public')->delete($user->profile_picture);
             }
             $validatedData['profile_picture'] = $request->file('profile_picture')->store('profile_picture', 'public');
         }

@@ -91,9 +91,22 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/admins/create" class="btn btn-primary mb-4">
-                            <i class="bx bx-plus-circle me-2"></i> Tambah Admin
-                        </a>
+                        <div class="d-flex justify-content-between">
+                            <a href="/dashboard/admins/create" class="btn btn-primary mb-4">
+                                <i class="bx bx-plus-circle me-2"></i> Tambah Admin
+                            </a>
+
+                            <form action="/dashboard/admins" class="d-flex" style="max-height: 39px;">
+                                <div class="input-group">
+                                    <input type="text" name="search" class="form-control outline-secondary" placeholder="Cari admin" value="{{ request('search') }}">
+                                    <button class="border-none p-0" type="submit">
+                                        <span class="input-group-text h-100" style="border-top-left-radius: 0rem; border-top-right-radius: 0.375rem; border-bottom-right-radius: 0.375rem; border-bottom-left-radius: 0rem;">
+                                            <i class="bx bx-search"></i>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
 
                         @if(session()->has('success'))
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -158,6 +171,12 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                <div class="pagination w-100 d-flex justify-content-center my-3">
+                                    <div class="d-flex justify-content-center">
+                                        {{ $admins->links('pagination::bootstrap-4') }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!--/ Striped Rows -->
