@@ -172,6 +172,12 @@
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                <div class="pagination w-100 d-flex justify-content-center my-3">
+                                    <div class="d-flex justify-content-center">
+                                        {{ $customers->links('pagination::bootstrap-4') }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!--/ Striped Rows -->

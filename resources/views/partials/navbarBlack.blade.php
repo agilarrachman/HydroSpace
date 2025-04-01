@@ -50,7 +50,7 @@
                     <div class="de-flex-col">
                         <!-- logo begin -->
                         <div id="logo">
-                            <a href="index.html">
+                            <a href="/">
                                 <img class="logo-main" src="/images/logo-black.webp" alt="">
                                 <img class="logo-mobile" src="/images/logo-black.webp" alt="">
                             </a>

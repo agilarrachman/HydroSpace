@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -22,9 +20,9 @@ class AdminController extends Controller
                     ->orWhere('email', 'like', "%$search%")
                     ->orWhere('username', 'like', "%$search%");
             })
-            ->get();
+            ->paginate(10);
 
-        return view('dashboard.admin', [
+        return view('dashboard.admins.index', [
             "title" => "HydroSpace | Admin",
             "active" => "Admin",
             "admins" => $admins
@@ -36,7 +34,7 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('dashboard.createAdmin', [
+        return view('dashboard.admins.create', [
             "title" => "HydroSpace | Tambah Admin",
             "active" => "Admin"
         ]);
@@ -76,7 +74,7 @@ class AdminController extends Controller
      */
     public function show(User $user)
     {
-        return view('dashboard.adminDetail', [
+        return view('dashboard.admins.show', [
             "title" => "HydroSpace | Detail Admin",
             "active" => "Admin",
             "admin" => $user

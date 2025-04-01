@@ -24,9 +24,9 @@ class CustomerController extends Controller
                     ->orWhere('email', 'like', "%$search%")
                     ->orWhere('username', 'like', "%$search%");
             })
-            ->get();
+            ->paginate(10);
 
-        return view('dashboard.customer', [
+        return view('dashboard.customers.index', [
             "title" => "HydroSpace | Pelanggan",
             "active" => "Pelanggan",
             "customers" => $customers
@@ -43,7 +43,7 @@ class CustomerController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('dashboard.createCustomer', [
+        return view('dashboard.customers.create', [
             "title" => "HydroSpace | Tambah Pelanggan",
             "active" => "Pelanggan",
             'provinces' => $provinces,
@@ -97,7 +97,7 @@ class CustomerController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('dashboard.customerDetail', [
+        return view('dashboard.customers.show', [
             "title" => "HydroSpace | Detail Pelanggan",
             "active" => "Pelanggan",
             'customer' => $user,
@@ -118,7 +118,7 @@ class CustomerController extends Controller
         $districts = District::all();
         $villages = Village::all();
 
-        return view('dashboard.updateCustomer', [
+        return view('dashboard.customers.edit', [
             "title" => "HydroSpace | Edit Data Pelanggan",
             "active" => "Pelanggan",
             "customer" => $user,

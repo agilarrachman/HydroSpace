@@ -52,6 +52,15 @@
         .app-brand .layout-menu-toggle {
             background-color: #354e33 !important;
         }
+
+        .thumbnail img {
+            display: block;
+            margin: auto;
+            object-fit: cover;
+            /* Pastikan gambar tetap proporsional */
+            height: 100%;
+            /* Sesuaikan tinggi agar gambar memenuhi container */
+        }
     </style>
 
     <link href="/css/plugins.css" rel="stylesheet" type="text/css">
@@ -82,7 +91,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Panduan Praktis Menanam Sawi Hidroponik</h5>
+                        <h5 class="mb-0">{{ $video->title }}</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -97,7 +106,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/video" class="btn btn-primary">
+                        <a href="javascript:history.back()" class="btn btn-primary" onclick="history.back();">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -105,10 +114,11 @@
                                 <!-- Create Video -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-end mb-3">
+                                        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start mb-3">
                                             <div class="col-lg-6">
-                                                <p class="col-lg-10 lead mb-0">🌱 Pemilihan & Perawatan Tanaman</p>
-                                                <h4 class="text-uppercase mb-3">Panduan Praktis Menanam Sawi Hidroponik</h1>
+                                                <p class="col-lg-10 lead mb-0">{{ $video->videoCategory->name }}</p>
+                                                <h4 class="text-uppercase mb-0">{{ $video->title }}</h1>
+                                                    <p class="mt-0 mb-3 p-0">Diunggah oleh <b>{{ $video->admin->name }}</b></p>
 
                                                     <div class="relative overflow-hidden rounded-1">
                                                         <!-- Thumbnail -->
@@ -117,23 +127,23 @@
                                                                 <div class="player wow scaleIn"><span></span></div>
                                                             </div>
                                                             <div class="absolute w-100 h-100 top-0 bg-dark hover-op-05"></div>
-                                                            <img src="/images/thumbnail/tips menanam bayam.jpeg" class="w-100 hover-scale-1-1" alt="">
+                                                            <img src="{{ asset('../storage/' . $video->thumbnail) }}" class="w-100 hover-scale-1-1" alt="">
                                                         </div>
 
                                                         <!-- Video (Hidden by default) -->
                                                         <video id="video" controls class="video w-100 rounded-1" style="display: none;" poster="/images/thumbnail/tips menanam bayam.jpeg">
-                                                            <source src="/videos/1.mp4" type="video/mp4">
+                                                            <source src="{{ asset('../storage/' . $video->video) }}" type="video/mp4">
                                                             Browser Anda tidak mendukung pemutaran video.
                                                         </video>
                                                     </div>
                                             </div>
 
-                                            <div class="col-lg-6 ps-lg-5 text-dark">
-                                                <div class="video-about">
+                                            <div class="col-lg-6 ps-lg-5 text-dark mt-5">
+                                                <div class="video-about mt-5">
                                                     <div class="me-lg-3">
                                                         <h5 class="text-uppercase">Tentang Video</h5>
                                                         <p class="text-dark text-wrap fs-16 lh-1-5 fw-500">
-                                                            Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!
+                                                            {{ $video->description }}
                                                         </p>
                                                     </div>
                                                 </div>
@@ -142,19 +152,31 @@
                                                     <h5 class="text-uppercase mb-3">Video Details</h5>
                                                     <div class="d-flex justify-content-between">
                                                         <div class="fw-bold">Durasi</div>
-                                                        <div>10 menit</div>
+                                                        <div style="color: #798D7A;">{{ $video->duration }} menit</div>
                                                     </div>
                                                     <div class="d-flex justify-content-between">
                                                         <div class="fw-bold">Tingkat Kesulitan</div>
-                                                        <div>Pemula</div>
+                                                        <div style="color: #798D7A;">{{ $video->difficulty_level }}</div>
                                                     </div>
                                                     <div class="d-flex justify-content-between">
                                                         <div class="fw-bold">Gaya Penyampaian</div>
-                                                        <div>Analisis & praktik langsung</div>
+                                                        <div style="color: #798D7A;">{{ $video->delivery_style }}</div>
                                                     </div>
                                                     <div class="w-100 d-flex justify-content-between">
-                                                        <div class="col-4 fw-bold">Alat yang Dibutuhkan</div>
-                                                        <div class="text-wrap col-8 text-end ps-2">Netpot, Rockwool, Nutrisi AB Mix, pH meter</div>
+                                                        <div class="w-100 d-flex justify-content-between">
+                                                            <div class="col-4 fw-bold">Produk yang Dibutuhkan</div>
+                                                            <div class="text-wrap col-8 text-end ps-2" id="products">
+                                                                @if ($video->videoProducts && $video->videoProducts->count())
+                                                                @foreach ($video->videoProducts as $videoProduct)
+                                                                @if ($videoProduct->product) <!-- Pastikan relasi product ada -->
+                                                                <a href="#" style="text-decoration: none;">{{ $videoProduct->product->name }}</a>@if (!$loop->last), @endif
+                                                                @endif
+                                                                @endforeach
+                                                                @else
+                                                                <span style="color: #798D7A;">Tidak ada produk yang dibutuhkan</span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -168,39 +190,46 @@
                                                     <tr>
                                                         <th>Objective 1</th>
                                                         <td>
-                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                            <p class="fw-bold m-0">{{ $video->objective_heading1 }}</p>
+                                                            <p class="mb-0 text-wrap">{{ $video->objective_description1 }}</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th>Objective 2</th>
                                                         <td>
-                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                            <p class="fw-bold m-0">{{ $video->objective_heading2 }}</p>
+                                                            <p class="mb-0 text-wrap">{{ $video->objective_description2 }}</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th>Objective 3</th>
                                                         <td>
-                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                            <p class="fw-bold m-0">{{ $video->objective_heading3 }}</p>
+                                                            <p class="mb-0 text-wrap">{{ $video->objective_description3 }}</p>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <th>Objective 4</th>
                                                         <td>
-                                                            <p class="fw-bold m-0">Memilih Bibit Sawi yang Unggul</p>
-                                                            <p class="mb-0 text-wrap">Ketahui ciri-ciri bibit berkualitas tinggi untuk pertumbuhan sawi yang sehat dan hasil panen maksimal.</p>
+                                                            <p class="fw-bold m-0">{{ $video->objective_heading4 }}</p>
+                                                            <p class="mb-0 text-wrap">{{ $video->objective_description4 }}</p>
                                                         </td>
                                                     </tr>
                                                 </tbody>
                                             </table>
-                                            <a class="btn btn-warning me-2" href="/dashboard/video/update">
-                                                <i class="bx bx-edit"></i> Edit
-                                            </a>
-                                            <a class="btn btn-danger" href="#">
-                                                <i class="bx bx-trash"></i> Delete
-                                            </a>
+                                            <div class="d-flex">
+                                                <button class="btn btn-warning me-2" onclick="navigateToEdit('{{ $video->slug }}')">
+                                                    <i class="bx bx-edit  me-2"></i> Edit
+                                                </button>
+                                                <form action="/dashboard/videos/{{ $video->slug }}" method="post">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-danger" onclick="return confirm('Apakah kamu yakin akan menghapus data video ini?')">
+                                                        <i class="bx bx-trash me-2"></i>
+                                                        <div data-i18n="Delete Account">Delete</div>
+                                                    </button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -254,6 +283,10 @@
             let video = document.getElementById("video");
             video.style.display = "block"; // Tampilkan video
             video.play(); // Mulai video secara otomatis
+        }
+
+        function navigateToEdit(slug) {
+            window.location.href = `/dashboard/videos/${slug}/edit`;
         }
     </script>
 </body>

@@ -6,8 +6,10 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
+use App\Models\Product;
 use App\Models\VideoCategory;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -49,19 +51,7 @@ Route::middleware(['blockAdmin'])->group(function () {
         ]);
     });
 
-    Route::get('/edukasi', function () {
-        return view('videos', [
-            "title" => "HydroSpace | Edukasi",
-            "active" => "Edukasi"
-        ]);
-    });
-
-    Route::get('/edukasi/slug', function () {
-        return view('viewVideo', [
-            "title" => "HydroSpace | Edukasi",
-            "active" => "Edukasi"
-        ]);
-    });
+    Route::get('/edukasi', [VideoController::class, 'indexCustomer']);    
 
     Route::get('/hydrobot', function () {
         return view('index', [
@@ -122,6 +112,8 @@ Route::middleware(['role:Customer'])->group(function () {
         ]);
     });
 
+    Route::get('/edukasi/{video:slug}', [VideoController::class, 'showCustomer']);
+
     Route::get('/pesanan', function () {
         return view('orders', [
             "title" => "HydroSpace | Pesanan Saya",
@@ -169,6 +161,11 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
     
     Route::resource('/videos', VideoController::class);
+    Route::get('/video/checkSlug/', [VideoController::class, 'checkSlug']);
+    Route::get('/getProducts', [VideoController::class, 'getProducts']);
+    Route::get('/getSelectedProducts/{video}', [VideoController::class, 'getSelectedProducts']);
+
+
     Route::resource('/video-categories', VideoCategoryController::class);
     Route::get('/videoCategories/checkSlug/', [VideoCategoryController::class, 'checkSlug']);
 
@@ -189,6 +186,10 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
             "active" => "Kategori",
             "videoCategories" => $videoCategories->get()
         ]);
+    });
+
+    Route::get('/getProducts', function () {
+        return response()->json(Product::select('id', 'name')->get());
     });
 });
 

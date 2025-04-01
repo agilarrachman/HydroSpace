@@ -63,4 +63,10 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function getProducts()
+    {
+        $products = Product::select('name', 'id')->get();
+        return response()->json($products);
+    }
 }

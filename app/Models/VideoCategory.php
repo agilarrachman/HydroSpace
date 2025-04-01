@@ -12,7 +12,6 @@ class VideoCategory extends Model
     use HasFactory, Sluggable;
 
     protected $guarded = ['id'];
-    // protected $with = ['videos'];
 
     public function getRouteKeyName()
     {
