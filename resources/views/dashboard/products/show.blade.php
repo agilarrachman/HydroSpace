@@ -39,10 +39,6 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
 
-    {{-- TRIX Editor --}}
-    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
-    <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
-
     <style>
         .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
             background-color: rgba(53, 78, 51, 0.16) !important;
@@ -80,7 +76,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Tambah Data Produk</h5>
+                        <h5 class="mb-0">{{ $product->name }}</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -95,7 +91,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/product" class="btn btn-primary">
+                        <a href="/dashboard/products" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -103,77 +99,73 @@
                                 <!-- Create Product -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST" enctype="multipart/form-data">
-                                            @csrf
-                                            <div class="col d-flex flex-column mx-auto">
-                                                <label for="images" class="form-label">Upload Images</label>
-                                                <div id="imageInputs" class="d-flex flex-wrap">
-                                                    <div class="input-group mb-3 me-2" style="flex: 1 1 18%;">
-                                                        <input type="file" name="images[]" class="form-control @error('images') is-invalid @enderror" accept="image/*">
-                                                        <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
-                                                            <i class="bx bx-plus-circle"></i>
-                                                        </button>
+                                        <div class="row gy-4 gx-5">
+                                            <div class="col-md-6">
+                                                <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
+                                                    <div class="carousel-inner">
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @php
+                                                                $picture = 'picture' . $i;
+                                                            @endphp
+                                                            @if (!empty($product->$picture))
+                                                                <div class="carousel-item {{ $i === 1 ? 'active' : '' }}" style="max-width: 625px; max-height: 625px">
+                                                                    <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2" style="object-fit: cover; width: 100%; height: 100%;">
+                                                                </div>
+                                                            @endif
+                                                        @endfor
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon bg-secondary" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                                <div class="mt-3 d-flex justify-content-center gap-2">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        @php
+                                                            $picture = 'picture' . $i;
+                                                        @endphp
+                                                        @if (!empty($product->$picture))
+                                                            <img src="{{ asset('storage/' . $product->$picture) }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1; object-fit: cover;" onclick="changeCarouselImage({{ $i - 1 }})">
+                                                        @endif
+                                                    @endfor
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <label for="cat_4">{{ $product->category->name }}</label>
+                                                <h2 class="fs-40">{{ $product->name }}</h2>
+                                                <p class="col-lg-10">{!! $product->description !!}</p>
+                                                <div class="d-flex mb-4 align-items-center">
+                                                    <div>
+                                                        <h3 class="fs-32 mb-0 me-2">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
                                                     </div>
                                                 </div>
-                                                @error('images')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
+
+                                                <div class="group mb-4 d-flex gap-2">
+                                                    <h5 class="mb-3">Tersisa</h5>
+                                                    <p>{{ $product->stock }}</p>
                                                 </div>
-                                                @enderror
-                                                <div id="rulesProfileImage" class="form-text mb-4">Silakan unggah gambar produk dengan format file gambar (jpeg, png, jpg, gif) dan ukuran maksimum 5 MB</div>
+
+                                                <a class="btn btn-warning me-2" href="/dashboard/products/{{ $product->slug }}/edit">
+                                                    <i class="bx bx-edit"></i> Edit
+                                                </a>
+                                                <a class="btn btn-danger" href="/dashboard/products/{{ $product->slug }}" onclick="event.preventDefault(); if(confirm('Apakah Anda yakin?')) document.getElementById('delete-form-{{ $product->slug }}').submit();">
+                                                    <i class="bx bx-trash me-1"></i> Hapus
+                                                </a>
+                                                <form id="delete-form-{{ $product->slug }}" action="/dashboard/products/{{ $product->slug }}" method="post" style="display: none;">
+                                                    @method('delete')
+                                                    @csrf
+                                                </form>
                                             </div>
-                                            <div class="mb-3">
-                                                <label for="nama_produk" class="form-label">Nama Produk</label>
-                                                <input type="text" class="form-control" id="nama_produk" name="nama_produk" placeholder="Masukkan nama produk" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="kategori" class="form-label">Kategori</label>
-                                                <select class="form-select" id="kategori" name="kategori">
-                                                    <option value="kategori1">Kategori 1</option>
-                                                    <option value="kategori2">Kategori 2</option>
-                                                    <option value="kategori3">Kategori 3</option>
-                                                </select>
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="stok" class="form-label">Stok</label>
-                                                <input type="number" class="form-control" id="stok" name="stok" placeholder="Masukkan stok" />
-                                            </div>
-                                            <div class="mb-3">
-                                                <label for="description" class="form-label">Product Description</label>
-                                                @error('description')
-                                                <p class="text-danger">{{ $message }}</p>
-                                                @enderror
-                                                <input id="description" type="hidden" name="description" value="{{ old('description') }}">
-                                                <trix-editor input="description"></trix-editor>
-                                            </div>
-                                            <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
-                                        </form>
+                                        </div>
 
                                         <script>
-                                            function addImageInput() {
-                                                const imageInputs = document.getElementById('imageInputs');
-                                                const newInput = document.createElement('div');
-                                                newInput.classList.add('input-group', 'mb-3', 'me-2');
-                                                newInput.style.flex = '1 1 18%';
-                                                newInput.innerHTML = `
-                                                        <input type="file" name="images[]" class="form-control" accept="image/*">
-                                                        <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
-                                                            <i class="bx bx-minus-circle"></i>
-                                                        </button>
-                                                    `;
-                                                if (imageInputs.children.length < 5) {
-                                                    imageInputs.insertBefore(newInput, imageInputs.lastElementChild);
-                                                } else {
-                                                    alert('Maksimal 5 gambar.');
-                                                }
-                                            }
-
-                                            function removeImageInput(button) {
-                                                button.parentElement.remove();
+                                            function changeCarouselImage(index) {
+                                                $('#productCarousel').carousel(index);
                                             }
                                         </script>
                                     </div>

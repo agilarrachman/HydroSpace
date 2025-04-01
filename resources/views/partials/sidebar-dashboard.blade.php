@@ -46,8 +46,8 @@
         </li>
 
         <!-- Product -->
-        <li class="menu-item {{ request()->is('dashboard/product*') ? 'active' : '' }}">
-            <a href="/dashboard/product" class="menu-link">
+        <li class="menu-item {{ request()->is('dashboard/products*') ? 'active' : '' }}">
+            <a href="/dashboard/products" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="Basic">Produk</div>
             </a>

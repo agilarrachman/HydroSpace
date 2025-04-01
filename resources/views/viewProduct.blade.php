@@ -49,7 +49,7 @@
                             <ul class="crumb m-0">
                                 <li><a href="/">Beranda</a></li>
                                 <li><a href="/produk">Produk</a></li>
-                                <li class="active">bibit-sawi</li>
+                                <li class="active">{{ $product->name }}</li>
                             </ul>
                         </div>
                     </div>
@@ -61,49 +61,52 @@
                     <div class="row gy-4 gx-5">
                         <div class="col-md-6">
                             <div id="sync1" class="owl-carousel owl-theme">
-                                <div class="item" style="padding: 40px;"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-5" alt=""></div>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @php
+                                        $picture = 'picture' . $i;
+                                    @endphp
+                                    @if (!empty($product->$picture))
+                                        <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px;">
+                                            <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: cover; height: 100%;">
+                                        </div>
+                                    @endif
+                                @endfor
+                                {{-- <div class="item" style="padding: 40px;"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-5" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div> --}}
                             </div>
 
                             <div id="sync2" class="owl-carousel owl-theme">
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-4" alt=""></div>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    @php
+                                        $picture = 'picture' . $i;
+                                    @endphp
+                                    @if (!empty($product->$picture))
+                                        <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 120px; height: 120px;">
+                                            <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100 h-100" style="object-fit: cover;">
+                                        </div>
+                                    @endif
+                                @endfor
+                                {{-- <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-4" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div>
+                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div> --}}
                             </div>
 
                         </div>
 
                         <div class="col-md-6">
-                            <label for="cat_4">🌱 Bibit & Benih</label>
-                            <h2 class="fs-40">bibit-sawi</h2 class="fs-48">
-                            <p class="col-lg-10">Dapatkan bibit-sawi berkualitas tinggi yang siap tumbuh dengan cepat dan subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat, Anda bisa menikmati panen sawi segar dalam waktu singkat.
-                                <br><br>🔹 <b>Keunggulan:</b>
-                                <br>✅ Pertumbuhan cepat & hasil melimpah
-                                <br>✅ Cocok untuk hidroponik & kebun konvensional
-                                <br>✅ Tingkat keberhasilan tinggi & bebas hama
-                                <br><br>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit. <br>
-                                Berat Bersih: 50 gram (±5.000 butir biji). <br>
-                                Daya Tumbuh: ≥85% dengan perawatan yang tepat. <br>
-                                Masa Panen: 25-30 hari setelah semai. <br>
-                                Media Tanam: Cocok untuk hidroponik, tanah, atau polybag. <br>
-                                Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk mempercepat perkecambahan. <br>
-                                Kualitas Terjamin: Bebas dari hama & penyakit, siap tumbuh dengan optimal.
-                            </p>
-                            <div class="d-flex mb-4 align-items-center">
-                                <div>
-                                    <h3 class="fs-24 mb-0 me-2 line-through op-5">Rp50.000</h3>
-                                </div>
-                                <div>
-                                    <h3 class="fs-32 mb-0 me-2">Rp15.000</h3>
-                                </div>
-                                <div>
-                                    <span class="fs-18 fw-600 px-3 rounded-20px bg-color-2 text-white">Sale</span>
-                                </div>
+                            <label for="cat_4">{{ $product->category->name }}</label>
+                            <h2 class="fs-40">{{ $product->name }}</h2>
+                            <p class="col-lg-10">{!! $product->description !!}</p>
+                            <h3 class="fs-32 mb-0 me-2">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
+
+                            <div class="group mb-4 d-flex gap-2 mt-2">
+                                <h5 class="mb-3">Tersisa</h5>
+                                <p>{{ $product->stock }}</p>
                             </div>
 
                             <div class="group radio__button mb-4">
