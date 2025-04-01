@@ -95,12 +95,14 @@
                             <a href="products/create" class="btn btn-primary">
                                 <i class="bx bx-plus-circle me-2"></i> Tambah Produk
                             </a>
-                            <form action="" method="GET" class="d-flex">
+                            <form action="/dashboard/products" class="d-flex" style="max-height: 39px;">
                                 <div class="input-group">
-                                    <input type="text" name="query" class="form-control outline-secondary" placeholder="Cari produk...">
-                                    <span class="input-group-text">
-                                        <i class="bx bx-search"></i>
-                                    </span>
+                                    <input type="text" name="search" class="form-control outline-secondary" placeholder="Cari produk" value="{{ request('search') }}">
+                                    <button class="border-none p-0" type="submit">
+                                        <span class="input-group-text h-100" style="border-top-left-radius: 0rem; border-top-right-radius: 0.375rem; border-bottom-right-radius: 0.375rem; border-bottom-left-radius: 0rem;">
+                                            <i class="bx bx-search"></i>
+                                        </span>
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -159,6 +161,10 @@
 
                     </div>
                     <!-- / Content -->
+
+                    <div class="d-flex justify-content-center align-items-center mt-4 pt-4">
+                        {{ $products->links() }}
+                    </div>
 
                     <div class="content-backdrop fade"></div>
                 </div>

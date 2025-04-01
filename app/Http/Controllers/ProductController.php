@@ -21,7 +21,7 @@ class ProductController extends Controller
         return view('dashboard.products.index', [
             "title" => "HydroSpace | Daftar Produk",
             "active" => "Produk",
-            "products" => Product::all(),
+            "products" => Product::with('category')->latest()->filter(request(['search', 'category']))->paginate(20)->withQueryString(),
         ]);
     }
 
