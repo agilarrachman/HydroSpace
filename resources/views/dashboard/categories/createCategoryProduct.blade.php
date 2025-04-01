@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Edit Data Kategori</h5>
+                        <h5 class="mb-0">Tambah Kategori Produk</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -96,24 +96,35 @@
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
                             <div class="authentication-inner" style="max-width: 100%;">
-                                <!-- Edit Category -->
+                                <!-- Create Kategori -->
                                 <div class="card">
                                     <div class="card-body">
-                                        <form id="formAuthentication" class="mb-3" action="index.html" method="POST" enctype="multipart/form-data">
+                                        <form id="formAuthentication" class="mb-3" action="/dashboard/product-categories" method="POST">
                                             @csrf
                                             <div class="mb-3">
-                                                <label for="nama_kategori" class="form-label">Nama Kategori</label>
-                                                <input type="text" class="form-control" id="nama_kategori" name="nama_kategori" placeholder="Masukkan nama kategori" />
+                                                <label for="name" class="form-label">Nama Kategori</label>
+                                                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Masukkan nama kategori" style="color: black;" required value="{{ old('name') }}" autofocus />
+                                                <div id="rulesSlug" class="form-text">Tekan tab setelah menuliskan nama kategori untuk membuat slug secara otomatis</div>
+                                                @error('name')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <div class="mb-3">
                                                 <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" class="form-control" id="slug" name="slug" placeholder="Masukkan slug" />
+                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug" style="color: black;" required value="{{ old('slug') }}" />
+                                                @error('slug')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
-                                            <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
+                                            <button class="btn btn-primary d-grid w-100 mt-4" type="submit">Simpan</button>
                                         </form>
                                     </div>
                                 </div>
-                                <!-- /Edit Category -->
+                                <!-- /Create Product -->
                             </div>
                         </div>
                     </div>
@@ -153,6 +164,17 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    <script>
+        const name = document.querySelector('#name');
+        const slug = document.querySelector('#slug');
+
+        name.addEventListener('change', function() {
+            fetch('/dashboard/productCategories/checkSlug?name=' + name.value)
+                .then(response => response.json())
+                .then(data => slug.value = data.slug)
+        });
+    </script>
 </body>
 
 </html>

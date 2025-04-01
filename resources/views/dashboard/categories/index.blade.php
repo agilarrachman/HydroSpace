@@ -90,21 +90,37 @@
 
                     <div class="container-xxl container-p-y">
                         <div class="row justify-content-between align-items-center">
-                            <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="bx bx-right-arrow-alt me-2"></i> Kategori Produk</h5>
+                            <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="menu-icon tf-icons bx bx-category me-2"></i> Kategori Produk</h5>
                             <div class="d-flex mb-4 col-lg-6 justify-content-end">
-                                <a href="category-product/create" class="btn btn-primary me-2">
+                                <a href="/dashboard/product-categories/create" class="btn btn-primary me-2">
                                     <i class="bx bx-plus-circle me-2"></i> Tambah Kategori
                                 </a>
-                                <form action="" method="GET" class="d-flex">
+                                <form action="/dashboard/categories" class="d-flex">
                                     <div class="input-group">
-                                        <input type="text" name="query" class="form-control outline-secondary" placeholder="Cari kategori produk">
-                                        <span class="input-group-text">
-                                            <i class="bx bx-search"></i>
-                                        </span>
+                                        <input type="text" name="searchProductCategory" class="form-control outline-secondary" placeholder="Cari kategori produk" value="{{ request('searchProductCategory') }}">
+                                        <button class="border-none p-0" type="submit">
+                                            <span class="input-group-text h-100" style="border-top-left-radius: 0rem; border-top-right-radius: 0.375rem; border-bottom-right-radius: 0.375rem; border-bottom-left-radius: 0rem;">
+                                                <i class="bx bx-search"></i>
+                                            </span>
+                                        </button>
                                     </div>
                                 </form>
                             </div>
                         </div>
+
+                        @if(session()->has('productSuccess'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ session('productSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
+
+                        @if(session()->has('productError'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ session('productError') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        @endif
 
                         <!-- Striped Rows -->
                         <div class="card">
@@ -119,86 +135,33 @@
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
+                                        @foreach ($productCategories as $productCategory)
                                         <tr>
-                                            <td class="text-center">1</td>
-                                            <td>📦 Paket Hidroponik</td>
-                                            <td>paket-hidroponik</td>
+                                            <td class="text-center">{{ $loop->iteration }}</td>
+                                            <td>{{ $productCategory->name }}</td>
+                                            <td>{{ $productCategory->slug }}</td>
                                             <td class="text-center">
                                                 <div class="dropdown">
                                                     <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                                         <i class="bx bx-dots-vertical-rounded"></i>
                                                     </button>
                                                     <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
+                                                        <a class="dropdown-item" href="/dashboard/product-categories/{{ $productCategory->slug }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
+                                                        <a class="dropdown-item" href="javascript:void(0);">
+                                                            <form action="/dashboard/product-categories/{{ $productCategory->slug }}" method="post">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data kategori produk ini?')">
+                                                                    <i class="bx bx-trash me-2"></i>
+                                                                    <div data-i18n="Delete Account">Delete</div>
+                                                                </button>
+                                                            </form>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center">2</td>
-                                            <td>⚙️ Aksesori & Pendukung</td>
-                                            <td>aksesori-pendukung</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">3</td>
-                                            <td>🛠️ Peralatan Hidroponik</td>
-                                            <td>peralatan-hidroponik</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">4</td>
-                                            <td>💧 Nutrisi Tanaman</td>
-                                            <td>nutrisi-tanaman</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-center">5</td>
-                                            <td>🌱 Bibit & Benih</td>
-                                            <td>bibit-benih</td>
-                                            <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="category/update"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="javascript:void(0);"><i class="bx bx-trash me-1"></i> Delete</a>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -208,7 +171,7 @@
 
                     <div class="container-xxl container-p-y">
                         <div class="row justify-content-between align-items-center">
-                            <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="bx bx-right-arrow-alt me-2"></i> Kategori Video</h5>
+                            <h5 class="mb-3 col-lg-6 d-flex align-items-center"><i class="menu-icon tf-icons bx bx-category me-2"></i> Kategori Video</h5>
                             <div class="d-flex mb-4 col-lg-6 justify-content-end">
                                 <a href="/dashboard/video-categories/create" class="btn btn-primary me-2">
                                     <i class="bx bx-plus-circle me-2"></i> Tambah Kategori
@@ -269,7 +232,7 @@
                                                             <form action="/dashboard/video-categories/{{ $videoCategory->slug }}" method="post">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data kategori ini?')">
+                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data kategori video ini?')">
                                                                     <i class="bx bx-trash me-2"></i>
                                                                     <div data-i18n="Delete Account">Delete</div>
                                                                 </button>
@@ -317,6 +280,7 @@
 
     <!-- Main JS -->
     <script src="{{ asset('layouts/dashboard/js/main.js') }}"></script>
+
 
     <!-- Page JS -->
     <script src="{{ asset('layouts/dashboard/js/dashboards-analytics.js') }}"></script>

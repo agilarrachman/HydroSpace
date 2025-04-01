@@ -6,10 +6,12 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\VideoController;
 use App\Models\Product;
+use App\Models\ProductCategory;
 use App\Models\VideoCategory;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
@@ -155,12 +157,17 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::get('/getProducts', [VideoController::class, 'getProducts']);
     Route::get('/getSelectedProducts/{video}', [VideoController::class, 'getSelectedProducts']);
 
-
-    Route::resource('/video-categories', VideoCategoryController::class);
-    Route::get('/videoCategories/checkSlug/', [VideoCategoryController::class, 'checkSlug']);
-
-
     Route::get('/categories', function (Request $request) {
+        // Ambil semua data video categories
+        $productCategories = ProductCategory::query();
+
+        // Jika ada pencarian, lakukan filter berdasarkan nama atau slug
+        if ($request->has('searchProductCategory')) {
+            $search = $request->input('searchProductCategory');
+            $productCategories->where('name', 'like', '%' . $search . '%')
+                ->orWhere('slug', 'like', '%' . $search . '%');
+        }
+
         // Ambil semua data video categories
         $videoCategories = VideoCategory::query();
 
@@ -171,12 +178,18 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
                 ->orWhere('slug', 'like', '%' . $search . '%');
         }
 
-        return view('dashboard.categories', [
+        return view('dashboard.categories.index', [
             "title" => "HydroSpace | Daftar Kategori",
             "active" => "Kategori",
-            "videoCategories" => $videoCategories->get()
+            "videoCategories" => $videoCategories->get(),
+            "productCategories" => $productCategories->get()
         ]);
     });
+
+    Route::resource('/product-categories', ProductCategoryController::class);
+    Route::get('/productCategories/checkSlug/', [ProductCategoryController::class, 'checkSlug']);
+    Route::resource('/video-categories', VideoCategoryController::class);
+    Route::get('/videoCategories/checkSlug/', [VideoCategoryController::class, 'checkSlug']);
 
     Route::get('/getProducts', function () {
         return response()->json(Product::select('id', 'name')->get());
@@ -200,26 +213,4 @@ Route::get('/dashboard/orders/id', function () {
         "active" => "Pesanan"
     ]);
 });
-
-Route::get('/dashboard/category', function () {
-    return view('dashboard.categories', [
-        "title" => "HydroSpace | Daftar Kategori",
-        "active" => "Kategori"
-    ]);
-});
-
-Route::get('/dashboard/category-product/create', function () {
-    return view('dashboard.createCategoryProduct', [
-        "title" => "HydroSpace | Tambah Kategori Produk",
-        "active" => "Kategori"
-    ]);
-});
-
-Route::get('/dashboard/category/update', function () {
-    return view('dashboard.updateCategory', [
-        "title" => "HydroSpace | Update Kategori",
-        "active" => "Kategori"
-    ]);
-});
-
 // END DASHBOARD ROUTE
