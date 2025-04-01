@@ -21,7 +21,7 @@ class VideoCategoryController extends Controller
      */
     public function create()
     {
-        return view('dashboard.createCategoryVideo', [
+        return view('dashboard.categories.createCategoryVideo', [
             "title" => "HydroSpace | Tambah Kategori Video",
             "active" => "Kategori"
         ]);
@@ -39,7 +39,7 @@ class VideoCategoryController extends Controller
 
         VideoCategory::create($validatedData);
 
-        return redirect('/dashboard/categories')->with('videoSuccess', 'Data kategori berhasil ditambahkan!');
+        return redirect('/dashboard/categories')->with('videoSuccess', 'Data kategori video berhasil ditambahkan!');
     }
 
     /**
@@ -55,7 +55,7 @@ class VideoCategoryController extends Controller
      */
     public function edit(VideoCategory $videoCategory)
     {
-        return view('dashboard.updateCategoryVideo', [
+        return view('dashboard.categories.updateCategoryVideo', [
             "title" => "HydroSpace | Update Kategori Video",
             "active" => "Kategori",
             "videoCategory" => $videoCategory
@@ -79,7 +79,7 @@ class VideoCategoryController extends Controller
         $validatedData = $request->validate($rules);
 
         VideoCategory::where('id', $videoCategory->id)->update($validatedData);
-        return redirect('/dashboard/categories')->with('videoSuccess', 'Data kategori berhasil diperbarui!');
+        return redirect('/dashboard/categories')->with('videoSuccess', 'Data kategori video berhasil diperbarui!');
     }
 
     /**
@@ -89,7 +89,7 @@ class VideoCategoryController extends Controller
     {
         $videoCategory->delete();
 
-        return redirect('/dashboard/categories')->with('videoSuccess', 'Data kategori berhasil dihapus!');
+        return redirect('/dashboard/categories')->with('videoSuccess', 'Data kategori video berhasil dihapus!');
     }
 
     public function checkSlug(Request $request)
