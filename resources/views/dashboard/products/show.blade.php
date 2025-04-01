@@ -91,7 +91,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/products" class="btn btn-primary">
+                        <a href="javascript:history.back()" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -105,14 +105,14 @@
                                                     <div class="carousel-inner">
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @php
-                                                                $picture = 'picture' . $i;
+                                                            $picture='picture' . $i;
                                                             @endphp
                                                             @if (!empty($product->$picture))
-                                                                <div class="carousel-item {{ $i === 1 ? 'active' : '' }}" style="max-width: 625px; max-height: 625px">
-                                                                    <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2" style="object-fit: cover; width: 100%; height: 100%;">
-                                                                </div>
+                                                            <div class="carousel-item {{ $i === 1 ? 'active' : '' }}" style="max-width: 625px; max-height: 625px">
+                                                                <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2" style="object-fit: cover; width: 100%; height: 100%;">
+                                                            </div>
                                                             @endif
-                                                        @endfor
+                                                            @endfor
                                                     </div>
                                                     <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
                                                         <span class="carousel-control-prev-icon bg-secondary" aria-hidden="true"></span>
@@ -126,12 +126,12 @@
                                                 <div class="mt-3 d-flex justify-content-center gap-2">
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @php
-                                                            $picture = 'picture' . $i;
+                                                        $picture='picture' . $i;
                                                         @endphp
                                                         @if (!empty($product->$picture))
-                                                            <img src="{{ asset('storage/' . $product->$picture) }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1; object-fit: cover;" onclick="changeCarouselImage({{ $i - 1 }})">
+                                                        <img src="{{ asset('storage/' . $product->$picture) }}" class="img-thumbnail" style="width: 18%; aspect-ratio: 1 / 1; object-fit: cover;" onclick="changeCarouselImage({{ $i - 1 }})">
                                                         @endif
-                                                    @endfor
+                                                        @endfor
                                                 </div>
                                             </div>
 

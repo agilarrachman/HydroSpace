@@ -43,7 +43,7 @@
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
     <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
 
-    <x-head.tinymce-config/>
+    <x-head.tinymce-config />
 
     <style>
         .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
@@ -97,7 +97,7 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <a href="/dashboard/products" class="btn btn-primary">
+                        <a href="javascript:history.back()" class="btn btn-primary">
                             <i class="bx bx-arrow-back me-2"></i>Kembali
                         </a>
                         <div class="authentication-wrapper authentication-basic container-p-y">
@@ -121,9 +121,9 @@
                                                             <i class="bx bx-plus-circle"></i>
                                                         </button>
                                                         @error('picture1')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
                                                         @enderror
                                                     </div>
                                                 </div>
@@ -134,22 +134,22 @@
 
                                             <div class="mb-3">
                                                 <label for="name" class="form-label">Nama Produk</label>
-                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Masukkan nama produk" value="{{ old('name') }}" required/>
+                                                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Masukkan nama produk" value="{{ old('name') }}" required />
                                                 <div class="form-text">Tekan tab setelah menuliskan nama produk untuk membuat slug secara otomatis</div>
                                                 @error('name')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
                                                 @enderror
                                             </div>
 
                                             <div class="mb-3">
                                                 <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" id="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" placeholder="Masukkan slug" value="{{ old('slug') }}" required/>
+                                                <input type="text" id="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" placeholder="Masukkan slug" value="{{ old('slug') }}" required />
                                                 @error('slug')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
                                                 @enderror
                                             </div>
 
@@ -162,30 +162,30 @@
                                                     @endforeach
                                                 </select>
                                                 @error('category_id')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
                                                 @enderror
                                             </div>
 
                                             <div class="row mb-3">
                                                 <div class="col-md-6 mb-3 mb-md-0">
                                                     <label for="stock" class="form-label">Stok</label>
-                                                    <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" placeholder="Masukkan stok" value="{{ old('stock') }}" required/>
+                                                    <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" placeholder="Masukkan stok" value="{{ old('stock') }}" required />
                                                     @error('stock')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
                                                     @enderror
                                                 </div>
 
                                                 <div class="col-md-6">
                                                     <label for="price" class="form-label">Harga</label>
-                                                    <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Masukkan harga" value="{{ old('price') }}" required/>
+                                                    <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Masukkan harga" value="{{ old('price') }}" required />
                                                     @error('price')
-                                                        <div class="invalid-feedback">
-                                                            {{ $message }}
-                                                        </div>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -193,7 +193,7 @@
                                             <div class="mb-3">
                                                 <textarea id="description" name="description">{{ old('description', $product->description) }}</textarea>
                                                 @error('description')
-                                                    <p class="text-danger">{{ $message }}</p>
+                                                <p class="text-danger">{{ $message }}</p>
                                                 @enderror
                                             </div>
                                             <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
@@ -240,7 +240,7 @@
                                                     const reader = new FileReader();
                                                     reader.readAsDataURL(file);
 
-                                                    reader.onload = function (event) {
+                                                    reader.onload = function(event) {
                                                         imgPreview.src = event.target.result;
                                                     };
                                                 } else {
