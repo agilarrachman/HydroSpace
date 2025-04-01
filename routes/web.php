@@ -37,19 +37,9 @@ Route::middleware(['blockAdmin'])->group(function () {
         ]);
     });
 
-    Route::get('/produk', function () {
-        return view('products', [
-            "title" => "HydroSpace | Produk",
-            "active" => "Produk"
-        ]);
-    });
+    Route::get('/produk', [ProductController::class, 'customerIndex']);
 
-    Route::get('/produk/slug', function () {
-        return view('viewProduct', [
-            "title" => "HydroSpace | Produk",
-            "active" => "Produk"
-        ]);
-    });
+    Route::get('/produk/{product:slug}', [ProductController::class, 'customerShow']);
 
     Route::get('/edukasi', [VideoController::class, 'indexCustomer']);    
 
@@ -150,7 +140,7 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     ]);
 
     Route::post('/keluar', [AdminProfileController::class, 'logout']);
-    
+
     Route::get('/update-password', function () {
         return view('dashboard.updatePassword', [
             "title" => "HydroSpace | Ubah Password",
@@ -191,34 +181,10 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::get('/getProducts', function () {
         return response()->json(Product::select('id', 'name')->get());
     });
-});
 
-Route::get('/dashboard/video/slug', function () {
-    return view('dashboard.videoDetail', [
-        "title" => "HydroSpace | Panduan Instalasi Sistem NFT Hidroponik",
-        "active" => "Video"
-    ]);
-});
+    Route::resource('/products', ProductController::class);
 
-Route::get('/dashboard/product', function () {
-    return view('dashboard.products', [
-        "title" => "HydroSpace | Daftar Produk",
-        "active" => "Produk"
-    ]);
-});
-
-Route::get('/dashboard/product/slug', function () {
-    return view('dashboard.productDetail', [
-        "title" => "HydroSpace | Bibit Sawi",
-        "active" => "Produk"
-    ]);
-});
-
-Route::get('/dashboard/product/create', function () {
-    return view('dashboard.createProduct', [
-        "title" => "HydroSpace | Tambah Produk",
-        "active" => "Produk"
-    ]);
+    Route::get('/Product/checkSlug', [ProductController::class, 'checkSlug']);
 });
 
 Route::get('/dashboard/orders', function () {
@@ -235,10 +201,10 @@ Route::get('/dashboard/orders/id', function () {
     ]);
 });
 
-Route::get('/dashboard/product/update', function () {
-    return view('dashboard.updateProduct', [
-        "title" => "HydroSpace | Update Produk",
-        "active" => "Produk"
+Route::get('/dashboard/category', function () {
+    return view('dashboard.categories', [
+        "title" => "HydroSpace | Daftar Kategori",
+        "active" => "Kategori"
     ]);
 });
 
