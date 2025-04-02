@@ -18,9 +18,49 @@
     <!-- color scheme -->
     <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
     <style>
         .header-light.transparent {
             background-color: #F8FBF3 !important;
+        }
+
+        .de-number button {
+            background-color: #354E33;
+            border: none;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 100px;
+            cursor: pointer;
+        }
+
+        .de-number button:hover {
+            background-color: rgb(33, 47, 31);
+        }
+
+        .notif-box {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            background: #E1EBE2;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            color: #354e33;
+            display: flex;
+        }
+
+        .notif-box.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: flex;
         }
     </style>
 </head>
@@ -39,6 +79,26 @@
 
         <!-- content begin -->
         <div class="no-bottom no-top" id="content">
+            @if (session('success'))
+            <div id="notif-success" class="notif-box">
+                <img src="/images/logo-icon-color.webp" alt="" style="width: 30px; object-fit: contain;">
+                <p class="mb-0 ms-2">{{ session('success') }}</p>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let notif = document.getElementById("notif-success");
+
+                    // Tampilkan notifikasi
+                    notif.classList.add("active");
+
+                    // Hilangkan notifikasi setelah 1.5 detik
+                    setTimeout(function() {
+                        notif.classList.remove("active");
+                    }, 2500);
+                });
+            </script>
+            @endif
 
             <div id="top"></div>
 
@@ -63,15 +123,15 @@
                             <div id="sync1" class="owl-carousel owl-theme">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @php
-                                        $picture = 'picture' . $i;
+                                    $picture='picture' . $i;
                                     @endphp
                                     @if (!empty($product->$picture))
-                                        <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px;">
-                                            <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: cover; height: 100%;">
-                                        </div>
+                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px;">
+                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: cover; height: 100%;">
+                                    </div>
                                     @endif
-                                @endfor
-                                {{-- <div class="item" style="padding: 40px;"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-5" alt=""></div>
+                                    @endfor
+                                    {{-- <div class="item" style="padding: 40px;"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-5" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
@@ -81,15 +141,15 @@
                             <div id="sync2" class="owl-carousel owl-theme">
                                 @for ($i = 1; $i <= 5; $i++)
                                     @php
-                                        $picture = 'picture' . $i;
+                                    $picture='picture' . $i;
                                     @endphp
                                     @if (!empty($product->$picture))
-                                        <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 120px; height: 120px;">
-                                            <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100 h-100" style="object-fit: cover;">
-                                        </div>
+                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 120px; height: 120px;">
+                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100 h-100" style="object-fit: cover;">
+                                    </div>
                                     @endif
-                                @endfor
-                                {{-- <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-4" alt=""></div>
+                                    @endfor
+                                    {{-- <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-4" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
                                 <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
@@ -104,7 +164,7 @@
                             <p class="col-lg-10">{!! $product->description !!}</p>
                             <h3 class="fs-32 mb-0 me-2">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
 
-                            <div class="group mb-4 d-flex gap-2 mt-2">
+                            <div class="group d-flex gap-2 mt-2">
                                 <h5 class="mb-3">Tersisa</h5>
                                 <p>{{ $product->stock }}</p>
                             </div>
@@ -112,13 +172,19 @@
                             <div class="group radio__button mb-4">
                                 <h5 class="mb-3">Quantity</h5>
                                 <div class="de-number">
-                                    <span class="d-minus">-</span>
-                                    <input type="text" class="no-border no-bg" value="1">
-                                    <span class="d-plus">+</span>
+                                    <button type="button" id="decrease-qty">-</button>
+                                    <input type="number" id="quantity" class="no-border no-bg" value="1" min="1" max="{{ $product->stock }}" disabled>
+                                    <button type="button" id="increase-qty">+</button>
                                 </div>
                             </div>
 
-                            <a class="btn-main" href="#">Tambah ke Keranjang</a>
+                            <form id="addToCartForm" action="{{ route('cart.add') }}" method="POST">
+                                @csrf
+                                <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                <input type="hidden" name="status" value="Keranjang">
+                                <input type="hidden" name="quantity" id="hidden-quantity" value="1">
+                                <button type="submit" class="btn-main">Tambah ke Keranjang</button>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -302,6 +368,37 @@
     ================================================== -->
     <script src="/js/plugins.js"></script>
     <script src="/js/designesia.js"></script>
+
+
+
+    <script>
+        document.getElementById("increase-qty").addEventListener("click", function() {
+            let quantityInput = document.getElementById("quantity");
+            if (parseInt(quantityInput.value) < parseInt(quantityInput.max)) {
+                quantityInput.value = parseInt(quantityInput.value) + 1;
+                document.getElementById("hidden-quantity").value = quantityInput.value; // Update hidden quantity
+            }
+        });
+
+        document.getElementById("decrease-qty").addEventListener("click", function() {
+            let quantityInput = document.getElementById("quantity");
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                document.getElementById("hidden-quantity").value = quantityInput.value; // Update hidden quantity
+            }
+        });
+
+        $(document).ready(function() {
+            let message = $("#notif-container").data("message"); // Ambil pesan dari data-attribute
+            if (message) {
+                de_atc(message);
+                $("#de_notif").addClass("active");
+                setTimeout(function() {
+                    $("#de_notif").removeClass("active");
+                }, 1500);
+            }
+        });
+    </script>
 
 </body>
 

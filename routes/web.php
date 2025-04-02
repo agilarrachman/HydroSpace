@@ -3,9 +3,11 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VideoCategoryController;
@@ -96,6 +98,10 @@ Route::middleware(['role:Customer'])->group(function () {
     });
 
     Route::put('/update-password/{user:username}', [UserController::class, 'updatePassword']);
+
+    Route::get('/keranjang', [CartController::class, 'showCart'])->name('cart.show');
+    Route::post('/keranjang/add', [CartController::class, 'addToCart'])->name('cart.add');
+    Route::post('/keranjang/update/{orderItemId}', [CartController::class, 'updateCart'])->name('cart.update');
 
     Route::get('/checkout', function () {
         return view('checkout', [

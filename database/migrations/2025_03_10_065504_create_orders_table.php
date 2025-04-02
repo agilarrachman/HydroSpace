@@ -14,19 +14,18 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')->references(column: 'id')->on(table: 'users');
-            $table->string('status');
-            $table->integer('total_amount');
+            $table->enum('status', ['Keranjang', 'Belum Bayar', 'Dikemas', 'Diantar', 'Selesai', 'Dibatalkan'])->default('Keranjang');
+            $table->integer('total_amount')->nullable();
             $table->string('midtrans_transaction_id')->nullable();
             $table->json('midtrans_response')->nullable();
-            $table->string('payment_method');
-            $table->string('recipient');
-            $table->string('phone_number');
-            $table->string('province');
-            $table->string('city');
-            $table->string('subdistrict');
-            $table->string('village');
-            $table->text('full_address');
-            $table->string('postal_code');
+            $table->string('payment_method')->nullable();
+            $table->string('recipient')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->string('province')->nullable();
+            $table->string('city')->nullable();
+            $table->string('subdistrict')->nullable();
+            $table->string('village')->nullable();
+            $table->text('full_address')->nullable();
             $table->timestamps();
         });
     }

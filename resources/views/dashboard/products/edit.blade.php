@@ -229,7 +229,7 @@
                                         @enderror
                                     </div>
 
-                                    <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
+                                    <button class="btn btn-primary d-grid w-100" type="submit" onclick="return confirm('Apakah kamu yakin akan mengubah data produk ini?')">Simpan Perubahan</button>
                                     </form>
 
                                     <script>

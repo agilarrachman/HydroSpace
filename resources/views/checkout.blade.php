@@ -23,6 +23,10 @@
             background-color: #F8FBF3 !important;
         }
 
+        input[type="checkbox"]:checked {
+            accent-color: #354E33;
+        }
+
         @media (min-width: 992px) {
             #crumb {
                 padding-top: 140px !important
@@ -165,7 +169,7 @@
                                 </div>
                             </div>
                             <div class="row g-3 mb-3">
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="kecamatan" class="form-label">Kecamatan</label>
                                     <select class="form-select" id="kecamatan" aria-label="Default select example">
                                         <option selected>Kecamatan</option>
@@ -174,7 +178,7 @@
                                         <option value="Bogor Utara">Bogor Utara</option>
                                     </select>
                                 </div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-6">
                                     <label for="kelurahan" class="form-label">Kelurahan</label>
                                     <select class="form-select" id="kelurahan" aria-label="Default select example">
                                         <option selected>Kelurahan</option>
@@ -182,10 +186,6 @@
                                         <option value="Babakan">Babakan</option>
                                         <option value="Sempur">Sempur</option>
                                     </select>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
-                                    <input type="number" class="form-control" id="kodePos" name="kodePos" placeholder="Kode Pos" value="123456" />
                                 </div>
                             </div>
                             <div class="mb-3">

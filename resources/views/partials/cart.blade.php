@@ -13,131 +13,128 @@
         <h5 class="mb-3">Keranjang Kamu</h5>
 
         <div class="cart-items">
+            @foreach ($orderItems as $orderItem)
             <!-- cart item begin -->
             <div class="de__cart">
                 <div class="de__cart-item justify-content-between">
                     <div class="d-wrap">
-                        <input type="checkbox" id="item" name="item" class="d-checkbox__input" checked />
-                        <label for="item" class="d-checkbox__label align-items-center"></label>
-                        <img src="/images/shop/bibit-benih/bibit sawi.png" alt="" class="p-2">
+                        <input type="checkbox" id="item-{{ $orderItem->id }}" name="item" class="d-checkbox__input" />
+                        <label for="item-{{ $orderItem->id }}" class="d-checkbox__label align-items-center"></label>
+                        <img src="{{ asset('storage/' . $orderItem->product->picture1) }}" alt="{{ $orderItem->product->name }}" class="p-2">
                         <div class="d-info">
                             <div>
-                                <h4>Bibit Sawi</h4>
-                                <span class="d-price">Rp20.000</span>
+                                <h4>{{ $orderItem->product->name }}</h4>
+                                <span class="d-price">Rp{{ number_format($orderItem->total_price, 0, ',', '.') }}</span>
                             </div>
                         </div>
                     </div>
 
                     <div class="de-number">
-                        <span class="d-minus">-</span>
-                        <input type="text" class="no-border no-bg" value="1">
-                        <span class="d-plus">+</span>
+                        <span class="d-minus" onclick="updateCart({{ $orderItem->id }}, 'quantity', 'decrease')">-</span>
+                        <input type="text" class="no-border no-bg" value="{{ $orderItem->quantity }}">
+                        <span class="d-plus" onclick="updateCart({{ $orderItem->id }}, 'quantity', 'increase')">+</span>
                     </div>
                 </div>
             </div>
             <!-- cart item end -->
-
-            <!-- cart item begin -->
-            <div class="de__cart">
-                <div class="de__cart-item justify-content-between">
-                    <div class="d-wrap">
-                        <input type="checkbox" id="item" name="item" class="d-checkbox__input" checked />
-                        <label for="item" class="d-checkbox__label align-items-center"></label>
-                        <img src="/images/shop/alat/netpot.png" alt="">
-                        <div class="d-info">
-                            <div>
-                                <h4>NetPot Hidroponik 5cm</h4>
-                                <span class="d-price">Rp1.000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="de-number">
-                        <span class="d-minus">-</span>
-                        <input type="text" class="no-border no-bg" value="1">
-                        <span class="d-plus">+</span>
-                    </div>
-                </div>
-            </div>
-            <!-- cart item end -->
-
-            <!-- cart item begin -->
-            <div class="de__cart">
-                <div class="de__cart-item justify-content-between">
-                    <div class="d-wrap">
-                        <input type="checkbox" id="item" name="item" class="d-checkbox__input" checked />
-                        <label for="item" class="d-checkbox__label align-items-center"></label>
-                        <img src="/images/shop/paket/paket.png" alt="">
-                        <div class="d-info">
-                            <div>
-                                <h4>Paket Hidroponik Wick 9 Lubang 1 Bak</h4>
-                                <span class="d-price">Rp50.000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="de-number">
-                        <span class="d-minus">-</span>
-                        <input type="text" class="no-border no-bg" value="1">
-                        <span class="d-plus">+</span>
-                    </div>
-                </div>
-            </div>
-            <!-- cart item end -->
-
-            <!-- cart item begin -->
-            <div class="de__cart">
-                <div class="de__cart-item justify-content-between">
-                    <div class="d-wrap">
-                        <input type="checkbox" id="item" name="item" class="d-checkbox__input" checked />
-                        <label for="item" class="d-checkbox__label align-items-center"></label>
-                        <img src="/images/shop/nutrisi/nutrisi.png" alt="">
-                        <div class="d-info">
-                            <div>
-                                <h4>Nutrisi Hidroponik AB</h4>
-                                <span class="d-price">Rp100.000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="de-number">
-                        <span class="d-minus">-</span>
-                        <input type="text" class="no-border no-bg" value="1">
-                        <span class="d-plus">+</span>
-                    </div>
-                </div>
-            </div>
-            <!-- cart item end -->
-
-            <!-- cart item begin -->
-            <div class="de__cart">
-                <div class="de__cart-item justify-content-between">
-                    <div class="d-wrap">
-                        <input type="checkbox" id="item" name="item" class="d-checkbox__input" checked />
-                        <label for="item" class="d-checkbox__label align-items-center"></label>
-                        <img src="/images/shop/aksesori-pendukung/phmeter.png" alt="">
-                        <div class="d-info">
-                            <div>
-                                <h4>PH Meter TDS & EC Meter</h4>
-                                <span class="d-price">Rp75.000</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="de-number">
-                        <span class="d-minus">-</span>
-                        <input type="text" class="no-border no-bg" value="1">
-                        <span class="d-plus">+</span>
-                    </div>
-                </div>
-            </div>
-            <!-- cart item end -->
+            @endforeach
         </div>
 
-        <a href="/checkout">
-            <button class="btn-primary w-100 rounded-20 py-2 mt-3">Checkout</button>
-        </a>
+        <div class="d-flex justify-content-between">
+            <div id="total-price col-4 ps-2" class="d-flex flex-column">
+                <span style="font-size: small; color: #354E33; height: 20px;">Total Harga</span>
+                <span id="total-price-value" style="color: #354E33">
+                    Rp{{ number_format($totalPrice, 0, ',', '.') }}
+                </span>
+            </div>
+            <a href="/checkout" class="col-8">
+                <button class="btn-primary w-100 rounded-20 py-2 mb-0 mt-auto">Checkout</button>
+            </a>
+        </div>
+
 
     </div>
 </div>
 <!-- overlay content end -->
+
+<script>
+    function addToCart(productId) {
+        let url = "/keranjang/add";
+        let data = {
+            product_id: productId,
+            quantity: 1, // Default tambah 1 item
+        };
+
+        fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    // Menampilkan notifikasi
+                    $("#de_notif").removeClass("active");
+                    de_atc('Produk telah ditambahkan ke keranjang');
+                    $("#de_notif").addClass("active");
+
+                    setTimeout(function() {
+                        $("#de_notif").removeClass("active");
+                    }, 1500);
+
+                    location.reload(); // Reload untuk update sidebar cart
+                } else {
+                    alert("Gagal menambahkan ke keranjang: " + data.error);
+                }
+            })
+            .catch((error) => console.error("Error:", error));
+    }
+
+    function updateCart(orderItemId, type, action) {
+        let url = `/keranjang/update/${orderItemId}`;
+        let data = {
+            type: type,
+            action: action
+        };
+
+        fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    const cartItemElement = document.querySelector(`#item-${orderItemId}`).closest('.de__cart');
+                    const quantityInput = cartItemElement.querySelector('.de-number input');
+                    const priceElement = cartItemElement.querySelector('.d-price');
+                    const totalPriceElement = document.getElementById("total-price-value");
+                    const totalItemElement = document.getElementById("total-item-value");
+
+                    // Pastikan data yang diterima tidak undefined atau null
+                    if (data.new_quantity !== undefined && data.new_price !== undefined && data.total_price !== undefined) {
+                        // Update jumlah item
+                        quantityInput.value = data.new_quantity;
+
+                        // Update harga item
+                        priceElement.textContent = `Rp${new Intl.NumberFormat('id-ID').format(data.new_price)}`;
+
+                        // Update total harga keseluruhan
+                        totalPriceElement.textContent = `Rp${new Intl.NumberFormat('id-ID').format(data.total_price)}`;
+
+                        // Update total jumlah item
+                        totalItemElement.textContent = data.total_item;
+                    } else {
+                        console.error("Data dari server tidak lengkap:", data);
+                    }
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
+</script>
