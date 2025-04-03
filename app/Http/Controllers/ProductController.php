@@ -112,47 +112,57 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
-            'picture1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'picture.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ];
 
         if ($request->slug != $product->slug) {
-            $rules['slug'] = 'required|unique:products';
+            $rules['slug'] = 'required|string|max:255|unique:products,slug';
         }
 
         $validatedData = $request->validate($rules);
 
-        foreach (['picture1', 'picture2', 'picture3', 'picture4', 'picture5'] as $pictureField) {
+        $oldImagesFromRequest = $request->input('oldImages', []);
+
+        // Debugging oldImages
+        // dd([
+        //     'oldImagesFromRequest' => $oldImagesFromRequest,
+        //     'productPictures' => [
+        //         'picture1' => $product->picture1,
+        //         'picture2' => $product->picture2,
+        //         'picture3' => $product->picture3,
+        //         'picture4' => $product->picture4,
+        //         'picture5' => $product->picture5,
+        //     ],
+        // ]);
+
+        for ($i = 1; $i <= 5; $i++) {
+            $pictureField = 'picture' . $i;
+            $currentPicturePath = $product->$pictureField;
+
             if ($request->hasFile($pictureField)) {
-                // Hapus gambar lama jika ada
-                if ($product->$pictureField) {
-                    Storage::disk('public')->delete($product->$pictureField);
+                if ($currentPicturePath) {
+                    Storage::disk('public')->delete($currentPicturePath);
                 }
-                // Simpan gambar baru
                 $validatedData[$pictureField] = $request->file($pictureField)->store('product_images', 'public');
-            } elseif ($request->input($pictureField) === null && $pictureField !== 'picture1') {
-                // Jika gambar dihapus (input kosong) untuk selain picture1, hapus dari database dan storage
-                if ($product->$pictureField) {
-                    Storage::disk('public')->delete($product->$pictureField);
+            } else {
+                if (!isset($oldImagesFromRequest[$i]) && $currentPicturePath) {
+                    Storage::disk('public')->delete($currentPicturePath);
+                    $validatedData[$pictureField] = null;
+                } elseif (isset($oldImagesFromRequest[$i])) {
+                    $validatedData[$pictureField] = $oldImagesFromRequest[$i];
+                } elseif (!$currentPicturePath) {
                     $validatedData[$pictureField] = null;
                 }
             }
         }
 
-        // Jika picture1 tidak diunggah atau dihapus, gunakan gambar lama
-        if (!$request->hasFile('picture1') && $request->input('picture1') !== null) {
-            unset($validatedData['picture1']); // Jangan ubah field ini
-        }
+        unset($validatedData['picture.*']);
+        unset($validatedData['oldImages']);
 
-        // Update data produk
         $product->update($validatedData);
 
         return redirect('/dashboard/products')->with('success', 'Produk berhasil diperbarui!');
     }
-
 
     /**
      * Remove the specified resource from storage.
