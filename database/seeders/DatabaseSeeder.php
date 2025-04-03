@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'penyungoding',
             'email' => 'penyungoding@gmail.com',
             'name' => 'Penyu Ngoding',
-            'password' => Hash::make('penyulucyu'),
+            'password' => Hash::make('penyu'),
             'phone_number' => '081234567890',
             'gender' => 'Wanita',
             'role' => 'Customer',

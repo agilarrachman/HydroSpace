@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->foreignId('customer_id')->references(column: 'id')->on(table: 'users');
             $table->enum('status', ['Keranjang', 'Belum Bayar', 'Dikemas', 'Diantar', 'Selesai', 'Dibatalkan'])->default('Keranjang');
             $table->integer('total_amount')->nullable();
