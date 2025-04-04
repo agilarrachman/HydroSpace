@@ -24,7 +24,7 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         if (!Auth::check()) {
-            return response()->json(['error' => 'User not logged in'], 401);
+            return response()->json(['error' => 'Pengguna Belum Login'], 401);
         }
 
         $user = Auth::user();

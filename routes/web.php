@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
+use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
@@ -45,7 +46,7 @@ Route::middleware(['blockAdmin'])->group(function () {
 
     Route::get('/produk/{product:slug}', [ProductController::class, 'customerShow']);
 
-    Route::get('/edukasi', [VideoController::class, 'indexCustomer']);    
+    Route::get('/edukasi', [VideoController::class, 'indexCustomer']);
 
     Route::get('/hydrobot', function () {
         return view('index', [
@@ -103,28 +104,15 @@ Route::middleware(['role:Customer'])->group(function () {
     Route::post('/keranjang/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::post('/keranjang/update/{orderItemId}', [CartController::class, 'updateCart'])->name('cart.update');
 
-    Route::get('/checkout', function () {
-        return view('checkout', [
-            "title" => "HydroSpace | Buat Pesanan",
-            "active" => "Buat Pesanan",
-        ]);
-    });
-
     Route::get('/edukasi/{video:slug}', [VideoController::class, 'showCustomer']);
 
-    Route::get('/pesanan', function () {
-        return view('orders', [
-            "title" => "HydroSpace | Pesanan Saya",
-            "active" => "Pesanan Saya",
-        ]);
-    });
+    Route::resource('/pesanan', OrderController::class)->parameters([
+        'pesanan' => 'order'
+    ]);
+    Route::post('/checkout', [OrderController::class, 'checkout']);
+    Route::get('/cancel', [OrderController::class, 'cancelOrder']);
 
-    Route::get('/pesanan/id', function () {
-        return view('orderDetail', [
-            "title" => "HydroSpace | Pesanan Saya",
-            "active" => "Pesanan Saya",
-        ]);
-    });
+    Route::post('/place-order', [MidtransController::class, 'placeOrder']);
 });
 
 Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
@@ -157,7 +145,7 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
-    
+
     Route::resource('/videos', VideoController::class);
     Route::get('/video/checkSlug/', [VideoController::class, 'checkSlug']);
     Route::get('/getProducts', [VideoController::class, 'getProducts']);

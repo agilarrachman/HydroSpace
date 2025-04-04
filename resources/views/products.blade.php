@@ -93,6 +93,12 @@
                                 <li><a href="/">Beranda</a></li>
                                 <li class="active">Produk</li>
                             </ul>
+                            @if(session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
                             <h1 class="text-uppercase">Produk</h1>
                             <p class="col-lg-10 lead">Jelajahi berbagai produk berkualitas untuk mendukung kebun hidroponik Anda</p>
                         </div>
@@ -209,7 +215,7 @@
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="produk/{{ $product->slug }}"><i class="icon_zoom-in_alt"></i></a>
-                                                <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                                <div class="atr__add-cart" onclick="submitCartForm({{ $product->id }})"><i class="icon_cart_alt"></i></div>
                                             </div>
                                         </div>
 

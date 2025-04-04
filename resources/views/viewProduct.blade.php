@@ -126,8 +126,8 @@
                                     $picture='picture' . $i;
                                     @endphp
                                     @if (!empty($product->$picture))
-                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px;">
-                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: cover; height: 100%;">
+                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px; background-color: #5b895866 !important;">
+                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: contain; width: 100%; height: 100%;">
                                     </div>
                                     @endif
                                     @endfor

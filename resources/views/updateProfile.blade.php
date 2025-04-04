@@ -180,6 +180,7 @@
                     name="email"
                     placeholder="Masukkan email"
                     value="{{ old('email', $customer->email) }}"
+                    required
                     autofocus />
                   @error('email')
                   <div class="invalid-feedback">
@@ -195,7 +196,8 @@
                     id="username"
                     name="username"
                     value="{{ old('username', $customer->username) }}"
-                    placeholder="Masukkan username" />
+                    placeholder="Masukkan username"
+                    required />
                   @error('username')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -212,7 +214,8 @@
                     id="name"
                     name="name"
                     value="{{ old('name', $customer->name) }}"
-                    placeholder="Masukkan nama lengkap" />
+                    placeholder="Masukkan nama lengkap"
+                    required />
                   @error('name')
                   <div class="invalid-feedback">
                     {{ $message }}
@@ -252,7 +255,8 @@
                     id="phone_number"
                     name="phone_number"
                     value="{{ old('phone_number', $customer->phone_number) }}"
-                    placeholder="Cth: 081234567890" />
+                    placeholder="Cth: 081234567890"
+                    required />
                   @error('phone_number')
                   <div class="invalid-feedback">
                     {{ $message }}

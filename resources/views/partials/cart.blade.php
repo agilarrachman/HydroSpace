@@ -1,3 +1,21 @@
+<style>
+    .btn-check:active+.btn-primary,
+    .btn-check:checked+.btn-primary,
+    .btn-primary.active,
+    .btn-primary:active,
+    .show>.btn-primary.dropdown-toggle {
+        color: #fff;
+        background-color: #354E33 !important;
+        border-color: #354E33 !important;
+    }
+
+    .btn-primary {
+        color: #fff;
+        background-color: #354E33 !important;
+        border-color: #354E33 !important;
+    }
+</style>
+
 <!-- overlay content begin -->
 <div id="extra-wrap" class="de-light cart-wrap">
     <div id="btn-close" class="dark">
@@ -12,45 +30,47 @@
 
         <h5 class="mb-3">Keranjang Kamu</h5>
 
-        <div class="cart-items">
-            @foreach ($orderItems as $orderItem)
-            <!-- cart item begin -->
-            <div class="de__cart">
-                <div class="de__cart-item justify-content-between">
-                    <div class="d-wrap">
-                        <input type="checkbox" id="item-{{ $orderItem->id }}" name="item" class="d-checkbox__input" />
-                        <label for="item-{{ $orderItem->id }}" class="d-checkbox__label align-items-center"></label>
-                        <img src="{{ asset('storage/' . $orderItem->product->picture1) }}" alt="{{ $orderItem->product->name }}" class="p-2">
-                        <div class="d-info">
-                            <div>
-                                <h4>{{ $orderItem->product->name }}</h4>
-                                <span class="d-price">Rp{{ number_format($orderItem->total_price, 0, ',', '.') }}</span>
+        <form action="/checkout" method="POST">
+            @csrf
+            <div class="cart-items">
+                @foreach ($orderItems as $orderItem)
+                <div class="de__cart">
+                    <div class="de__cart-item justify-content-between">
+                        <div class="d-wrap">
+                            <input type="checkbox" id="item-{{ $orderItem->id }}" name="items[]" value="{{ $orderItem->id }}" class="d-checkbox__input" />
+                            <label for="item-{{ $orderItem->id }}" class="d-checkbox__label align-items-center"></label>
+                            <img src="{{ asset('storage/' . $orderItem->product->picture1) }}" alt="{{ $orderItem->product->name }}" class="p-2">
+                            <div class="d-info">
+                                <div>
+                                    <h4>{{ $orderItem->product->name }}</h4>
+                                    <span class="d-price">Rp{{ number_format($orderItem->total_price, 0, ',', '.') }}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="de-number">
-                        <span class="d-minus" onclick="updateCart({{ $orderItem->id }}, 'quantity', 'decrease')">-</span>
-                        <input type="text" class="no-border no-bg" value="{{ $orderItem->quantity }}">
-                        <span class="d-plus" onclick="updateCart({{ $orderItem->id }}, 'quantity', 'increase')">+</span>
+                        <div class="de-number">
+                            <span class="d-minus" onclick="updateCart({{ $orderItem->id }}, 'quantity', 'decrease')">-</span>
+                            <input type="text" class="no-border no-bg" name="quantities[{{ $orderItem->id }}]" value="{{ $orderItem->quantity }}">
+                            <span class="d-plus" onclick="updateCart({{ $orderItem->id }}, 'quantity', 'increase')">+</span>
+                        </div>
                     </div>
                 </div>
+                @endforeach
             </div>
-            <!-- cart item end -->
-            @endforeach
-        </div>
 
-        <div class="d-flex justify-content-between">
-            <div id="total-price col-4 ps-2" class="d-flex flex-column">
-                <span style="font-size: small; color: #354E33; height: 20px;">Total Harga</span>
-                <span id="total-price-value" style="color: #354E33">
-                    Rp{{ number_format($totalPrice, 0, ',', '.') }}
-                </span>
+            <div class="d-flex justify-content-between">
+                <div id="total-price col-4 ps-2" class="d-flex flex-column">
+                    <span style="font-size: small; color: #354E33; height: 20px;">Total Harga</span>
+                    <span id="total-price-value" style="color: #354E33">
+                        Rp{{ number_format($totalPrice, 0, ',', '.') }}
+                    </span>
+                </div>
+                <button type="submit" class="col-8 btn-primary text-center rounded-20 py-2 mb-0 mt-auto">
+                    Checkout
+                </button>
             </div>
-            <a href="/checkout" class="col-8">
-                <button class="btn-primary w-100 rounded-20 py-2 mb-0 mt-auto">Checkout</button>
-            </a>
-        </div>
+        </form>
+
 
 
     </div>
@@ -58,6 +78,26 @@
 <!-- overlay content end -->
 
 <script>
+    document.querySelector("#checkout-btn").addEventListener("click", function() {
+        let checkedItems = [];
+
+        // Ambil item yang dipilih
+        document.querySelectorAll(".d-checkbox__input:checked").forEach((checkbox) => {
+            checkedItems.push(checkbox.id.replace("item-", ""));
+        });
+
+        if (checkedItems.length === 0) {
+            alert("Silakan pilih minimal satu item untuk checkout!");
+            return;
+        }
+
+        // Konversi array menjadi string dengan format query parameter
+        let queryString = checkedItems.map(id => `items[]=${id}`).join("&");
+
+        // Redirect ke halaman create sambil membawa data item
+        window.location.href = `/pesanan/create?${queryString}`;
+    });
+
     function addToCart(productId) {
         let url = "/keranjang/add";
         let data = {
