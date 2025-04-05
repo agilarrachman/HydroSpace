@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use Illuminate\Http\Request;
 use Midtrans\Config;
 use Midtrans\Snap;
+use Illuminate\Support\Facades\Auth;
 
 class MidtransController extends Controller
 {
@@ -16,9 +18,26 @@ class MidtransController extends Controller
         Config::$isSanitized = true;
         Config::$is3ds = true;
 
-        // Ambil data dari request
-        $order_id = uniqid();
-        $gross_amount = 30000; // Ganti dengan nilai dari request atau $request->amount
+        // Validasi request (opsional, tapi sangat disarankan)
+        $request->validate([
+            'amount' => 'required|integer|min:1',
+        ]);
+
+        do {
+            $randomNumber = mt_rand(1000, 9999);
+            $order_id = 'HYD1' . $randomNumber;
+        } while (Order::where('id', $order_id)->exists());
+
+        // Mendapatkan total amount dari request
+        $gross_amount = $request->input('amount');
+
+        // Mendapatkan informasi pengguna yang terautentikasi
+        if (Auth::check()) {
+            $user = Auth::user();
+            $name = $user->name;
+            $email = $user->email;
+            $phone_number = $user->phone_number ?? null; 
+        }
 
         $params = [
             'transaction_details' => [
@@ -26,10 +45,9 @@ class MidtransController extends Controller
                 'gross_amount' => $gross_amount,
             ],
             'customer_details' => [
-                'first_name' => 'Budi',
-                'last_name' => 'Pratama',
-                'email' => 'budi.pra@example.com',
-                'phone' => '08111222333',
+                'name' => $name,
+                'email' => $email,
+                'phone_number' => $phone_number,
             ],
         ];
 
@@ -41,7 +59,8 @@ class MidtransController extends Controller
                 'method' => 'POST',
                 'url' => Config::$isProduction
                     ? 'https://app.midtrans.com/snap/v1/transactions'
-                    : 'https://app.sandbox.midtrans.com/snap/v1/transactions'
+                    : 'https://app.sandbox.midtrans.com/snap/v1/transactions',
+                'order_id' => $order_id
             ]);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 500);

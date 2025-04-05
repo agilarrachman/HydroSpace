@@ -18,6 +18,10 @@
     <!-- color scheme -->
     <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 
+    <!-- Midtrans -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-XWPVRwTXXJ0A8RT_"></script>
+
     <style>
         .header-light.transparent {
             background-color: #F8FBF3 !important;
@@ -90,72 +94,79 @@
             </section>
 
             <section class="pt-3" style="padding-bottom: 140px;">
-                <form action="/pesanan" method="post">
-                    @csrf
-                    <h3 class="fw-bold mx-auto text-center mt-3 mb-5">Pesanan Kamu</h3>
-                    <div class="container d-flex flex-column-reverse flex-lg-row justify-content-between">
-                        <div class="col-lg-6 pe-5">
-                            <h5 class="mb-3"><b>Detail Pesanan</b></h5>
 
-                            @foreach($orderItems as $item)
-                            <div class="product d-flex gap-3">
-                                <div class="image-product d-flex">
-                                    <img src="{{ asset('storage/' . $item->product->picture1) }}" alt="{{ $item->product->name }}" class="h-100 object-fit-cover p-0 m-auto" style="background-color: transparent; border: none;">
-                                </div>
-                                <div class="d-flex flex-column flex-grow-1">
-                                    <label for="cat_{{ $item->product->id }}">{{ $item->product->category->name }}</label>
-                                    <h4 class="text-wrap">{{ $item->product->name }}</h4>
-                                    <div class="d-flex justify-content-between">
-                                        <p class="m-0"><b>Jumlah:</b> {{ $item->quantity }} pcs</p>
-                                        <span class="d-price">Rp{{ number_format($item->total_price, 0, ',', '.') }}</span>
-                                    </div>
-                                </div>
+                <h3 class="fw-bold mx-auto text-center mt-3 mb-5">Pesanan Kamu</h3>
+                <div class="container d-flex flex-column-reverse flex-lg-row justify-content-between">
+                    <div class="col-lg-6 pe-5">
+                        <h5 class="mb-3"><b>Detail Pesanan</b></h5>
+
+                        @foreach($orderItems as $item)
+                        <div class="product d-flex gap-3">
+                            <div class="image-product d-flex">
+                                <img src="{{ asset('storage/' . $item->product->picture1) }}" alt="{{ $item->product->name }}" class="h-100 object-fit-cover p-0 m-auto" style="background-color: transparent; border: none;">
                             </div>
-
-                            <hr class="my-3" style="opacity: 0.10;">
-                            @endforeach
-
-                            <div class="w-100 my-3 d-flex justify-content-between gap-2">
-                                <h4 class="m-0">Total:</h4>
-                                <h4 class="m-0 text-truncate fw-bold text-end">Rp{{ number_format($totalPrice, 0, ',', '.') }}</h4>
-                            </div>
-
-                            <div class="terms w-100">
-                                <h3>Ketentuan Pemesanan</h3>
-                                <ul class="w-100">
-                                    <li class="text-wrap">Semua pesanan diproses setelah pembayaran berhasil dikonfirmasi.</li>
-                                    <li class="text-wrap">Pesanan akan diproses dalam waktu 1-3 hari kerja setelah pembayaran dikonfirmasi.</li>
-                                    <li class="text-wrap">Pesanan yang sudah diproses tidak dapat dibatalkan.</li>
-                                    <li class="text-wrap">Jika ada kendala atau pertanyaan, hubungi tim kami melalui fitur chat admin.</li>
-                                </ul>
-                            </div>
-
-                            <div id='submit w-100' class="mt20 order-last">
-                                <div class="de_checkbox mb-3 px-0">
-                                    <input id="read" name="read" type="checkbox" value="Ya">
-                                    <label for="read">Saya telah membaca ketentuan pemesanan</label>
-                                </div>
-                                <div class="d-flex">
-                                    <a href="/cancel" class="btn-outline col-6">Batalkan Pesanan</a>
-                                    <button type="button" id="pay-button" class="btn-main col-6 ms-2" style="color: #fff;">Buat Pesanan</button>
+                            <div class="d-flex flex-column flex-grow-1">
+                                <label for="cat_{{ $item->product->id }}">{{ $item->product->category->name }}</label>
+                                <h4 class="text-wrap">{{ $item->product->name }}</h4>
+                                <div class="d-flex justify-content-between">
+                                    <p class="m-0"><b>Jumlah:</b> {{ $item->quantity }} pcs</p>
+                                    <span class="d-price">Rp{{ number_format($item->total_price, 0, ',', '.') }}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="address col-lg-6 ps-5">
+                        <hr class="my-3" style="opacity: 0.10;">
+                        @endforeach
+
+                        <div class="w-100 my-3 d-flex justify-content-between gap-2">
+                            <h4 class="m-0">Total:</h4>
+                            <h4 class="m-0 text-truncate fw-bold text-end">Rp{{ number_format($totalPrice, 0, ',', '.') }}</h4>
+                        </div>
+
+                        <div class="terms w-100">
+                            <h3>Ketentuan Pemesanan</h3>
+                            <ul class="w-100">
+                                <li class="text-wrap">Semua pesanan diproses setelah pembayaran berhasil dikonfirmasi.</li>
+                                <li class="text-wrap">Pesanan akan diproses dalam waktu 1-3 hari kerja setelah pembayaran dikonfirmasi.</li>
+                                <li class="text-wrap">Pesanan yang sudah diproses tidak dapat dibatalkan.</li>
+                                <li class="text-wrap">Jika ada kendala atau pertanyaan, hubungi tim kami melalui fitur chat admin.</li>
+                            </ul>
+                        </div>
+
+                        <div id='submit w-100' class="mt20 order-last">
+                            <div class="de_checkbox mb-3 px-0">
+                                <input id="read" name="read" type="checkbox" value="Ya">
+                                <label for="read">Saya telah membaca ketentuan pemesanan</label>
+                            </div>
+                            <div class="d-flex">
+                                <a href="/cancel" class="btn-outline col-6">Batalkan Pesanan</a>
+                                <form id="payment-form" class="col-6 ms-2">
+                                    <input type="hidden" name="amount" value="{{ $totalPrice }}">
+                                    <input type='submit' id='pay-button' value='Bayar Sekarang' class="btn-main w-100 h-100">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="address col-lg-6 ps-5">
+                        <form action="/pesanan" method="post" id="form">
+                            @csrf
                             <div class="d-flex justify-content-between">
                                 <h5 class="mb-3"><b>Informasi Pengiriman</b></h5>
                                 <div class="de_checkbox">
-                                    <input type="checkbox" id="useMyAddress" onclick="fillCustomerAddress()">
-                                    <label for="my_address">Alamat Saya</label>
+                                    <input type="checkbox" id="useMyAddress" name="useMyAddress" onclick="fillCustomerAddress()">
+                                    <label for="useMyAddress">Alamat Saya</label>
                                 </div>
                             </div>
 
+                            <input type="text" name="customer_id" value="{{ auth()->user()->id }}" hidden>
+                            <input type="hidden" name="status" value="Dikemas">
 
                             <div class="row g-3 mb-3">
+                                <input type="hidden" name="total_amount" value="{{ $totalPrice }}">
                                 <div class="field-set col-lg-6">
                                     <label for="recipient" class="form-label">Nama Penerima</label>
-                                    <input type="text" class="form-control @error('recipient') is-invalid @enderror" id="recipient" name="recipient" placeholder="Masukkan nama penerima pesanan" required />
+                                    <input type="text" class="form-control @error('recipient') is-invalid @enderror" id="recipient" name="recipient" placeholder="Masukkan nama penerima pesanan" value="{{ old('phone_number') }}" required />
                                     @error('recipient')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -225,10 +236,16 @@
                                 <textarea class="form-control" id="full_address" name="full_address" rows="3" style="min-height: 200px;" placeholder="Masukkan alamat lengkap Anda, termasuk patokan, gang, nomor rumah, hingga link Google Maps jika tersedia. 
 Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)" required>{{ old('full_address')}}</textarea>
                             </div>
-
-                        </div>
+                            @if(session('selected_items'))
+                            @foreach(session('selected_items') as $itemId)
+                            <input type="hidden" name="selected_items[]" value="{{ $itemId }}">
+                            @endforeach
+                            @endif
+                        </form>
                     </div>
-                </form>
+                </div>
+
+
             </section>
 
         </div>
@@ -253,7 +270,7 @@ Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bog
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             let checkbox = document.getElementById("read");
-            let submitButton = document.getElementById("pay-btn");
+            let submitButton = document.getElementById("pay-button");
 
             // Saat pertama kali halaman dimuat, buat tombol tidak bisa diklik
             submitButton.disabled = true;
@@ -333,51 +350,101 @@ Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bog
                 .catch(error => console.error('Error:', error));
         }
 
-        document.getElementById('pay-button').addEventListener('click', function() {
-            const form = document.querySelector('form');
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentForm = document.getElementById('payment-form');
+            const payButton = document.getElementById('pay-button');
+            const orderForm = document.getElementById('form'); // Dapatkan form pesanan
 
-            // Ambil semua data form
-            const formData = new FormData(form);
-            const payload = {};
+            if (paymentForm && orderForm) {
+                paymentForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Mencegah form submit biasa
 
-            formData.forEach((value, key) => {
-                payload[key] = value;
-            });
+                    const amountInput = paymentForm.querySelector('input[name="amount"]');
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            // Kirim data ke backend untuk mendapatkan Snap Token
-            fetch('/place-order', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    },
-                    body: JSON.stringify(payload)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.token) {
-                        // Panggil Midtrans Snap popup
-                        window.snap.pay(data.token, {
-                            onSuccess: function(result) {
-                                // Redirect atau kirim ke backend bahwa pembayaran sukses
-                                window.location.href = "/pesanan/sukses";
-                            },
-                            onPending: function(result) {
-                                alert("Menunggu pembayaran...");
-                                window.location.href = "/pesanan/pending";
-                            },
-                            onError: function(result) {
-                                alert("Pembayaran gagal!");
-                            },
-                            onClose: function() {
-                                alert("Anda menutup popup pembayaran.");
-                            }
-                        });
+                    if (amountInput) {
+                        const amount = parseInt(amountInput.value);
+
+                        fetch('/place-order', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': csrfToken
+                                },
+                                body: JSON.stringify({
+                                    amount: amount,
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.token) {
+                                    window.snap.pay(data.token, {
+                                        onSuccess: function(result) {
+                                            // Ambil semua data dari form order
+                                            const formData = new FormData(orderForm);
+                                            formData.append('midtrans_transaction_id', result.transaction_id);
+                                            formData.append('midtrans_response', JSON.stringify(result));
+                                            formData.append('payment_method', result.payment_type);
+                                            formData.append('order_id', data.order_id);
+
+                                            // Kirim data order dan pembayaran ke backend
+                                            fetch('/pesanan', {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'X-CSRF-TOKEN': csrfToken
+                                                    },
+                                                    body: formData
+                                                })
+                                                .then(response => response.json()) // Atau response.text() jika backend mengembalikan redirect
+                                                .then(data => {
+                                                    // Handle respons dari backend setelah penyimpanan order
+                                                    if (data.order_id) {
+                                                        window.location.href = '/pesanan/' + data.order_id; // Redirect ke detail pesanan
+                                                    } else if (data.error) {
+                                                        alert('Gagal menyimpan pesanan: ' + data.error);
+                                                        console.error('Error menyimpan pesanan:', data.error);
+                                                    } else {
+                                                        alert('Terjadi kesalahan saat menyimpan pesanan.');
+                                                        console.error('Respon tidak terduga dari backend:', data);
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error mengirim data pesanan:', error);
+                                                    alert('Terjadi kesalahan jaringan saat menyimpan pesanan.');
+                                                });
+                                        },
+                                        onPending: function(result) {
+                                            alert('Menunggu Pembayaran!');
+                                            console.log(result);
+                                            // Anda bisa menambahkan logika untuk status pending di sini
+                                        },
+                                        onError: function(result) {
+                                            alert('Pembayaran Gagal!');
+                                            console.log(result);
+                                            // Anda bisa menambahkan logika untuk status error di sini
+                                        },
+                                        onClose: function() {
+                                            alert('Anda menutup popup pembayaran sebelum menyelesaikan transaksi.');
+                                            // Anda bisa menambahkan logika ketika pengguna menutup popup
+                                        }
+                                    });
+                                } else {
+                                    alert('Terjadi kesalahan: ' + (data.error || 'Tidak dapat memproses pembayaran'));
+                                    console.error('Error:', data);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('Terjadi kesalahan jaringan atau server.');
+                            });
                     } else {
-                        alert("Terjadi kesalahan: " + (data.error || "Tidak bisa memproses"));
+                        console.error('Elemen input dengan name="amount" tidak ditemukan di dalam form pembayaran.');
+                        alert('Terjadi kesalahan: Jumlah pembayaran tidak ditemukan.');
                     }
-                })
-                .catch(error => console.error('Error:', error));
+                });
+            } else {
+                console.error('Form pembayaran atau form pesanan tidak ditemukan.');
+            }
         });
     </script>
 

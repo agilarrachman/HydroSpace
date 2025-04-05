@@ -6,12 +6,15 @@ use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
+use Midtrans\Config;
+use Midtrans\Snap;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
@@ -89,34 +92,72 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'alamat' => 'required|string|max:255',
-            'nomor_hp' => 'required|string|max:15',
+            'customer_id' => 'required|integer|exists:users,id',
+            'status' => 'nullable|in:Keranjang,Belum Bayar,Dikemas,Diantar,Selesai,Dibatalkan',
+            'recipient' => 'required|string|max:255',
+            'phone_number' => ['required', 'string', 'regex:/^08[0-9]{8,11}$/'],
+            'province' => 'required|string|max:255',
+            'city' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'village' => 'required|string|max:255',
+            'full_address' => 'required|string',
+            'total_amount' => 'required|integer|min:1',
+            'midtrans_transaction_id' => 'required|string|max:255',
+            'midtrans_response' => 'required|json',
+            'payment_method' => 'required|string|max:255',
+            'selected_items' => 'required|array|min:1',
+            'order_id' => 'required|string|max:255|unique:orders,id'
         ]);
 
-        $selectedItems = Session::get('checkout_items', []);
+        DB::beginTransaction();
+        try {
+            // Dapatkan order lama (Keranjang) milik user
+            $oldOrder = Order::where('customer_id', Auth::id())
+                ->where('status', 'Keranjang')
+                ->first();
 
-        if (empty($selectedItems)) {
-            return redirect('/keranjang')->with('error', 'Silakan pilih item untuk checkout.');
+            // Gunakan order_id yang diterima dari frontend
+            $newOrderId = $request->order_id;
+
+            // Buat order baru dengan status 'Belum Bayar'
+            $newOrder = Order::create([
+                'id' => $newOrderId,
+                'customer_id' => Auth::id(),
+                'status' => 'Dikemas',
+                'total_amount' => $request->total_amount,
+                'midtrans_transaction_id' => $request->midtrans_transaction_id,
+                'midtrans_response' => $request->midtrans_response,
+                'payment_method' => $request->payment_method,
+                'recipient' => $request->recipient,
+                'phone_number' => $request->phone_number,
+                'province' => $request->province,
+                'city' => $request->city,
+                'subdistrict' => $request->district,
+                'village' => $request->village,
+                'full_address' => $request->full_address,
+            ]);
+
+            if ($oldOrder) {
+                // Pindahkan hanya order_items yang dipilih dari order lama ke order baru
+                OrderItem::where('order_id', $oldOrder->id)
+                    ->whereIn('id', $request->selected_items) // Perhatikan: kita memfilter berdasarkan ID order_item
+                    ->update(['order_id' => $newOrderId]);
+
+                // Periksa apakah order lama masih memiliki order items
+                if (!OrderItem::where('order_id', $oldOrder->id)->exists()) {
+                    // Jika tidak ada order items lagi, hapus order lama
+                    $oldOrder->delete();
+                }
+            }
+
+            $request->session()->forget('selected_items');
+
+            DB::commit();
+            return response()->json(['order_id' => $newOrderId]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['error' => 'Gagal memproses pesanan: ' . $e->getMessage()], 500);
         }
-
-        $user = Auth::user();
-
-        // Buat Order Baru
-        $order = Order::create([
-            'user_id' => $user->id,
-            'status' => 'belum dibayar',
-            'total_price' => OrderItem::whereIn('id', $selectedItems)->sum('total_price'),
-            'alamat' => $request->alamat,
-            'nomor_hp' => $request->nomor_hp,
-        ]);
-
-        // Update order_id pada item yang dicheckout
-        OrderItem::whereIn('id', $selectedItems)->update(['order_id' => $order->id, 'status' => 'dipesan']);
-
-        // Hapus session checkout
-        Session::forget('checkout_items');
-
-        return redirect()->route('orders.show', $order->id)->with('success', 'Pesanan berhasil dibuat!');
     }
 
     /**
@@ -195,5 +236,5 @@ class OrderController extends Controller
 
         // Mengembalikan respon jika berhasil
         return redirect()->route('keranjang')->with('success', 'Produk berhasil ditambahkan ke keranjang!');
-    }
+    }   
 }

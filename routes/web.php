@@ -109,6 +109,7 @@ Route::middleware(['role:Customer'])->group(function () {
     Route::resource('/pesanan', OrderController::class)->parameters([
         'pesanan' => 'order'
     ]);
+    Route::get('/get-snap-token/{orderId}', [OrderController::class, 'getSnapToken']);
     Route::post('/checkout', [OrderController::class, 'checkout']);
     Route::get('/cancel', [OrderController::class, 'cancelOrder']);
 
