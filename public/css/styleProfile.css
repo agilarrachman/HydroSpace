@@ -22321,7 +22321,7 @@ button.menu-link:hover{
   background-color: var(--bg-light);
 }
 
-.status.payment{
+.status.canceled{
   width: fit-content;
   background-color: #F6D2D2;
   color: red;

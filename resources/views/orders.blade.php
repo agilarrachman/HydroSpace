@@ -136,71 +136,12 @@
             </a>
           </div>
 
-          <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-            <h5 class="mb-0">Hai, Agil ArRachman!</h5>
+          <div class="navbar-nav-right w-100 d-flex justify-content-between align-items-center" id="navbar-collapse">
+            <h5 class="mb-0">Hai, {{ auth()->user()->username }}!</h5>
 
-            <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-              <!-- User -->
-              <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                  <div class="avatar avatar-online">
-                    <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
-                  </div>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end">
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <div class="d-flex">
-                        <div class="flex-shrink-0 me-3">
-                          <div class="avatar avatar-online">
-                            <img src="../images/team/3.jpg" alt class="w-px-40 h-auto rounded-circle" />
-                          </div>
-                        </div>
-                        <div class="flex-grow-1">
-                          <span class="fw-medium d-block">Agil ArRachman</span>
-                          <small class="text-muted">agil.arrachman</small>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-user me-2"></i>
-                      <span class="align-middle">My Profile</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <i class="bx bx-cog me-2"></i>
-                      <span class="align-middle">Settings</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="#">
-                      <span class="d-flex align-items-center align-middle">
-                        <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
-                        <span class="flex-grow-1 align-middle ms-1">Billing</span>
-                        <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      </span>
-                    </a>
-                  </li>
-                  <li>
-                    <div class="dropdown-divider"></div>
-                  </li>
-                  <li>
-                    <a class="dropdown-item" href="javascript:void(0);">
-                      <i class="bx bx-power-off me-2"></i>
-                      <span class="align-middle">Log Out</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <!--/ User -->
-            </ul>
+            <div class="avatar avatar">
+              <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 my-auto rounded-circle object-fit-cover" />
+            </div>
           </div>
         </nav>
 
@@ -218,208 +159,99 @@
             <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
 
             <div class="cards d-flex flex-column gap-3">
-
+              @if ($orders->isNotEmpty())
+              @foreach ($orders as $order)
               <div class="card">
                 <div class="card-body">
                   <div class="d-lg-flex flex-lg-row-reverse justify-content-lg-between">
-                    <p class="status process px-3 rounded-pill d-inline-block w-auto">Sedang Proses</p>
-                    <h5 class="mb-4">ID Pesanan: HYD00189303</h5>
+                    @if ($order->status == 'Dikemas')
+                    <p class="status process px-3 rounded-pill d-inline-block w-auto">Sedang Dikemas</p>
+                    @elseif ($order->status == 'Diantar')
+                    <p class="status process px-3 rounded-pill d-inline-block w-auto">Sedang Diantar</p>
+                    @elseif ($order->status == 'Selesai')
+                    <p class="status success px-3 rounded-pill d-inline-block w-auto">Selesai</p>
+                    @elseif ($order->status == 'Dibatalkan')
+                    <p class="status canceled px-3 rounded-pill d-inline-block w-auto">Dibatalkan</p>
+                    @else
+                    <p class="status unknown px-3 rounded-pill d-inline-block w-auto">{{ $order->status }}</p>
+                    @endif
+                    <h5 class="mb-4">ID Pesanan: {{ $order->id }}</h5>
                   </div>
 
+                  @if ($order->orderItems->isNotEmpty())
+                  @foreach ($order->orderItems as $orderItem)
                   <div class="product d-flex gap-3">
-                    <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                    <div class="image-product d-flex">
+                      @if ($orderItem->product && $orderItem->product->picture1)
+                      <img src="{{ asset('storage/' . $orderItem->product->picture1) }}" alt="{{ $orderItem->product->name }}" class="h-100 object-fit-cover p-0 m-auto" style="background-color: transparent; border: none;">
+                      @else
+                      <img src="/images/default-product.png" alt="Produk Tidak Tersedia" class="h-100 object-fit-cover p-0">
+                      @endif
                     </div>
                     <div class="d-info d-flex flex-grow-1 justify-content-between">
                       <div class="d-flex flex-column">
-                        <label for="cat_4">🌱 Bibit & Benih</label>
-                        <h4 class="text-wrap">Bibit Sawi</h4>
-                        <p class="m-0"><b>Jumlah:</b> 5pcs</p>
+                        @if ($orderItem->product && $orderItem->product->category)
+                        <label for="cat_{{ $orderItem->product->category->id }}">{{ $orderItem->product->category->name }}</label>
+                        @else
+                        <label for="cat_unknown">Kategori Tidak Diketahui</label>
+                        @endif
+                        @if ($orderItem->product)
+                        <h4 class="text-wrap">{{ $orderItem->product->name }}</h4>
+                        @else
+                        <h4 class="text-wrap">Produk Tidak Ditemukan</h4>
+                        @endif
+                        <p class="m-0"><b>Jumlah:</b> {{ $orderItem->quantity }}pcs</p>
                       </div>
-                      <span class="d-price fw-bold">Rp20.000</span>
+                      @if ($orderItem->product)
+                      <span class="d-price fw-bold">Rp{{ number_format($orderItem->product->price, 0, ',', '.') }}</span>
+                      @else
+                      <span class="d-price fw-bold">Rp0</span>
+                      @endif
                     </div>
                   </div>
-
+                  @if (!$loop->last)
                   <hr class="my-3" style="opacity: 0.10;">
-
-                  <div class="product d-flex gap-3">
-                    <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
-                    </div>
-                    <div class="d-info d-flex flex-grow-1 justify-content-between">
-                      <div class="d-flex flex-column">
-                        <label for="cat_4">🌱 Bibit & Benih</label>
-                        <h4 class="text-wrap">Bibit Sawi</h4>
-                        <p class="m-0"><b>Jumlah:</b> 5pcs</p>
-                      </div>
-                      <span class="d-price fw-bold">Rp20.000</span>
-                    </div>
-                  </div>
-
-                  <hr class="my-3" style="opacity: 0.10;">
-
-                  <div class="product d-flex gap-3">
-                    <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
-                    </div>
-                    <div class="d-info d-flex flex-grow-1 justify-content-between">
-                      <div class="d-flex flex-column">
-                        <label for="cat_4">🌱 Bibit & Benih</label>
-                        <h4 class="text-wrap">Bibit Sawi</h4>
-                        <p class="m-0"><b>Jumlah:</b> 5pcs</p>
-                      </div>
-                      <span class="d-price fw-bold">Rp20.000</span>
-                    </div>
-                  </div>
+                  @endif
+                  @endforeach
+                  @else
+                  <p>Tidak ada item dalam pesanan ini.</p>
+                  @endif
 
                   <div class="detail-order mt-4">
                     <div class="w-100 d-flex justify-content-between gap-2">
                       <p class="m-0"><b>Alamat Pengiriman: </b></p>
-                      <p class="m-0 text-truncate text-end">Jl. Raya Cipadung No. 1, Bandung</p>
+                      <p class="m-0 text-truncate text-end">{{ $order->full_address ?? '-' }}, {{ $cities->firstWhere('id', $order->city)->name }}, {{ $provinces->firstWhere('id', $order->province)->name }}</p>
                     </div>
 
                     <div class="w-100 d-flex justify-content-between gap-2">
                       <p class="m-0"><b>Waktu Pemesanan: </b></p>
-                      <p class="m-0 text-truncate text-end">12 Agustus 2021, 12:00</p>
+                      <p class="m-0 text-truncate text-end">{{ $order->created_at ? $order->created_at->format('d F Y, H:i') : '-' }}</p>
                     </div>
 
                     <div class="w-100 d-flex justify-content-between gap-2">
                       <p class="m-0"><b>Metode Pembayaran: </b></p>
-                      <p class="m-0 text-truncate text-end">Transfer Bank</p>
+                      <p class="m-0 text-truncate text-end"><span style="text-transform: uppercase;">{{ $order->payment_method ?? '-' }}</span></p>
                     </div>
 
                     <div class="w-100 d-flex justify-content-between gap-2">
                       <p class="m-0"><b>Total: </b></p>
-                      <p class="m-0 text-truncate text-end">Rp60.000</p>
+                      <p class="m-0 text-truncate text-end">Rp{{ number_format($order->total_amount ?? 0, 0, ',', '.') }}</p>
                     </div>
                   </div>
 
                   <div class="w-100 mt-4 d-flex justify-content-between gap-3">
                     <a href="/chat" class="btn-line flex-grow-1">Hubungi Admin</a>
-                    <a href="/pesanan/id" class="btn-primary px-3 py-2 rounded-pill flex-grow-1 text-center">Lihat Pesanan</a>
+                    <a href="{{ route('pesanan.show', $order->id) }}" class="btn-primary px-3 py-2 rounded-pill flex-grow-1 text-center">Lihat Pesanan</a>
                   </div>
 
                 </div>
               </div>
-
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-lg-flex flex-lg-row-reverse justify-content-lg-between">
-                    <p class="status payment px-3 rounded-pill d-inline-block w-auto">Belum Dibayar</p>
-                    <h5 class="mb-4">ID Pesanan: HYD00189303</h5>
-                  </div>
-
-                  <div class="product d-flex gap-3">
-                    <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
-                    </div>
-                    <div class="d-info d-flex flex-grow-1 justify-content-between">
-                      <div class="d-flex flex-column">
-                        <label for="cat_4">🌱 Bibit & Benih</label>
-                        <h4 class="text-wrap">Bibit Sawi</h4>
-                        <p class="m-0"><b>Jumlah:</b> 5pcs</p>
-                      </div>
-                      <span class="d-price fw-bold">Rp20.000</span>
-                    </div>
-                  </div>
-
-                  <div class="detail-order mt-4">
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Alamat Pengiriman: </b></p>
-                      <p class="m-0 text-truncate text-end">Jl. Raya Cipadung No. 1, Bandung</p>
-                    </div>
-
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Waktu Pemesanan: </b></p>
-                      <p class="m-0 text-truncate text-end">12 Agustus 2021, 12:00</p>
-                    </div>
-
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Metode Pembayaran: </b></p>
-                      <p class="m-0 text-truncate text-end">Transfer Bank</p>
-                    </div>
-
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Total: </b></p>
-                      <p class="m-0 text-truncate text-end">Rp60.000</p>
-                    </div>
-                  </div>
-
-                  <div class="w-100 mt-4 d-flex justify-content-between gap-3">
-                    <a href="/chat" class="btn-line flex-grow-1">Hubungi Admin</a>
-                    <a href="/pesanan/id" class="btn-primary px-3 py-2 rounded-pill flex-grow-1 text-center">Lihat Pesanan</a>
-                  </div>
-
-                </div>
+              @endforeach
+              @else
+              <div class="alert alert-info" role="alert" style="background-color: #e1ebe2; color: #354e33;">
+                Kamu belum memiliki pesanan. <a href="/produk" class="alert-link" style="color: #354e33;">Yuk, mulai berbelanja!</a>
               </div>
-
-              <div class="card">
-                <div class="card-body">
-                  <div class="d-lg-flex flex-lg-row-reverse justify-content-lg-between">
-                    <p class="status done px-3 rounded-pill d-inline-block w-auto">Selesai</p>
-                    <h5 class="mb-4">ID Pesanan: HYD00189303</h5>
-                  </div>
-
-                  <div class="product d-flex gap-3">
-                    <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
-                    </div>
-                    <div class="d-info d-flex flex-grow-1 justify-content-between">
-                      <div class="d-flex flex-column">
-                        <label for="cat_4">🌱 Bibit & Benih</label>
-                        <h4 class="text-wrap">Bibit Sawi</h4>
-                        <p class="m-0"><b>Jumlah:</b> 5pcs</p>
-                      </div>
-                      <span class="d-price fw-bold">Rp20.000</span>
-                    </div>
-                  </div>
-
-                  <hr class="my-3" style="opacity: 0.10;">
-
-                  <div class="product d-flex gap-3">
-                    <div class="image-product">
-                      <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
-                    </div>
-                    <div class="d-info d-flex flex-grow-1 justify-content-between">
-                      <div class="d-flex flex-column">
-                        <label for="cat_4">🌱 Bibit & Benih</label>
-                        <h4 class="text-wrap">Bibit Sawi</h4>
-                        <p class="m-0"><b>Jumlah:</b> 5pcs</p>
-                      </div>
-                      <span class="d-price fw-bold">Rp20.000</span>
-                    </div>
-                  </div>
-
-                  <div class="detail-order mt-4">
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Alamat Pengiriman: </b></p>
-                      <p class="m-0 text-truncate text-end">Jl. Raya Cipadung No. 1, Bandung</p>
-                    </div>
-
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Waktu Pemesanan: </b></p>
-                      <p class="m-0 text-truncate text-end">12 Agustus 2021, 12:00</p>
-                    </div>
-
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Metode Pembayaran: </b></p>
-                      <p class="m-0 text-truncate text-end">Transfer Bank</p>
-                    </div>
-
-                    <div class="w-100 d-flex justify-content-between gap-2">
-                      <p class="m-0"><b>Total: </b></p>
-                      <p class="m-0 text-truncate text-end">Rp60.000</p>
-                    </div>
-                  </div>
-
-                  <div class="w-100 mt-4 d-flex justify-content-between gap-3">
-                    <a href="/chat" class="btn-line flex-grow-1">Hubungi Admin</a>
-                    <a href="/pesanan/id" class="btn-primary px-3 py-2 rounded-pill flex-grow-1 text-center">Lihat Pesanan</a>
-                  </div>
-
-                </div>
-              </div>
-
+              @endif
             </div>
 
           </div>

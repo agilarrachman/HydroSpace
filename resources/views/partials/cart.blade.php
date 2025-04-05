@@ -57,18 +57,10 @@
                 </div>
                 @endforeach
             </div>
-
-            <div class="d-flex justify-content-between">
-                <div id="total-price col-4 ps-2" class="d-flex flex-column">
-                    <span style="font-size: small; color: #354E33; height: 20px;">Total Harga</span>
-                    <span id="total-price-value" style="color: #354E33">
-                        Rp{{ number_format($totalPrice, 0, ',', '.') }}
-                    </span>
-                </div>
-                <button type="submit" class="col-8 btn-primary text-center rounded-20 py-2 mb-0 mt-auto">
-                    Checkout
-                </button>
-            </div>
+            
+            <button type="submit" class="w-100 btn-primary text-center rounded-20 py-2 mb-0 mt-auto">
+                Checkout
+            </button>
         </form>
 
 

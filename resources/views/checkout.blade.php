@@ -136,7 +136,7 @@
                         <div id='submit w-100' class="mt20 order-last">
                             <div class="de_checkbox mb-3 px-0">
                                 <input id="read" name="read" type="checkbox" value="Ya">
-                                <label for="read">Saya telah membaca ketentuan pemesanan</label>
+                                <label for="read" style="cursor: pointer;">Saya telah membaca ketentuan pemesanan</label>
                             </div>
                             <div class="d-flex">
                                 <a href="/cancel" class="btn-outline col-6">Batalkan Pesanan</a>
@@ -155,7 +155,7 @@
                                 <h5 class="mb-3"><b>Informasi Pengiriman</b></h5>
                                 <div class="de_checkbox">
                                     <input type="checkbox" id="useMyAddress" name="useMyAddress" onclick="fillCustomerAddress()">
-                                    <label for="useMyAddress">Alamat Saya</label>
+                                    <label for="useMyAddress" style="cursor: pointer;">Alamat Saya</label>
                                 </div>
                             </div>
 

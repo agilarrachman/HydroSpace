@@ -11,9 +11,6 @@ use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
-use Midtrans\Config;
-use Midtrans\Snap;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -23,9 +20,24 @@ class OrderController extends Controller
      */
     public function index()
     {
+        $orders = Order::where('customer_id', Auth::id())
+            ->where('status', '!=', 'Keranjang')
+            ->with('orderItems.product')
+            ->get();
+
+        $provinces = Province::all();
+        $cities = City::all();
+        $districts = District::all();
+        $villages = Village::all();
+
         return view('orders', [
             "title" => "HydroSpace | Pesanan Saya",
             "active" => "Pesanan Saya",
+            'orders' => $orders,
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'districts' => $districts,
+            'villages' => $villages,
         ]);
     }
 
@@ -132,7 +144,7 @@ class OrderController extends Controller
                 'phone_number' => $request->phone_number,
                 'province' => $request->province,
                 'city' => $request->city,
-                'subdistrict' => $request->district,
+                'district' => $request->district,
                 'village' => $request->village,
                 'full_address' => $request->full_address,
             ]);
@@ -165,9 +177,20 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
+        $order->load('orderItems.product');
+        $provinces = Province::all();
+        $cities = City::all();
+        $districts = District::all();
+        $villages = Village::all();
+
         return view('orderDetail', [
-            "title" => "HydroSpace | Pesanan Saya",
+            "title" => "HydroSpace | Pesanan " . $order->id,
             "active" => "Pesanan Saya",
+            "order" => $order,
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'districts' => $districts,
+            'villages' => $villages
         ]);
     }
 
