@@ -41,6 +41,36 @@ class OrderController extends Controller
         ]);
     }
 
+    public function indexAdmin()
+    {
+        $orders = Order::where('status', '!=', 'Keranjang')
+            ->with('orderItems.product')
+            ->when(request()->filled('search'), function ($query) {
+                $search = request()->input('search');
+                $query->where('id', 'like', "%$search%")
+                    ->orWhere(function ($subQuery) use ($search) {
+                        $subQuery->where('status', '!=', 'Keranjang') // Tambahkan kondisi ini
+                            ->whereHas('customer', function ($q) use ($search) {
+                                $q->where('name', 'like', "%$search%");
+                            });
+                    })
+                    ->orWhere(function ($subQuery) use ($search) {
+                        $subQuery->where('status', '!=', 'Keranjang') // Tambahkan kondisi ini
+                            ->whereHas('orderItems.product', function ($q) use ($search) {
+                                $q->where('name', 'like', "%$search%");
+                            });
+                    });
+            })
+            ->latest()
+            ->paginate(10);
+
+        return view('dashboard.orders.index', [
+            "title" => "HydroSpace | Daftar Pesanan",
+            "active" => "Pesanan",
+            'orders' => $orders,
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */
@@ -194,6 +224,25 @@ class OrderController extends Controller
         ]);
     }
 
+    public function showAdmin(Order $order)
+    {
+        $order->load('orderItems.product');
+        $provinces = Province::all();
+        $cities = City::all();
+        $districts = District::all();
+        $villages = Village::all();
+
+        return view('dashboard.orders.show', [
+            "title" => "HydroSpace | Detail Pesanan",
+            "active" => "Pesanan",
+            "order" => $order,
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'districts' => $districts,
+            'villages' => $villages
+        ]);
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
@@ -205,9 +254,15 @@ class OrderController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Order $order)
+    public function updateStatus(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'id' => 'required|exists:orders,id',
+            'status' => 'required|in:Keranjang,Belum Bayar,Dikemas,Diantar,Selesai,Dibatalkan',
+        ]);
+
+        Order::where('id', $validatedData['id'])->update(['status' => $validatedData['status']]);
+        return redirect('/dashboard/orders/' . $validatedData['id']);
     }
 
     /**
@@ -231,8 +286,8 @@ class OrderController extends Controller
 
         // Mencari order yang sedang berjalan (status "Keranjang") untuk customer ini
         $order = Order::where('customer_id', $user->id)
-                    ->where('status', 'Keranjang')
-                    ->first();
+            ->where('status', 'Keranjang')
+            ->first();
 
         // Jika tidak ada order yang sedang berjalan, buat order baru
         if (!$order) {
@@ -259,5 +314,5 @@ class OrderController extends Controller
 
         // Mengembalikan respon jika berhasil
         return redirect()->route('keranjang')->with('success', 'Produk berhasil ditambahkan ke keranjang!');
-    }   
+    }
 }

@@ -169,7 +169,7 @@
                     @elseif ($order->status == 'Diantar')
                     <p class="status process px-3 rounded-pill d-inline-block w-auto">Sedang Diantar</p>
                     @elseif ($order->status == 'Selesai')
-                    <p class="status success px-3 rounded-pill d-inline-block w-auto">Selesai</p>
+                    <p class="status done px-3 rounded-pill d-inline-block w-auto">Selesai</p>
                     @elseif ($order->status == 'Dibatalkan')
                     <p class="status canceled px-3 rounded-pill d-inline-block w-auto">Dibatalkan</p>
                     @else

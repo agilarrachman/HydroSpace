@@ -147,6 +147,9 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
 
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
 
+    Route::resource('/video-categories', VideoCategoryController::class);
+    Route::get('/videoCategories/checkSlug/', [VideoCategoryController::class, 'checkSlug']);
+
     Route::resource('/videos', VideoController::class);
     Route::get('/video/checkSlug/', [VideoController::class, 'checkSlug']);
     Route::get('/getProducts', [VideoController::class, 'getProducts']);
@@ -183,29 +186,14 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
 
     Route::resource('/product-categories', ProductCategoryController::class);
     Route::get('/productCategories/checkSlug/', [ProductCategoryController::class, 'checkSlug']);
-    Route::resource('/video-categories', VideoCategoryController::class);
-    Route::get('/videoCategories/checkSlug/', [VideoCategoryController::class, 'checkSlug']);
 
     Route::get('/getProducts', function () {
         return response()->json(Product::select('id', 'name')->get());
     });
-
     Route::resource('/products', ProductController::class);
-
     Route::get('/Product/checkSlug', [ProductController::class, 'checkSlug']);
-});
 
-Route::get('/dashboard/orders', function () {
-    return view('dashboard.orders', [
-        "title" => "HydroSpace | Daftar Pesanan",
-        "active" => "Pesanan"
-    ]);
+    Route::get('/orders', [OrderController::class, 'indexAdmin']);
+    Route::put('/updateStatus', [OrderController::class, 'updateStatus'])->name('dashboard.orders.updateStatus');
+    Route::get('/orders/{order:id}', [OrderController::class, 'showAdmin']);
 });
-
-Route::get('/dashboard/orders/id', function () {
-    return view('dashboard.orderDetail', [
-        "title" => "HydroSpace | Detail Pesanan",
-        "active" => "Pesanan"
-    ]);
-});
-// END DASHBOARD ROUTE

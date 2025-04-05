@@ -75,7 +75,7 @@
                             @auth
                             <div class="d-flex">
                                 <a class="de-icon-counter" href="/pesanan">
-                                    <div class="d-counter">0</div>
+                                    <div class="d-counter">{{ $totalOrder }}</div>
                                     <img src="/images/ui/order.svg" class="" alt="">
                                 </a>
 

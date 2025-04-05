@@ -244,7 +244,7 @@
                 @elseif ($order->status == 'Diantar')
                 <p class="status process px-3 rounded-pill d-inline-block w-auto">Sedang Diantar</p>
                 @elseif ($order->status == 'Selesai')
-                <p class="status success px-3 rounded-pill d-inline-block w-auto">Selesai</p>
+                <p class="status done px-3 rounded-pill d-inline-block w-auto">Selesai</p>
                 @elseif ($order->status == 'Dibatalkan')
                 <p class="status canceled px-3 rounded-pill d-inline-block w-auto">Dibatalkan</p>
                 @else
@@ -269,15 +269,15 @@
                     <div class="status-text">Dikemas</div>
                   </div>
 
-                  <!-- Fase 2: Dikirim -->
+                  <!-- Fase 2: Diantar -->
                   <div class="status-item">
                     <div class="circle {{ $order->status == 'Diantar' || $order->status == 'Selesai' ? 'active' : '' }}">
-                      <!-- SVG Icon untuk Dikirim -->
+                      <!-- SVG Icon untuk Diantar -->
                       <svg width="31" height="22" viewBox="0 0 31 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23.3918 19.8645C24.5236 19.8645 25.4372 18.9509 25.4372 17.8191C25.4372 16.6873 24.5236 15.7736 23.3918 15.7736C22.26 15.7736 21.3463 16.6873 21.3463 17.8191C21.3463 18.9509 22.26 19.8645 23.3918 19.8645ZM25.4372 7.5918H22.0281V11.0009H28.11L25.4372 7.5918ZM7.02814 19.8645C8.15996 19.8645 9.0736 18.9509 9.0736 17.8191C9.0736 16.6873 8.15996 15.7736 7.02814 15.7736C5.89632 15.7736 4.98269 16.6873 4.98269 17.8191C4.98269 18.9509 5.89632 19.8645 7.02814 19.8645ZM26.1191 5.54634L30.21 11.0009V17.8191H27.4827C27.4827 20.0827 25.6554 21.91 23.3918 21.91C21.1281 21.91 19.3009 20.0827 19.3009 17.8191H11.1191C11.1191 20.0827 9.29178 21.91 7.02814 21.91C4.76451 21.91 2.93723 20.0827 2.93723 17.8191H0.209961V2.81907C0.209961 1.30543 1.4236 0.0917969 2.93723 0.0917969H22.0281V5.54634H26.1191ZM2.93723 2.81907V15.0918H3.9736C4.7236 14.26 5.81451 13.7282 7.02814 13.7282C8.24178 13.7282 9.33269 14.26 10.0827 15.0918H19.3009V2.81907H2.93723Z" fill="currentColor" />
                       </svg>
                     </div>
-                    <div class="status-text">Dikirim</div>
+                    <div class="status-text">Diantar</div>
                   </div>
 
                   <!-- Fase 3: Selesai -->

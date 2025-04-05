@@ -205,6 +205,8 @@ class ProductController extends Controller
 
         // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
         $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
+        
+        $totalOrder = Order::where('customer_id', $user->id)->count();
 
         return view('products', [
             "title" => $category ? $category->name : "Produk",  // Jika kategori ditemukan, gunakan namanya, jika tidak "Produk"
@@ -219,6 +221,7 @@ class ProductController extends Controller
             "orderItems" => $orderItems,  // Mengirimkan orderItems ke view jika ada
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
+            'totalOrder' => $totalOrder,
         ]);
     }
 
@@ -233,6 +236,7 @@ class ProductController extends Controller
 
         // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
         $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
+        $totalOrder = Order::where('customer_id', $user->id)->count();
 
         return view('viewProduct', [
             "title" => $product->name . " | HydroSpace",
@@ -242,6 +246,7 @@ class ProductController extends Controller
             "orderItems" => $orderItems,  // Mengirimkan orderItems ke view jika ada
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
+            'totalOrder' => $totalOrder,
         ]);
     }
 
