@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -171,6 +172,7 @@
         /* Chatadmin styling End */
     </style>
 </head>
+
 <body>
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
@@ -263,4 +265,5 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
+
 </html>

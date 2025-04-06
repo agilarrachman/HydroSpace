@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('chats', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('customer_id')->references(column: 'id')->on(table: 'users');
-            $table->foreignId('admin_id')->references(column: 'id')->on(table: 'users');
+            // $table->foreignId('customer_id')->references(column: 'id')->on(table: 'users');
+            // $table->foreignId('admin_id')->references(column: 'id')->on(table: 'users');
+            $table->foreignId('from_user_id')->constrained(table: 'users');
+            $table->foreignId('to_user_id')->constrained(table: 'users');
             $table->text('message');
             $table->timestamps();
         });

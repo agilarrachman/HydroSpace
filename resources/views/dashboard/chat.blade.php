@@ -212,12 +212,18 @@
                         <div class="card w-25 h-100 overflow-auto d-none d-lg-block">
                             <ul class="nav nav-pills flex-column" id="customer-tabs" role="tablist">
                             @foreach ($users as $user)
-                                <li class="nav-item d-flex align-items-center gap-2 justify-content-start" role="presentation">
-                                <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
-                                <button class="nav-link text-start" id="customer{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#customer{{ $loop->index + 1 }}-chat" type="button" role="tab">
-                                    <a href="{{ route('chat', ['user' => $user->id]) }}">{{ $user->username }}</a>
-                                </button>
+                                <li class="nav-item" role="presentation">
+                                    <a class="nav-link d-flex align-items-center justify-content-start gap-4 py-3" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
+                                        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                        <p class="mb-0">{{ $user->username }}</p>
+                                    </a>
                                 </li>
+                                <style>
+                                    .nav-link:hover {
+                                        background-color: rgba(53, 78, 51, 0.1);
+                                        color: #354e33;
+                                    }
+                                </style>
                             @endforeach
                             </ul>
                         </div>

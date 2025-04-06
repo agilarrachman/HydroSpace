@@ -10,6 +10,8 @@ class Chat extends Model
     /** @use HasFactory<\Database\Factories\ChatFactory> */
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function customers()
     {
         return $this->belongsTo(User::class, 'customer_id');
