@@ -18,15 +18,46 @@
     <!-- color scheme -->
     <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 
+    <!-- Midtrans -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-XWPVRwTXXJ0A8RT_"></script>
+
     <style>
         .header-light.transparent {
             background-color: #F8FBF3 !important;
+        }
+
+        input[type="checkbox"]:checked {
+            accent-color: #354E33;
         }
 
         @media (min-width: 992px) {
             #crumb {
                 padding-top: 140px !important
             }
+        }
+
+        .btn-outline {
+            display: inline-block;
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 10px 20px;
+            color: #354E33;
+            border: 2px solid #354E33;
+            border-radius: 100px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-outline:hover {
+            background-color: rgb(225, 228, 218);
+        }
+
+        .btn-main:disabled {
+            background-color: #ccc !important;
+            cursor: not-allowed;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -63,46 +94,33 @@
             </section>
 
             <section class="pt-3" style="padding-bottom: 140px;">
+
                 <h3 class="fw-bold mx-auto text-center mt-3 mb-5">Pesanan Kamu</h3>
-                <div class="container d-flex flex-column-reverse flex-lg-row gap-5 justify-content-between">
-                    <div class="col-lg-5">
+                <div class="container d-flex flex-column-reverse flex-lg-row justify-content-between">
+                    <div class="col-lg-6 pe-5">
                         <h5 class="mb-3"><b>Detail Pesanan</b></h5>
 
+                        @foreach($orderItems as $item)
                         <div class="product d-flex gap-3">
-                            <div class="image-product">
-                                <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
+                            <div class="image-product d-flex">
+                                <img src="{{ asset('storage/' . $item->product->picture1) }}" alt="{{ $item->product->name }}" class="h-100 object-fit-cover p-0 m-auto" style="background-color: transparent; border: none;">
                             </div>
-                            <div class="d-info d-flex flex-grow-1 justify-content-between">
-                                <div class="d-flex flex-column">
-                                    <label for="cat_4">🌱 Bibit & Benih</label>
-                                    <h4 class="text-wrap">Bibit Sawi</h4>
-                                    <p class="m-0"><b>Jumlah:</b> 5pcs</p>
+                            <div class="d-flex flex-column flex-grow-1">
+                                <label for="cat_{{ $item->product->id }}">{{ $item->product->category->name }}</label>
+                                <h4 class="text-wrap">{{ $item->product->name }}</h4>
+                                <div class="d-flex justify-content-between">
+                                    <p class="m-0"><b>Jumlah:</b> {{ $item->quantity }} pcs</p>
+                                    <span class="d-price">Rp{{ number_format($item->total_price, 0, ',', '.') }}</span>
                                 </div>
-                                <span class="d-price fw-bold">Rp20.000</span>
                             </div>
                         </div>
 
                         <hr class="my-3" style="opacity: 0.10;">
+                        @endforeach
 
-                        <div class="product d-flex gap-3">
-                            <div class="image-product">
-                                <img src="/images/shop/bibit-benih/bibit-sawi2.png" alt="" class="h-100 object-fit-cover p-0">
-                            </div>
-                            <div class="d-info d-flex flex-grow-1 justify-content-between">
-                                <div class="d-flex flex-column">
-                                    <label for="cat_4">🌱 Bibit & Benih</label>
-                                    <h4 class="text-wrap">Bibit Sawi</h4>
-                                    <p class="m-0"><b>Jumlah:</b> 5pcs</p>
-                                </div>
-                                <span class="d-price fw-bold">Rp20.000</span>
-                            </div>
-                        </div>
-
-                        <hr class="my-3" style="opacity: 0.50;">
-
-                        <div class="w-100 mt-3 d-flex justify-content-between gap-2">
+                        <div class="w-100 my-3 d-flex justify-content-between gap-2">
                             <h4 class="m-0">Total:</h4>
-                            <h4 class="m-0 text-truncate fw-bold text-end">Rp30.000</p>
+                            <h4 class="m-0 text-truncate fw-bold text-end">Rp{{ number_format($totalPrice, 0, ',', '.') }}</h4>
                         </div>
 
                         <div class="terms w-100">
@@ -118,83 +136,116 @@
                         <div id='submit w-100' class="mt20 order-last">
                             <div class="de_checkbox mb-3 px-0">
                                 <input id="read" name="read" type="checkbox" value="Ya">
-                                <label for="read">Saya telah membaca ketentuan pemesanan</label>
+                                <label for="read" style="cursor: pointer;">Saya telah membaca ketentuan pemesanan</label>
                             </div>
-                            <input type='submit' id='send_message' value='Buat Pesanan' class="btn-main w-100">
+                            <div class="d-flex">
+                                <a href="/cancel" class="btn-outline col-6">Batalkan Pesanan</a>
+                                <form id="payment-form" class="col-6 ms-2">
+                                    <input type="hidden" name="amount" value="{{ $totalPrice }}">
+                                    <input type='submit' id='pay-button' value='Bayar Sekarang' class="btn-main w-100 h-100">
+                                </form>
+                            </div>
                         </div>
                     </div>
 
-                    <div class="address col-lg-6">
-                        <div class="d-flex justify-content-between">
-                            <h5 class="mb-3"><b>Informasi Pengiriman</b></h5>
-                            <div class="de_checkbox">
-                                <input id="my_address" name="my_address" type="checkbox" value="Ya">
-                                <label for="my_address">Alamat Saya</label>
+                    <div class="address col-lg-6 ps-5">
+                        <form action="/pesanan" method="post" id="form">
+                            @csrf
+                            <div class="d-flex justify-content-between">
+                                <h5 class="mb-3"><b>Informasi Pengiriman</b></h5>
+                                <div class="de_checkbox">
+                                    <input type="checkbox" id="useMyAddress" name="useMyAddress" onclick="fillCustomerAddress()">
+                                    <label for="useMyAddress" style="cursor: pointer;">Alamat Saya</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <form name="contactForm" id="recipient_order_form" class="position-relative z1000" method="post" action="#">
+                            <input type="text" name="customer_id" value="{{ auth()->user()->id }}" hidden>
+                            <input type="hidden" name="status" value="Dikemas">
+
                             <div class="row g-3 mb-3">
+                                <input type="hidden" name="total_amount" value="{{ $totalPrice }}">
                                 <div class="field-set col-lg-6">
-                                    <label for="namaPenerima" class="form-label">Nama Penerima</label>
-                                    <input type="text" class="form-control" id="namaPenerima" name="namaPenerima" placeholder="Masukkan nama penerima pesanan" />
+                                    <label for="recipient" class="form-label">Nama Penerima</label>
+                                    <input type="text" class="form-control @error('recipient') is-invalid @enderror" id="recipient" name="recipient" placeholder="Masukkan nama penerima pesanan" value="{{ old('phone_number') }}" required />
+                                    @error('recipient')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                                 <div class="field-set col-lg-6">
-                                    <label for="nomorPenerima" class="form-label">Nomor Telepon Penerima</label>
-                                    <input type="text" class="form-control" id="nomorPenerima" name="nomorPenerima" placeholder="Masukkan nomor telepon penerima pesanan" />
+                                    <label for="phone_number" class="form-label">Nomor Telepon Penerima</label>
+                                    <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" placeholder="Cth: 081234567890" value="{{ old('phone_number') }}" required />
+                                    @error('phone_number')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="row g-3 mb-3">
                                 <div class="col-lg-6">
-                                    <label for="provinsi" class="form-label">Provinsi</label>
-                                    <select class="form-select" id="provinsi" aria-label="Default select example">
-                                        <option selected>Provinsi</option>
-                                        <option value="Jawa Barat">Jawa Barat</option>
-                                        <option value="Jawa Timur">Jawa Timur</option>
-                                        <option value="Jawa Tengah">Jawa Tengah</option>
+                                    <label for="province" class="form-label">Provinsi</label>
+                                    <select class="form-select" id="province" name="province" onchange="loadCities(this.value)">
+                                        <option selected disabled>Pilih Provinsi</option>
+                                        @foreach ($provinces as $province)
+                                        <option value="{{ $province->id }}" {{ old('province') == $province->id ? 'selected' : '' }}>
+                                            {{ $province->name }}
+                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="kota" class="form-label">Kota</label>
-                                    <select class="form-select" id="kota" aria-label="Default select example">
-                                        <option selected>Kota</option>
-                                        <option value="Kota Bogor">Kota Bogor</option>
-                                        <option value="Kabupaten Bogor">Kabupaten Bogor</option>
-                                        <option value="Sukabumi">Sukabumi</option>
+                                    <label for="city" class="form-label">Kota</label>
+                                    <select class="form-select" id="city" name="city" onchange="loadDistricts(this.value)">
+                                        <option selected disabled>Pilih Kota</option>
+                                        @foreach ($cities as $city)
+                                        <option value="{{ $city->id }}" {{ old('city') == $city->id ? 'selected' : '' }}>
+                                            {{ $city->name }}
+                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="row g-3 mb-3">
-                                <div class="col-lg-4">
-                                    <label for="kecamatan" class="form-label">Kecamatan</label>
-                                    <select class="form-select" id="kecamatan" aria-label="Default select example">
-                                        <option selected>Kecamatan</option>
-                                        <option value="Bogor Tengah">Bogor Tengah</option>
-                                        <option value="Bogor Selatan">Bogor Selatan</option>
-                                        <option value="Bogor Utara">Bogor Utara</option>
+                                <div class="col-lg-6">
+                                    <label for="district" class="form-label">Kecamatan</label>
+                                    <select class="form-select" id="district" name="district" onchange="loadVillages(this.value)">
+                                        <option selected disabled>Pilih Kecamatan</option>
+                                        @foreach ($districts as $district)
+                                        <option value="{{ $district->id }}" {{ old('district') == $district->id ? 'selected' : '' }}>
+                                            {{ $district->name }}
+                                        </option>
+                                        @endforeach
                                     </select>
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="kelurahan" class="form-label">Kelurahan</label>
-                                    <select class="form-select" id="kelurahan" aria-label="Default select example">
-                                        <option selected>Kelurahan</option>
-                                        <option value="Cidangiang">Cidangiang</option>
-                                        <option value="Babakan">Babakan</option>
-                                        <option value="Sempur">Sempur</option>
+                                <div class="col-lg-6">
+                                    <label for="village" class="form-label">Kelurahan</label>
+                                    <select class="form-select" id="village" name="village">
+                                        <option selected disabled>Pilih Kelurahan</option>
+                                        @foreach ($villages as $village)
+                                        <option value="{{ $village->id }}" {{ old('village') == $village->id ? 'selected' : '' }}>
+                                            {{ $village->name }}
+                                        </option>
+                                        @endforeach
                                     </select>
-                                </div>
-                                <div class="col-lg-4">
-                                    <label for="exampleFormControlSelect1" class="form-label">Kode Pos</label>
-                                    <input type="number" class="form-control" id="kodePos" name="kodePos" placeholder="Kode Pos" value="123456" />
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="alamat" class="form-label">Alamat Lengkap</label>
-                                <textarea class="form-control" id="alamat" rows="3" style="min-height: 240px;"></textarea>
+                                <label for="full_address" class="form-label">Alamat Lengkap</label>
+                                <textarea class="form-control" id="full_address" name="full_address" rows="3" style="min-height: 200px;" placeholder="Masukkan alamat lengkap Anda, termasuk patokan, gang, nomor rumah, hingga link Google Maps jika tersedia. 
+Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)" required>{{ old('full_address')}}</textarea>
                             </div>
+                            @if(session('selected_items'))
+                            @foreach(session('selected_items') as $itemId)
+                            <input type="hidden" name="selected_items[]" value="{{ $itemId }}">
+                            @endforeach
+                            @endif
                         </form>
                     </div>
                 </div>
+
+
             </section>
 
         </div>
@@ -215,6 +266,187 @@
     ================================================== -->
     <script src="/js/plugins.js"></script>
     <script src="/js/designesia.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let checkbox = document.getElementById("read");
+            let submitButton = document.getElementById("pay-button");
+
+            // Saat pertama kali halaman dimuat, buat tombol tidak bisa diklik
+            submitButton.disabled = true;
+
+            // Tambahkan event listener untuk mendeteksi perubahan pada checkbox
+            checkbox.addEventListener("change", function() {
+                submitButton.disabled = !this.checked;
+            });
+        });
+
+
+        function fillCustomerAddress() {
+            let isChecked = document.getElementById('useMyAddress').checked;
+
+            document.getElementById('recipient').value = isChecked ? "{{ $customer->name }}" : "";
+            document.getElementById('phone_number').value = isChecked ? "{{ $customer->phone_number }}" : "";
+            document.getElementById('province').value = isChecked ? "{{ $customer->province }}" : "";
+            document.getElementById('city').value = isChecked ? "{{ $customer->city }}" : "";
+            document.getElementById('district').value = isChecked ? "{{ $customer->district }}" : "";
+            document.getElementById('village').value = isChecked ? "{{ $customer->village }}" : "";
+            document.getElementById('full_address').value = isChecked ? "{{ $customer->full_address }}" : "";
+        }
+
+        function loadCities(provinceId) {
+            // Reset Kota, Kecamatan, dan Kelurahan
+            let citySelect = document.getElementById('city');
+            let districtSelect = document.getElementById('district');
+            let villageSelect = document.getElementById('village');
+
+            citySelect.innerHTML = '<option selected disabled>Pilih Kota</option>';
+            districtSelect.innerHTML = '<option selected disabled>Pilih Kecamatan</option>';
+            villageSelect.innerHTML = '<option selected disabled>Pilih Kelurahan</option>';
+
+            // Fetch data kota berdasarkan provinsi
+            fetch(`/get-cities/${provinceId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(city => {
+                        citySelect.innerHTML += `<option value="${city.id}">${city.name}</option>`;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function loadDistricts(cityId) {
+            // Reset Kecamatan dan Kelurahan
+            let districtSelect = document.getElementById('district');
+            let villageSelect = document.getElementById('village');
+
+            districtSelect.innerHTML = '<option selected disabled>Pilih Kecamatan</option>';
+            villageSelect.innerHTML = '<option selected disabled>Pilih Kelurahan</option>';
+
+            // Fetch data kecamatan berdasarkan kota
+            fetch(`/get-districts/${cityId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(district => {
+                        districtSelect.innerHTML += `<option value="${district.id}">${district.name}</option>`;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        function loadVillages(districtId) {
+            // Reset Kelurahan
+            let villageSelect = document.getElementById('village');
+            villageSelect.innerHTML = '<option selected disabled>Pilih Kelurahan</option>';
+
+            // Fetch data kelurahan berdasarkan kecamatan
+            fetch(`/get-villages/${districtId}`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(village => {
+                        villageSelect.innerHTML += `<option value="${village.id}">${village.name}</option>`;
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const paymentForm = document.getElementById('payment-form');
+            const payButton = document.getElementById('pay-button');
+            const orderForm = document.getElementById('form'); // Dapatkan form pesanan
+
+            if (paymentForm && orderForm) {
+                paymentForm.addEventListener('submit', function(event) {
+                    event.preventDefault(); // Mencegah form submit biasa
+
+                    const amountInput = paymentForm.querySelector('input[name="amount"]');
+                    const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+                    if (amountInput) {
+                        const amount = parseInt(amountInput.value);
+
+                        fetch('/place-order', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json',
+                                    'X-CSRF-TOKEN': csrfToken
+                                },
+                                body: JSON.stringify({
+                                    amount: amount,
+                                })
+                            })
+                            .then(response => response.json())
+                            .then(data => {
+                                if (data.token) {
+                                    window.snap.pay(data.token, {
+                                        onSuccess: function(result) {
+                                            // Ambil semua data dari form order
+                                            const formData = new FormData(orderForm);
+                                            formData.append('midtrans_transaction_id', result.transaction_id);
+                                            formData.append('midtrans_response', JSON.stringify(result));
+                                            formData.append('payment_method', result.payment_type);
+                                            formData.append('order_id', data.order_id);
+
+                                            // Kirim data order dan pembayaran ke backend
+                                            fetch('/pesanan', {
+                                                    method: 'POST',
+                                                    headers: {
+                                                        'X-CSRF-TOKEN': csrfToken
+                                                    },
+                                                    body: formData
+                                                })
+                                                .then(response => response.json()) // Atau response.text() jika backend mengembalikan redirect
+                                                .then(data => {
+                                                    // Handle respons dari backend setelah penyimpanan order
+                                                    if (data.order_id) {
+                                                        window.location.href = '/pesanan/' + data.order_id; // Redirect ke detail pesanan
+                                                    } else if (data.error) {
+                                                        alert('Gagal menyimpan pesanan: ' + data.error);
+                                                        console.error('Error menyimpan pesanan:', data.error);
+                                                    } else {
+                                                        alert('Terjadi kesalahan saat menyimpan pesanan.');
+                                                        console.error('Respon tidak terduga dari backend:', data);
+                                                    }
+                                                })
+                                                .catch(error => {
+                                                    console.error('Error mengirim data pesanan:', error);
+                                                    alert('Terjadi kesalahan jaringan saat menyimpan pesanan.');
+                                                });
+                                        },
+                                        onPending: function(result) {
+                                            alert('Menunggu Pembayaran!');
+                                            console.log(result);
+                                            // Anda bisa menambahkan logika untuk status pending di sini
+                                        },
+                                        onError: function(result) {
+                                            alert('Pembayaran Gagal!');
+                                            console.log(result);
+                                            // Anda bisa menambahkan logika untuk status error di sini
+                                        },
+                                        onClose: function() {
+                                            alert('Anda menutup popup pembayaran sebelum menyelesaikan transaksi.');
+                                            // Anda bisa menambahkan logika ketika pengguna menutup popup
+                                        }
+                                    });
+                                } else {
+                                    alert('Terjadi kesalahan: ' + (data.error || 'Tidak dapat memproses pembayaran'));
+                                    console.error('Error:', data);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                alert('Terjadi kesalahan jaringan atau server.');
+                            });
+                    } else {
+                        console.error('Elemen input dengan name="amount" tidak ditemukan di dalam form pembayaran.');
+                        alert('Terjadi kesalahan: Jumlah pembayaran tidak ditemukan.');
+                    }
+                });
+            } else {
+                console.error('Form pembayaran atau form pesanan tidak ditemukan.');
+            }
+        });
+    </script>
 
 </body>
 

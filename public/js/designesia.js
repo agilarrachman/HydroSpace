@@ -1867,16 +1867,16 @@
          
          });
 
-         jQuery(".de__pcard .atr__add-cart").on("click", function () {
+        //  jQuery(".de__pcard .atr__add-cart").on("click", function () {
              
-            $("#de_notif").removeClass("active");
-            de_atc('Product added to cart');
-            $("#de_notif").addClass("active");
-            setTimeout(function() {
-                $("#de_notif").removeClass("active");
-            }, 1500);
+        //     $("#de_notif").removeClass("active");
+        //     de_atc('Produk telah ditambahkan ke keranjang');
+        //     $("#de_notif").addClass("active");
+        //     setTimeout(function() {
+        //         $("#de_notif").removeClass("active");
+        //     }, 1500);
          
-         });
+        //  });
          // product click notification close
 	   
          // ecommerce

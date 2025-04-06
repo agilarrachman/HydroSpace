@@ -1,3 +1,14 @@
+<style>
+    #mainmenu li a:hover {
+        color: rgb(53, 78, 51);
+        border-bottom: 2px solid rgb(53, 78, 51);
+    }
+
+    #mainmenu li a.active {
+        border-bottom: 2px solid rgb(53, 78, 51);
+    }
+</style>
+
 <header class="header-light transparent">
     <div id="topbar">
         <div class="container">
@@ -54,6 +65,7 @@
                             <li><a class="menu-item {{ ($active === 'HydroBot') ? 'active' : '' }}" href="/hydrobot#ai" id="consultationLink">HydroBot</a></li>
                             <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="/tentang">Tentang Kami</a></li>
                             <li><a class="menu-item {{ ($active === 'Kontak') ? 'active' : '' }}" href="/kontak">Kontak</a></li>
+                            <li><a class="menu-item {{ ($active === 'Profil') ? 'active' : '' }}" href="/profil/{{ auth()->user()->username }}">Profil</a></li>
                         </ul>
                         <!-- mainmenu end -->
                     </div>
@@ -63,12 +75,12 @@
                             @auth
                             <div class="d-flex">
                                 <a class="de-icon-counter" href="/pesanan">
-                                    <div class="d-counter">0</div>
+                                    <div class="d-counter">{{ $totalOrder }}</div>
                                     <img src="/images/ui/order.svg" class="" alt="">
                                 </a>
 
                                 <div id="btn-cart" class="de-icon-counter">
-                                    <div class="d-counter">5</div>
+                                    <div class="d-counter" id="total-item-value">{{ $totalItem }}</div>
                                     <img src="/images/ui/cart.svg" class="" alt="">
                                 </div>
                             </div>

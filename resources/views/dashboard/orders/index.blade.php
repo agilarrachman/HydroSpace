@@ -52,6 +52,26 @@
         .app-brand .layout-menu-toggle {
             background-color: #354e33 !important;
         }
+
+        .status.canceled {
+            width: fit-content;
+            background-color: #F6D2D2;
+            color: red;
+            margin-bottom: 0;
+        }
+
+        .status.process {
+            width: fit-content;
+            background-color: #E1EBE2;
+            margin-bottom: 0;
+        }
+
+        .status.success {
+            width: fit-content;
+            background-color: #354e33;
+            color: white;
+            margin-bottom: 0;
+        }
     </style>
 </head>
 
@@ -76,7 +96,7 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">Daftar Produk</h5>
+                        <h5 class="mb-0">Daftar {{ $active }}</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
@@ -91,13 +111,10 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <div class="d-flex justify-content-between mb-4">
-                            <a href="products/create" class="btn btn-primary">
-                                <i class="bx bx-plus-circle me-2"></i> Tambah Produk
-                            </a>
-                            <form action="/dashboard/products" class="d-flex" style="max-height: 39px;">
+                        <div class="d-flex justify-content-end mb-4">
+                            <form action="/dashboard/orders" class="d-flex" style="max-height: 39px;">
                                 <div class="input-group">
-                                    <input type="text" name="search" class="form-control outline-secondary" placeholder="Cari produk" value="{{ request('search') }}">
+                                    <input type="text" name="search" class="form-control outline-secondary" placeholder="Cari pesanan" value="{{ request('search') }}">
                                     <button class="border-none p-0" type="submit">
                                         <span class="input-group-text h-100" style="border-top-left-radius: 0rem; border-top-right-radius: 0.375rem; border-bottom-right-radius: 0.375rem; border-bottom-left-radius: 0rem;">
                                             <i class="bx bx-search"></i>
@@ -107,78 +124,62 @@
                             </form>
                         </div>
 
-                        @if(session()->has('success'))
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ session('success') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
-
-                        @if(session()->has('error'))
-                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                            {{ session('error') }}
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                        @endif
-
                         <!-- Striped Rows -->
                         <div class="card">
+
                             <div class="table-responsive text-nowrap">
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
                                             <th class="text-center"><strong>#</strong></th>
-                                            <th><strong>Gambar</strong></th>
-                                            <th><strong>Nama Produk</strong></th>
-                                            <th><strong>Kategori</strong></th>
-                                            <th><strong>Harga Produk</strong></th>
-                                            <th class="text-center"><strong>Stok Produk</strong></th>
+                                            <th><strong>ID Pesanan</strong></th>
+                                            <th><strong>Nama Customer</strong></th>
+                                            <th class="text-center"><strong>Status</strong></th>
+                                            <th><strong>Total Harga</strong></th>
+                                            <th class="text-center"><strong>Waktu Pemesanan</strong></th>
                                             <th class="text-center"><strong>Aksi</strong></th>
                                         </tr>
                                     </thead>
                                     <tbody class="table-border-bottom-0">
-                                        @foreach ($products as $product)
+                                        @foreach ($orders as $order)
                                         <tr>
                                             <td class="text-center">{{ $loop->iteration }}</td>
-                                            <td>
-                                                <img src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}" style="width: 75px; height: 75px; object-fit: cover;" />
+                                            <td>{{ $order->id }}</td>
+                                            <td>{{ $order->customer->name }}</td>
+                                            <td class="d-flex justify-content-center">
+                                                @if ($order->status == 'Dikemas')
+                                                <p class="status process px-3 rounded-pill d-inline-block w-auto">Sedang Dikemas</p>
+                                                @elseif ($order->status == 'Diantar')
+                                                <p class="status process px-3 rounded-pill d-inline-block w-auto">Sedang Diantar</p>
+                                                @elseif ($order->status == 'Selesai')
+                                                <p class="status success px-3 rounded-pill d-inline-block w-auto">Selesai</p>
+                                                @elseif ($order->status == 'Dibatalkan')
+                                                <p class="status canceled px-3 rounded-pill d-inline-block w-auto">Dibatalkan</p>
+                                                @else
+                                                <p class="status unknown px-3 rounded-pill d-inline-block w-auto">{{ $order->status }}</p>
+                                                @endif
                                             </td>
-                                            <td>{{ $product->name }}</td>
-                                            <td>{{ $product->category->name }}</td>
-                                            <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
-                                            <td class="text-center">{{ $product->stock }}</td>
+                                            <td>Rp{{ number_format($order->total_amount, 0, ',', '.') }}</td>
+                                            <td class="text-center">{{ $order->created_at ? $order->created_at->format('d F Y, H:i') : '-' }}</td>
                                             <td class="text-center">
-                                                <div class="dropdown">
-                                                    <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                                                        <i class="bx bx-dots-vertical-rounded"></i>
-                                                    </button>
-                                                    <div class="dropdown-menu">
-                                                        <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}"><i class="bx bx-show me-1"></i> Lihat</a>
-                                                        <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}/edit"><i class="bx bx-edit-alt me-1"></i> Edit</a>
-                                                        <a class="dropdown-item" href="/dashboard/products/{{ $product->slug }}" onclick="event.preventDefault(); if(confirm('Apakah Anda yakin?')) document.getElementById('delete-form-{{ $product->slug }}').submit();">
-                                                            <i class="bx bx-trash me-1"></i> Hapus
-                                                        </a>
-                                                        <form id="delete-form-{{ $product->slug }}" action="/dashboard/products/{{ $product->slug }}" method="post" style="display: none;">
-                                                            @method('delete')
-                                                            @csrf
-                                                        </form>
-                                                    </div>
-                                                </div>
+                                                <a href="/dashboard/orders/{{ $order->id }}" class="btn-primary p-2 rounded-3">Lihat Detail</a>
                                             </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
+
+                                <div class="pagination w-100 d-flex justify-content-center my-3">
+                                    <div class="d-flex justify-content-center">
+                                        {{ $orders->links('pagination::bootstrap-4') }}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!--/ Striped Rows -->
 
                     </div>
                     <!-- / Content -->
-
-                    <div class="d-flex justify-content-center align-items-center mt-4 pt-4">
-                        {{ $products->links() }}
-                    </div>
 
                     <div class="content-backdrop fade"></div>
                 </div>
