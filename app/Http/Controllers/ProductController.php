@@ -165,7 +165,6 @@ class ProductController extends Controller
         return redirect('/dashboard/products')->with('success', 'Produk berhasil diperbarui!');
     }
 
-
     /**
      * Remove the specified resource from storage.
      */

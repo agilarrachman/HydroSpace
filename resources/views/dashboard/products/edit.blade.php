@@ -115,32 +115,32 @@
                                                     {{-- Mengirim informasi data gambar lama --}}
                                                     @for ($i = 1; $i <= 5; $i++)
                                                         @php
-                                                        $picture='picture' . $i;
+                                                            $picture = 'picture' . $i;
                                                         @endphp
                                                         @if ($product->$picture)
-                                                        <div class="input-group mb-2 me-2" style="flex: 1 1 45%;">
-                                                            <div class="me-2 img-container" style="height: 75px; width: 100px; display: block;">
-                                                                <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%; object-fit: cover;" src="{{ asset('storage/' . $product->$picture) }}">
+                                                            <div class="input-group mb-2 me-2" style="flex: 1 1 45%;">
+                                                                <div class="me-2 img-container" style="height: 75px; width: 100px; display: block;">
+                                                                    <img class="img-preview rounded-2 form-control" style="width: 100%; height: 100%; object-fit: cover;" src="{{ asset('storage/' . $product->$picture) }}">
+                                                                </div>
+                                                                <input type="hidden" name="oldImages[{{ $i }}]" value="{{ $product->$picture }}">
+                                                                <input style="border-radius: 6px 0px 0px 6px;" type="file" id="image{{ $i }}" name="picture{{ $i }}" class="py-4 form-control @error('picture' . $i) is-invalid @enderror" accept="image/*" onchange="previewImage(this); displayFileName(this);">
+                                                                @if ($i === 1)
+                                                                    <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
+                                                                        <i class="bx bx-plus-circle"></i>
+                                                                    </button>
+                                                                @else
+                                                                    <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
+                                                                        <i class="bx bx-minus-circle"></i>
+                                                                    </button>
+                                                                @endif
+                                                                @error('picture' . $i)
+                                                                    <div class="invalid-feedback">
+                                                                        {{ $message }}
+                                                                    </div>
+                                                                @enderror
                                                             </div>
-                                                            <input type="hidden" name="oldImages[{{ $i }}]" value="{{ $product->$picture }}">
-                                                            <input style="border-radius: 6px 0px 0px 6px;" type="file" id="image{{ $i }}" name="picture{{ $i }}" class="py-4 form-control @error('picture' . $i) is-invalid @enderror" accept="image/*" onchange="previewImage(this); displayFileName(this);">
-                                                            @if ($i === 1)
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="addImageInput()">
-                                                                <i class="bx bx-plus-circle"></i>
-                                                            </button>
-                                                            @else
-                                                            <button type="button" class="btn btn-outline-secondary" onclick="removeImageInput(this)">
-                                                                <i class="bx bx-minus-circle"></i>
-                                                            </button>
-                                                            @endif
-                                                            @error('picture' . $i)
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                            @enderror
-                                                        </div>
                                                         @endif
-                                                        @endfor
+                                                    @endfor
                                                 </div>
 
                                                 <div id="rulesProfileImage" class="form-text mb-4">
@@ -153,9 +153,9 @@
                                                 <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" placeholder="Masukkan nama produk" value="{{ old('name', $product->name) }}" required />
                                                 <div class="form-text">Tekan tab setelah menuliskan nama produk untuk membuat slug secara otomatis</div>
                                                 @error('name')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
@@ -163,9 +163,9 @@
                                                 <label for="slug" class="form-label">Slug</label>
                                                 <input type="text" id="slug" class="form-control @error('slug') is-invalid @enderror" name="slug" placeholder="Masukkan slug" value="{{ old('slug', $product->slug) }}" required />
                                                 @error('slug')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
@@ -174,15 +174,15 @@
                                                 <select class="form-select @error('category_id') is-invalid @enderror" id="category" name="category_id" required>
                                                     <option selected disabled>Pilih kategori</option>
                                                     @foreach ($categories as $category)
-                                                    <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
-                                                        {{ $category->name }}
-                                                    </option>
+                                                        <option value="{{ $category->id }}" {{ old('category_id', $product->category_id) == $category->id ? 'selected' : '' }}>
+                                                            {{ $category->name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                                 @error('category_id')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
                                                 @enderror
                                             </div>
 
@@ -191,9 +191,9 @@
                                                     <label for="stock" class="form-label">Stok</label>
                                                     <input type="number" class="form-control @error('stock') is-invalid @enderror" id="stock" name="stock" placeholder="Masukkan stok" value="{{ old('stock', $product->stock) }}" required />
                                                     @error('stock')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
 
@@ -201,9 +201,9 @@
                                                     <label for="price" class="form-label">Harga</label>
                                                     <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" placeholder="Masukkan harga" value="{{ old('price', $product->price) }}" required />
                                                     @error('price')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
                                                     @enderror
                                                 </div>
                                             </div>
@@ -211,7 +211,7 @@
                                             <div class="mb-3">
                                                 <textarea id="description" name="description">{{ old('description', $product->description) }}</textarea>
                                                 @error('description')
-                                                <p class="text-danger">{{ $message }}</p>
+                                                    <p class="text-danger">{{ $message }}</p>
                                                 @enderror
                                             </div>
 
