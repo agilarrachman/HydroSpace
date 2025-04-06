@@ -1,20 +1,13 @@
 <!DOCTYPE html>
-<html lang="en"
-    class="light-style layout-menu-fixed layout-compact"
-    dir="ltr"
-    data-theme="theme-default"
-    data-assets-path="../assets/"
-    data-template="vertical-menu-template-free">
-
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>{{ $title }}</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ $title ?? 'HydroSpace' }}</title>
+
     <link rel="icon" href="{{ asset('images/icon.webp') }}" type="image/gif" sizes="16x16">
     <meta name="description" content="" />
 
-    <!-- Favicon -->
-    {{-- <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" /> --}}
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -35,9 +28,10 @@
 
     <!-- Helpers -->
     <script src="{{ asset('layouts/dashboard/js/helpers.js') }}"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
 
     <style>
         .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
@@ -177,17 +171,12 @@
         /* Chatadmin styling End */
     </style>
 </head>
-
 <body>
-    <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
-
             @include('partials.sidebar-dashboard')
 
-            <!-- Layout container -->
             <div class="layout-page">
-                <!-- Navbar -->
                 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
@@ -196,118 +185,60 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center justify-content-between" id="navbar-collapse">
-                        <h5 class="mb-0">{{ $active }}</h5>
+                        {{-- <h5 class="mb-0">{{ $active }}</h5> --}}
+                        <h5 class="mb-0">Chat dengan User</h5>
 
                         <div class="avatar avatar-online">
                             <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
                         </div>
                     </div>
                 </nav>
-                <!-- / Navbar -->
 
-                <!-- Content wrapper -->
                 <div class="content-wrapper">
-                    <!-- Content -->
                     <div class="container-xxl d-flex flex-column flex-lg-row gap-4 flex-grow-1 container-p-y" style="height: 90vh;">
                         <div class="card w-25 h-100 overflow-auto d-none d-lg-block">
                             <ul class="nav nav-pills flex-column" id="customer-tabs" role="tablist">
-                            @foreach ($users as $user)
+                                {{-- @foreach ($users as $user)
+                                    <li class="nav-item d-flex align-items-center gap-2 justify-content-start" role="presentation">
+                                        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+                                        <button class="nav-link text-start" id="customer{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#customer{{ $loop->index + 1 }}-chat" type="button" role="tab">
+                                            <a href="{{ route('chat', ['user' => $user->id]) }}">{{ $user->username }}</a>
+                                        </button>
+                                    </li>
+                                @endforeach --}}
                                 <li class="nav-item d-flex align-items-center gap-2 justify-content-start" role="presentation">
-                                <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
-                                <button class="nav-link text-start" id="customer{{ $loop->index + 1 }}-tab" data-bs-toggle="pill" data-bs-target="#customer{{ $loop->index + 1 }}-chat" type="button" role="tab">
-                                    <a href="{{ route('chat', ['user' => $user->id]) }}">{{ $user->username }}</a>
-                                </button>
+                                    <img src="#" alt="User" class="rounded-circle" style="width: 30px; height: 30px; object-fit: cover;">
+                                    <button class="nav-link text-start" id="customer-tab" data-bs-toggle="pill" data-bs-target="#customer-chat" type="button" role="tab">
+                                        <a href="#">Nama</a>
+                                    </button>
                                 </li>
-                            @endforeach
                             </ul>
                         </div>
 
                         <div class="w-100 d-block d-lg-none">
                             <select id="customer-select" class="form-select w-100">
-                            <option value="" selected disabled>Pilih pengguna untuk memulai chat</option>
-                            @foreach ($users as $user)
-                                <option value="customer{{ $loop->index + 1 }}-chat">{{ $user->username }}</option>
-                            @endforeach
+                                <option value="" selected disabled>Pilih pengguna untuk memulai chat</option>
+                                {{-- @foreach ($users as $user)
+                                    <option value="customer{{ $loop->index + 1 }}-chat">{{ $user->username }}</option>
+                                @endforeach --}}
+                                <option value="customer-chat">Nama-1</option>
                             </select>
                         </div>
 
                         <!-- Chat Section -->
-                        <div class="tab-content w-100 w-lg-75 h-75 p-0 flex-grow-1" id="customer-chats">
-                            <div class="tab-pane fade show active h-100" id="default-chat" role="tabpanel">
-                                <div class="card p-3 h-100 d-flex flex-column">
-                                    <h5>Mulai Chat</h5>
-                                    <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
-                                        <div class="chat h-100 d-flex align-items-center justify-content-center">
-                                            <p class="text-muted">Pilih pengguna untuk memulai percakapan.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Uncomment and modify the following section if needed --}}
-                            {{-- @foreach ($users as $user)
-                            <div class="tab-pane fade h-100" id="customer{{ $loop->index + 1 }}-chat" role="tabpanel">
-                            <div class="card p-3 h-100 d-flex flex-column">
-                                <h5>Chat dengan {{ $user->username }}</h5>
-                                <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
-                                <div class="chat h-100">
-                                    <div class="admin d-flex gap-2">
-                                    <div class="chat-bubble admin text-wrap lh-1">
-                                        <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
-                                        Halo, HydroMates! Apakah ada yang bisa saya bantu?
-                                    </div>
-                                    <div class="profile-picture">
-                                        <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
-                                    </div>
-                                    </div>
-                                    <div class="user d-flex gap-2">
-                                    <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" />
-                                    <div class="chat-bubble user text-wrap lh-1">
-                                        <h5 class="mb-1" style="font-weight: 800;">{{ $user->username }}</h5>
-                                        {{ $user->last_message ?? 'Belum ada pesan.' }}
-                                    </div>
-                                    </div>
-                                </div>
-                                </div>
-                                <div class="chat-input my-0">
-                                <input type="text" placeholder="Ketik pesan.." required />
-                                <button type="submit">
-                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
-                                    </svg>
-                                </button>
-                                </div>
-                            </div>
-                            </div>
-                            @endforeach --}}
-                        </div>
+                        {!! $slot !!}
+
                     </div>
-                    <!-- / Content -->
 
                     <div class="content-backdrop fade"></div>
                 </div>
-                <!-- / Content wrapper -->
             </div>
-            <!-- / Layout page -->
         </div>
 
-        <!-- Overlay -->
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-    <!-- / Layout wrapper -->
 
-    <script>
-        document.getElementById('customer-select').addEventListener('change', function() {
-            let selectedChat = this.value;
-
-            // Menonaktifkan semua tab
-            document.querySelectorAll('.tab-pane').forEach(tab => {
-                tab.classList.remove('show', 'active');
-            });
-
-            // Mengaktifkan tab yang dipilih dari dropdown
-            document.getElementById(selectedChat).classList.add('show', 'active');
-        });
-    </script>
+    @livewireScripts
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -332,5 +263,4 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
-
 </html>

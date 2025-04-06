@@ -1,20 +1,23 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\LocationController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\VideoCategoryController;
-use App\Http\Controllers\VideoController;
+use App\Models\User;
+use App\Livewire\Chat;
 use App\Models\Product;
-use App\Models\ProductCategory;
-use App\Models\VideoCategory;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Models\VideoCategory;
+use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VideoController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\AdminProfileController;
+use App\Http\Controllers\VideoCategoryController;
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ProductCategoryController;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
 Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
@@ -43,7 +46,7 @@ Route::middleware(['blockAdmin'])->group(function () {
 
     Route::get('/produk/{product:slug}', [ProductController::class, 'customerShow']);
 
-    Route::get('/edukasi', [VideoController::class, 'indexCustomer']);    
+    Route::get('/edukasi', [VideoController::class, 'indexCustomer']);
 
     Route::get('/hydrobot', function () {
         return view('index', [
@@ -74,12 +77,12 @@ Route::middleware(['blockAdmin'])->group(function () {
     });
 });
 
-Route::get('/dashboard/chat', function () {
-    return view('dashboard.chat', [
-        "title" => "HydroSpace | Chat Customer",
-        "active" => "Chat Customer"
-    ]);
-});
+// Route::get('/dashboard/chat', function () {
+//     return view('dashboard.chat', [
+//         "title" => "HydroSpace | Chat Customer",
+//         "active" => "Chat Customer"
+//     ]);
+// });
 
 Route::middleware(['role:Customer'])->group(function () {
     Route::resource('/profil', UserController::class)->parameters([
@@ -151,7 +154,7 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 
     Route::put('/update-password/{user:username}', [AdminController::class, 'updatePassword']);
-    
+
     Route::resource('/videos', VideoController::class);
     Route::get('/video/checkSlug/', [VideoController::class, 'checkSlug']);
     Route::get('/getProducts', [VideoController::class, 'getProducts']);
@@ -196,6 +199,16 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     });
 
     Route::resource('/products', ProductController::class);
+
+    Route::get('/chat', function () {
+        return view('dashboard.chat', [
+            "title" => "HydroSpace | Chat Customer",
+            "active" => "Chat Customer",
+            "users" => User::where('role', 'Customer')->get()
+        ]);
+    });
+
+    Route::get('/chat/{user:id}', Chat::class)->name('chat');
 
     Route::get('/Product/checkSlug', [ProductController::class, 'checkSlug']);
 });
