@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -12,13 +11,13 @@ class Chat extends Model
 
     protected $guarded = ['id'];
 
-    public function customers()
+    public function fromUser()
     {
-        return $this->belongsTo(User::class, 'customer_id');
+        return $this->belongsTo(User::class, 'from_user_id');
     }
 
-    public function admins()
+    public function toUser()
     {
-        return $this->belongsTo(User::class, 'admin_id');
+        return $this->belongsTo(User::class, 'to_user_id');
     }
 }

@@ -215,13 +215,25 @@
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link d-flex align-items-center justify-content-start gap-4 py-3" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
                                         <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
-                                        <p class="mb-0">{{ $user->username }}</p>
+                                        <p class="mb-0"><span>@</span>{{ $user->username }}</p>
                                     </a>
                                 </li>
                                 <style>
+                                    .nav-link {
+                                        border-left: 5px solid #ffffff00 !important;
+                                    }
                                     .nav-link:hover {
-                                        background-color: rgba(53, 78, 51, 0.1);
-                                        color: #354e33;
+                                        background-color: rgba(67, 89, 113, 0.04) !important;
+                                        color: #454545 !important;
+                                        border-left: 5px solid #354e33 !important;
+                                    }
+                                    .nav-link.active {
+                                        background-color: rgba(53, 78, 51, 0.1) !important;
+                                        color: #454545 !important;
+                                        border-left: 5px solid #354e33 !important;
+                                    }
+                                    .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
+                                        box-shadow: none;
                                     }
                                 </style>
                             @endforeach
@@ -241,9 +253,9 @@
                         <div class="tab-content w-100 w-lg-75 h-75 p-0 flex-grow-1" id="customer-chats">
                             <div class="tab-pane fade show active h-100" id="default-chat" role="tabpanel">
                                 <div class="card p-3 h-100 d-flex flex-column">
-                                    <h5>Mulai Chat</h5>
                                     <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
                                         <div class="chat h-100 d-flex align-items-center justify-content-center">
+                                            <img src="{{ asset('images/dashboard/hero-dashboard.png') }}" style="max-height: 275px;" class="mb-4"/>
                                             <p class="text-muted">Pilih pengguna untuk memulai percakapan.</p>
                                         </div>
                                     </div>

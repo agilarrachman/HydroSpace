@@ -68,21 +68,8 @@ Route::middleware(['blockAdmin'])->group(function () {
             "active" => "Kontak"
         ]);
     });
-
-    Route::get('/chat', function () {
-        return view('chat', [
-            "title" => "HydroSpace | Chat Admin HydroSpace",
-            "active" => "Chat Admin HydroSpace"
-        ]);
-    });
 });
 
-// Route::get('/dashboard/chat', function () {
-//     return view('dashboard.chat', [
-//         "title" => "HydroSpace | Chat Customer",
-//         "active" => "Chat Customer"
-//     ]);
-// });
 
 Route::middleware(['role:Customer'])->group(function () {
     Route::resource('/profil', UserController::class)->parameters([
@@ -122,6 +109,8 @@ Route::middleware(['role:Customer'])->group(function () {
             "active" => "Pesanan Saya",
         ]);
     });
+
+    Route::get('/chat', [Chat::class, 'chatToAdmin'])->name('chatToAdmin');
 });
 
 Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
