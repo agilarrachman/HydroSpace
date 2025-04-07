@@ -5,7 +5,6 @@
     data-theme="theme-default"
     data-assets-path="../assets/"
     data-template="vertical-menu-template-free">
-
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -16,34 +15,170 @@
     <!-- Favicon -->
     {{-- <link rel="icon" type="image/x-icon" href="{{ asset('assets/img/favicon/favicon.ico') }}" /> --}}
     <!-- Fonts -->
+    <link rel="icon" href="{{ asset('images/icon.webp') }}" type="image/gif" sizes="16x16">
+    <meta name="description" content="" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 
     <link rel="stylesheet" href="{{ asset('layouts/dashboard/css/fonts/boxicons.css') }}" />
 
-    <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('layouts/dashboard/css/core.css') }}" class="template-customizer-core-css" />
     <link rel="stylesheet" href="{{ asset('layouts/dashboard/css/theme-default.css') }}" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="{{ asset('layouts/dashboard/css/demo.css') }}" />
 
-    <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('layouts/dashboard/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
     <link rel="stylesheet" href="{{ asset('layouts/dashboard/libs/apex-charts/apex-charts.css') }}" />
 
-    <!-- Page CSS -->
-
-    <!-- Helpers -->
     <script src="{{ asset('layouts/dashboard/js/helpers.js') }}"></script>
-    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
 
     <link href="{{ asset('css/plugins.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/styleProfile.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/coloring.css') }}" rel="stylesheet" type="text/css">
-    <!-- color scheme -->
+
     <link id="colors" href="{{ asset('css/colors/scheme-01.css') }}" rel="stylesheet" type="text/css">
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @livewireStyles
+
+    <style>
+        .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
+            background-color: rgba(53, 78, 51, 0.16) !important;
+            color: #354e33 !important;
+        }
+
+        .bg-menu-theme .menu-inner>.menu-item.active:before {
+            background-color: #354e33 !important;
+        }
+
+        .app-brand .layout-menu-toggle {
+            background-color: #354e33 !important;
+        }
+
+        .admin .profile-picture {
+            background-color: #354e33 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 100px !important;
+        }
+
+        .admin .profile-picture img {
+            width: 20px !important;
+            object-fit: contain !important;
+        }
+
+        .chat-bubble.admin {
+            background-color: #354e33 !important;
+            color: white !important;
+            margin-left: auto !important;
+            align-self: flex-end !important;
+        }
+
+        .chat-bubble.admin h5 {
+            color: #354e33 !important;
+        }
+
+        .user img {
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 100px !important;
+            object-fit: contain !important;
+        }
+
+        @media (min-width: 992px) {
+            .h-lg-90 {
+                height: 90% !important;
+            }
+        }
+
+        /* Container Chatadmin styling */
+        .chat-window {
+            padding: 15px !important;
+            height: 400px !important;
+            border-radius: 10px !important;
+            background-color: white !important;
+            font-size: 16px !important;
+        }
+
+        .chat-window .chat {
+            overflow-y: auto !important;
+            display: flex !important;
+            flex-direction: column !important;
+        }
+
+        /* Chat bubble styling */
+        .chat-bubble {
+            padding: 10px 15px !important;
+            border-radius: 15px !important;
+            margin: 5px 0 !important;
+            max-width: 80% !important;
+            display: inline-block !important;
+        }
+
+        .chat-bubble.user {
+            background-color: #E1EBE2 !important;
+            color: #354e33 !important;
+            margin-right: auto !important;
+            align-self: flex-start !important;
+        }
+
+        .chat-bubble.user h5 {
+            color: #354e33 !important;
+        }
+
+        /* Chatadmin styling Start */
+        .chat-input {
+            display: flex !important;
+            padding-top: 10px !important;
+        }
+
+        .chat-input input[type="text"] {
+            width: 100% !important;
+            padding: 10px !important;
+            border: 1px solid #354e33 !important;
+            border-radius: 5px !important;
+            margin-right: 10px !important;
+        }
+
+        .chat-input button {
+            background-color: #354e33 !important;
+            color: white !important;
+            border: none !important;
+            padding: 10px 15px !important;
+            border-radius: 5px !important;
+            cursor: pointer !important;
+        }
+
+        .chat-input button:hover {
+            background-color: #2E452C !important;
+        }
+
+        @media (max-width: 1024px) {
+
+            /* Tablet ke bawah */
+            .chatadmin {
+                margin-top: 140px !important;
+            }
+
+            .chat-window {
+                height: 600px !important;
+            }
+        }
+
+        @media (min-width: 1024px) {
+
+            .tab-content {
+                height: 100% !important;
+            }
+        }
+
+        /* Chatadmin styling End */
+    </style>
 
     <style>
         .form-control:disabled {
@@ -113,7 +248,6 @@
         }
     </style>
 </head>
-
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -214,10 +348,62 @@
                         @include('partials.navbarProfile')
                         {{-- Navbar end --}}
 
-                        <h3 class="fw-bold mt-lg-5">{{ $active }}</h3>
+                        <h3 class="fw-bold mb-4">{{ $active }}</h3>
 
                         <!-- Chat Section Start -->
                         <div class="chat section flex-grow-1 d-flex flex-column overflow-auto border" id="ai">
+                            <div class="container h-100 px-0">
+                                <!-- Chat Window -->
+                                <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
+                                    <div class="chat h-100">
+                                        @foreach ($messages as $message)
+                                            <div class="d-flex align-items-start gap-2 @if($message->from_user_id == auth()->id()) admin @else user flex-row-reverse @endif">
+                                                <div class="chat-bubble @if($message->from_user_id == auth()->id()) admin @else user @endif text-wrap mt-0 mb-2">
+                                                    <h6 class="@class([ 'mb-2',
+                                                                        'text-end' => $message->from_user_id == auth()->id(),
+                                                                        'text-start' => $message->from_user_id != auth()->id(),
+                                                                    ])" style="font-weight: 800; color:@if($message->from_user_id == auth()->id()) #FFFFFF @else #454545 @endif;">{{ $message->fromUser->username }}</h6>
+
+                                                    <p class="@class([ 'text-end' => $message->from_user_id == auth()->id(),
+                                                                        'text-start' => $message->from_user_id != auth()->id()
+                                                                    ])">{{ $message->message }}</p>
+
+                                                    <p class="@class([ 'text-end' => $message->from_user_id == auth()->id(),
+                                                                        'text-start' => $message->from_user_id != auth()->id()
+                                                                    ])"><small>{{ $message->created_at->setTimezone('Asia/Jakarta')->format('H:i') }}</small></p>
+                                                </div>
+                                                <div class="profile-picture">
+                                                    @if($message->from_user_id == auth()->id())
+                                                        <img src="{{ asset('storage/' . $message->fromUser->profile_picture) }}" alt="User" />
+                                                    @else
+                                                        <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    </div>
+                                </div>
+                                <div class="chat-input my-0">
+                                    <div class="form-control">
+                                        <form action="" wire:submit.prevent="sendMessage">
+                                            <div class="d-flex align-items-center gap-2">
+                                                <input name="message" type="text" class="form-control" placeholder="Ketik pesan.." required wire:model="message" />
+                                                <button type="submit" class="btn btn-primary d-flex align-items-center justify-content-center">
+                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                        <path
+                                                            d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z"
+                                                            fill="white" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{-- {!! $slot !!} --}}
+                        {{-- <div class="chat section flex-grow-1 d-flex flex-column overflow-auto border" id="ai">
 
                             <div class="container h-100 px-0">
                                 <form id="ask" class="h-100">
@@ -232,7 +418,7 @@
                                                 </div>
                                                 <div class="chat-bubble bot text-wrap lh-1">
                                                     <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
-                                                    Halo, HydroMates! Apakah ada yang bisa saya bantu?
+                                                    Halo, HydroMates! Apakah ada yang bisa saya bantu? YEYEYEYE
                                                 </div>
                                             </div>
 
@@ -268,7 +454,7 @@
                                     </div>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
                         <!-- Chatbot Section End -->
                     </div>
                     <!-- / Content -->
@@ -286,6 +472,8 @@
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
     <!-- / Layout wrapper -->
+
+    @livewireScripts
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -315,5 +503,4 @@
     <script src="{{ asset('js/plugins.js') }}"></script>
     <!-- <script src="{{ asset('js/designesia.js') }}"></script> -->
 </body>
-
 </html>

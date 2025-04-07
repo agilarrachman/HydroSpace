@@ -4,6 +4,7 @@ use App\Models\User;
 use App\Livewire\Chat;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Livewire\ChatToAdmin;
 use App\Models\VideoCategory;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Route;
@@ -111,6 +112,7 @@ Route::middleware(['role:Customer'])->group(function () {
     });
 
     Route::get('/chat', [Chat::class, 'chatToAdmin'])->name('chatToAdmin');
+    // Route::get('/chat', [ChatToAdmin::class])->name('chatToAdmin');
 });
 
 Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {

@@ -30,26 +30,8 @@ class Chat extends Component
             "active" => "Chat " . $this->user->name,
             "customerUsername" => $this->user->username,
             "users" => User::where('role', 'Customer')->get()
-            // "role" => $role,
         ]);
     }
-
-    // public function chatToCustomer()
-    // {
-    //     $role = Auth::user()->role;
-    //     $urlslug = url()->current();
-
-    //     // dd($role, $urlslug);
-
-    //     return view('components.layouts.app', [
-    //         "title" => "HydroSpace | Chat Customer HydroSpace",
-    //         "active" => "Chat Customer HydroSpace",
-    //         "role" => $role,
-    //         "url" => $urlslug,
-    //         "title" => "HydroSpace | Chat Customer",
-    //         "users" => User::where('role', 'Customer')->get()
-    //     ]);
-    // }
 
     public function chatToAdmin()
     {
@@ -58,9 +40,25 @@ class Chat extends Component
 
         // dd($role, $urlslug);
 
-        return view('components.layouts.app', [
+        // $slot = view('livewire.slotChatToAdmin', [
+        //     "title" => "HydroSpace | Chat Admin HydroSpace",
+        //     "messages" => \App\Models\Chat::where('from_user_id', Auth::user()->id)
+        //         ->orWhere('to_user_id', Auth::user()->id)
+        //         ->orderBy('created_at', 'asc')
+        //         ->get(),
+        //     "active" => "Chat Admin HydroSpace",
+        //     "users" => User::where('role', 'Admin')->get(),
+        //     "customerUsername" => null,
+        // ]);
+
+        return view('chat', [
+            "messages" => \App\Models\Chat::where('from_user_id', Auth::user()->id)
+                ->orWhere('to_user_id', Auth::user()->id)
+                ->orderBy('created_at', 'asc')
+                ->get(),
             "title" => "HydroSpace | Chat Admin HydroSpace",
             "active" => "Chat Admin HydroSpace",
+            // "slot" => $slot,
             // "role" => $role,
         ]);
     }
