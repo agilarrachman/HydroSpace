@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Order;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -112,47 +113,57 @@ class ProductController extends Controller
             'stock' => 'required|integer|min:0',
             'price' => 'required|numeric|min:0',
             'description' => 'nullable|string',
-            'picture1' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture2' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture3' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture4' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
-            'picture5' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
+            'picture.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:5120',
         ];
 
         if ($request->slug != $product->slug) {
-            $rules['slug'] = 'required|unique:products';
+            $rules['slug'] = 'required|string|max:255|unique:products,slug';
         }
 
         $validatedData = $request->validate($rules);
 
-        foreach (['picture1', 'picture2', 'picture3', 'picture4', 'picture5'] as $pictureField) {
+        $oldImagesFromRequest = $request->input('oldImages', []);
+
+        // Debugging oldImages
+        // dd([
+        //     'oldImagesFromRequest' => $oldImagesFromRequest,
+        //     'productPictures' => [
+        //         'picture1' => $product->picture1,
+        //         'picture2' => $product->picture2,
+        //         'picture3' => $product->picture3,
+        //         'picture4' => $product->picture4,
+        //         'picture5' => $product->picture5,
+        //     ],
+        // ]);
+
+        for ($i = 1; $i <= 5; $i++) {
+            $pictureField = 'picture' . $i;
+            $currentPicturePath = $product->$pictureField;
+
             if ($request->hasFile($pictureField)) {
-                // Hapus gambar lama jika ada
-                if ($product->$pictureField) {
-                    Storage::disk('public')->delete($product->$pictureField);
+                if ($currentPicturePath) {
+                    Storage::disk('public')->delete($currentPicturePath);
                 }
-                // Simpan gambar baru
                 $validatedData[$pictureField] = $request->file($pictureField)->store('product_images', 'public');
-            } elseif ($request->input($pictureField) === null && $pictureField !== 'picture1') {
-                // Jika gambar dihapus (input kosong) untuk selain picture1, hapus dari database dan storage
-                if ($product->$pictureField) {
-                    Storage::disk('public')->delete($product->$pictureField);
+            } else {
+                if (!isset($oldImagesFromRequest[$i]) && $currentPicturePath) {
+                    Storage::disk('public')->delete($currentPicturePath);
+                    $validatedData[$pictureField] = null;
+                } elseif (isset($oldImagesFromRequest[$i])) {
+                    $validatedData[$pictureField] = $oldImagesFromRequest[$i];
+                } elseif (!$currentPicturePath) {
                     $validatedData[$pictureField] = null;
                 }
             }
         }
 
-        // Jika picture1 tidak diunggah atau dihapus, gunakan gambar lama
-        if (!$request->hasFile('picture1') && $request->input('picture1') !== null) {
-            unset($validatedData['picture1']); // Jangan ubah field ini
-        }
+        unset($validatedData['picture.*']);
+        unset($validatedData['oldImages']);
 
-        // Update data produk
         $product->update($validatedData);
 
         return redirect('/dashboard/products')->with('success', 'Produk berhasil diperbarui!');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -169,7 +180,7 @@ class ProductController extends Controller
         // Hapus produk dari database
         Product::destroy($product->id);
 
-        return redirect('/dashboard/products')->with('success', 'Produk berhasil dihapus!');
+        return redirect('/dashboard/products')->with('success', 'Data produk berhasil dihapus!');
     }
 
     public function checkSlug(Request $request)
@@ -181,25 +192,60 @@ class ProductController extends Controller
     // CUSTOMERS PRODUCTS
     public function customerIndex()
     {
-
+        // Menentukan kategori produk berdasarkan slug yang diterima dari request
         $category = ProductCategory::where('slug', request('category'))->first();
 
+        $user = Auth::user();
+        
+        // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
+        $order = Order::where('customer_id', $user->id)  // Memastikan mengambil ID user yang sedang login
+            ->where('status', 'Keranjang')
+            ->first();
+
+        // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
+        $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
+        
+        $totalOrder = Order::where('customer_id', $user->id)->count();
+
         return view('products', [
-            "title" => $category ? $category->name : "Produk",
-            "active" => "Produk",
-            "products" => Product::with('category')->latest()->filter(request(['search', 'category']))->paginate(12)->withQueryString(),
-            "categories" => ProductCategory::all(),
-            "currentCategory" => $category
+            "title" => $category ? $category->name : "Produk",  // Jika kategori ditemukan, gunakan namanya, jika tidak "Produk"
+            "active" => "Produk",  // Mengaktifkan menu Produk
+            "products" => Product::with('category')  // Mengambil produk dengan kategori
+                ->latest()
+                ->filter(request(['search', 'category']))  // Filter berdasarkan pencarian atau kategori
+                ->paginate(12)  // Paginate hasil pencarian produk
+                ->withQueryString(),
+            "categories" => ProductCategory::all(),  // Mengambil semua kategori produk
+            "currentCategory" => $category,  // Mengirimkan kategori saat ini yang sedang dilihat
+            "orderItems" => $orderItems,  // Mengirimkan orderItems ke view jika ada
+            'totalPrice' => $orderItems->sum('total_price'),
+            'totalItem' => $orderItems->sum('quantity'),
+            'totalOrder' => $totalOrder,
         ]);
     }
 
     public function customerShow(Product $product)
     {
+        $user = Auth::user();
+
+        // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
+        $order = Order::where('customer_id', $user->id)  // Memastikan mengambil ID user yang sedang login
+            ->where('status', 'Keranjang')
+            ->first();
+
+        // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
+        $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
+        $totalOrder = Order::where('customer_id', $user->id)->count();
+
         return view('viewProduct', [
             "title" => $product->name . " | HydroSpace",
             "active" => "Produk",
             "product" => $product,
             "categories" => ProductCategory::all(),
+            "orderItems" => $orderItems,  // Mengirimkan orderItems ke view jika ada
+            'totalPrice' => $orderItems->sum('total_price'),
+            'totalItem' => $orderItems->sum('quantity'),
+            'totalOrder' => $totalOrder,
         ]);
     }
 

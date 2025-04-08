@@ -19,6 +19,33 @@
     <link href="{{ asset('css/coloring.css') }}" rel="stylesheet" type="text/css">
     <!-- color scheme -->
     <link id="colors" href="{{ asset('css/colors/scheme-01.css') }}" rel="stylesheet" type="text/css">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <style>
+        .notif-box {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            background: #E1EBE2;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-size: 14px;
+            z-index: 1000;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            color: #354e33;
+            display: flex;
+        }
+
+        .notif-box.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: flex;
+        }
+    </style>
 </head>
 
 <body>
@@ -33,8 +60,28 @@
         @include('partials.navbarShop')
         {{-- navbar end --}}
 
-        <!-- content begin -->
         <div class="no-bottom no-top" id="content">
+            <!-- content begin -->
+            @if (session('success'))
+            <div id="notif-success" class="notif-box">
+                <img src="/images/logo-icon-color.webp" alt="" style="width: 30px; object-fit: contain;">
+                <p class="mb-0 ms-2">{{ session('success') }}</p>
+            </div>
+
+            <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    let notif = document.getElementById("notif-success");
+
+                    // Tampilkan notifikasi
+                    notif.classList.add("active");
+
+                    // Hilangkan notifikasi setelah 1.5 detik
+                    setTimeout(function() {
+                        notif.classList.remove("active");
+                    }, 2500);
+                });
+            </script>
+            @endif
 
             <div id="top"></div>
 
@@ -46,6 +93,12 @@
                                 <li><a href="/">Beranda</a></li>
                                 <li class="active">Produk</li>
                             </ul>
+                            @if(session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                {{ session('error') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                            @endif
                             <h1 class="text-uppercase">Produk</h1>
                             <p class="col-lg-10 lead">Jelajahi berbagai produk berkualitas untuk mendukung kebun hidroponik Anda</p>
                         </div>
@@ -70,30 +123,39 @@
                                 <div id="new-arrivals-carousel" class="owl-carousel owl-4-cols">
                                     <!-- product item begin -->
                                     @foreach ($products as $product)
-                                        <div class="item">
-                                            <div class="de__pcard text-center">
-                                                <div class="atr__images">
-                                                    <div class="atr__promo">
-                                                        Sale
-                                                    </div>
-                                                    <a href="/produk/{{ $product->slug }}">
-                                                        <img class="atr__image-main p-5" src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}">
-                                                    </a>
-                                                    <div class="atr__extra-menu">
-                                                        <a class="atr__quick-view" href="/produk/{{ $product->slug }}"><i class="icon_zoom-in_alt"></i></a>
-                                                        <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                    <div class="item">
+                                        <div class="de__pcard text-center">
+                                            <div class="atr__images">
+                                                <div class="atr__promo">
+                                                    Sale
+                                                </div>
+                                                <a href="/produk/{{ $product->slug }}">
+                                                    <img class="atr__image-main p-5 object-fit-cover w-100" src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}">
+                                                </a>
+                                                <div class="atr__extra-menu">
+                                                    <a class="atr__quick-view" href="/produk/{{ $product->slug }}"><i class="icon_zoom-in_alt"></i></a>
+                                                    <form id="addToCartForm-{{ $product->id }}" action="{{ route('cart.add') }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                        <input type="hidden" name="status" value="Keranjang">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                    </form>
+
+                                                    <div class="atr__add-carts" onclick="submitCartForm({{ $product->id }})">
+                                                        <i class="icon_cart_alt"></i>
                                                     </div>
                                                 </div>
-
-                                                <label for="cat_4">{{ $product->category->name }}</label>
-
-                                                <h3>{{ $product->name }}</h3>
-                                                <div class="atr__main-price">
-                                                    Rp{{ number_format($product->price, 0, ',', '.') }}
-                                                </div>
-
                                             </div>
+
+                                            <label for="cat_4">{{ $product->category->name }}</label>
+
+                                            <h3>{{ $product->name }}</h3>
+                                            <div class="atr__main-price">
+                                                Rp{{ number_format($product->price, 0, ',', '.') }}
+                                            </div>
+
                                         </div>
+                                    </div>
                                     @endforeach
                                     <!-- product item end -->
                                 </div>
@@ -127,12 +189,12 @@
                                 <h4>Kategori</h4>
                                 <div class="de_form">
                                     @foreach ($categories as $category)
-                                        <div class="de_checkbox">
-                                            <input id="cat_{{ $category->id }}" name="category" type="checkbox" value="{{ $category->slug }}"
-                                                onchange="if(this.checked) { window.location.href = '/produk?category=' + this.value + '#katalog-produk'; } else { window.location.href = '/produk'; }"
-                                                {{ request('category') == $category->slug ? 'checked' : '' }}>
-                                            <label for="cat_{{ $category->id }}">{{ $category->emoji }} {{ $category->name }}</label>
-                                        </div>
+                                    <div class="de_checkbox">
+                                        <input id="cat_{{ $category->id }}" name="category" type="checkbox" value="{{ $category->slug }}"
+                                            onchange="if(this.checked) { window.location.href = '/produk?category=' + this.value + '#katalog-produk'; } else { window.location.href = '/produk'; }"
+                                            {{ request('category') == $category->slug ? 'checked' : '' }}>
+                                        <label for="cat_{{ $category->id }}">{{ $category->emoji }} {{ $category->name }}</label>
+                                    </div>
                                     @endforeach
                                 </div>
                             </div>
@@ -142,30 +204,30 @@
                             <div class="row g-4">
                                 <!-- product item begin -->
                                 @foreach ($products as $product)
-                                    <div class="col-xl-3 col-lg-4 col-md-6">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="produk/{{ $product->slug }}">
-                                                    <img class="atr__image-main p-5" src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="produk/{{ $product->slug }}"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
+                                <div class="col-xl-3 col-lg-4 col-md-6">
+                                    <div class="de__pcard text-center">
+                                        <div class="atr__images">
+                                            <div class="atr__promo">
+                                                Sale
                                             </div>
-
-                                            <label for="cat_4">{{ $product->category->name }}</label>
-
-                                            <h3>{{ $product->name }}</h3>
-                                            <div class="atr__main-price">
-                                                Rp {{ number_format($product->price, 0, ',', '.') }}
+                                            <a href="produk/{{ $product->slug }}">
+                                                <img class="atr__image-main p-5" src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}">
+                                            </a>
+                                            <div class="atr__extra-menu">
+                                                <a class="atr__quick-view" href="produk/{{ $product->slug }}"><i class="icon_zoom-in_alt"></i></a>
+                                                <div class="atr__add-cart" onclick="submitCartForm({{ $product->id }})"><i class="icon_cart_alt"></i></div>
                                             </div>
-
                                         </div>
+
+                                        <label for="cat_4">{{ $product->category->name }}</label>
+
+                                        <h3>{{ $product->name }}</h3>
+                                        <div class="atr__main-price">
+                                            Rp {{ number_format($product->price, 0, ',', '.') }}
+                                        </div>
+
                                     </div>
+                                </div>
                                 @endforeach
                                 <!-- product item end -->
 
@@ -186,6 +248,7 @@
         {{-- footer --}}
         @include('partials.footer')
         {{-- footer end --}}
+
     </div>
 
     {{-- overlay cart --}}
@@ -196,6 +259,12 @@
     ================================================== -->
     <script src="{{ asset('js/plugins.js') }}"></script>
     <script src="{{ asset('js/designesia.js') }}"></script>
+
+    <script>
+        function submitCartForm(productId) {
+            document.getElementById(`addToCartForm-${productId}`).submit();
+        }
+    </script>
 
 </body>
 

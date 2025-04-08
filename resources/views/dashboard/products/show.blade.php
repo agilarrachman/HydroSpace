@@ -108,8 +108,8 @@
                                                             $picture='picture' . $i;
                                                             @endphp
                                                             @if (!empty($product->$picture))
-                                                            <div class="carousel-item {{ $i === 1 ? 'active' : '' }}" style="max-width: 625px; max-height: 625px">
-                                                                <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2" style="object-fit: cover; width: 100%; height: 100%;">
+                                                            <div class="rounded-2 carousel-item {{ $i === 1 ? 'active' : '' }}" style="max-width: 625px; height: 625px; background-color: #5b895866 !important;">
+                                                                <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2" style="object-fit: contain; width: 100%; height: 100%;">
                                                             </div>
                                                             @endif
                                                             @endfor
