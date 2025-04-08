@@ -15,6 +15,8 @@ use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\GeminiController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\OrderController;
@@ -44,6 +46,14 @@ Route::middleware(['blockAdmin'])->group(function () {
             "active" => "Beranda"
         ]);
     });
+    
+    Route::get('/hydrobot#ai', function () {
+        return view('index', [
+            "active" => "HydroBot"
+        ]);
+    });
+    Route::post('/question', [GeminiController::class, 'index']);
+    Route::post('/hydrobot/clear-history', [GeminiController::class, 'clearHistory']);
 
     Route::get('/produk', [ProductController::class, 'customerIndex']);
 
@@ -57,6 +67,7 @@ Route::middleware(['blockAdmin'])->group(function () {
             "active" => "HydroBot"
         ]);
     });
+    Route::post('/question', [GeminiController::class, 'index']);
 
     Route::get('/tentang', function () {
         return view('about', [
