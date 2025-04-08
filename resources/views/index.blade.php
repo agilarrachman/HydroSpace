@@ -20,6 +20,13 @@
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <style>
+        .chatbot .newChatButton:hover {
+            background-color: #FFF !important;
+            color: #354e33 !important;
+        }
+    </style>
 </head>
 
 <body class="dark-scheme">
@@ -253,10 +260,14 @@
             <div class="chatbot section" id="ai" style="margin-bottom: 140px; z-index: 999999;">
                 <div class="container">
                     <div class="d-flex flex-column flex-md-row gap-2 gap-lg-5 justify-content-between">
-                        <div class="col-md-5">
+                        <div class="col-md-5 mb-3 mb-lg-0">
                             <img src="/images/logo-white.webp" alt="HydroSpace Logo" style="width: 200px;" class="mb-3">
                             <h2 class="mb-2 text-wrap">Konsultasi Chatbot AI <br><span class="id-color-2">seputar Hidroponik</span></h2>
                             <p class="text-wrap">HydroBot adalah asisten virtual cerdas yang siap membantumu menjawab pertanyaan dan mengatasi kesulitan seputar hidroponik. Dari pemilihan sistem tanam, perawatan tanaman, hingga solusi saat menghadapi kendala, HydroBot memberikan panduan cepat dan akurat kapan saja. Dengan teknologi AI, chatbot ini dirancang untuk memudahkan perjalanan hidroponikmu, baik sebagai pemula maupun yang ingin mengoptimalkan hasil panen.</p>
+                            <form action="/hydrobot/clear-history" method="POST">
+                                @csrf
+                                <button type="submit" class="newChatButton px-3 py-2" style="color: white;background-color: transparent; border: 1px solid #FFF; border-radius: 50px;" onclick="return confirm('Apakah kamu yakin akan membuat percakapan baru? HydroBot akan melupakan semua riwayat percakapan Kamu.')">Percakapan Baru</button>
+                            </form>
                         </div>
                         <div class="col-md-6">
                             <form id="ask">
@@ -720,7 +731,7 @@
 
             const messageElement = `
             <div class="chat-bubble ${sender} text-wrap lh-1">
-                <h5 style="font-weight: 800;">${sender === 'user' ? 'Anda' : 'Hydrobot'}</h5>
+                <h5 style="font-weight: 800;">${sender === 'user' ? 'Anda' : 'HydroBot'}</h5>
                 ${formattedMessage}
             </div>`;
 

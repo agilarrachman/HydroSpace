@@ -42,14 +42,14 @@ Route::middleware(['blockAdmin'])->group(function () {
             "active" => "Beranda"
         ]);
     });
-    Route::post('/question', [GeminiController::class, 'index']);
-    Route::get('/hydrobot', function () {
+    
+    Route::get('/hydrobot#ai', function () {
         return view('index', [
             "active" => "HydroBot"
         ]);
     });
-
-    Route::get('/test-gemini', [GeminiController::class, 'testGemini']);
+    Route::post('/question', [GeminiController::class, 'index']);
+    Route::post('/hydrobot/clear-history', [GeminiController::class, 'clearHistory']);
 
     Route::get('/produk', [ProductController::class, 'customerIndex']);
 
