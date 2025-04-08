@@ -188,10 +188,7 @@
             <!-- Layout container -->
             <div class="layout-page">
                 <!-- Navbar -->
-
-                <nav
-                    class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-                    id="layout-navbar">
+                <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme" id="layout-navbar">
                     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
                         <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
                             <i class="bx bx-menu bx-sm"></i>
@@ -206,158 +203,107 @@
                         </div>
                     </div>
                 </nav>
-
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <!-- Content -->
                     <div class="container-xxl d-flex flex-column flex-lg-row gap-4 flex-grow-1 container-p-y" style="height: 90vh;">
-                        <!-- Tabs for Customers (Hidden on Small Screens) -->
                         <div class="card w-25 h-100 overflow-auto d-none d-lg-block">
                             <ul class="nav nav-pills flex-column" id="customer-tabs" role="tablist">
+                            @foreach ($users as $user)
                                 <li class="nav-item" role="presentation">
-                                    <button class="nav-link active" id="customer1-tab" data-bs-toggle="pill" data-bs-target="#customer1-chat" type="button" role="tab">Nurrizkyta Aulia</button>
+                                    <a class="nav-link d-flex align-items-center justify-content-start gap-4 py-3" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
+                                        <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
+                                        <p class="mb-0"><span>@</span>{{ $user->username }}</p>
+                                    </a>
                                 </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="customer2-tab" data-bs-toggle="pill" data-bs-target="#customer2-chat" type="button" role="tab">Fillah Alfatih</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="customer3-tab" data-bs-toggle="pill" data-bs-target="#customer3-chat" type="button" role="tab">Agil ArRachman</button>
-                                </li>
-                                <li class="nav-item" role="presentation">
-                                    <button class="nav-link" id="customer4-tab" data-bs-toggle="pill" data-bs-target="#customer4-chat" type="button" role="tab">Nasywa Shafa</button>
-                                </li>
+                                <style>
+                                    .nav-link {
+                                        border-left: 5px solid #ffffff00 !important;
+                                    }
+                                    .nav-link:hover {
+                                        background-color: rgba(67, 89, 113, 0.04) !important;
+                                        color: #454545 !important;
+                                        border-left: 5px solid #354e33 !important;
+                                    }
+                                    .nav-link.active {
+                                        background-color: rgba(53, 78, 51, 0.1) !important;
+                                        color: #454545 !important;
+                                        border-left: 5px solid #354e33 !important;
+                                    }
+                                    .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
+                                        box-shadow: none;
+                                    }
+                                </style>
+                            @endforeach
                             </ul>
                         </div>
 
-                        <!-- Select for Customers (Visible on Small Screens) -->
                         <div class="w-100 d-block d-lg-none">
                             <select id="customer-select" class="form-select w-100">
-                                <option value="customer1-chat">Nurrizkyta Aulia</option>
-                                <option value="customer2-chat">Fillah Alfatih</option>
-                                <option value="customer3-chat">Agil ArRachman</option>
-                                <option value="customer4-chat">Nasywa Shafa</option>
+                            <option value="" selected disabled>Pilih pengguna untuk memulai chat</option>
+                            @foreach ($users as $user)
+                                <option value="customer{{ $loop->index + 1 }}-chat">{{ $user->username }}</option>
+                            @endforeach
                             </select>
                         </div>
 
                         <!-- Chat Section -->
                         <div class="tab-content w-100 w-lg-75 h-75 p-0 flex-grow-1" id="customer-chats">
-                            <div class="tab-pane fade show active h-100" id="customer1-chat" role="tabpanel">
+                            <div class="tab-pane fade show active h-100" id="default-chat" role="tabpanel">
                                 <div class="card p-3 h-100 d-flex flex-column">
-                                    <h5>Chat dengan Nurrizkyta Aulia</h5>
                                     <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
-                                        <div class="chat h-100">
-                                            <div class="admin d-flex gap-2">
-                                                <div class="chat-bubble admin text-wrap lh-1">
-                                                    <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
-                                                    Halo, HydroMates! Apakah ada yang bisa saya bantu?
-                                                </div>
-                                                <div class="profile-picture">
-                                                    <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
-                                                </div>
-                                            </div>
-                                            <div class="user d-flex gap-2">
-                                                <img src="{{ asset('images/team/1.jpg') }}" alt="User" />
-                                                <div class="chat-bubble user text-wrap lh-1">
-                                                    <h5 class="mb-1" style="font-weight: 800;">Nurrizkyta Aulia</h5>
-                                                    Kok pesanan saya lama banget yahhhh
-                                                </div>
-                                            </div>
+                                        <div class="chat h-100 d-flex align-items-center justify-content-center">
+                                            <img src="{{ asset('images/dashboard/hero-dashboard.png') }}" style="max-height: 275px;" class="mb-4"/>
+                                            <p class="text-muted">Pilih pengguna untuk memulai percakapan.</p>
                                         </div>
-                                    </div>
-                                    <div class="chat-input my-0">
-                                        <input type="text" placeholder="Ketik pesan.." required />
-                                        <button type="submit"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
-                                            </svg></button>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="tab-pane fade h-100" id="customer2-chat" role="tabpanel">
-                                <div class="card p-3 h-100 d-flex flex-column">
-                                    <h5>Chat dengan Fillah Alfatih</h5>
-                                    <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
-                                        <div class="chat h-100">
-                                            <div class="admin d-flex gap-2">
-                                                <div class="chat-bubble admin text-wrap lh-1">
-                                                    <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
-                                                    Halo, HydroMates! Apakah ada yang bisa saya bantu?
-                                                </div>
-                                                <div class="profile-picture">
-                                                    <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
-                                                </div>
-                                            </div>
-                                        </div>
+                            {{-- Uncomment and modify the following section if needed --}}
+                            {{-- @foreach ($users as $user)
+                            <div class="tab-pane fade h-100" id="customer{{ $loop->index + 1 }}-chat" role="tabpanel">
+                            <div class="card p-3 h-100 d-flex flex-column">
+                                <h5>Chat dengan {{ $user->username }}</h5>
+                                <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
+                                <div class="chat h-100">
+                                    <div class="admin d-flex gap-2">
+                                    <div class="chat-bubble admin text-wrap lh-1">
+                                        <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
+                                        Halo, HydroMates! Apakah ada yang bisa saya bantu?
                                     </div>
-                                    <div class="chat-input my-0">
-                                        <input type="text" placeholder="Ketik pesan.." required />
-                                        <button type="submit"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
-                                            </svg></button>
+                                    <div class="profile-picture">
+                                        <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
                                     </div>
-                                </div>
-                            </div>
-
-                            <div class="tab-pane fade h-100" id="customer3-chat" role="tabpanel">
-                                <div class="card p-3 h-100 d-flex flex-column">
-                                    <h5>Chat dengan Agil ArRachman</h5>
-                                    <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
-                                        <div class="chat h-100">
-                                            <div class="admin d-flex gap-2">
-                                                <div class="chat-bubble admin text-wrap lh-1">
-                                                    <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
-                                                    Halo, HydroMates! Apakah ada yang bisa saya bantu?
-                                                </div>
-                                                <div class="profile-picture">
-                                                    <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
-                                                </div>
-                                            </div>
-                                        </div>
                                     </div>
-                                    <div class="chat-input my-0">
-                                        <input type="text" placeholder="Ketik pesan.." required />
-                                        <button type="submit"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
-                                            </svg></button>
+                                    <div class="user d-flex gap-2">
+                                    <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" />
+                                    <div class="chat-bubble user text-wrap lh-1">
+                                        <h5 class="mb-1" style="font-weight: 800;">{{ $user->username }}</h5>
+                                        {{ $user->last_message ?? 'Belum ada pesan.' }}
+                                    </div>
                                     </div>
                                 </div>
-                            </div>
-
-                            <div class="tab-pane fade h-100" id="customer4-chat" role="tabpanel">
-                                <div class="card p-3 h-100 d-flex flex-column">
-                                    <h5>Chat dengan Nasywa Shafa</h5>
-                                    <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
-                                        <div class="chat h-100">
-                                            <div class="admin d-flex gap-2">
-                                                <div class="chat-bubble admin text-wrap lh-1">
-                                                    <h5 class="mb-2" style="font-weight: 800; color:#fff;">Admin HydroSpace</h5>
-                                                    Halo, HydroMates! Apakah ada yang bisa saya bantu?
-                                                </div>
-                                                <div class="profile-picture">
-                                                    <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chat-input my-0">
-                                        <input type="text" placeholder="Ketik pesan.." required />
-                                        <button type="submit"><svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
-                                            </svg></button>
-                                    </div>
+                                </div>
+                                <div class="chat-input my-0">
+                                <input type="text" placeholder="Ketik pesan.." required />
+                                <button type="submit">
+                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M24.0431 13.886C24.5682 13.6234 24.8999 13.0867 24.8999 12.4996C24.8999 11.9125 24.5682 11.3758 24.0431 11.1133L2.34309 0.263263C1.7933 -0.0116297 1.13302 0.0643301 0.66002 0.456886C0.187018 0.849442 -0.00932183 1.48441 0.159543 2.07544L2.37382 9.82543C2.56394 10.4908 3.17214 10.9496 3.86418 10.9496L10.9499 10.9496C11.8059 10.9496 12.4999 11.6436 12.4999 12.4996C12.4999 13.3557 11.8059 14.0496 10.9499 14.0496L3.86419 14.0496C3.17215 14.0496 2.56395 14.5084 2.37383 15.1738L0.159542 22.9238C-0.0093228 23.5148 0.187017 24.1498 0.660019 24.5424C1.13302 24.9349 1.7933 25.0109 2.34308 24.736L24.0431 13.886Z" fill="white" />
+                                    </svg>
+                                </button>
                                 </div>
                             </div>
+                            </div>
+                            @endforeach --}}
                         </div>
                     </div>
-
-
                     <!-- / Content -->
 
                     <div class="content-backdrop fade"></div>
                 </div>
-                <!-- Content wrapper -->
+                <!-- / Content wrapper -->
             </div>
             <!-- / Layout page -->
         </div>
