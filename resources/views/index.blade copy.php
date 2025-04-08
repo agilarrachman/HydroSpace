@@ -637,7 +637,7 @@
     <script src="js/custom-marquee.js"></script>
     <script src="js/custom-swiper-2.js"></script>
 
-    <!-- <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script> -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="js/gemini.js"></script>
 
     <script type="text/javascript">
@@ -719,7 +719,7 @@
                 .replace(/\n/g, '<br>'); // Replace newlines with <br>
 
             const messageElement = `
-            <div class="chat-bubble ${sender} text-wrap lh-1">
+            <div class="chat-bubble ${sender}">
                 <h5 style="font-weight: 800;">${sender === 'user' ? 'Anda' : 'Hydrobot'}</h5>
                 ${formattedMessage}
             </div>`;
