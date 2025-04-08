@@ -667,7 +667,7 @@
 
         $(document).ready(function() {
             $('#chat-window').html(`
-            <div class="chat-bubble bot text-wrap lh-1">
+            <div class="chat-bubble bot text-wrap lh-base">
                 <h5 style="font-weight: 800;">HydroBot</h5>
                 Halo, HydroMates! 🌱🤖 Aku HydroBot, asisten virtualmu di dunia hidroponik. Ada yang bisa aku bantu hari ini? 😊
             </div>            
@@ -726,11 +726,13 @@
 
             // Format message: replace **text** with <strong>text</strong> and \n with <br>
             const formattedMessage = message
-                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>') // Format bold
-                .replace(/\n/g, '<br>'); // Replace newlines with <br>
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/^(\*|-|\+) (.*?)(?:\n|$)/gm, '<li>$2</li>') // Mendukung *, -, atau + sebagai penanda list
+                .replace(/\n/g, '<br>')
+                .replace(/^(<li>.*?<\/li>(?:\n|$))+/gm, '<ul>$&</ul>');
 
             const messageElement = `
-            <div class="chat-bubble ${sender} text-wrap lh-1">
+            <div class="chat-bubble ${sender} text-wrap lh-base">
                 <h5 style="font-weight: 800;">${sender === 'user' ? 'Anda' : 'HydroBot'}</h5>
                 ${formattedMessage}
             </div>`;

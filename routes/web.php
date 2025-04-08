@@ -16,7 +16,6 @@ use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\GeminiController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MidtransController;
 use App\Http\Controllers\OrderController;
