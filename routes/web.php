@@ -1,6 +1,16 @@
 <?php
 
+use App\Models\User;
+use App\Livewire\Chat;
+use App\Models\Product;
+use Illuminate\Http\Request;
+use App\Livewire\ChatToAdmin;
+use App\Models\VideoCategory;
+use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\VideoController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\CartController;
@@ -13,12 +23,6 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\VideoCategoryController;
-use App\Http\Controllers\VideoController;
-use App\Models\Product;
-use App\Models\ProductCategory;
-use App\Models\VideoCategory;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
 Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
@@ -78,21 +82,8 @@ Route::middleware(['blockAdmin'])->group(function () {
             "active" => "Kontak"
         ]);
     });
-
-    Route::get('/chat', function () {
-        return view('chat', [
-            "title" => "HydroSpace | Chat Admin HydroSpace",
-            "active" => "Chat Admin HydroSpace"
-        ]);
-    });
 });
 
-Route::get('/dashboard/chat', function () {
-    return view('dashboard.chat', [
-        "title" => "HydroSpace | Chat Customer",
-        "active" => "Chat Customer"
-    ]);
-});
 
 Route::middleware(['role:Customer'])->group(function () {
     Route::resource('/profil', UserController::class)->parameters([
@@ -122,6 +113,16 @@ Route::middleware(['role:Customer'])->group(function () {
     Route::get('/get-snap-token/{orderId}', [OrderController::class, 'getSnapToken']);
     Route::post('/checkout', [OrderController::class, 'checkout']);
     Route::get('/cancel', [OrderController::class, 'cancelOrder']);
+
+    Route::get('/pesanan/id', function () {
+        return view('orderDetail', [
+            "title" => "HydroSpace | Pesanan Saya",
+            "active" => "Pesanan Saya",
+        ]);
+    });
+
+    // Route::get('/chat', [Chat::class, 'chatToAdmin'])->name('chatToAdmin');
+    Route::get('/chat', ChatToAdmin::class)->name('chatToAdmin');
 
     Route::post('/place-order', [MidtransController::class, 'placeOrder']);
 });
@@ -201,6 +202,17 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
         return response()->json(Product::select('id', 'name')->get());
     });
     Route::resource('/products', ProductController::class);
+
+    Route::get('/chat', function () {
+        return view('dashboard.chat', [
+            "title" => "HydroSpace | Chat Customer",
+            "active" => "Chat Customer",
+            "users" => User::where('role', 'Customer')->get()
+        ]);
+    });
+
+    Route::get('/chat/{user:id}', Chat::class)->name('chat');
+
     Route::get('/Product/checkSlug', [ProductController::class, 'checkSlug']);
 
     Route::get('/orders', [OrderController::class, 'indexAdmin']);
