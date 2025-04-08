@@ -24,7 +24,7 @@
                 <ul class="nav nav-pills flex-column" id="customer-tabs" role="tablist">
                 @foreach ($users as $user)
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link d-flex align-items-center justify-content-start gap-4 py-3 @if($user->username == $customerUsername) active @endif" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
+                        <a wire:navigate class="nav-link d-flex align-items-center justify-content-start gap-4 py-3 @if($user->username == $customerUsername) active @endif" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
                             <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
                             <p class="mb-0"><span>@</span>{{ $user->username }}</p>
                         </a>
@@ -67,10 +67,10 @@
                 <div class="tab-pane fade h-100 show active" role="tabpanel">
                     <div class="card p-3 h-100 d-flex flex-column">
                         <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
-                            <div class="chat h-100">
-                                @foreach ($messages as $message)
+                            <div class="chat h-100" wire:poll.visible id="chat-window">
+                                @foreach ($messages as $index => $message)
                                     <div class="d-flex align-items-start gap-2 @if($message->from_user_id == auth()->id()) admin @else user flex-row-reverse @endif">
-                                        <div class="chat-bubble @if($message->from_user_id == auth()->id()) admin @else user @endif text-wrap mt-0 mb-2">
+                                        <div class="chat-bubble @if($message->from_user_id == auth()->id()) admin @else user @endif text-wrap mt-0 mb-2" @if($loop->last) id="last-message" @endif>
                                             <h6 class="@class([ 'mb-2',
                                                                 'text-end' => $message->from_user_id == auth()->id(),
                                                                 'text-start' => $message->from_user_id != auth()->id(),
@@ -118,5 +118,23 @@
 
         <div class="content-backdrop fade"></div>
     </div>
+    <script>
+        function scrollToLastMessage() {
+            setTimeout(() => {
+                const lastMsg = document.getElementById('last-message');
+                if (lastMsg) {
+                    lastMsg.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }, 100);
+        }
+
+        document.addEventListener("DOMContentLoaded", scrollToLastMessage);
+
+        document.addEventListener("livewire:load", function () {
+            Livewire.hook('message.processed', (message, component) => {
+                scrollToLastMessage();
+            });
+        });
+    </script>
 </div>
 {{--  $slot end here --}}

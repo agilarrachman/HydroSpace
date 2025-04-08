@@ -10,6 +10,7 @@
         "cviebrock/eloquent-sluggable": "^11.0",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
+        "laravel/ui": "^4.6",
         "laravolt/indonesia": "^0.36.0",
         "livewire/livewire": "^3.4",
         "livewire/volt": "^1.7.0",

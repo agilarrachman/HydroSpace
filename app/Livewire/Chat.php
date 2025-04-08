@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Database\Eloquent\Builder;
 
 class Chat extends Component
 {
@@ -21,12 +22,13 @@ class Chat extends Component
 
         return view('livewire.chat', [
             "title" => "HydroSpace | Chat",
-            "messages" => \App\Models\Chat::where('from_user_id', Auth::user()->id)
-                        ->orWhere('from_user_id', $this->user->id)
-                        ->orWhere('to_user_id',  Auth::user()->id)
-                        ->orWhere('to_user_id', $this->user->id)
-                        ->orderBy('created_at', 'asc')
-                        ->get(),
+            "messages" => \App\Models\Chat::where(function (Builder $query) {
+                $query->where('from_user_id', Auth::user()->id)
+                      ->where('to_user_id', $this->user->id);
+            })->orWhere(function (Builder $query) {
+                $query->where('from_user_id', $this->user->id)
+                      ->where('to_user_id', Auth::user()->id);
+            })->orderBy('created_at', 'asc')->get(),
             "active" => "Chat " . $this->user->name,
             "customerUsername" => $this->user->username,
             "users" => User::where('role', 'Customer')->get()

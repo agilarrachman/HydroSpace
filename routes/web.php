@@ -111,8 +111,8 @@ Route::middleware(['role:Customer'])->group(function () {
         ]);
     });
 
-    Route::get('/chat', [Chat::class, 'chatToAdmin'])->name('chatToAdmin');
-    // Route::get('/chat', [ChatToAdmin::class])->name('chatToAdmin');
+    // Route::get('/chat', [Chat::class, 'chatToAdmin'])->name('chatToAdmin');
+    Route::get('/chat', ChatToAdmin::class)->name('chatToAdmin');
 });
 
 Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
