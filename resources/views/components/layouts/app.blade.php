@@ -220,6 +220,7 @@
     data-theme="theme-default"
     data-assets-path="../assets/"
     data-template="vertical-menu-template-free">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -462,6 +463,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -614,5 +616,6 @@
     <script src="{{ asset('js/plugins.js') }}"></script>
     <!-- <script src="{{ asset('js/designesia.js') }}"></script> -->
 </body>
+
 </html>
 @endif

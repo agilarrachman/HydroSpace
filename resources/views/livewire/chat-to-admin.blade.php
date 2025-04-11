@@ -29,7 +29,12 @@
                             @if($message->from_user_id == auth()->id())
                                 <img style="width: 100% !important" src="{{ asset('storage/' . $message->fromUser->profile_picture) }}" alt="User" />
                             @else
-                                <img style="width: 20px !important;" src="{{ asset('images/logo-icon-color.webp') }}" alt="Admin" />
+                                {{-- <img style="width: 20px !important;" src="{{ asset('images/logo-icon-color.webp') }}" alt="Admin" /> --}}
+                                <img
+                                    style="height: 100% !important; aspect-ratio: 1/1 !important; border-radius: 50% !important; object-fit: cover !important;"
+                                    src="{{ asset('storage/' . $message->fromUser->profile_picture) }}"
+                                    alt="{{ $message->fromUser->role }}"
+                                />
                             @endif
                         </div>
                     </div>
