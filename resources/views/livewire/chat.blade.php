@@ -69,27 +69,36 @@
                         <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
                             <div class="chat h-100" wire:poll.visible id="chat-window">
                                 @foreach ($messages as $index => $message)
-                                    <div class="d-flex align-items-start gap-2 @if($message->from_user_id == auth()->id()) admin @else user flex-row-reverse @endif">
-                                        <div class="chat-bubble @if($message->from_user_id == auth()->id()) admin @else user @endif text-wrap mt-0 mb-2" @if($loop->last) id="last-message" @endif>
-                                            <h6 @class([ 'mb-0',
-                                                                'text-end' => $message->from_user_id == auth()->id(),
-                                                                'text-start' => $message->from_user_id != auth()->id(),
-                                                            ]) style="font-weight: 800; color:@if($message->from_user_id == auth()->id()) #FFFFFF @else #454545 @endif;">{{ $message->fromUser->username }}</h6>
+                                    @php
+                                        $isAdmin = $message->fromUser->role === 'Admin';
+                                        $isMe = $message->from_user_id === auth()->id();
+                                        $isAdminOrMe = $isAdmin || $isMe;
+                                    @endphp
 
-                                            <p class="mt-1" @class([ 'text-end' => $message->from_user_id == auth()->id(),
-                                                                'text-start' => $message->from_user_id != auth()->id()
-                                                            ])>{{ $message->message }}</p>
+                                    <div class="d-flex align-items-start gap-2 {{ $isAdminOrMe ? 'admin' : 'user flex-row-reverse' }}">
+                                        <div class="chat-bubble {{ $isAdminOrMe ? 'admin' : 'user' }} text-wrap mt-0 mb-2" @if($loop->last) id="last-message" @endif>
+                                            <h6 class="mb-0 {{ $isAdminOrMe ? 'text-end' : 'text-start' }}"
+                                                style="font-weight: 800; color:{{ $isAdminOrMe ? '#FFFFFF' : '#454545' }};">
+                                                {{ $message->fromUser->username }}
+                                            </h6>
 
-                                            <p @class([ 'text-end' => $message->from_user_id == auth()->id(),
-                                                                'text-start' => $message->from_user_id != auth()->id()
-                                                            ])><small>{{ $message->created_at->setTimezone('Asia/Jakarta')->format('H:i') }}</small></p>
+                                            <p class="mt-1 {{ $isAdminOrMe ? 'text-end' : 'text-start' }}">
+                                                {{ $message->message }}
+                                            </p>
+
+                                            <p class="{{ $isAdminOrMe ? 'text-end' : 'text-start' }}">
+                                                <small>{{ $message->created_at->setTimezone('Asia/Jakarta')->format('H:i') }}</small>
+                                            </p>
                                         </div>
+
                                         <div class="profile-picture">
-                                            @if($message->from_user_id == auth()->id())
-                                                <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
-                                            @else
-                                                <img src="{{ asset('storage/' . $message->fromUser->profile_picture) }}" alt="User" />
-                                            @endif
+                                            <img src="{{ $message->fromUser->profile_picture
+                                                    ? asset('storage/' . $message->fromUser->profile_picture)
+                                                    : asset('images/default-profile.png') }}"
+                                            alt="{{ $isAdminOrMe ? 'Admin' : 'User' }}" />
+
+                                            {{-- <img src="{{ $isAdminOrMe ? asset('images/logo-icon.webp') : asset('storage/' . $message->fromUser->profile_picture) }}"
+                                                alt="{{ $isAdminOrMe ? 'Admin' : 'User' }}" /> --}}
                                         </div>
                                     </div>
                                 @endforeach

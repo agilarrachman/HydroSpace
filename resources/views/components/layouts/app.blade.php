@@ -79,7 +79,7 @@
             width: 40px;
             height: 40px;
             border-radius: 100px;
-            object-fit: contain;
+            object-fit: cover;
         }
 
         @media (min-width: 992px) {
@@ -282,8 +282,9 @@
         }
 
         .admin .profile-picture img {
-            /* width: 20px !important; */
+            height: 100% !important;
             object-fit: cover !important;
+            border-radius: 100% !important;
         }
 
         .chat-bubble.admin {

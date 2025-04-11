@@ -15,53 +15,20 @@ class Chat extends Component
 
     public function render()
     {
-        // $role = Auth::user()->role;
-        // $urlslug = url()->current();
-
-        // dd($role, $urlslug);
+        $adminIds = User::where('role', 'Admin')->pluck('id');
 
         return view('livewire.chat', [
             "title" => "HydroSpace | Chat",
-            "messages" => \App\Models\Chat::where(function (Builder $query) {
-                $query->where('from_user_id', Auth::user()->id)
-                      ->where('to_user_id', $this->user->id);
-            })->orWhere(function (Builder $query) {
+            "messages" => \App\Models\Chat::where(function (Builder $query) use ($adminIds) {
+                $query->whereIn('from_user_id', $adminIds)
+                    ->where('to_user_id', $this->user->id);
+            })->orWhere(function (Builder $query) use ($adminIds) {
                 $query->where('from_user_id', $this->user->id)
-                      ->where('to_user_id', Auth::user()->id);
+                    ->whereIn('to_user_id', $adminIds);
             })->orderBy('created_at', 'asc')->get(),
             "active" => "Chat " . $this->user->name,
             "customerUsername" => $this->user->username,
             "users" => User::where('role', 'Customer')->get()
-        ]);
-    }
-
-    public function chatToAdmin()
-    {
-        // $role = Auth::user()->role;
-        // $urlslug = url()->current();
-
-        // dd($role, $urlslug);
-
-        // $slot = view('livewire.slotChatToAdmin', [
-        //     "title" => "HydroSpace | Chat Admin HydroSpace",
-        //     "messages" => \App\Models\Chat::where('from_user_id', Auth::user()->id)
-        //         ->orWhere('to_user_id', Auth::user()->id)
-        //         ->orderBy('created_at', 'asc')
-        //         ->get(),
-        //     "active" => "Chat Admin HydroSpace",
-        //     "users" => User::where('role', 'Admin')->get(),
-        //     "customerUsername" => null,
-        // ]);
-
-        return view('chat', [
-            "messages" => \App\Models\Chat::where('from_user_id', Auth::user()->id)
-                ->orWhere('to_user_id', Auth::user()->id)
-                ->orderBy('created_at', 'asc')
-                ->get(),
-            "title" => "HydroSpace | Chat Admin HydroSpace",
-            "active" => "Chat Admin HydroSpace",
-            // "slot" => $slot,
-            // "role" => $role,
         ]);
     }
 
