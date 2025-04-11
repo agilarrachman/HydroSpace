@@ -118,6 +118,7 @@
             background-color: #E1EBE2;
             color: #354e33;
             margin-right: auto;
+            margin-top: 0 !important;
             align-self: flex-start;
         }
 
@@ -343,6 +344,7 @@
             background-color: #E1EBE2 !important;
             color: #354e33 !important;
             margin-right: auto !important;
+            margin-top: 0 !important;
             align-self: flex-start !important;
         }
 
