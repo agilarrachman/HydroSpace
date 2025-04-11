@@ -114,6 +114,9 @@ class OrderController extends Controller
         $villages = Village::all();
         $customer = Auth::user();
 
+        $user = Auth::user();
+        $totalOrder = Order::where('customer_id', $user->id)->count();
+
         return view('checkout', [
             "title" => "HydroSpace | Buat Pesanan",
             "active" => "Buat Pesanan",
@@ -125,6 +128,7 @@ class OrderController extends Controller
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
             "orderItems" => $orderItems, // Kirim data item ke view
+            'totalOrder' => $totalOrder,
         ]);
     }
 
