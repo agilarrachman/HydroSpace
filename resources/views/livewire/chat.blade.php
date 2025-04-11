@@ -13,7 +13,7 @@
             </h5>
 
             <div class="avatar avatar-online">
-                <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
+                <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 rounded-circle object-fit-cover" />
             </div>
         </div>
     </nav>

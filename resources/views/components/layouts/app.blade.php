@@ -56,12 +56,13 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            border-radius: 100px;
+            border-radius: 100px !important;
         }
 
         .admin .profile-picture img {
-            width: 20px;
-            object-fit: contain;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 100% !important;
         }
 
         .chat-bubble.admin {

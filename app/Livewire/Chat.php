@@ -25,7 +25,7 @@ class Chat extends Component
             })->orWhere(function (Builder $query) use ($adminIds) {
                 $query->where('from_user_id', $this->user->id)
                     ->whereIn('to_user_id', $adminIds);
-            })->orderBy('created_at', 'asc')->get(),
+            })->orderBy('created_at', 'asc')->get()->unique('message'),
             "active" => "Chat " . $this->user->name,
             "customerUsername" => $this->user->username,
             "users" => User::where('role', 'Customer')->get()
