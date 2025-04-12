@@ -79,10 +79,17 @@
 
                                     <div class="d-flex align-items-start gap-2 {{ $isAdminOrMe ? 'admin' : 'user flex-row-reverse' }}">
                                         <div class="chat-bubble {{ $isAdminOrMe ? 'admin' : 'user' }} text-wrap mt-0 mb-2" @if($loop->last) id="last-message" @endif>
-                                            <h6 class="mb-0 {{ $isAdminOrMe ? 'text-end' : 'text-start' }}"
-                                                style="font-weight: 800; color:{{ $isAdminOrMe ? '#FFFFFF' : '#454545' }};">
-                                                {{ $message->fromUser->username }}
-                                            </h6>
+                                            <div class="d-flex gap-2 align-items-center">
+                                                @if ($isAdminOrMe == 'Admin')
+                                                <p class="mb-0 ms-auto" style="font-size: 10px !important; color: #354e33; background-color: #d9f7e8; padding: 2px 5px; border-radius: 5px;">
+                                                    Admin
+                                                </p>
+                                                @endif
+                                                <h6 class="mb-0 {{ $isAdminOrMe ? 'text-end' : 'text-start' }}"
+                                                    style="font-weight: 800; color:{{ $isAdminOrMe ? '#FFFFFF' : '#454545' }};">
+                                                    {{ $message->fromUser->username }}
+                                                </h6>
+                                            </div>
 
                                             <p class="mt-1 {{ $isAdminOrMe ? 'text-end' : 'text-start' }}">
                                                 {{ $message->message }}

@@ -274,6 +274,16 @@
             background-color: #354e33 !important;
         }
 
+        .user .profile-picture {
+            background-color: #354e33 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 100px !important;
+        }
+
         .admin .profile-picture {
             background-color: transparent !important;
             display: flex !important;
