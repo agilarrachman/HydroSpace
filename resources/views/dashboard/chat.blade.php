@@ -244,11 +244,11 @@
                         </div>
 
                         <div class="w-100 d-block d-lg-none">
-                            <select id="customer-select" class="form-select w-100">
-                            <option value="" selected disabled>Pilih pengguna untuk memulai chat</option>
-                            @foreach ($users as $user)
-                                <option value="customer{{ $loop->index + 1 }}-chat">{{ $user->username }}</option>
-                            @endforeach
+                            <select id="customer-select" class="form-select w-100" onchange="location.href=this.value;">
+                                <option value="" selected disabled>Pilih pengguna untuk memulai chat</option>
+                                @foreach ($users as $user)
+                                    <option value="{{ route('chat', ['user' => $user->id]) }}"><span>@</span>{{ $user->username }}</option>
+                                @endforeach
                             </select>
                         </div>
 
