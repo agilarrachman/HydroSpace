@@ -79,7 +79,7 @@
                         <h5 class="mb-0">Daftar Admin</h5>
 
                         <div class="avatar avatar-online">
-                            <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
+                            <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 rounded-circle object-fit-cover" />
                         </div>
                     </div>
                 </nav>
@@ -142,7 +142,7 @@
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>
-                                                <img src="{{ asset('../storage/' . $admin->profile_picture) }}" alt="Avatar" class="rounded-circle" style="height: 100%; max-height: 40px;" />
+                                                <img src="{{ asset('../storage/' . $admin->profile_picture) }}" alt="Avatar" class="rounded-circle object-fit-cover" style="height: 100%; height: 40px; width: 40px;" />
                                             </td>
                                             <td>{{ $admin->username }}</td>
                                             <td>{{ $admin->email }}</td>

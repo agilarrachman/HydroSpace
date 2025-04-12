@@ -29,7 +29,10 @@ class ChatToAdmin extends Component
             "messages" => \App\Models\Chat::where('from_user_id', Auth::user()->id)
                 ->orWhere('to_user_id', Auth::user()->id)
                 ->orderBy('created_at', 'asc')
-                ->get(),
+                ->get()
+                ->unique(function ($item) {
+                    return $item->from_user_id . '-' . $item->message . '-' . $item->created_at->format('Y-m-d H:i:s');
+                }), // <- ini untuk buang duplikat berdasarkan isi pesan
             "active" => "Chat " . $this->user->name,
             "customerUsername" => $this->user->username,
             "users" => User::where('role', 'Admin')->get()
@@ -41,11 +44,23 @@ class ChatToAdmin extends Component
 
         // dd($this->message);
 
-        \App\Models\Chat::create([
-            'from_user_id' =>  Auth::user()->id,
-            'to_user_id' => $this->user->id,
-            'message' => $this->message,
-        ]);
+        // \App\Models\Chat::create([
+        //     'from_user_id' =>  Auth::user()->id,
+        //     'to_user_id' => $this->user->id,
+        //     'message' => $this->message,
+        // ]);
+
+        // $this->reset('message');
+
+        $admins = User::where('role', 'Admin')->get();
+
+        foreach ($admins as $admin) {
+            \App\Models\Chat::create([
+                'from_user_id' => Auth::user()->id,
+                'to_user_id' => $admin->id,
+                'message' => $this->message,
+            ]);
+        }
 
         $this->reset('message');
     }

@@ -7,21 +7,22 @@ use Illuminate\Http\Request;
 use App\Livewire\ChatToAdmin;
 use App\Models\VideoCategory;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\VideoController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\GeminiController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MidtransController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\VideoCategoryController;
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ProductCategoryController;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
 Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
@@ -45,7 +46,7 @@ Route::middleware(['blockAdmin'])->group(function () {
             "active" => "Beranda"
         ]);
     });
-    
+
     Route::get('/hydrobot#ai', function () {
         return view('index', [
             "active" => "HydroBot"
@@ -203,10 +204,29 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::resource('/products', ProductController::class);
 
     Route::get('/chat', function () {
+
+        $adminIds = User::where('role', 'Admin')->pluck('id');
+        $lastMessagesFromUsers = [];
+
+        foreach (User::where('role', 'Customer')->get() as $customer) {
+            $lastMessage = \App\Models\Chat::where(function ($query) use ($adminIds, $customer) {
+                $query->whereIn('from_user_id', $adminIds)
+                    ->where('to_user_id', $customer->id);
+            })->orWhere(function ($query) use ($adminIds, $customer) {
+                $query->where('from_user_id', $customer->id)
+                    ->whereIn('to_user_id', $adminIds);
+            })->orderBy('created_at', 'desc')->first();
+
+            $lastMessagesFromUsers[$customer->id] = $lastMessage && $lastMessage->from_user_id === $customer->id;
+        }
+
+        // dd($lastMessagesFromUsers);
+
         return view('dashboard.chat', [
             "title" => "HydroSpace | Chat Customer",
             "active" => "Chat Customer",
-            "users" => User::where('role', 'Customer')->get()
+            "users" => User::where('role', 'Customer')->get(),
+            "lastMessagesFromUsers" => $lastMessagesFromUsers
         ]);
     });
 
