@@ -27,6 +27,9 @@
                         <a wire:navigate class="nav-link d-flex align-items-center justify-content-start gap-4 py-3 @if($user->username == $customerUsername) active @endif" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
                             <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
                             <p class="mb-0"><span>@</span>{{ $user->username }}</p>
+                            @if($lastMessagesFromUsers[$user->id] ?? false)
+                                <div class="rounded-circle bg-danger ms-auto" style="width: 10px; height: 10px;"></div>
+                            @endif
                         </a>
                     </li>
                     <style>

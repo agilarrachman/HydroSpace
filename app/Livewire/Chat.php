@@ -16,6 +16,19 @@ class Chat extends Component
     public function render()
     {
         $adminIds = User::where('role', 'Admin')->pluck('id');
+        $lastMessagesFromUsers = [];
+
+        foreach (User::where('role', 'Customer')->get() as $customer) {
+            $lastMessage = \App\Models\Chat::where(function ($query) use ($adminIds, $customer) {
+                $query->whereIn('from_user_id', $adminIds)
+                    ->where('to_user_id', $customer->id);
+            })->orWhere(function ($query) use ($adminIds, $customer) {
+                $query->where('from_user_id', $customer->id)
+                    ->whereIn('to_user_id', $adminIds);
+            })->orderBy('created_at', 'desc')->first();
+
+            $lastMessagesFromUsers[$customer->id] = $lastMessage && $lastMessage->from_user_id === $customer->id;
+        }
 
         return view('livewire.chat', [
             "title" => "HydroSpace | Chat",
@@ -28,7 +41,8 @@ class Chat extends Component
             })->orderBy('created_at', 'asc')->get()->unique('message'),
             "active" => "Chat " . $this->user->name,
             "customerUsername" => $this->user->username,
-            "users" => User::where('role', 'Customer')->get()
+            "users" => User::where('role', 'Customer')->get(),
+            "lastMessagesFromUsers" => $lastMessagesFromUsers
         ]);
     }
 
