@@ -30,7 +30,9 @@ class ChatToAdmin extends Component
                 ->orWhere('to_user_id', Auth::user()->id)
                 ->orderBy('created_at', 'asc')
                 ->get()
-                ->unique('message'), // <- ini untuk buang duplikat berdasarkan isi pesan
+                ->unique(function ($item) {
+                    return $item->from_user_id . '-' . $item->message . '-' . $item->created_at->format('Y-m-d H:i:s');
+                }), // <- ini untuk buang duplikat berdasarkan isi pesan
             "active" => "Chat " . $this->user->name,
             "customerUsername" => $this->user->username,
             "users" => User::where('role', 'Admin')->get()
