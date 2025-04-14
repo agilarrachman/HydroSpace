@@ -13,7 +13,7 @@
             </h5>
 
             <div class="avatar avatar-online">
-                <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 h-auto rounded-circle" />
+                <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 rounded-circle object-fit-cover" />
             </div>
         </div>
     </nav>
@@ -27,6 +27,9 @@
                         <a wire:navigate class="nav-link d-flex align-items-center justify-content-start gap-4 py-3 @if($user->username == $customerUsername) active @endif" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
                             <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
                             <p class="mb-0"><span>@</span>{{ $user->username }}</p>
+                            @if($lastMessagesFromUsers[$user->id] ?? false)
+                                <div class="rounded-circle bg-danger ms-auto" style="width: 10px; height: 10px;"></div>
+                            @endif
                         </a>
                     </li>
                     <style>
@@ -52,12 +55,11 @@
             </div>
 
             <div class="w-100 d-block d-lg-none">
-                <select id="customer-select" class="form-select w-100">
+                <select id="customer-select" class="form-select w-100" onchange="location.href=this.value;">
                     <option value="" selected disabled>Pilih pengguna untuk memulai chat</option>
-                    {{-- @foreach ($users as $user)
-                        <option value="customer{{ $loop->index + 1 }}-chat">{{ $user->username }}</option>
-                    @endforeach --}}
-                    <option value="customer-chat">Nama-1</option>
+                    @foreach ($users as $user)
+                        <option value="{{ route('chat', ['user' => $user->id]) }}"><span>@</span>{{ $user->username }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -69,27 +71,43 @@
                         <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
                             <div class="chat h-100" wire:poll.visible id="chat-window">
                                 @foreach ($messages as $index => $message)
-                                    <div class="d-flex align-items-start gap-2 @if($message->from_user_id == auth()->id()) admin @else user flex-row-reverse @endif">
-                                        <div class="chat-bubble @if($message->from_user_id == auth()->id()) admin @else user @endif text-wrap mt-0 mb-2" @if($loop->last) id="last-message" @endif>
-                                            <h6 @class([ 'mb-0',
-                                                                'text-end' => $message->from_user_id == auth()->id(),
-                                                                'text-start' => $message->from_user_id != auth()->id(),
-                                                            ]) style="font-weight: 800; color:@if($message->from_user_id == auth()->id()) #FFFFFF @else #454545 @endif;">{{ $message->fromUser->username }}</h6>
+                                    @php
+                                        $isAdmin = $message->fromUser->role === 'Admin';
+                                        $isMe = $message->from_user_id === auth()->id();
+                                        $isAdminOrMe = $isAdmin || $isMe;
+                                    @endphp
 
-                                            <p class="mt-1" @class([ 'text-end' => $message->from_user_id == auth()->id(),
-                                                                'text-start' => $message->from_user_id != auth()->id()
-                                                            ])>{{ $message->message }}</p>
+                                    <div class="d-flex align-items-start gap-2 {{ $isAdminOrMe ? 'admin' : 'user flex-row-reverse' }}">
+                                        <div class="chat-bubble {{ $isAdminOrMe ? 'admin' : 'user' }} text-wrap mt-0 mb-2" @if($loop->last) id="last-message" @endif>
+                                            <div class="d-flex gap-2 align-items-center">
+                                                @if ($isAdminOrMe == 'Admin')
+                                                <p class="mb-0 ms-auto" style="font-size: 10px !important; color: #354e33; background-color: #d9f7e8; padding: 2px 5px; border-radius: 5px;">
+                                                    Admin
+                                                </p>
+                                                @endif
+                                                <h6 class="mb-0 {{ $isAdminOrMe ? 'text-end' : 'text-start' }}"
+                                                    style="font-weight: 800; color:{{ $isAdminOrMe ? '#FFFFFF' : '#454545' }};">
+                                                    {{ $message->fromUser->username }}
+                                                </h6>
+                                            </div>
 
-                                            <p @class([ 'text-end' => $message->from_user_id == auth()->id(),
-                                                                'text-start' => $message->from_user_id != auth()->id()
-                                                            ])><small>{{ $message->created_at->setTimezone('Asia/Jakarta')->format('H:i') }}</small></p>
+                                            <p class="mt-1 {{ $isAdminOrMe ? 'text-end' : 'text-start' }}">
+                                                {{ $message->message }}
+                                            </p>
+
+                                            <p class="{{ $isAdminOrMe ? 'text-end' : 'text-start' }}">
+                                                <small>{{ $message->created_at->setTimezone('Asia/Jakarta')->format('H:i') }}</small>
+                                            </p>
                                         </div>
+
                                         <div class="profile-picture">
-                                            @if($message->from_user_id == auth()->id())
-                                                <img src="{{ asset('images/logo-icon.webp') }}" alt="Admin" />
-                                            @else
-                                                <img src="{{ asset('storage/' . $message->fromUser->profile_picture) }}" alt="User" />
-                                            @endif
+                                            <img src="{{ $message->fromUser->profile_picture
+                                                    ? asset('storage/' . $message->fromUser->profile_picture)
+                                                    : asset('images/default-profile.png') }}"
+                                            alt="{{ $isAdminOrMe ? 'Admin' : 'User' }}" />
+
+                                            {{-- <img src="{{ $isAdminOrMe ? asset('images/logo-icon.webp') : asset('storage/' . $message->fromUser->profile_picture) }}"
+                                                alt="{{ $isAdminOrMe ? 'Admin' : 'User' }}" /> --}}
                                         </div>
                                     </div>
                                 @endforeach

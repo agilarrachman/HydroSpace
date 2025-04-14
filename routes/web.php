@@ -47,7 +47,7 @@ Route::middleware(['blockAdmin'])->group(function () {
             "active" => "Beranda"
         ]);
     });
-    
+
     Route::get('/hydrobot#ai', function () {
         return view('index', [
             "active" => "HydroBot"
@@ -206,10 +206,29 @@ Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
     Route::resource('/products', ProductController::class);
 
     Route::get('/chat', function () {
+
+        $adminIds = User::where('role', 'Admin')->pluck('id');
+        $lastMessagesFromUsers = [];
+
+        foreach (User::where('role', 'Customer')->get() as $customer) {
+            $lastMessage = \App\Models\Chat::where(function ($query) use ($adminIds, $customer) {
+                $query->whereIn('from_user_id', $adminIds)
+                    ->where('to_user_id', $customer->id);
+            })->orWhere(function ($query) use ($adminIds, $customer) {
+                $query->where('from_user_id', $customer->id)
+                    ->whereIn('to_user_id', $adminIds);
+            })->orderBy('created_at', 'desc')->first();
+
+            $lastMessagesFromUsers[$customer->id] = $lastMessage && $lastMessage->from_user_id === $customer->id;
+        }
+
+        // dd($lastMessagesFromUsers);
+
         return view('dashboard.chat', [
             "title" => "HydroSpace | Chat Customer",
             "active" => "Chat Customer",
-            "users" => User::where('role', 'Customer')->get()
+            "users" => User::where('role', 'Customer')->get(),
+            "lastMessagesFromUsers" => $lastMessagesFromUsers
         ]);
     });
 

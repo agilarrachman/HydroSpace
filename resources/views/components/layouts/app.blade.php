@@ -56,12 +56,13 @@
             justify-content: center;
             width: 40px;
             height: 40px;
-            border-radius: 100px;
+            border-radius: 100px !important;
         }
 
         .admin .profile-picture img {
-            width: 20px;
-            object-fit: contain;
+            height: 100% !important;
+            object-fit: cover !important;
+            border-radius: 100% !important;
         }
 
         .chat-bubble.admin {
@@ -79,7 +80,7 @@
             width: 40px;
             height: 40px;
             border-radius: 100px;
-            object-fit: contain;
+            object-fit: cover;
         }
 
         @media (min-width: 992px) {
@@ -117,6 +118,7 @@
             background-color: #E1EBE2;
             color: #354e33;
             margin-right: auto;
+            margin-top: 0 !important;
             align-self: flex-start;
         }
 
@@ -219,6 +221,7 @@
     data-theme="theme-default"
     data-assets-path="../assets/"
     data-template="vertical-menu-template-free">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
@@ -271,6 +274,16 @@
             background-color: #354e33 !important;
         }
 
+        .user .profile-picture {
+            background-color: #354e33 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            border-radius: 100px !important;
+        }
+
         .admin .profile-picture {
             background-color: transparent !important;
             display: flex !important;
@@ -282,8 +295,9 @@
         }
 
         .admin .profile-picture img {
-            /* width: 20px !important; */
+            height: 100% !important;
             object-fit: cover !important;
+            border-radius: 100% !important;
         }
 
         .chat-bubble.admin {
@@ -340,6 +354,7 @@
             background-color: #E1EBE2 !important;
             color: #354e33 !important;
             margin-right: auto !important;
+            margin-top: 0 !important;
             align-self: flex-start !important;
         }
 
@@ -460,6 +475,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -612,5 +628,6 @@
     <script src="{{ asset('js/plugins.js') }}"></script>
     <!-- <script src="{{ asset('js/designesia.js') }}"></script> -->
 </body>
+
 </html>
 @endif

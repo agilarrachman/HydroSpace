@@ -12,10 +12,13 @@
                 @foreach ($messages as $index => $message)
                     <div class="d-flex align-items-start gap-2 @if($message->from_user_id == auth()->id()) admin @else user flex-row-reverse @endif">
                         <div class="chat-bubble @if($message->from_user_id == auth()->id()) admin @else user @endif text-wrap mt-0 mb-2"  @if($loop->last) id="last-message" @endif>
-                            <h6 @class([ 'mb-0',
-                                                'text-end' => $message->from_user_id == auth()->id(),
-                                                'text-start' => $message->from_user_id != auth()->id(),
-                                            ]) style="font-weight: 800; color:@if($message->from_user_id == auth()->id()) #FFFFFF @else #454545 @endif;">{{ $message->fromUser->username }}</h6>
+                            <h6 @class([ 'mb-0', 'text-end' => $message->from_user_id == auth()->id(), 'text-start' => $message->from_user_id != auth()->id()]) style="font-weight: 800; color:@if($message->from_user_id == auth()->id()) #FFFFFF @else #454545 @endif;">
+                                @if ($message->from_user_id != auth()->id())
+                                Admin
+                                @else
+                                {{ $message->fromUser->username }}
+                                @endif
+                            </h6>
 
                             <p class="mt-1" @class([ 'text-end' => $message->from_user_id == auth()->id(),
                                                 'text-start' => $message->from_user_id != auth()->id()
@@ -29,7 +32,11 @@
                             @if($message->from_user_id == auth()->id())
                                 <img style="width: 100% !important" src="{{ asset('storage/' . $message->fromUser->profile_picture) }}" alt="User" />
                             @else
-                                <img style="width: 20px !important;" src="{{ asset('images/logo-icon-color.webp') }}" alt="Admin" />
+                                <img
+                                    style="width: 20px !important; aspect-ratio: 1/1 !important; border-radius: 50% !important;"
+                                    src="{{ asset('images/logo-icon.webp') }}"
+                                    alt="{{ $message->fromUser->role }}"
+                                />
                             @endif
                         </div>
                     </div>
