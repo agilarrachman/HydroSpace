@@ -95,34 +95,63 @@
                         </div>
 
                         <div class="col-lg-6">
+
                             <div class="p-4 rounded-10px">
-                                <form name="contactForm" id="contact_form" class="position-relative z1000" method="post" action="#">
+                                @if(session()->has('success'))
+                                <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                                    {{ session('success') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+
+                                @if(session()->has('error'))
+                                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                </div>
+                                @endif
+                                
+                                <form name="contactForm" id="contact_form" class="position-relative z1000" action="/kontak" method="post">
+                                    @csrf
 
                                     <div class="field-set">
-                                        <input type="text" name="Name" id="name" class="form-control" placeholder="Nama Kamu" required>
+                                        <input type="text" name="name" id="name" class="form-control @error('name') is-invalid @enderror" placeholder="Nama Kamu" required value="{{ old('name') }}" autofocus>
+                                        @error('name')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
 
                                     <div class="field-set">
-                                        <input type="text" name="Email" id="email" class="form-control" placeholder="Email Kamu" required>
+                                        <input type="text" name="email" id="email" class="form-control @error('email') is-invalid @enderror" placeholder="Email Kamu" required value="{{ old('email') }}">
+                                        @error('email')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
 
                                     <div class="field-set">
-                                        <input type="text" name="phone" id="phone" class="form-control" placeholder="Nomor Telepon Kamu" required>
+                                        <input type="number" name="phone_number" id="phone_number" class="form-control @error('phone_number') is-invalid @enderror" placeholder="Nomor Telepon Kamu" required value="{{ old('phone_number') }}">
+                                        @error('phone_number')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
 
                                     <div class="field-set mb20">
-                                        <textarea name="message" id="message" class="form-control" placeholder="Pesan Kamu" required></textarea>
+                                        <textarea name="message" id="message" class="form-control @error('message') is-invalid @enderror" placeholder="Pesan Kamu" required>{{ old('message') }}</textarea>
+                                        @error('message')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
                                     </div>
 
                                     <div id='submit' class="mt20">
                                         <input type='submit' id='send_message' value='Kirim' class="btn-main">
-                                    </div>
-
-                                    <div id="success_message" class='success'>
-                                        Your message has been sent successfully. Refresh this page if you want to send more messages.
-                                    </div>
-                                    <div id="error_message" class='error'>
-                                        Sorry there was an error sending your form.
                                     </div>
                                 </form>
                             </div>
