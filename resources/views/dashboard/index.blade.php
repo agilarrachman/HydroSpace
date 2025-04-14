@@ -133,7 +133,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-medium d-block mb-1">Pendapatan</span>
-                                        <h3 class="card-title mt-2 mb-1">Rp98,1 jt</h3>
+                                        <h3 class="card-title mt-2 mb-1">Rp{{ number_format($totalIncome / 1000000, 2, ',', '.') }}jt</h3>
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +147,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-medium d-block mb-1">Jumlah Produk</span>
-                                        <h3 class="card-title text-nowrap mt-2 mb-1">132</h3>
+                                        <h3 class="card-title text-nowrap mt-2 mb-1">{{ $totalProduct }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +161,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-medium d-block mb-1">Transaksi</span>
-                                        <h3 class="card-title mt-2 mb-1">41</h3>
+                                        <h3 class="card-title mt-2 mb-1">{{ $totalTransaction }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -178,76 +178,32 @@
                                     </div>
                                     <div class="card-body pt-3">
                                         <ul class="p-0 m-0 d-flex flex-column h-100 gap-3">
+                                            @foreach ($bestSellers as $item)
                                             <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                 <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
+                                                    <img src="{{ asset('storage/' . $item->picture1) }}" alt="Credit Card" class="rounded" />
                                                 </div>
                                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
+                                                    <div class="me-2 flex-fill">
+                                                        <h6 class="mb-0 text-truncate" style="max-width: 200px !important">{{ $item->name }}</h6>
+                                                        <small class="text-muted">{{ $item->category->name }}</small>
                                                     </div>
                                                     <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
+                                                        @php
+                                                            $income = $item->total_income ?? 0;
+                                                            if ($income >= 1000000) {
+                                                                $formattedIncome = 'Rp' . number_format($income / 1000000, 2, ',', '') . 'jt';
+                                                            } elseif ($income >= 1000) {
+                                                                $formattedIncome = 'Rp' . number_format($income / 1000, 0, '', '') . 'rb';
+                                                            } else {
+                                                                $formattedIncome = 'Rp' . number_format($income, 0, ',', '.');
+                                                            }
+                                                        @endphp
+                                                        <small class="fw-medium">{{ $formattedIncome }}</small>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -256,7 +212,6 @@
 
                             <!-- Expense Overview -->
                             <div class="col-md-6 col-lg-8 order-0 order-lg-1 mb-4">
-
                                 <div class="card h-100">
                                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                                         <h5 class="m-0 me-2">Grafik Pendapatan</h5>
@@ -275,6 +230,117 @@
                                         <div class="tab-content p-0">
                                             <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
                                                 <div id="incomeChart" style="height: 350px;"></div>
+                                                <script>
+                                                    'use strict';
+
+                                                    (function () {
+                                                    let cardColor, headingColor, axisColor, shadeColor, borderColor;
+
+                                                    cardColor = config.colors.cardColor;
+                                                    headingColor = config.colors.headingColor;
+                                                    axisColor = config.colors.axisColor;
+                                                    borderColor = config.colors.borderColor;
+
+                                                    // Income Chart - Area chart
+                                                    // --------------------------------------------------------------------
+                                                    const incomeChartEl = document.querySelector('#incomeChart'),
+                                                        incomeChartConfig = {
+                                                        series: [
+                                                            {
+                                                            data: [24, 21, 30, 22, 42, 26, 35, 29]
+                                                            }
+                                                        ],
+                                                        chart: {
+                                                            height: 215,
+                                                            parentHeightOffset: 0,
+                                                            parentWidthOffset: 0,
+                                                            toolbar: {
+                                                            show: false
+                                                            },
+                                                            type: 'area'
+                                                        },
+                                                        dataLabels: {
+                                                            enabled: false
+                                                        },
+                                                        stroke: {
+                                                            width: 2,
+                                                            curve: 'smooth'
+                                                        },
+                                                        legend: {
+                                                            show: false
+                                                        },
+                                                        markers: {
+                                                            size: 6,
+                                                            colors: 'transparent',
+                                                            strokeColors: 'transparent',
+                                                            strokeWidth: 4,
+                                                            discrete: [
+                                                            {
+                                                                fillColor: config.colors.white,
+                                                                seriesIndex: 0,
+                                                                dataPointIndex: 7,
+                                                                strokeColor: config.colors.primary,
+                                                                strokeWidth: 2,
+                                                                size: 6,
+                                                                radius: 8
+                                                            }
+                                                            ],
+                                                            hover: {
+                                                            size: 7
+                                                            }
+                                                        },
+                                                        colors: [config.colors.primary],
+                                                        fill: {
+                                                            type: 'gradient',
+                                                            gradient: {
+                                                            shade: shadeColor,
+                                                            shadeIntensity: 0.6,
+                                                            opacityFrom: 0.5,
+                                                            opacityTo: 0.25,
+                                                            stops: [0, 95, 100]
+                                                            }
+                                                        },
+                                                        grid: {
+                                                            borderColor: borderColor,
+                                                            strokeDashArray: 3,
+                                                            padding: {
+                                                            top: -20,
+                                                            bottom: -8,
+                                                            left: -10,
+                                                            right: 8
+                                                            }
+                                                        },
+                                                        xaxis: {
+                                                            categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+                                                            axisBorder: {
+                                                            show: false
+                                                            },
+                                                            axisTicks: {
+                                                            show: false
+                                                            },
+                                                            labels: {
+                                                            show: true,
+                                                            style: {
+                                                                fontSize: '13px',
+                                                                colors: axisColor
+                                                            }
+                                                            }
+                                                        },
+                                                        yaxis: {
+                                                            labels: {
+                                                            show: false
+                                                            },
+                                                            min: 10,
+                                                            max: 50,
+                                                            tickAmount: 4
+                                                        }
+                                                        };
+                                                    if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {
+                                                        const incomeChart = new ApexCharts(incomeChartEl, incomeChartConfig);
+                                                        incomeChart.render();
+                                                    }
+                                                    })();
+                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -284,44 +350,93 @@
 
                         </div>
 
-                        <div class="contact">
-                            <div class="card h-100">
-                                <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                    <div class="card-title mb-0">
-                                        <h5 class="m-0 me-2">Pesan Untuk HydroSpace</h5>
-                                    </div>
-                                </div>
-                                <div class="card-body pt-3">
-                                    <div class="row">
-                                        <div class="d-flex flex-nowrap overflow-auto gap-4">
-                                            @foreach ($contacts as $contact)
-                                            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
-                                                <div class="card h-100">
-                                                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                            <div class="me-2">
-                                                                <h6 class="mb-0" style="color: #354e33;">{{ $contact->name }}</h6>
-                                                                <div class="info d-flex flex-column">
-                                                                    <small class="text-muted">{{ $contact->email }}</small>
-                                                                    <small class="text-muted">{{ $contact->phone_number }}</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body pt-1">
-                                                        <p class="mb-0">
-                                                            {{ $contact->message }}
-                                                        </p>
-                                                    </div>
+                        <div class="row">
+                            <div class="d-flex flex-nowrap overflow-auto gap-4">
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                            </div>
+                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                    <h6 class="mb-0">John Doe</h6>
+                                                    <small class="text-muted">john.doe@example.com</small>
                                                 </div>
                                             </div>
-                                            @endforeach
+                                        </div>
+                                        <div class="card-body pt-3">
+                                            <p class="mb-0">
+                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                            </div>
+                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                    <h6 class="mb-0">John Doe</h6>
+                                                    <small class="text-muted">john.doe@example.com</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-3">
+                                            <p class="mb-0">
+                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                            </div>
+                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                    <h6 class="mb-0">John Doe</h6>
+                                                    <small class="text-muted">john.doe@example.com</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-3">
+                                            <p class="mb-0">
+                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                    <div class="card h-100">
+                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                            </div>
+                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                <div class="me-2">
+                                                    <h6 class="mb-0">John Doe</h6>
+                                                    <small class="text-muted">john.doe@example.com</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-body pt-3">
+                                            <p class="mb-0">
+                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <!-- / Content -->
 
