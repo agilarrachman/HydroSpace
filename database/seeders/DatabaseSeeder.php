@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Admin HydroSpace',
             'username' => 'admin',
-            'email' => 'admin@hydrospace.com',
+            'email' => 'admin@gmail.com',
             'password' => Hash::make('admin123'),
             'gender' => 'Pria',
             'phone_number' => '081234567890',
@@ -94,7 +94,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => 'adminkai',
-            'email' => 'kaiser@hydrospace.com',
+            'email' => 'kaiser@gmail.com',
             'name' => 'Kaiser',
             'password' => Hash::make('admin123'),
             'phone_number' => '081234567819',
@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => 'adminceue',
-            'email' => 'juhyun@hydrospace.com',
+            'email' => 'juhyun@gmail.com',
             'name' => 'Juhyun',
             'password' => Hash::make('admin123'),
             'phone_number' => '0811234567890',
@@ -120,7 +120,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'username' => 'admingondrong',
-            'email' => 'zaki@hydrospace.com',
+            'email' => 'zaki@gmail.com',
             'name' => 'Zaki Kurniawan',
             'password' => Hash::make('admin123'),
             'phone_number' => '081234567819',
