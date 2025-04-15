@@ -91,7 +91,7 @@ class DashboardController extends Controller
             "contactMessages" => DB::table('contacts')->orderBy('created_at', 'desc')->get(),
             "monthlyIncome" => array_values($monthlyIncomeFull),
             "incomeCategories" => array_values($months),
-            "dataPointIndex" => $currentMonthIndex,
+            "dataPointIndex" => ($selectedYear == now()->year) ? $currentMonthIndex : null,
             "years" => $years,
             "selectedYear" => $selectedYear
         ]);
