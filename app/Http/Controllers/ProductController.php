@@ -243,6 +243,42 @@ class ProductController extends Controller
         $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
         $totalOrder = Order::where('customer_id', $user->id)->count();
 
+        // $relatedIds = DB::table('frequently_bought_togethers')
+        //     ->where('product_id', $product->id)
+        //     ->orderByDesc('count')
+        //     ->limit(4)
+        //     ->pluck('related_product_id');
+
+        // $recommendedProducts = Product::whereIn('id', $relatedIds)
+        //     ->distinct()
+        //     ->get();
+
+        $relatedA = DB::table('frequently_bought_togethers')
+            ->where('product_id', $product->id)
+            ->pluck('related_product_id')
+            ->toArray();
+
+        $relatedB = DB::table('frequently_bought_togethers')
+            ->where('related_product_id', $product->id)
+            ->pluck('product_id')
+            ->toArray();
+
+        // Gabungkan dan ambil ID unik
+        $allRelatedIds = collect(array_merge($relatedA, $relatedB))
+            ->unique()
+            ->filter(fn($id) => $id != $product->id)
+            ->values();
+
+        // Ambil produk lalu hapus duplikat berdasarkan ID
+        $recommendedProducts = Product::whereIn('id', $allRelatedIds)
+            ->get()
+            ->unique('id') // ini penting
+            ->sortBy(fn($product) => array_search($product->id, $allRelatedIds->toArray()))
+            ->values();
+
+        // dd($recommendedProducts);
+        // dd($recommendedProducts->pluck('id'));
+
         return view('viewProduct', [
             "title" => $product->name . " | HydroSpace",
             "active" => "Produk",
@@ -252,6 +288,7 @@ class ProductController extends Controller
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
             'totalOrder' => $totalOrder,
+            'recommendedProducts' => $recommendedProducts,
         ]);
     }
 
