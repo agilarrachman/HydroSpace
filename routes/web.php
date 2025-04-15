@@ -47,7 +47,12 @@ Route::middleware(['blockAdmin'])->group(function () {
     Route::get('/', function () {
         return view('index', [
             "title" => "HydroSpace | Beranda",
-            "active" => "Beranda"
+            "active" => "Beranda",
+            "bestSellers" => Product::withCount('orderItems')
+                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
+                ->orderBy('total_income', 'desc')
+                ->take(4)
+                ->get(),
         ]);
     });
 

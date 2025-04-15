@@ -432,113 +432,28 @@
                             <div class="owl-custom-nav menu-">
                                 <div id="best-seller-carousel" class="owl-carousel owl-4-cols d-flex flex-column">
                                     <!-- product item begin -->
+                                    @foreach ($bestSellers as $item)
                                     <div class="item">
                                         <div class="de__pcard text-center">
                                             <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="shop-product-single.html">
-                                                    <img class="atr__image-main" src="images/shop/plants/peace-lily-s.webp">
-                                                    <img class="atr__image-hover" src="images/shop/plants/peace-lily-s.webp">
+                                                <a href="produk/{{ $item->slug }}">
+                                                    <img class="atr__image-main" src="{{ asset('storage/' . $item->picture1) }}" style="border-radius: 12px;">
+                                                    <img class="atr__image-hover" src="{{ asset('storage/' . $item->picture1) }}" style="border-radius: 12px;">>
                                                 </a>
                                                 <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="shop-product-single.html"><i class="icon_zoom-in_alt"></i></a>
+                                                    <a class="atr__quick-view" href="produk/{{ $item->slug }}"><i class="icon_zoom-in_alt"></i></a>
                                                     <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
                                                 </div>
                                             </div>
-
-                                            <p class="m-0">Bibit</p>
-                                            <h3 class="m-0">Peace Lily Plant</h3>
+                                            <p class="m-0">{{ $item->category->name }}</p>
+                                            <h3 class="m-0">{{ $item->name }}</h3>
                                             <div class="atr__main-price">
-                                                Rp190.000
+                                                Rp{{ number_format($item->price, 0, ',', '.') }}
                                             </div>
-
                                         </div>
                                     </div>
+                                    @endforeach
                                     <!-- product item end -->
-
-                                    <!-- product item begin -->
-                                    <div class="item">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="shop-product-single.html">
-                                                    <img class="atr__image-main" src="images/shop/plants/aglonema.webp">
-                                                    <img class="atr__image-hover" src="images/shop/plants/aglonema.webp">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="shop-product-single.html"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
-                                            </div>
-
-                                            <p class="m-0">Bibit</p>
-                                            <h3 class="m-0">Aglonema Plant</h3>
-                                            <div class="atr__main-price">
-                                                Rp195.000
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- product item end -->
-
-                                    <!-- product item begin -->
-                                    <div class="item">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="shop-product-single.html">
-                                                    <img class="atr__image-main" src="images/shop/plants/jade-mini.webp">
-                                                    <img class="atr__image-hover" src="images/shop/plants/jade-mini.webp">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="shop-product-single.html"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
-                                            </div>
-
-                                            <p class="m-0">Bibit</p>
-                                            <h3 class="m-0">Jade Plant Mini</h3>
-                                            <div class="atr__main-price">
-                                                Rp295.000
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- product item end -->
-
-                                    <!-- product item begin -->
-                                    <div class="item">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="shop-product-single.html">
-                                                    <img class="atr__image-main" src="images/thumbnail/instalasi hidroponik.jpeg">
-                                                    <img class="atr__image-hover" src="images/thumbnail/instalasi hidroponik.jpeg">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="shop-product-single.html"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
-                                            </div>
-
-                                            <p class="m-0">Peralatan</p>
-                                            <h3 class="m-0">NFT</h3>
-                                            <div class="atr__main-price">
-                                                Rp515.000
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- product item end -->
-
                                 </div>
                             </div>
                         </div>
@@ -546,7 +461,7 @@
                     <div class="spacer-20"></div>
 
                     <div class="col-lg-12 text-center">
-                        <a class="btn-main wow fadeInUp" href="projects.html">Lihat Semua</a>
+                        <a class="btn-main wow fadeInUp" href="/produk">Lihat Semua</a>
                     </div>
 
                 </div>
@@ -670,7 +585,7 @@
             <div class="chat-bubble bot text-wrap lh-base">
                 <h5 style="font-weight: 800;">HydroBot</h5>
                 Halo, HydroMates! 🌱🤖 Aku HydroBot, asisten virtualmu di dunia hidroponik. Ada yang bisa aku bantu hari ini? 😊
-            </div>            
+            </div>
         `);
         });
 
