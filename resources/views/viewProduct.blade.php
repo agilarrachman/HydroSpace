@@ -209,7 +209,7 @@
                                                 </div>
                                             </div>
 
-                                            <label for="cat_4">{{ $item->id }} - {{ $item->category->name }}</label>
+                                            <label for="cat_4">{{ $item->category->name }}</label>
 
                                             <h3>{{ $item->name }}</h3>
                                             <div class="atr__main-price mt-3">
