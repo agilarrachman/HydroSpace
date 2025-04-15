@@ -39,6 +39,12 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
 
+    <script>
+        const incomeData = @json($monthlyIncome);
+        const incomeCategories = @json($incomeCategories);
+        const dataPointIndex = @json($dataPointIndex);
+    </script>
+
     <style>
         .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
             background-color: rgba(53, 78, 51, 0.16) !important;
@@ -133,7 +139,17 @@
                                             </div>
                                         </div>
                                         <span class="fw-medium d-block mb-1">Pendapatan</span>
-                                        <h3 class="card-title mt-2 mb-1">Rp{{ number_format($totalIncome / 1000000, 2, ',', '.') }}jt</h3>
+                                        @php
+                                            $income = $totalIncome ?? 0;
+                                            if ($income >= 1000000) {
+                                                $formattedIncome = 'Rp' . number_format($income / 1000000, 2, ',', '') . 'jt';
+                                            } elseif ($income >= 1000) {
+                                                $formattedIncome = 'Rp' . number_format($income / 1000, 0, '', '') . 'rb';
+                                            } else {
+                                                $formattedIncome = 'Rp' . number_format($income, 0, ',', '.');
+                                            }
+                                        @endphp
+                                        <h3 class="card-title mt-2 mb-1">{{ $formattedIncome }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -220,9 +236,11 @@
                                                 Pilih Periode
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item" href="#">Tahunan</a></li>
-                                                <li><a class="dropdown-item" href="#">Bulanan</a></li>
-                                                <li><a class="dropdown-item" href="#">Harian</a></li>
+                                                @foreach ($years as $year)
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ url('/dashboard?tahun=' . $year) }}">{{ $year }}</a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -230,117 +248,6 @@
                                         <div class="tab-content p-0">
                                             <div class="tab-pane fade show active" id="navs-tabs-line-card-income" role="tabpanel">
                                                 <div id="incomeChart" style="height: 350px;"></div>
-                                                <script>
-                                                    'use strict';
-
-                                                    (function () {
-                                                    let cardColor, headingColor, axisColor, shadeColor, borderColor;
-
-                                                    cardColor = config.colors.cardColor;
-                                                    headingColor = config.colors.headingColor;
-                                                    axisColor = config.colors.axisColor;
-                                                    borderColor = config.colors.borderColor;
-
-                                                    // Income Chart - Area chart
-                                                    // --------------------------------------------------------------------
-                                                    const incomeChartEl = document.querySelector('#incomeChart'),
-                                                        incomeChartConfig = {
-                                                        series: [
-                                                            {
-                                                            data: [24, 21, 30, 22, 42, 26, 35, 29]
-                                                            }
-                                                        ],
-                                                        chart: {
-                                                            height: 215,
-                                                            parentHeightOffset: 0,
-                                                            parentWidthOffset: 0,
-                                                            toolbar: {
-                                                            show: false
-                                                            },
-                                                            type: 'area'
-                                                        },
-                                                        dataLabels: {
-                                                            enabled: false
-                                                        },
-                                                        stroke: {
-                                                            width: 2,
-                                                            curve: 'smooth'
-                                                        },
-                                                        legend: {
-                                                            show: false
-                                                        },
-                                                        markers: {
-                                                            size: 6,
-                                                            colors: 'transparent',
-                                                            strokeColors: 'transparent',
-                                                            strokeWidth: 4,
-                                                            discrete: [
-                                                            {
-                                                                fillColor: config.colors.white,
-                                                                seriesIndex: 0,
-                                                                dataPointIndex: 7,
-                                                                strokeColor: config.colors.primary,
-                                                                strokeWidth: 2,
-                                                                size: 6,
-                                                                radius: 8
-                                                            }
-                                                            ],
-                                                            hover: {
-                                                            size: 7
-                                                            }
-                                                        },
-                                                        colors: [config.colors.primary],
-                                                        fill: {
-                                                            type: 'gradient',
-                                                            gradient: {
-                                                            shade: shadeColor,
-                                                            shadeIntensity: 0.6,
-                                                            opacityFrom: 0.5,
-                                                            opacityTo: 0.25,
-                                                            stops: [0, 95, 100]
-                                                            }
-                                                        },
-                                                        grid: {
-                                                            borderColor: borderColor,
-                                                            strokeDashArray: 3,
-                                                            padding: {
-                                                            top: -20,
-                                                            bottom: -8,
-                                                            left: -10,
-                                                            right: 8
-                                                            }
-                                                        },
-                                                        xaxis: {
-                                                            categories: ['', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
-                                                            axisBorder: {
-                                                            show: false
-                                                            },
-                                                            axisTicks: {
-                                                            show: false
-                                                            },
-                                                            labels: {
-                                                            show: true,
-                                                            style: {
-                                                                fontSize: '13px',
-                                                                colors: axisColor
-                                                            }
-                                                            }
-                                                        },
-                                                        yaxis: {
-                                                            labels: {
-                                                            show: false
-                                                            },
-                                                            min: 10,
-                                                            max: 50,
-                                                            tickAmount: 4
-                                                        }
-                                                        };
-                                                    if (typeof incomeChartEl !== undefined && incomeChartEl !== null) {
-                                                        const incomeChart = new ApexCharts(incomeChartEl, incomeChartConfig);
-                                                        incomeChart.render();
-                                                    }
-                                                    })();
-                                                </script>
                                             </div>
                                         </div>
                                     </div>
@@ -350,93 +257,34 @@
 
                         </div>
 
-                        <div class="row">
-                            <div class="d-flex flex-nowrap overflow-auto gap-4">
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
-                                    <div class="card h-100">
-                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">John Doe</h6>
-                                                    <small class="text-muted">john.doe@example.com</small>
+                        @if ($contactMessages->count() > 0)
+                            <div class="row">
+                                <div class="d-flex flex-nowrap overflow-auto gap-4">
+                                    @foreach ($contactMessages as $contactMessage)
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                        <div class="card h-100">
+                                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">{{ $contactMessage->name }}</h6>
+                                                        <small class="text-muted">{{ $contactMessage->email }}</small>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class="card-body pt-3">
-                                            <p class="mb-0">
-                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
-                                            </p>
+                                            <div class="card-body pt-3">
+                                                <p class="mb-0">
+                                                    {{ $contactMessage->message }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
-                                    <div class="card h-100">
-                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">John Doe</h6>
-                                                    <small class="text-muted">john.doe@example.com</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body pt-3">
-                                            <p class="mb-0">
-                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
-                                    <div class="card h-100">
-                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">John Doe</h6>
-                                                    <small class="text-muted">john.doe@example.com</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body pt-3">
-                                            <p class="mb-0">
-                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
-                                    <div class="card h-100">
-                                        <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                            <div class="avatar flex-shrink-0 me-3">
-                                                <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
-                                            </div>
-                                            <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                <div class="me-2">
-                                                    <h6 class="mb-0">John Doe</h6>
-                                                    <small class="text-muted">john.doe@example.com</small>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-body pt-3">
-                                            <p class="mb-0">
-                                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante."
-                                            </p>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
+                        @endif
                     </div>
                     <!-- / Content -->
 

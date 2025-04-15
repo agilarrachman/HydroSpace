@@ -21,10 +21,12 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MidtransController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ProductCategoryController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
 Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
@@ -130,24 +132,7 @@ Route::middleware(['role:Customer'])->group(function () {
 });
 
 Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
-    Route::get('/', function () {
-        return view('dashboard.index', [
-            "title" => "HydroSpace | Dashboard",
-            "active" => "Dashboard",
-            "totalProduct" => Product::count(),
-            "totalIncome" => Order::sum('total_amount'),
-            "totalTransaction" => Order::count(),
-            "bestSellers" => Product::withCount('orderItems')
-                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
-                ->orderBy('total_income', 'desc')
-                ->take(5)
-                ->get(),
-            "monthlyIncome" => Order::select(DB::raw('SUM(total_amount) as total_income, MONTH(created_at) as month'))
-                ->groupBy('month')
-                ->orderBy('month', 'asc')
-                ->get(),
-        ]);
-    });
+    Route::get('/', [DashboardController::class, 'index']);
 
     Route::resource('/admins', AdminController::class)->parameters([
         'admins' => 'user'
