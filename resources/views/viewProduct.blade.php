@@ -201,7 +201,7 @@
                                         <div class="de__pcard text-center">
                                             <div class="atr__images">
                                                 <a href="/produk/{{ $item->slug }}">
-                                                    <img class="atr__image-main p-2" src="{{ asset('storage/' . $item->picture1) }}" alt="Product Image" style="width: 100%; height: 100%; object-fit: cover;">
+                                                    <img class="atr__image-main p-2" src="{{ asset('storage/' . $item->picture1) }}" alt="Product Image">
                                                 </a>
                                                 <div class="atr__extra-menu">
                                                     <a class="atr__quick-view" href="/produk/{{ $item->slug }}"><i class="icon_zoom-in_alt"></i></a>
