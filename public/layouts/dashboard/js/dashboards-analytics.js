@@ -22,7 +22,7 @@
                 parentHeightOffset: 0,
                 parentWidthOffset: 0,
                 toolbar: {
-                    show: false
+                    show: true
                 },
                 type: 'area'
             },
@@ -80,7 +80,7 @@
             xaxis: {
                 categories: incomeCategories,
                 axisBorder: { show: false },
-                axisTicks: { show: false },
+                axisTicks: { show: true },
                 labels: {
                     show: true,
                     style: {

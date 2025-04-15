@@ -46,6 +46,10 @@
     </script>
 
     <style>
+        .apexcharts-toolbar {
+            padding-right: 24px !important;
+            padding-top: 8px !important;
+        }
         .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
             background-color: rgba(53, 78, 51, 0.16) !important;
             color: #354e33;
