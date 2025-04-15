@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Order;
-use App\Models\ProductCategory;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Models\ProductCategory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateProductRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ProductController extends Controller
 {
@@ -196,7 +197,7 @@ class ProductController extends Controller
         $category = ProductCategory::where('slug', request('category'))->first();
 
         $user = Auth::user();
-        
+
         // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
         $order = Order::where('customer_id', $user->id)  // Memastikan mengambil ID user yang sedang login
             ->where('status', 'Keranjang')
@@ -204,7 +205,7 @@ class ProductController extends Controller
 
         // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
         $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
-        
+
         $totalOrder = Order::where('customer_id', $user->id)->count();
 
         return view('products', [
@@ -221,6 +222,11 @@ class ProductController extends Controller
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
             'totalOrder' => $totalOrder,
+            "bestSellers" => Product::withCount('orderItems')
+                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
+                ->orderBy('total_income', 'desc')
+                ->take(4)
+                ->get(),
         ]);
     }
 

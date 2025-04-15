@@ -436,6 +436,9 @@
                                     <div class="item">
                                         <div class="de__pcard text-center">
                                             <div class="atr__images">
+                                                <div class="atr__promo">
+                                                    {{ $loop->iteration }}
+                                                </div>
                                                 <a href="produk/{{ $item->slug }}">
                                                     <img class="atr__image-main" src="{{ asset('storage/' . $item->picture1) }}" style="border-radius: 12px;">
                                                     <img class="atr__image-hover" src="{{ asset('storage/' . $item->picture1) }}" style="border-radius: 12px;">>

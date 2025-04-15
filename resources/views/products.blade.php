@@ -122,36 +122,36 @@
 
                                 <div id="new-arrivals-carousel" class="owl-carousel owl-4-cols">
                                     <!-- product item begin -->
-                                    @foreach ($products as $product)
+                                    @foreach ($bestSellers as $item)
                                     <div class="item">
                                         <div class="de__pcard text-center">
                                             <div class="atr__images">
                                                 <div class="atr__promo">
-                                                    Sale
+                                                    {{ $loop->iteration }}
                                                 </div>
-                                                <a href="/produk/{{ $product->slug }}">
-                                                    <img class="atr__image-main p-5 object-fit-cover w-100" src="{{ asset('storage/' . $product->picture1) }}" alt="{{ $product->picture1 }}">
+                                                <a href="/produk/{{ $item->slug }}">
+                                                    <img class="atr__image-main p-5 object-fit-cover w-100" src="{{ asset('storage/' . $item->picture1) }}" alt="{{ $item->picture1 }}">
                                                 </a>
                                                 <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="/produk/{{ $product->slug }}"><i class="icon_zoom-in_alt"></i></a>
-                                                    <form id="addToCartForm-{{ $product->id }}" action="{{ route('cart.add') }}" method="POST" style="display: none;">
+                                                    <a class="atr__quick-view" href="/produk/{{ $item->slug }}"><i class="icon_zoom-in_alt"></i></a>
+                                                    <form id="addToCartForm-{{ $item->id }}" action="{{ route('cart.add') }}" method="POST" style="display: none;">
                                                         @csrf
-                                                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                        <input type="hidden" name="product_id" value="{{ $item->id }}">
                                                         <input type="hidden" name="status" value="Keranjang">
                                                         <input type="hidden" name="quantity" value="1">
                                                     </form>
 
-                                                    <div class="atr__add-carts" onclick="submitCartForm({{ $product->id }})">
+                                                    <div class="atr__add-carts" onclick="submitCartForm({{ $item->id }})">
                                                         <i class="icon_cart_alt"></i>
                                                     </div>
                                                 </div>
                                             </div>
 
-                                            <label for="cat_4">{{ $product->category->name }}</label>
+                                            <label for="cat_4">{{ $item->category->name }}</label>
 
-                                            <h3>{{ $product->name }}</h3>
+                                            <h3>{{ $item->name }}</h3>
                                             <div class="atr__main-price">
-                                                Rp{{ number_format($product->price, 0, ',', '.') }}
+                                                Rp{{ number_format($item->price, 0, ',', '.') }}
                                             </div>
 
                                         </div>
