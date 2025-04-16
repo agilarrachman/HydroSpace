@@ -7,6 +7,10 @@
     #mainmenu li a.active {
         border-bottom: 2px solid rgb(53, 78, 51);
     }
+
+    #btn-masuk:hover{
+        color: white !important;
+    }
 </style>
 
 <header class="header-light transparent">
@@ -65,7 +69,9 @@
                             <li><a class="menu-item {{ ($active === 'HydroBot') ? 'active' : '' }}" href="/hydrobot#ai" id="consultationLink">HydroBot</a></li>
                             <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="/tentang">Tentang Kami</a></li>
                             <li><a class="menu-item {{ ($active === 'Kontak') ? 'active' : '' }}" href="/kontak">Kontak</a></li>
+                            @auth
                             <li><a class="menu-item {{ ($active === 'Profil') ? 'active' : '' }}" href="/profil/{{ auth()->user()->username }}">Profil</a></li>
+                            @endauth
                         </ul>
                         <!-- mainmenu end -->
                     </div>
@@ -86,7 +92,7 @@
                             </div>
                             @else
                             <div class="menu_side_area">
-                                <a href="/masuk" class="btn-main btn-line">Masuk</a>
+                                <a href="/masuk" class="btn-main btn-line" style="color: rgb(53, 78, 51); border: 2px solid rgb(53, 78, 51);" id="btn-masuk">Masuk</a>
                                 <span id="menu-btn"></span>
                             </div>
                             @endauth

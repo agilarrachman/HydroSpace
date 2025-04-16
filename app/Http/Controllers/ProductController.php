@@ -196,34 +196,44 @@ class ProductController extends Controller
         // Menentukan kategori produk berdasarkan slug yang diterima dari request
         $category = ProductCategory::where('slug', request('category'))->first();
 
+        // Inisialisasi variabel user dan order sebagai null atau nilai default
         $user = Auth::user();
+        $orderItems = collect([]); // Inisialisasi sebagai collection kosong
+        $totalOrder = 0;
+        $totalPrice = 0;
+        $totalItem = 0;
 
-        // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
-        $order = Order::where('customer_id', $user->id)  // Memastikan mengambil ID user yang sedang login
-            ->where('status', 'Keranjang')
-            ->first();
+        // Hanya jalankan query order jika user sudah login
+        if ($user) {
+            // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
+            $order = Order::where('customer_id', $user->id)
+                ->where('status', 'Keranjang')
+                ->first();
 
-        // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
-        $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
+            // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
+            $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
 
-        $totalOrder = Order::where('customer_id', $user->id)->count();
+            $totalOrder = Order::where('customer_id', $user->id)->count();
+            $totalPrice = $orderItems->sum('total_price');
+            $totalItem = $orderItems->sum('quantity');
+        }
 
         return view('products', [
-            "title" => $category ? $category->name : "Produk",  // Jika kategori ditemukan, gunakan namanya, jika tidak "Produk"
-            "active" => "Produk",  // Mengaktifkan menu Produk
-            "products" => Product::with('category')  // Mengambil produk dengan kategori
+            "title" => $category ? $category->name : "Produk", // Jika kategori ditemukan, gunakan namanya, jika tidak "Produk"
+            "active" => "Produk", // Mengaktifkan menu Produk
+            "products" => Product::with('category') // Mengambil produk dengan kategori
                 ->latest()
-                ->filter(request(['search', 'category']))  // Filter berdasarkan pencarian atau kategori
-                ->paginate(12)  // Paginate hasil pencarian produk
+                ->filter(request(['search', 'category'])) // Filter berdasarkan pencarian atau kategori
+                ->paginate(12) // Paginate hasil pencarian produk
                 ->withQueryString(),
-            "categories" => ProductCategory::all(),  // Mengambil semua kategori produk
-            "currentCategory" => $category,  // Mengirimkan kategori saat ini yang sedang dilihat
-            "orderItems" => $orderItems,  // Mengirimkan orderItems ke view jika ada
-            'totalPrice' => $orderItems->sum('total_price'),
-            'totalItem' => $orderItems->sum('quantity'),
+            "categories" => ProductCategory::all(), // Mengambil semua kategori produk
+            "currentCategory" => $category, // Mengirimkan kategori saat ini yang sedang dilihat
+            "orderItems" => $orderItems, // Mengirimkan orderItems ke view jika ada
+            'totalPrice' => $totalPrice,
+            'totalItem' => $totalItem,
             'totalOrder' => $totalOrder,
             "bestSellers" => Product::withCount('orderItems')
-                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
+                ->withSum('orderItems as total_income', \DB::raw('quantity * price'))
                 ->orderBy('total_income', 'desc')
                 ->take(4)
                 ->get(),
@@ -234,31 +244,28 @@ class ProductController extends Controller
     {
         $user = Auth::user();
 
-        // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
-        $order = Order::where('customer_id', $user->id)  // Memastikan mengambil ID user yang sedang login
-            ->where('status', 'Keranjang')
-            ->first();
+        // Inisialisasi variabel orderItems dan totalOrder dengan nilai default
+        $orderItems = collect([]);
+        $totalOrder = 0;
 
-        // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
-        $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
-        $totalOrder = Order::where('customer_id', $user->id)->count();
+        // Hanya jalankan query order jika user sudah login
+        if ($user) {
+            // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
+            $order = Order::where('customer_id', $user->id)
+                ->where('status', 'Keranjang')
+                ->first();
 
-        // $relatedIds = DB::table('frequently_bought_togethers')
-        //     ->where('product_id', $product->id)
-        //     ->orderByDesc('count')
-        //     ->limit(4)
-        //     ->pluck('related_product_id');
+            // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
+            $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
+            $totalOrder = Order::where('customer_id', $user->id)->count();
+        }
 
-        // $recommendedProducts = Product::whereIn('id', $relatedIds)
-        //     ->distinct()
-        //     ->get();
-
-        $relatedA = DB::table('frequently_bought_togethers')
+        $relatedA = \DB::table('frequently_bought_togethers')
             ->where('product_id', $product->id)
             ->pluck('related_product_id')
             ->toArray();
 
-        $relatedB = DB::table('frequently_bought_togethers')
+        $relatedB = \DB::table('frequently_bought_togethers')
             ->where('related_product_id', $product->id)
             ->pluck('product_id')
             ->toArray();
@@ -273,18 +280,15 @@ class ProductController extends Controller
         $recommendedProducts = Product::whereIn('id', $allRelatedIds)
             ->get()
             ->unique('id') // ini penting
-            ->sortBy(fn($product) => array_search($product->id, $allRelatedIds->toArray()))
+            ->sortBy(fn($relatedProduct) => array_search($relatedProduct->id, $allRelatedIds->toArray()))
             ->values();
-
-        // dd($recommendedProducts);
-        // dd($recommendedProducts->pluck('id'));
 
         return view('viewProduct', [
             "title" => $product->name . " | HydroSpace",
             "active" => "Produk",
             "product" => $product,
             "categories" => ProductCategory::all(),
-            "orderItems" => $orderItems,  // Mengirimkan orderItems ke view jika ada
+            "orderItems" => $orderItems,     // Mengirimkan orderItems ke view jika ada
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
             'totalOrder' => $totalOrder,
