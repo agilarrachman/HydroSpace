@@ -116,7 +116,7 @@
                 </div>
             </section>
 
-            <section class="pt-100" style="padding-bottom: 0;">
+            <section class="pt-100" style="margin-bottom: 50px !important;">
                 <div class="container">
                     <div class="row gy-4 gx-5">
                         <div class="col-md-6">
@@ -130,12 +130,7 @@
                                             <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: contain; width: 100%; height: 100%;">
                                         </div>
                                     @endif
-                                    @endfor
-                                    {{-- <div class="item" style="padding: 40px;"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-5" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div> --}}
+                                @endfor
                             </div>
 
                             <div id="sync2" class="owl-carousel owl-theme">
@@ -148,12 +143,7 @@
                                         <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     @endif
-                                    @endfor
-                                    {{-- <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi.png" class="w-100 p-4" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi2.png" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi3.jpg" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi4.webp" class="w-100" alt=""></div>
-                                <div class="item"><img src="/images/shop/bibit-benih/bibit-sawi5.jpg" class="w-100" alt=""></div> --}}
+                                @endfor
                             </div>
 
                         </div>
@@ -190,7 +180,8 @@
                 </div>
             </section>
 
-            <section>
+            @if($recommendedProducts->isNotEmpty())
+            <section style="padding-top: 0px !important; margin-top: -50px !important;">
                 <div class="container" style="padding-top: 0;">
                     <div class="row g-4 mb-4">
                         <div class="col-lg-12">
@@ -203,152 +194,38 @@
                                     </div>
                                 </div>
 
-
                                 <div id="new-arrivals-carousel" class="owl-carousel owl-4-cols">
-
                                     <!-- product item begin -->
+                                    @foreach($recommendedProducts as $item)
                                     <div class="item">
                                         <div class="de__pcard text-center">
                                             <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="/produk/slug">
-                                                    <img class="atr__image-main p-2" src="/images/shop/nutrisi/nutrisi.png">
+                                                <a href="/produk/{{ $item->slug }}">
+                                                    <img class="atr__image-main p-2" src="{{ asset('storage/' . $item->picture1) }}" alt="Product Image">
                                                 </a>
                                                 <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
+                                                    <a class="atr__quick-view" href="/produk/{{ $item->slug }}"><i class="icon_zoom-in_alt"></i></a>
                                                     <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
                                                 </div>
                                             </div>
 
-                                            <label for="cat_4">💧 Nutrisi Tanaman</label>
+                                            <label for="cat_4">{{ $item->category->name }}</label>
 
-                                            <h3>Nutrisi Hidroponik AB</h3>
-                                            <div class="atr__main-price">
-                                                Rp100.000
+                                            <h3>{{ $item->name }}</h3>
+                                            <div class="atr__main-price mt-3">
+                                                Rp{{ number_format($item->price, 0, ',', '.') }}
                                             </div>
-
                                         </div>
                                     </div>
+                                    @endforeach
                                     <!-- product item end -->
-
-                                    <!-- product item begin -->
-                                    <div class="item">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="/produk/slug">
-                                                    <img class="atr__image-main p-2" src="/images/shop/alat/netpot.png">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
-                                            </div>
-
-                                            <label for="cat_4">🛠️ Peralatan Hidroponik</label>
-
-                                            <h3>NetPot Hidroponik 5cm</h3>
-                                            <div class="atr__main-price">
-                                                Rp1.000
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- product item end -->
-
-                                    <!-- product item begin -->
-                                    <div class="item">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="/produk/slug">
-                                                    <img class="atr__image-main p-2" src="/images/shop/paket/paket.png">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
-                                            </div>
-
-                                            <label for="cat_4">📦 Paket Hidroponik</label>
-
-                                            <h3>Paket Hidroponik Wick 9 Lubang 1 Bak</h3>
-                                            <div class="atr__main-price">
-                                                Rp50.000
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- product item end -->
-
-                                    <!-- product item begin -->
-                                    <div class="item">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="/produk/slug">
-                                                    <img class="atr__image-main p-2" src="/images/shop/aksesori-pendukung/phmeter.png">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
-                                            </div>
-
-                                            <label for="cat_4">⚙️ Aksesori & Pendukung</label>
-
-                                            <h3>PH Meter TDS & EC Meter</h3>
-                                            <div class="atr__main-price">
-                                                Rp75.000
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- product item end -->
-
-                                    <!-- product item begin -->
-                                    <div class="item">
-                                        <div class="de__pcard text-center">
-                                            <div class="atr__images">
-                                                <div class="atr__promo">
-                                                    Sale
-                                                </div>
-                                                <a href="/produk/slug">
-                                                    <img class="atr__image-main p-2" src="/images/shop/nutrisi/nutrisi.png">
-                                                </a>
-                                                <div class="atr__extra-menu">
-                                                    <a class="atr__quick-view" href="/produk/slug"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
-                                                </div>
-                                            </div>
-
-                                            <label for="cat_4">💧 Nutrisi Tanaman</label>
-
-                                            <h3>Nutrisi Hidroponik AB</h3>
-                                            <div class="atr__main-price">
-                                                Rp100.000
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                    <!-- product item end -->
-
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div>
             </section>
+            @endif
 
         </div>
         <!-- content end -->
@@ -368,8 +245,6 @@
     ================================================== -->
     <script src="/js/plugins.js"></script>
     <script src="/js/designesia.js"></script>
-
-
 
     <script>
         document.getElementById("increase-qty").addEventListener("click", function() {
@@ -399,7 +274,5 @@
             }
         });
     </script>
-
 </body>
-
 </html>

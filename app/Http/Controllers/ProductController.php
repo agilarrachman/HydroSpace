@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
-use App\Http\Requests\UpdateProductRequest;
 use App\Models\Order;
-use App\Models\ProductCategory;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Product;
 use Illuminate\Http\Request;
-use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Models\ProductCategory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\UpdateProductRequest;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 class ProductController extends Controller
 {
@@ -196,7 +197,7 @@ class ProductController extends Controller
         $category = ProductCategory::where('slug', request('category'))->first();
 
         $user = Auth::user();
-        
+
         // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
         $order = Order::where('customer_id', $user->id)  // Memastikan mengambil ID user yang sedang login
             ->where('status', 'Keranjang')
@@ -204,7 +205,7 @@ class ProductController extends Controller
 
         // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
         $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
-        
+
         $totalOrder = Order::where('customer_id', $user->id)->count();
 
         return view('products', [
@@ -221,6 +222,11 @@ class ProductController extends Controller
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
             'totalOrder' => $totalOrder,
+            "bestSellers" => Product::withCount('orderItems')
+                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
+                ->orderBy('total_income', 'desc')
+                ->take(4)
+                ->get(),
         ]);
     }
 
@@ -237,6 +243,42 @@ class ProductController extends Controller
         $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
         $totalOrder = Order::where('customer_id', $user->id)->count();
 
+        // $relatedIds = DB::table('frequently_bought_togethers')
+        //     ->where('product_id', $product->id)
+        //     ->orderByDesc('count')
+        //     ->limit(4)
+        //     ->pluck('related_product_id');
+
+        // $recommendedProducts = Product::whereIn('id', $relatedIds)
+        //     ->distinct()
+        //     ->get();
+
+        $relatedA = DB::table('frequently_bought_togethers')
+            ->where('product_id', $product->id)
+            ->pluck('related_product_id')
+            ->toArray();
+
+        $relatedB = DB::table('frequently_bought_togethers')
+            ->where('related_product_id', $product->id)
+            ->pluck('product_id')
+            ->toArray();
+
+        // Gabungkan dan ambil ID unik
+        $allRelatedIds = collect(array_merge($relatedA, $relatedB))
+            ->unique()
+            ->filter(fn($id) => $id != $product->id)
+            ->values();
+
+        // Ambil produk lalu hapus duplikat berdasarkan ID
+        $recommendedProducts = Product::whereIn('id', $allRelatedIds)
+            ->get()
+            ->unique('id') // ini penting
+            ->sortBy(fn($product) => array_search($product->id, $allRelatedIds->toArray()))
+            ->values();
+
+        // dd($recommendedProducts);
+        // dd($recommendedProducts->pluck('id'));
+
         return view('viewProduct', [
             "title" => $product->name . " | HydroSpace",
             "active" => "Produk",
@@ -246,6 +288,7 @@ class ProductController extends Controller
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
             'totalOrder' => $totalOrder,
+            'recommendedProducts' => $recommendedProducts,
         ]);
     }
 

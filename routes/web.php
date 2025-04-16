@@ -1,29 +1,32 @@
 <?php
 
 use App\Models\User;
+use App\Models\Order;
 use App\Livewire\Chat;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Livewire\ChatToAdmin;
 use App\Models\VideoCategory;
 use App\Models\ProductCategory;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\VideoController;
-use App\Http\Controllers\AdminProfileController;
-use App\Http\Controllers\AuthenticationController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\GeminiController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\MidtransController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductCategoryController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\VideoCategoryController;
-use App\Models\Contact;
+use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ProductCategoryController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
 Route::post('/masuk', [AuthenticationController::class, 'authenticate']);
@@ -44,7 +47,12 @@ Route::middleware(['blockAdmin'])->group(function () {
     Route::get('/', function () {
         return view('index', [
             "title" => "HydroSpace | Beranda",
-            "active" => "Beranda"
+            "active" => "Beranda",
+            "bestSellers" => Product::withCount('orderItems')
+                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
+                ->orderBy('total_income', 'desc')
+                ->take(4)
+                ->get(),
         ]);
     });
 
@@ -77,9 +85,12 @@ Route::middleware(['blockAdmin'])->group(function () {
         ]);
     });
 
-    Route::resource('/kontak', ContactController::class)->parameters([
-        'kontak' => 'contact'
-    ]);
+    Route::get('/kontak', function () {
+        return view('contact', [
+            "title" => "HydroSpace | Kontak",
+            "active" => "Kontak"
+        ]);
+    });
 });
 
 
@@ -126,16 +137,7 @@ Route::middleware(['role:Customer'])->group(function () {
 });
 
 Route::middleware(['role:Admin'])->prefix('dashboard')->group(function () {
-    Route::get('/', function () {
-        
-        $contacts = Contact::all();
-
-        return view('dashboard.index', [
-            "title" => "HydroSpace | Dashboard",
-            "active" => "Dashboard",
-            "contacts" => $contacts
-        ]);
-    });
+    Route::get('/', [DashboardController::class, 'index']);
 
     Route::resource('/admins', AdminController::class)->parameters([
         'admins' => 'user'

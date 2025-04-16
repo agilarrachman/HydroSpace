@@ -39,7 +39,17 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('layouts/dashboard/js/config.js') }}"></script>
 
+    <script>
+        const incomeData = @json($monthlyIncome);
+        const incomeCategories = @json($incomeCategories);
+        const dataPointIndex = @json($dataPointIndex);
+    </script>
+
     <style>
+        .apexcharts-toolbar {
+            padding-right: 24px !important;
+            padding-top: 8px !important;
+        }
         .bg-menu-theme .menu-inner>.menu-item.active>.menu-link {
             background-color: rgba(53, 78, 51, 0.16) !important;
             color: #354e33;
@@ -133,7 +143,17 @@
                                             </div>
                                         </div>
                                         <span class="fw-medium d-block mb-1">Pendapatan</span>
-                                        <h3 class="card-title mt-2 mb-1">Rp98,1 jt</h3>
+                                        @php
+                                            $income = $totalIncome ?? 0;
+                                            if ($income >= 1000000) {
+                                                $formattedIncome = 'Rp' . number_format($income / 1000000, 2, ',', '') . 'jt';
+                                            } elseif ($income >= 1000) {
+                                                $formattedIncome = 'Rp' . number_format($income / 1000, 0, '', '') . 'rb';
+                                            } else {
+                                                $formattedIncome = 'Rp' . number_format($income, 0, ',', '.');
+                                            }
+                                        @endphp
+                                        <h3 class="card-title mt-2 mb-1">{{ $formattedIncome }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -147,7 +167,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-medium d-block mb-1">Jumlah Produk</span>
-                                        <h3 class="card-title text-nowrap mt-2 mb-1">132</h3>
+                                        <h3 class="card-title text-nowrap mt-2 mb-1">{{ $totalProduct }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -161,7 +181,7 @@
                                             </div>
                                         </div>
                                         <span class="fw-medium d-block mb-1">Transaksi</span>
-                                        <h3 class="card-title mt-2 mb-1">41</h3>
+                                        <h3 class="card-title mt-2 mb-1">{{ $totalTransaction }}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -178,76 +198,32 @@
                                     </div>
                                     <div class="card-body pt-3">
                                         <ul class="p-0 m-0 d-flex flex-column h-100 gap-3">
+                                            @foreach ($bestSellers as $item)
                                             <li class="d-flex pb-1 flex-grow-1 align-items-center">
                                                 <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
+                                                    <img src="{{ asset('storage/' . $item->picture1) }}" alt="Credit Card" class="rounded" />
                                                 </div>
                                                 <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
+                                                    <div class="me-2 flex-fill">
+                                                        <h6 class="mb-0 text-truncate" style="max-width: 200px !important">{{ $item->name }}</h6>
+                                                        <small class="text-muted">{{ $item->category->name }}</small>
                                                     </div>
                                                     <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
+                                                        @php
+                                                            $income = $item->total_income ?? 0;
+                                                            if ($income >= 1000000) {
+                                                                $formattedIncome = 'Rp' . number_format($income / 1000000, 2, ',', '') . 'jt';
+                                                            } elseif ($income >= 1000) {
+                                                                $formattedIncome = 'Rp' . number_format($income / 1000, 0, '', '') . 'rb';
+                                                            } else {
+                                                                $formattedIncome = 'Rp' . number_format($income, 0, ',', '.');
+                                                            }
+                                                        @endphp
+                                                        <small class="fw-medium">{{ $formattedIncome }}</small>
                                                     </div>
                                                 </div>
                                             </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="d-flex pb-1 flex-grow-1 align-items-center">
-                                                <div class="avatar flex-shrink-0 me-3">
-                                                    <img src="{{ asset('images/slider/1-flip.jpg') }}" alt="Credit Card" class="rounded" />
-                                                </div>
-                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                    <div class="me-2">
-                                                        <h6 class="mb-0">Tomat Apel</h6>
-                                                        <small class="text-muted">Kategori Bibit Sayur</small>
-                                                    </div>
-                                                    <div class="user-progress">
-                                                        <small class="fw-medium">Rp12,5 jt</small>
-                                                    </div>
-                                                </div>
-                                            </li>
+                                            @endforeach
                                         </ul>
                                     </div>
                                 </div>
@@ -256,7 +232,6 @@
 
                             <!-- Expense Overview -->
                             <div class="col-md-6 col-lg-8 order-0 order-lg-1 mb-4">
-
                                 <div class="card h-100">
                                     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
                                         <h5 class="m-0 me-2">Grafik Pendapatan</h5>
@@ -265,9 +240,11 @@
                                                 Pilih Periode
                                             </button>
                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <li><a class="dropdown-item" href="#">Tahunan</a></li>
-                                                <li><a class="dropdown-item" href="#">Bulanan</a></li>
-                                                <li><a class="dropdown-item" href="#">Harian</a></li>
+                                                @foreach ($years as $year)
+                                                    <li>
+                                                        <a class="dropdown-item" href="{{ url('/dashboard?tahun=' . $year) }}">{{ $year }}</a>
+                                                    </li>
+                                                @endforeach
                                             </ul>
                                         </div>
                                     </div>
@@ -284,44 +261,34 @@
 
                         </div>
 
-                        <div class="contact">
-                            <div class="card h-100">
-                                <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                    <div class="card-title mb-0">
-                                        <h5 class="m-0 me-2">Pesan Untuk HydroSpace</h5>
-                                    </div>
-                                </div>
-                                <div class="card-body pt-3">
-                                    <div class="row">
-                                        <div class="d-flex flex-nowrap overflow-auto gap-4">
-                                            @foreach ($contacts as $contact)
-                                            <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
-                                                <div class="card h-100">
-                                                    <div class="card-header d-flex align-items-center justify-content-between pb-0">
-                                                        <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
-                                                            <div class="me-2">
-                                                                <h6 class="mb-0" style="color: #354e33;">{{ $contact->name }}</h6>
-                                                                <div class="info d-flex flex-column">
-                                                                    <small class="text-muted">{{ $contact->email }}</small>
-                                                                    <small class="text-muted">{{ $contact->phone_number }}</small>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="card-body pt-1">
-                                                        <p class="mb-0">
-                                                            {{ $contact->message }}
-                                                        </p>
+                        @if ($contactMessages->count() > 0)
+                            <div class="row">
+                                <div class="d-flex flex-nowrap overflow-auto gap-4">
+                                    @foreach ($contactMessages as $contactMessage)
+                                    <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4 flex-shrink-0">
+                                        <div class="card h-100">
+                                            <div class="card-header d-flex align-items-center justify-content-between pb-0">
+                                                <div class="avatar flex-shrink-0 me-3">
+                                                    <img src="../assets/img/avatars/user.png" alt class="w-px-40 h-auto rounded-circle" />
+                                                </div>
+                                                <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                                                    <div class="me-2">
+                                                        <h6 class="mb-0">{{ $contactMessage->name }}</h6>
+                                                        <small class="text-muted">{{ $contactMessage->email }}</small>
                                                     </div>
                                                 </div>
                                             </div>
-                                            @endforeach
+                                            <div class="card-body pt-3">
+                                                <p class="mb-0">
+                                                    {{ $contactMessage->message }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
-                        </div>
-
+                        @endif
                     </div>
                     <!-- / Content -->
 

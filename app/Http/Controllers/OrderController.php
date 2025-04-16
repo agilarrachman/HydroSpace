@@ -189,6 +189,24 @@ class OrderController extends Controller
                     ->whereIn('id', $request->selected_items) // Perhatikan: kita memfilter berdasarkan ID order_item
                     ->update(['order_id' => $newOrderId]);
 
+                // Ambil semua product_id yang baru saja dipindahkan ke order baru
+                $productIds = OrderItem::where('order_id', $newOrderId)
+                    ->pluck('product_id')
+                    ->toArray();
+
+                // Sinkronisasi tabel frequently_bought_togethers
+                foreach ($productIds as $mainProductId) {
+                    foreach ($productIds as $relatedProductId) {
+                        if ($mainProductId !== $relatedProductId) {
+                            DB::statement("
+                                INSERT INTO frequently_bought_togethers (product_id, related_product_id, count, created_at, updated_at)
+                                VALUES (?, ?, 1, NOW(), NOW())
+                                ON DUPLICATE KEY UPDATE count = count + 1, updated_at = NOW()
+                                ", [$mainProductId, $relatedProductId]);
+                        }
+                    }
+                }
+
                 // Periksa apakah order lama masih memiliki order items
                 if (!OrderItem::where('order_id', $oldOrder->id)->exists()) {
                     // Jika tidak ada order items lagi, hapus order lama
@@ -318,5 +336,21 @@ class OrderController extends Controller
 
         // Mengembalikan respon jika berhasil
         return redirect()->route('keranjang')->with('success', 'Produk berhasil ditambahkan ke keranjang!');
+    }
+
+    function syncFrequentlyBought(array $productIds)
+    {
+        foreach ($productIds as $mainProductId) {
+            foreach ($productIds as $relatedProductId) {
+                if ($mainProductId !== $relatedProductId) {
+                    // Gunakan raw SQL untuk langsung update DB (tanpa model)
+                    DB::statement("
+                        INSERT INTO frequently_bought_togethers (product_id, related_product_id, count, created_at, updated_at)
+                        VALUES (?, ?, 1, NOW(), NOW())
+                        ON DUPLICATE KEY UPDATE count = count + 1, updated_at = NOW()
+                        ", [$mainProductId, $relatedProductId]);
+                }
+            }
+        }
     }
 }
