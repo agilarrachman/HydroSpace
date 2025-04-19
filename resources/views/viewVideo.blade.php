@@ -17,6 +17,8 @@
     <link href="/css/coloring.css" rel="stylesheet" type="text/css">
     <!-- color scheme -->
     <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
+
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 
 <body>
@@ -58,9 +60,9 @@
                     <div class="col-lg-6">
                         <div class="relative overflow-hidden rounded-1">
                             <!-- Thumbnail -->
-                            <div id="thumbnail" class="thumbnail relative overflow-hidden rounded-1" onclick="playVideo()">
+                            <div id="thumbnail" class="thumbnail relative overflow-hidden rounded-1">
                                 <div class="absolute start-0 w-100 abs-middle fs-36 text-white text-center z-2">
-                                    <div class="player wow scaleIn"><span></span></div>
+                                    <div class="player wow scaleIn" onclick="playVideo()"><span></span></div>
                                 </div>
                                 <div class="absolute w-100 h-100 top-0 bg-dark hover-op-05"></div>
                                 <img src="{{ asset('../storage/' . $video->thumbnail) }}" class="w-100 hover-scale-1-1" alt="">
@@ -104,13 +106,17 @@
                                     @if ($video->videoProducts && $video->videoProducts->count())
                                     @foreach ($video->videoProducts as $videoProduct)
                                     @if ($videoProduct->product) <!-- Pastikan relasi product ada -->
-                                    <a href="#" style="text-decoration: none;">{{ $videoProduct->product->name }}</a>@if (!$loop->last), @endif
+                                    <a href="/produk/{{ $videoProduct->product->slug }}" style="text-decoration: none;">{{ $videoProduct->product->name }}</a>@if (!$loop->last), @endif
                                     @endif
                                     @endforeach
                                     @else
                                     <span style="color: #798D7A;">Tidak ada produk yang dibutuhkan</span>
                                     @endif
                                 </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <div class="fw-bold">Ditonton sebanyak</div>
+                                <div style="color: #798D7A;">{{ $viewCount }} pengguna</div>
                             </div>
                         </div>
                     </div>
@@ -199,6 +205,22 @@
             let video = document.getElementById("video");
             video.style.display = "block"; // Tampilkan video
             video.play(); // Mulai video secara otomatis
+
+            const videoId = '{{ $video->id }}';
+            const customerId = '{{ auth()->user()->id }}'
+
+            // Kirim permintaan AJAX untuk menambah view_count dengan video_id dan customer_id
+            fetch('/viewVideo', {
+                method: 'POST',
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    video_id: videoId,
+                    customer_id: customerId,
+                }),
+            });
         }
     </script>
 

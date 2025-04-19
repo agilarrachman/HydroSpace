@@ -481,12 +481,13 @@
 
                     <div class="row g-4">
 
+                        @foreach ($mostViewedVideos as $mostViewedVideo)
                         <div class="col-lg-6">
                             <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".3s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/tips menanam bayam.jpeg" class="hover-scale-1-1 w-100" alt="">
+                                <a href="/edukasi/{{ $mostViewedVideo->slug }}" class="abs w-100 h-100 z-5"></a>
+                                <img src="{{ asset('../storage/' . $mostViewedVideo->thumbnail) }}" class="hover-scale-1-1 w-100" alt="">
                                 <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Ingin menanam sawi hidroponik sendiri di rumah? Video ini akan membimbingmu dari pemilihan bibit, perawatan nutrisi, hingga panen dengan hasil yang maksimal. Cocok untuk pemula maupun yang ingin meningkatkan teknik bercocok tanam hidroponik!</div>
+                                    <div class="mb-3">{{ $mostViewedVideo->description }}</div>
                                     <b>Klik untuk menonton!</b>
                                 </div>
                                 <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
@@ -494,8 +495,8 @@
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
                                         <div class="col-11 d-flex flex-column flex-lg-row">
                                             <div class="me-5">
-                                                🌱 Pemilihan & Perawatan Tanaman
-                                                <h5>Panduan Praktis Menanam Sawi Hidroponik</h5>
+                                                {{ $mostViewedVideo->videoCategory->name }}
+                                                <h5>{{ $mostViewedVideo->title }}</h5>
                                             </div>
                                         </div>
 
@@ -507,33 +508,7 @@
                                 <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
                             </div>
                         </div>
-
-                        <div class="col-lg-6">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".6s">
-                                <a href="project-single.html" class="abs w-100 h-100 z-5"></a>
-                                <img src="images/thumbnail/instalasi hidroponik.jpeg" class="hover-scale-1-1 w-100" alt="">
-                                <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
-                                    <div class="mb-3">Pelajari cara memasang sistem hidroponik NFT (Nutrient Film Technique) dengan benar! Video ini membahas alat dan bahan yang dibutuhkan, cara merakit pipa, memasang pompa, hingga memastikan aliran nutrisi berjalan optimal. Cocok untuk pemula yang ingin memulai hidroponik modern dengan hasil maksimal!</div>
-                                    <b>Klik untuk menonton!</b>
-                                </div>
-                                <div class="abs bg-color z-2 top-0 w-100 h-100 hover-op-1"></div>
-                                <div class="abs z-2 bottom-0 w-100 hover-op-0">
-                                    <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
-                                        <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
-                                                🛠️ Instalasi & Perakitan Sistem
-                                                <h5>Panduan Instalasi Sistem NFT Hidroponik</h5>
-                                            </div>
-                                        </div>
-
-                                        <div class="col-1 w-40px">
-                                            <img src="images/misc/right-arrow.webp" class="w-100" alt="">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="gradient-trans-color-bottom abs w-100 h-40 bottom-0"></div>
-                            </div>
-                        </div>
+                        @endforeach
 
                         <div class="spacer-20"></div>
 

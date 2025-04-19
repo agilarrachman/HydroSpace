@@ -42,6 +42,11 @@ class User extends Authenticatable
         ];
     }
 
+    public function users()
+    {
+        return $this->hasMany(VideoView::class, 'customer_id');
+    }
+
     public function chats()
     {
         return $this->hasMany(Chat::class, 'customer_id');

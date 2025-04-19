@@ -26,6 +26,9 @@ use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\VideoViewController;
+use App\Models\Video;
+use App\Models\VideoView;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/masuk', [AuthenticationController::class, 'login']);
@@ -45,6 +48,20 @@ Route::get('/get-villages/{districtId}', [LocationController::class, 'getVillage
 
 Route::middleware(['blockAdmin'])->group(function () {
     Route::get('/', function () {
+        $mostViewedVideoViews = VideoView::select('video_id', DB::raw('count(*) as total_views'))
+            ->groupBy('video_id')
+            ->orderByDesc('total_views')
+            ->take(4) // Ambil misalnya 4 video teratas
+            ->get();
+        
+        $mostViewedVideos = collect([]);
+        foreach ($mostViewedVideoViews as $view) {
+            $video = Video::find($view->video_id);
+            if ($video) {
+                $mostViewedVideos->push($video);
+            }
+        }
+
         return view('index', [
             "title" => "HydroSpace | Beranda",
             "active" => "Beranda",
@@ -53,6 +70,7 @@ Route::middleware(['blockAdmin'])->group(function () {
                 ->orderBy('total_income', 'desc')
                 ->take(4)
                 ->get(),
+            "mostViewedVideos" => $mostViewedVideos,
         ]);
     });
 
@@ -115,6 +133,7 @@ Route::middleware(['role:Customer'])->group(function () {
     Route::post('/keranjang/update/{orderItemId}', [CartController::class, 'updateCart'])->name('cart.update');
 
     Route::get('/edukasi/{video:slug}', [VideoController::class, 'showCustomer']);
+    Route::resource('/viewVideo', VideoViewController::class);
 
     Route::resource('/pesanan', OrderController::class)->parameters([
         'pesanan' => 'order'

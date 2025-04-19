@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('objective_description3', 255)->nullable();
             $table->string('objective_heading4', 255)->nullable();
             $table->string('objective_description4', 255)->nullable();
+            $table->integer('view_count')->default(0)->unsigned();
             $table->timestamps();
         });
     }
