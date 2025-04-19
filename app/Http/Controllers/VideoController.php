@@ -6,9 +6,11 @@ use App\Models\Product;
 use App\Models\Video;
 use App\Models\VideoCategory;
 use App\Models\VideoProduct;
+use App\Models\VideoView;
 use Illuminate\Http\Request;
 use \Cviebrock\EloquentSluggable\Services\SlugService;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Log;
 
 class VideoController extends Controller
 {
@@ -271,10 +273,13 @@ class VideoController extends Controller
 
     public function showCustomer(Video $video)
     {
+        $viewCount = VideoView::where('video_id', $video->id)->count();
+
         return view('viewVideo', [
             "title" => "HydroSpace | " . $video->title,
             "active" => "Edukasi",
             'video' => $video->load(['admin', 'videoCategory', 'videoProducts.product']),
+            'viewCount' => $viewCount,
         ]);
     }
 }

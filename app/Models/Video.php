@@ -13,6 +13,11 @@ class Video extends Model
 
     protected $guarded = ['id'];
 
+    public function videos()
+    {
+        return $this->hasMany(VideoView::class, 'video_id');
+    }
+
     public function admin()
     {
         return $this->belongsTo(User::class, 'admin_id');

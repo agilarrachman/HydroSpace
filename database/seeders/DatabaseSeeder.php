@@ -132,6 +132,24 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::create([
+            'username' => 'pillahhh',
+            'email' => 'fillahalfatih@gmail.com',
+            'name' => 'Muhammad Fillah Alfatih',
+            'password' => Hash::make('111'),
+            'phone_number' => '0812345678194',
+            'gender' => 'Pria',
+            'role' => 'Customer',
+            'profile_picture' => 'profile_picture/TVx2kE3BaT26cu8r0cscqrhDdnDQfVfMkZv2u6z6.jpg',
+            'province' => 15,
+            'city' => 250,
+            'district' => 3757,
+            'village' => 46935,
+            'full_address' => 'PERUM KARANG INDAH BLOK BJ 48 C',
+            'created_at' => '2025-03-26 10:41:00',
+            'updated_at' => '2025-03-26 13:16:11'
+        ]);
+
+        User::create([
             'username' => 'nausssie',
             'email' => 'nurrizkytaaulia@gmail.com',
             'name' => 'Nurrizkyta Aulia Hanifah',
@@ -221,7 +239,7 @@ class DatabaseSeeder extends Seeder
             'category_id' => 1,
             'title' => 'Panduan Praktis Menanam Sawi Hidroponik',
             'slug' => 'panduan-praktis-menanam-sawi-hidroponik',
-            'video' => 'video/sample_video_1.mp4',
+            'video' => 'video/1.mp4',
             'thumbnail' => 'thumbnail/tips_menanam_bayam.jpeg',
             'duration' => 120,
             'difficulty_level' => 'Pemula',

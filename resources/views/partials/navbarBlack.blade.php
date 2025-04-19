@@ -5,6 +5,11 @@
         border-bottom: 2px solid #354e33;
     }
 
+    #mainmenu li a:hover {
+        color: rgb(53, 78, 51);
+        border-bottom: 2px solid rgb(53, 78, 51);
+    }
+
     .profile-picture {
         color: #354e33;
     }
