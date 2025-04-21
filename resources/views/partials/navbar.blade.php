@@ -56,10 +56,10 @@
                     <div class="de-flex-col header-col-mid">
                         <!-- mainmenu begin -->
                         <ul id="mainmenu">
-                            <li><a class="menu-item {{ ($active === 'Beranda') ? 'active' : '' }}" href="/">Beranda</a></li>
+                            <li><a class="menu-item {{ ($active === 'Beranda') ? 'active' : '' }}" href="/" id="home">Beranda</a></li>
                             <li><a class="menu-item {{ ($active === 'Produk') ? 'active' : '' }}" href="/produk">Produk</a></li>
                             <li><a class="menu-item {{ ($active === 'Edukasi') ? 'active' : '' }}" href="/edukasi">Edukasi</a></li>
-                            <li><a class="menu-item {{ ($active === 'HydroBot') ? 'active' : '' }}" href="/hydrobot#ai" id="consultationLink">HydroBot</a></li>
+                            <li><a class="menu-item {{ ($active === 'HydroBot') ? 'active' : '' }}" href="#ai" id="consultationLink">HydroBot</a></li>
                             <li><a class="menu-item {{ ($active === 'Tentang') ? 'active' : '' }}" href="/tentang">Tentang Kami</a></li>
                             <li><a class="menu-item {{ ($active === 'Kontak') ? 'active' : '' }}" href="/kontak">Kontak</a></li>
                         </ul>
@@ -91,3 +91,28 @@
     </div>
 </header>
 <!-- header end -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        function updateActiveMenu() {
+            const hash = window.location.hash;
+
+            // Reset semua
+            document.querySelectorAll('.menu-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            if (hash === '#ai') {
+                document.getElementById('consultationLink')?.classList.add('active');
+            } else if (window.location.pathname === '/') {
+                document.getElementById('home')?.classList.add('active');
+            } else {
+                const currentPath = window.location.pathname;
+                document.querySelector(`.menu-item[href="${currentPath}"]`)?.classList.add('active');
+            }
+        }
+
+        updateActiveMenu();
+        window.addEventListener('hashchange', updateActiveMenu);
+    });
+</script>

@@ -53,7 +53,7 @@ Route::middleware(['blockAdmin'])->group(function () {
             ->orderByDesc('total_views')
             ->take(4) // Ambil misalnya 4 video teratas
             ->get();
-        
+
         $mostViewedVideos = collect([]);
         foreach ($mostViewedVideoViews as $view) {
             $video = Video::find($view->video_id);
@@ -74,11 +74,6 @@ Route::middleware(['blockAdmin'])->group(function () {
         ]);
     });
 
-    Route::get('/hydrobot#ai', function () {
-        return view('index', [
-            "active" => "HydroBot"
-        ]);
-    });
     Route::post('/question', [GeminiController::class, 'index']);
     Route::post('/hydrobot/clear-history', [GeminiController::class, 'clearHistory']);
 

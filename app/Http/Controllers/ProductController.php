@@ -213,7 +213,9 @@ class ProductController extends Controller
             // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
             $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
 
-            $totalOrder = Order::where('customer_id', $user->id)->count();
+            $totalOrder = Order::where('customer_id', $user->id)
+                ->where('status', '!=', 'keranjang')
+                ->count();
             $totalPrice = $orderItems->sum('total_price');
             $totalItem = $orderItems->sum('quantity');
         }
@@ -233,7 +235,7 @@ class ProductController extends Controller
             'totalItem' => $totalItem,
             'totalOrder' => $totalOrder,
             "bestSellers" => Product::withCount('orderItems')
-                ->withSum('orderItems as total_income', \DB::raw('quantity * price'))
+                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
                 ->orderBy('total_income', 'desc')
                 ->take(4)
                 ->get(),
@@ -257,15 +259,17 @@ class ProductController extends Controller
 
             // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
             $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
-            $totalOrder = Order::where('customer_id', $user->id)->count();
+            $totalOrder = Order::where('customer_id', $user->id)
+                ->where('status', '!=', 'keranjang')
+                ->count();
         }
 
-        $relatedA = \DB::table('frequently_bought_togethers')
+        $relatedA = DB::table('frequently_bought_togethers')
             ->where('product_id', $product->id)
             ->pluck('related_product_id')
             ->toArray();
 
-        $relatedB = \DB::table('frequently_bought_togethers')
+        $relatedB = DB::table('frequently_bought_togethers')
             ->where('related_product_id', $product->id)
             ->pluck('product_id')
             ->toArray();
