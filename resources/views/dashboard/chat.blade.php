@@ -211,13 +211,13 @@
                     <div class="container-xxl d-flex flex-column flex-lg-row gap-4 flex-grow-1 container-p-y" style="height: 90vh;">
                         <div class="card w-25 h-100 overflow-auto d-none d-lg-block">
                             <ul class="nav nav-pills flex-column" id="customer-tabs" role="tablist">
-                            @foreach ($users as $user)
+                                @foreach ($users as $user)
                                 <li class="nav-item" role="presentation">
                                     <a class="nav-link d-flex align-items-center justify-content-start gap-4 py-3" href="{{ route('chat', ['user' => $user->id]) }}" style="transition: background-color 0.3s, color 0.3s;">
                                         <img src="{{ asset('storage/' . $user->profile_picture) }}" alt="User" class="rounded-circle" style="width: 40px; height: 40px; object-fit: cover;">
-                                        <p class="mb-0"><span>@</span>{{ $user->username }}</p>
+                                        <p class="mb-0 text-truncate" style="max-width: 95px !important"><span>@</span>{{ $user->username }}</p>
                                         @if($lastMessagesFromUsers[$user->id] ?? false)
-                                            <div class="rounded-circle bg-danger ms-auto" style="width: 10px; height: 10px;"></div>
+                                        <div class="rounded-circle bg-danger ms-auto" style="width: 10px; height: 10px;"></div>
                                         @endif
                                     </a>
                                 </li>
@@ -225,21 +225,26 @@
                                     .nav-link {
                                         border-left: 5px solid #ffffff00 !important;
                                     }
+
                                     .nav-link:hover {
                                         background-color: rgba(67, 89, 113, 0.04) !important;
                                         color: #454545 !important;
                                         border-left: 5px solid #354e33 !important;
                                     }
+
                                     .nav-link.active {
                                         background-color: rgba(53, 78, 51, 0.1) !important;
                                         color: #454545 !important;
                                         border-left: 5px solid #354e33 !important;
                                     }
-                                    .nav-pills .nav-link.active, .nav-pills .nav-link.active:hover, .nav-pills .nav-link.active:focus {
+
+                                    .nav-pills .nav-link.active,
+                                    .nav-pills .nav-link.active:hover,
+                                    .nav-pills .nav-link.active:focus {
                                         box-shadow: none;
                                     }
                                 </style>
-                            @endforeach
+                                @endforeach
                             </ul>
                         </div>
 
@@ -247,7 +252,7 @@
                             <select id="customer-select" class="form-select w-100" onchange="location.href=this.value;">
                                 <option value="" selected disabled>Pilih pengguna untuk memulai chat</option>
                                 @foreach ($users as $user)
-                                    <option value="{{ route('chat', ['user' => $user->id]) }}"><span>@</span>{{ $user->username }}</option>
+                                <option value="{{ route('chat', ['user' => $user->id]) }}"><span>@</span>{{ $user->username }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -258,7 +263,7 @@
                                 <div class="card p-3 h-100 d-flex flex-column">
                                     <div class="chat-window d-flex flex-column flex-grow-1 overflow-auto">
                                         <div class="chat h-100 d-flex align-items-center justify-content-center">
-                                            <img src="{{ asset('images/dashboard/hero-dashboard.png') }}" style="max-height: 275px;" class="mb-4"/>
+                                            <img src="{{ asset('images/dashboard/hero-dashboard.png') }}" style="max-height: 275px;" class="mb-4" />
                                             <p class="text-muted">Pilih pengguna untuk memulai percakapan.</p>
                                         </div>
                                     </div>
