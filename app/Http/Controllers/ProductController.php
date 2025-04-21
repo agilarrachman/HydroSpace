@@ -235,8 +235,8 @@ class ProductController extends Controller
             'totalItem' => $totalItem,
             'totalOrder' => $totalOrder,
             "bestSellers" => Product::withCount('orderItems')
-                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
-                ->orderBy('total_income', 'desc')
+                ->withSum('orderItems as quantity', DB::raw('quantity'))
+                ->orderBy('quantity', 'desc')
                 ->take(4)
                 ->get(),
         ]);

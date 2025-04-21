@@ -69,17 +69,17 @@ class DashboardController extends Controller
         }
 
         $bestSellers = Product::withCount([
-                'orderItems as total_quantity' => function ($query) use ($selectedYear) {
-                    $query->whereYear('created_at', $selectedYear);
-                }
-            ])->withSum([
-                    'orderItems as total_income' => function ($query) use ($selectedYear) {
-                        $query->whereYear('created_at', $selectedYear);
-                    }
-                ], DB::raw('quantity * price'))
-                ->orderByDesc('total_income')
-                ->take(5)
-                ->get();
+            'orderItems as total_quantity' => function ($query) use ($selectedYear) {
+                $query->whereYear('created_at', $selectedYear);
+            }
+        ])->withSum([
+            'orderItems as quantity' => function ($query) use ($selectedYear) {
+                $query->whereYear('created_at', $selectedYear);
+            }
+        ], DB::raw('quantity'))
+            ->orderByDesc('quantity')
+            ->take(5)
+            ->get();
 
         return view('dashboard.index', [
             "title" => "HydroSpace | Dashboard",
