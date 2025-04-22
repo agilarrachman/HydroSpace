@@ -126,6 +126,7 @@ Route::middleware(['role:Customer'])->group(function () {
     Route::get('/keranjang', [CartController::class, 'showCart'])->name('cart.show');
     Route::post('/keranjang/add', [CartController::class, 'addToCart'])->name('cart.add');
     Route::post('/keranjang/update/{orderItemId}', [CartController::class, 'updateCart'])->name('cart.update');
+    Route::delete('/keranjang/remove/{orderItemId}', [CartController::class, 'removeItem']);
 
     Route::get('/edukasi/{video:slug}', [VideoController::class, 'showCustomer']);
     Route::resource('/viewVideo', VideoViewController::class);
