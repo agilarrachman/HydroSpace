@@ -126,11 +126,11 @@
                                     $picture='picture' . $i;
                                     @endphp
                                     @if (!empty($product->$picture))
-                                        <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px; background-color: #5b895866 !important;">
-                                            <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: contain; width: 100%; height: 100%;">
-                                        </div>
+                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px; background-color: #E1EBE2 !important;">
+                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: contain; width: 100%; height: 100%;">
+                                    </div>
                                     @endif
-                                @endfor
+                                    @endfor
                             </div>
 
                             <div id="sync2" class="owl-carousel owl-theme">
@@ -143,7 +143,7 @@
                                         <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100 h-100" style="object-fit: cover;">
                                     </div>
                                     @endif
-                                @endfor
+                                    @endfor
                             </div>
 
                         </div>
@@ -274,5 +274,142 @@
             }
         });
     </script>
+
+    <script>
+        document.querySelector("#checkout-btn").addEventListener("click", function() {
+            let checkedItems = [];
+
+            // Ambil item yang dipilih
+            document.querySelectorAll(".d-checkbox__input:checked").forEach((checkbox) => {
+                checkedItems.push(checkbox.id.replace("item-", ""));
+            });
+
+            if (checkedItems.length === 0) {
+                alert("Silakan pilih minimal satu item untuk checkout!");
+                return;
+            }
+
+            // Konversi array menjadi string dengan format query parameter
+            let queryString = checkedItems.map(id => `items[]=${id}`).join("&");
+
+            // Redirect ke halaman create sambil membawa data item
+            window.location.href = `/pesanan/create?${queryString}`;
+        });
+
+        function addToCart(productId) {
+            let url = "/keranjang/add";
+            let data = {
+                product_id: productId,
+                quantity: 1, // Default tambah 1 item
+            };
+
+            fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.success) {
+                        // Menampilkan notifikasi
+                        $("#de_notif").removeClass("active");
+                        de_atc('Produk telah ditambahkan ke keranjang');
+                        $("#de_notif").addClass("active");
+
+                        setTimeout(function() {
+                            $("#de_notif").removeClass("active");
+                        }, 1500);
+
+                        location.reload(); // Reload untuk update sidebar cart
+                    } else {
+                        alert("Gagal menambahkan ke keranjang: " + data.error);
+                    }
+                })
+                .catch((error) => console.error("Error:", error));
+        }
+
+        function updateCart(orderItemId, type, action) {
+            const cartItemElement = document.querySelector(`#item-${orderItemId}`).closest('.de__cart');
+            const quantityInput = cartItemElement.querySelector('.de-number input');
+            const currentQuantity = parseInt(quantityInput.value);
+
+            // Cek apakah akan mengurangi menjadi 0
+            if (action === 'decrease' && currentQuantity === 1) {
+                if (confirm("Apakah Anda yakin ingin menghapus item ini dari keranjang?")) {
+                    removeCartItem(orderItemId); // Langsung panggil fungsi hapus jika yakin
+                } else {
+                    // Jika tidak yakin, kembalikan nilai input ke 1 (atau biarkan saja)
+                    quantityInput.value = 1; // Mencegah perubahan di UI
+                }
+                return; // Hentikan eksekusi fungsi updateCart lebih lanjut
+            }
+
+            let url = `/keranjang/update/${orderItemId}`;
+            let data = {
+                type: type,
+                action: action
+            };
+
+            fetch(url, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                    },
+                    body: JSON.stringify(data),
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const priceElement = cartItemElement.querySelector('.d-price');
+                        const totalItemElement = document.getElementById("total-item-value");
+
+                        if (data.new_quantity !== undefined && data.new_price !== undefined && data.total_price !== undefined) {
+                            quantityInput.value = data.new_quantity;
+                            priceElement.textContent = `Rp${new Intl.NumberFormat('id-ID').format(data.new_price)}`;
+                            totalItemElement.textContent = data.total_item;
+                        } else {
+                            console.error("Data dari server tidak lengkap:", data);
+                        }
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+
+        function removeCartItem(orderItemId) {
+            let url = `/keranjang/remove/${orderItemId}`;
+
+            fetch(url, {
+                    method: "DELETE",
+                    headers: {
+                        "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const cartItemElement = document.querySelector(`#item-${orderItemId}`).closest('.de__cart');
+                        if (cartItemElement) {
+                            cartItemElement.remove();
+
+                            const totalItemElement = document.getElementById("total-item-value");
+                            if (totalItemElement) {
+                                totalItemElement.textContent = data.total_item;
+                            }
+
+                            // Refresh halaman setelah item berhasil dihapus
+                            location.reload();
+                        }
+                    } else {
+                        alert("Gagal menghapus item dari keranjang: " + data.error);
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+        }
+    </script>
 </body>
+
 </html>

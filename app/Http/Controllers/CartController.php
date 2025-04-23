@@ -74,8 +74,6 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang!');
     }
 
-
-
     public function updateCart(Request $request, $orderItemId)
     {
         $orderItem = OrderItem::find($orderItemId);
@@ -85,33 +83,94 @@ class CartController extends Controller
         }
 
         if ($request->type === 'quantity') {
-            if ($request->action === 'increase') {
-                $orderItem->quantity += 1;
-            } elseif ($request->action === 'decrease' && $orderItem->quantity > 1) {
+            if ($request->action === 'decrease' && $orderItem->quantity > 0) {
                 $orderItem->quantity -= 1;
-            }
+                $orderItem->total_price = $orderItem->quantity * $orderItem->product->price;
+                $orderItem->save();
 
-            $orderItem->total_price = $orderItem->quantity * $orderItem->product->price;
-            $orderItem->save();
+                if ($orderItem->quantity === 0) {
+                    $orderId = $orderItem->order_id;
+                    $orderItem->delete();
+
+                    // Recalculate total amount and total item for the order
+                    $order = Order::find($orderId);
+                    if ($order) {
+                        $order->total_amount = OrderItem::where('order_id', $orderId)->sum('total_price');
+                        $order->save();
+                    }
+
+                    $totalPrice = OrderItem::where('order_id', $orderId)->sum('total_price');
+                    $totalItem = OrderItem::where('order_id', $orderId)->sum('quantity');
+
+                    return response()->json(['success' => true, 'new_quantity' => 0, 'new_price' => 0, 'total_price' => $totalPrice, 'total_item' => $totalItem]);
+                }
+
+                // Update total order dan response jika kuantitas tidak 0 setelah pengurangan
+                $order = Order::find($orderItem->order_id);
+                if ($order) {
+                    $order->total_amount = OrderItem::where('order_id', $order->id)->sum('total_price');
+                    $order->save();
+                }
+
+                $totalPrice = OrderItem::where('order_id', $orderItem->order_id)->sum('total_price');
+                $totalItem = OrderItem::where('order_id', $orderItem->order_id)->sum('quantity');
+
+                return response()->json([
+                    'success' => true,
+                    'new_quantity' => $orderItem->quantity,
+                    'new_price' => $orderItem->total_price,
+                    'total_price' => $totalPrice,
+                    'total_item' => $totalItem
+                ]);
+            } elseif ($request->action === 'increase') {
+                $orderItem->quantity += 1;
+                $orderItem->total_price = $orderItem->quantity * $orderItem->product->price;
+                $orderItem->save();
+
+                // Update total order setelah penambahan
+                $order = Order::find($orderItem->order_id);
+                if ($order) {
+                    $order->total_amount = OrderItem::where('order_id', $order->id)->sum('total_price');
+                    $order->save();
+                }
+
+                $totalPrice = OrderItem::where('order_id', $orderItem->order_id)->sum('total_price');
+                $totalItem = OrderItem::where('order_id', $orderItem->order_id)->sum('quantity');
+
+                return response()->json([
+                    'success' => true,
+                    'new_quantity' => $orderItem->quantity,
+                    'new_price' => $orderItem->total_price,
+                    'total_price' => $totalPrice,
+                    'total_item' => $totalItem
+                ]);
+            }
         }
 
-        // **Pastikan total amount di tabel orders diperbarui**
-        $order = Order::find($orderItem->order_id);
+        return response()->json(['success' => false, 'error' => 'Gagal memperbarui item']);
+    }
+
+    public function removeItem($orderItemId)
+    {
+        $orderItem = OrderItem::find($orderItemId);
+
+        if (!$orderItem) {
+            return response()->json(['success' => false, 'error' => 'Item tidak ditemukan']);
+        }
+
+        $orderId = $orderItem->order_id; // Get the order ID before deleting
+        $orderItem->delete();
+
+        // Recalculate total amount and total item for the order
+        $order = Order::find($orderId);
         if ($order) {
-            $order->total_amount = OrderItem::where('order_id', $order->id)->sum('total_price');
+            $order->total_amount = OrderItem::where('order_id', $orderId)->sum('total_price');
             $order->save();
         }
 
-        // Hitung total harga semua item dalam keranjang
-        $totalPrice = OrderItem::where('order_id', $orderItem->order_id)->sum('total_price');
-        $totalItem = OrderItem::where('order_id', $orderItem->order_id)->sum('quantity');
+        $totalPrice = OrderItem::where('order_id', $orderId)->sum('total_price');
+        $totalItem = OrderItem::where('order_id', $orderId)->sum('quantity');
 
-        return response()->json([
-            'success' => true,
-            'new_quantity' => $orderItem->quantity,
-            'new_price' => $orderItem->total_price,
-            'total_price' => $totalPrice,
-            'total_item' => $totalItem
-        ]);
+        return response()->json(['success' => true, 'total_price' => $totalPrice, 'total_item' => $totalItem]);
     }
 }

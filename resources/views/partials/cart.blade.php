@@ -33,6 +33,7 @@
         <form action="/checkout" method="POST">
             @csrf
             <div class="cart-items">
+                @if ($orderItems->isNotEmpty())
                 @foreach ($orderItems as $orderItem)
                 <div class="de__cart">
                     <div class="de__cart-item justify-content-between">
@@ -56,11 +57,16 @@
                     </div>
                 </div>
                 @endforeach
+
             </div>
-            
+
             <button type="submit" class="w-100 btn-primary text-center rounded-20 py-2 mb-0 mt-auto">
                 Checkout
             </button>
+            @else
+                <p style="color: #354E33;">Kamu belum memasukkan produk ke keranjang</p>
+            </div>
+            @endif
         </form>
 
 
@@ -68,105 +74,3 @@
     </div>
 </div>
 <!-- overlay content end -->
-
-<script>
-    document.querySelector("#checkout-btn").addEventListener("click", function() {
-        let checkedItems = [];
-
-        // Ambil item yang dipilih
-        document.querySelectorAll(".d-checkbox__input:checked").forEach((checkbox) => {
-            checkedItems.push(checkbox.id.replace("item-", ""));
-        });
-
-        if (checkedItems.length === 0) {
-            alert("Silakan pilih minimal satu item untuk checkout!");
-            return;
-        }
-
-        // Konversi array menjadi string dengan format query parameter
-        let queryString = checkedItems.map(id => `items[]=${id}`).join("&");
-
-        // Redirect ke halaman create sambil membawa data item
-        window.location.href = `/pesanan/create?${queryString}`;
-    });
-
-    function addToCart(productId) {
-        let url = "/keranjang/add";
-        let data = {
-            product_id: productId,
-            quantity: 1, // Default tambah 1 item
-        };
-
-        fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-                },
-                body: JSON.stringify(data),
-            })
-            .then((response) => response.json())
-            .then((data) => {
-                if (data.success) {
-                    // Menampilkan notifikasi
-                    $("#de_notif").removeClass("active");
-                    de_atc('Produk telah ditambahkan ke keranjang');
-                    $("#de_notif").addClass("active");
-
-                    setTimeout(function() {
-                        $("#de_notif").removeClass("active");
-                    }, 1500);
-
-                    location.reload(); // Reload untuk update sidebar cart
-                } else {
-                    alert("Gagal menambahkan ke keranjang: " + data.error);
-                }
-            })
-            .catch((error) => console.error("Error:", error));
-    }
-
-    function updateCart(orderItemId, type, action) {
-        let url = `/keranjang/update/${orderItemId}`;
-        let data = {
-            type: type,
-            action: action
-        };
-
-        fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content"),
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    const cartItemElement = document.querySelector(`#item-${orderItemId}`).closest('.de__cart');
-                    const quantityInput = cartItemElement.querySelector('.de-number input');
-                    const priceElement = cartItemElement.querySelector('.d-price');
-                    const totalPriceElement = document.getElementById("total-price-value");
-                    const totalItemElement = document.getElementById("total-item-value");
-
-                    // Pastikan data yang diterima tidak undefined atau null
-                    if (data.new_quantity !== undefined && data.new_price !== undefined && data.total_price !== undefined) {
-                        // Update jumlah item
-                        quantityInput.value = data.new_quantity;
-
-                        // Update harga item
-                        priceElement.textContent = `Rp${new Intl.NumberFormat('id-ID').format(data.new_price)}`;
-
-                        // Update total harga keseluruhan
-                        totalPriceElement.textContent = `Rp${new Intl.NumberFormat('id-ID').format(data.total_price)}`;
-
-                        // Update total jumlah item
-                        totalItemElement.textContent = data.total_item;
-                    } else {
-                        console.error("Data dari server tidak lengkap:", data);
-                    }
-                }
-            })
-            .catch(error => console.error("Error:", error));
-    }
-</script>
