@@ -86,7 +86,9 @@ class DashboardController extends Controller
             "active" => "Dashboard",
             "totalProduct" => Product::count(),
             "totalIncome" => Order::whereYear('created_at', $selectedYear)->sum('total_amount'),
-            "totalTransaction" => Order::whereYear('created_at', $selectedYear)->count(),
+            "totalTransaction" => Order::whereYear('created_at', $selectedYear)
+                ->where('status', '!=', 'Keranjang')
+                ->count(),
             "bestSellers" => $bestSellers,
             "contactMessages" => DB::table('contacts')->orderBy('created_at', 'desc')->get(),
             "monthlyIncome" => array_values($monthlyIncomeFull),
