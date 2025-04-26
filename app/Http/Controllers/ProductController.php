@@ -125,18 +125,6 @@ class ProductController extends Controller
 
         $oldImagesFromRequest = $request->input('oldImages', []);
 
-        // Debugging oldImages
-        // dd([
-        //     'oldImagesFromRequest' => $oldImagesFromRequest,
-        //     'productPictures' => [
-        //         'picture1' => $product->picture1,
-        //         'picture2' => $product->picture2,
-        //         'picture3' => $product->picture3,
-        //         'picture4' => $product->picture4,
-        //         'picture5' => $product->picture5,
-        //     ],
-        // ]);
-
         for ($i = 1; $i <= 5; $i++) {
             $pictureField = 'picture' . $i;
             $currentPicturePath = $product->$pictureField;
