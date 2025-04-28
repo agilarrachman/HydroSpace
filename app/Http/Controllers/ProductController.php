@@ -125,18 +125,6 @@ class ProductController extends Controller
 
         $oldImagesFromRequest = $request->input('oldImages', []);
 
-        // Debugging oldImages
-        // dd([
-        //     'oldImagesFromRequest' => $oldImagesFromRequest,
-        //     'productPictures' => [
-        //         'picture1' => $product->picture1,
-        //         'picture2' => $product->picture2,
-        //         'picture3' => $product->picture3,
-        //         'picture4' => $product->picture4,
-        //         'picture5' => $product->picture5,
-        //     ],
-        // ]);
-
         for ($i = 1; $i <= 5; $i++) {
             $pictureField = 'picture' . $i;
             $currentPicturePath = $product->$pictureField;
@@ -235,8 +223,8 @@ class ProductController extends Controller
             'totalItem' => $totalItem,
             'totalOrder' => $totalOrder,
             "bestSellers" => Product::withCount('orderItems')
-                ->withSum('orderItems as total_income', DB::raw('quantity * price'))
-                ->orderBy('total_income', 'desc')
+                ->withSum('orderItems as quantity', DB::raw('quantity'))
+                ->orderBy('quantity', 'desc')
                 ->take(4)
                 ->get(),
         ]);

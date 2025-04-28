@@ -194,7 +194,11 @@
                                     </div>
                                 </div>
 
+                                @if($recommendedProducts->count() < 4)
+                                <div id="new-arrivals-carousel" class="owl-carousel">
+                                @else
                                 <div id="new-arrivals-carousel" class="owl-carousel owl-4-cols">
+                                @endif
                                     <!-- product item begin -->
                                     @foreach($recommendedProducts as $item)
                                     <div class="item">

@@ -210,16 +210,14 @@
                                                     </div>
                                                     <div class="user-progress">
                                                         @php
-                                                            $income = $item->total_income ?? 0;
-                                                            if ($income >= 1000000) {
-                                                                $formattedIncome = 'Rp' . number_format($income / 1000000, 2, ',', '') . 'jt';
-                                                            } elseif ($income >= 1000) {
-                                                                $formattedIncome = 'Rp' . number_format($income / 1000, 0, '', '') . 'rb';
+                                                            $quantity = $item->quantity ?? 0;
+                                                            if ($quantity > 0) {
+                                                                $newQuantity = $quantity . ' terjual';
                                                             } else {
-                                                                $formattedIncome = 'Rp' . number_format($income, 0, ',', '.');
+                                                                $newQuantity = '0 terjual';
                                                             }
                                                         @endphp
-                                                        <small class="fw-medium">{{ $formattedIncome }}</small>
+                                                        <small class="fw-medium">{{ $newQuantity }}</small>
                                                     </div>
                                                 </div>
                                             </li>

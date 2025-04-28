@@ -165,7 +165,7 @@ class OrderController extends Controller
             // Gunakan order_id yang diterima dari frontend
             $newOrderId = $request->order_id;
 
-            // Buat order baru dengan status 'Belum Bayar'
+            // Buat order baru dengan status 'Dikemas'
             $newOrder = Order::create([
                 'id' => $newOrderId,
                 'customer_id' => Auth::id(),
@@ -199,11 +199,28 @@ class OrderController extends Controller
                     foreach ($productIds as $relatedProductId) {
                         if ($mainProductId !== $relatedProductId) {
                             DB::statement("
-                                INSERT INTO frequently_bought_togethers (product_id, related_product_id, count, created_at, updated_at)
-                                VALUES (?, ?, 1, NOW(), NOW())
-                                ON DUPLICATE KEY UPDATE count = count + 1, updated_at = NOW()
-                                ", [$mainProductId, $relatedProductId]);
+                            INSERT INTO frequently_bought_togethers (product_id, related_product_id, count, created_at, updated_at)
+                            VALUES (?, ?, 1, NOW(), NOW())
+                            ON DUPLICATE KEY UPDATE count = count + 1, updated_at = NOW()
+                        ", [$mainProductId, $relatedProductId]);
                         }
+                    }
+                }
+
+                // --- Kurangi stok produk ---
+                $orderItems = OrderItem::where('order_id', $newOrderId)->get();
+
+                foreach ($orderItems as $item) {
+                    $product = Product::find($item->product_id);
+
+                    if ($product) {
+                        if ($product->stock < $item->quantity) {
+                            throw new \Exception('Stok produk tidak cukup untuk produk: ' . $product->name);
+                        }
+
+                        // Kurangi stok
+                        $product->stock -= $item->quantity;
+                        $product->save();
                     }
                 }
 
@@ -214,6 +231,7 @@ class OrderController extends Controller
                 }
             }
 
+            // Bersihkan session selected_items
             $request->session()->forget('selected_items');
 
             DB::commit();
