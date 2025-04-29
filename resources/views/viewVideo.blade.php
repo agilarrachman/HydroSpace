@@ -19,6 +19,13 @@
     <link id="colors" href="/css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <style>
+        header .profile-picture:hover {
+            color: #354e33;
+            border-bottom: 2px solid #354e33 !important;
+        }
+    </style>
 </head>
 
 <body>
