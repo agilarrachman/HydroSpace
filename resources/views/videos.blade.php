@@ -20,7 +20,6 @@
     <link id="colors" href="css/colors/scheme-01.css" rel="stylesheet" type="text/css">
 
     <style>
-
         .page-link:not(.active) {
             font-weight: 300;
             color: #223044;
@@ -119,9 +118,9 @@
                                 <div class="abs z-2 bottom-0 w-100 hover-op-0">
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
                                         <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
+                                            <div class="me-5 w-100">
                                                 {{ $video->videoCategory->name }}
-                                                <h5>{{ $video->title }}</h5>
+                                                <h5 class="text-truncate">{{ $video->title }}</h5>
                                             </div>
                                         </div>
 

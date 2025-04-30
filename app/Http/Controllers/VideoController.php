@@ -28,6 +28,7 @@ class VideoController extends Controller
                         $query->where('name', 'like', "%$search%");
                     });
             })
+            ->orderBy('updated_at', 'desc') 
             ->paginate(10);
 
         return view('dashboard.videos.index', [
@@ -259,6 +260,7 @@ class VideoController extends Controller
                     $categoryQuery->where('slug', $categorySlug);
                 });
             })
+            ->orderBy('created_at', 'desc')
             ->paginate(10); 
 
         $videoCategories = VideoCategory::all();

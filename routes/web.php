@@ -51,7 +51,7 @@ Route::middleware(['blockAdmin'])->group(function () {
         $mostViewedVideoViews = VideoView::select('video_id', DB::raw('count(*) as total_views'))
             ->groupBy('video_id')
             ->orderByDesc('total_views')
-            ->take(4) // Ambil misalnya 4 video teratas
+            ->take(2)
             ->get();
 
         $mostViewedVideos = collect([]);

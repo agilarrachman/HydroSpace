@@ -494,9 +494,9 @@
                                 <div class="abs z-2 bottom-0 w-100 hover-op-0">
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
                                         <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5">
+                                            <div class="me-5 w-100">
                                                 {{ $mostViewedVideo->videoCategory->name }}
-                                                <h5>{{ $mostViewedVideo->title }}</h5>
+                                                <h5 class="text-truncate">{{ $mostViewedVideo->title }}</h5>
                                             </div>
                                         </div>
 
@@ -513,7 +513,7 @@
                         <div class="spacer-20"></div>
 
                         <div class="col-lg-12 text-center">
-                            <a class="btn-main wow fadeInUp" href="projects.html">Lihat Semua</a>
+                            <a class="btn-main wow fadeInUp" href="/edukasi">Lihat Semua</a>
                         </div>
 
                     </div>

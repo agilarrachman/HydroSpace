@@ -115,7 +115,9 @@ class OrderController extends Controller
         $customer = Auth::user();
 
         $user = Auth::user();
-        $totalOrder = Order::where('customer_id', $user->id)->count();
+        $totalOrder = Order::where('customer_id', $user->id)
+            ->where('status', '!=', 'keranjang')
+            ->count();
 
         return view('checkout', [
             "title" => "HydroSpace | Buat Pesanan",

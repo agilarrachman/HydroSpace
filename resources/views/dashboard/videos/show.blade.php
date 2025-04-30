@@ -115,9 +115,9 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex flex-column flex-lg-row justify-content-between align-items-start mb-3">
-                                            <div class="col-lg-6">
+                                            <div class="col-lg-6 col-12">
                                                 <p class="col-lg-10 lead mb-0">{{ $video->videoCategory->name }}</p>
-                                                <h4 class="text-uppercase mb-0">{{ $video->title }}</h1>
+                                                <h4 class="text-uppercase mb-0" style="word-wrap: break-word; white-space: normal;">{{ $video->title }}</h1>
                                                     <p class="mt-0 mb-3 p-0">Diunggah oleh <b>{{ $video->admin->name }}</b></p>
 
                                                     <div class="relative overflow-hidden rounded-1">
