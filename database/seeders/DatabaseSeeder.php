@@ -634,7 +634,7 @@ class DatabaseSeeder extends Seeder
             'picture3' => '',
             'picture4' => '',
             'picture5' => '',
-            'price' => 850000,
+            'price' => 230000,
             'stock' => 50,
             'description' => 'Paket lengkap untuk pemula hidroponik, mudah digunakan dan sudah termasuk nutrisi dasar. Cocok untuk Anda yang ingin mulai berkebun di rumah secara praktis dan efisien.',
         ]);
@@ -676,7 +676,7 @@ class DatabaseSeeder extends Seeder
             'picture3' => '',
             'picture4' => '',
             'picture5' => '',
-            'price' => 920000,
+            'price' => 68000,
             'stock' => 150,
             'description' => 'Paket hidroponik sistem wick dengan 9 lubang dan 1 bak, solusi praktis untuk pemula yang ingin menanam sayuran di rumah tanpa listrik. Mudah digunakan, hemat tempat, dan cocok untuk berbagai jenis tanaman daun.',
         ]);
@@ -705,7 +705,7 @@ class DatabaseSeeder extends Seeder
             'picture3' => '',
             'picture4' => '',
             'picture5' => '',
-            'price' => 420000,
+            'price' => 44000,
             'stock' => 150,
             'description' => 'Alat pengukur pH, TDS, dan EC untuk memastikan nutrisi hidroponik sesuai kebutuhan tanaman. Akurat, mudah digunakan, dan penting untuk pemantauan kualitas air.',
         ]);
