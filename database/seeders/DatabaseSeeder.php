@@ -50,7 +50,7 @@ class DatabaseSeeder extends Seeder
             'city' => 250,
             'district' => 3757,
             'village' => 46935,
-            'full_address' => 'PERUM KARANG INDAH BLOK BJ 48 C',            
+            'full_address' => 'PERUM KARANG INDAH BLOK BJ 48 C',
             'created_at' => '2025-03-20 09:54:24',
             'updated_at' => '2025-03-23 07:33:28',
         ]);
@@ -212,7 +212,7 @@ class DatabaseSeeder extends Seeder
             'name' => '🌱 Pemilihan dan Perawatan Tanaman',
             'created_at' => '2025-03-28 08:40:35',
             'updated_at' => '2025-03-28 08:40:35'
-        ]);        
+        ]);
 
         Video::create([
             'admin_id' => 6,
@@ -486,7 +486,7 @@ class DatabaseSeeder extends Seeder
             'objective_heading4' => '',
             'objective_description4' => '',
         ]);
-        
+
         VideoView::create([
             'customer_id' => 2,
             'video_id' => 7,
@@ -527,76 +527,231 @@ class DatabaseSeeder extends Seeder
             'slug' => 'nutrisi-tanaman',
         ]);
 
+        // Paket Bibit & Benih
         Product::create([
             'category_id' => 1,
             'name' => 'Bibit Sawi Segar',
             'slug' => 'bibit-sawi',
-            'picture1' => 'product_images/bibit-sawi.png',
-            'picture2' => 'product_images/fdkhgmiGr9NJHesXEz59NXnMVXSN9GexBPrsZ6bw.png',
-            'picture3' => 'product_images/9dAGOhnIfiPfkvwMtjAAzCs9iXDzmmmdIsNx9NKM.jpg',
-            'picture4' => '',
-            'picture5' => '',
+            'picture1' => 'product_images/bibit-sawi-1.jpg',
+            'picture2' => 'product_images/bibit-sawi-2.jpg',
+            'picture3' => 'product_images/bibit-sawi-3.png',
+            'picture4' => 'product_images/bibit-sawi-4.png',
+            'picture5' => 'product_images/bibit-sawi-5.png',
             'price' => 5000,
             'stock' => 100,
             'description' => '<p>Dapatkan bibit sawi berkualitas tinggi yang siap tumbuh dengan cepat dan&nbsp;subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat&nbsp;keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat,&nbsp;Anda bisa menikmati panen sawi segar dalam waktu singkat.</p>
-<p>🔹 Keunggulan:<br>✅ Pertumbuhan cepat &amp; hasil melimpah<br>✅ Cocok untuk hidroponik &amp; kebun konvensional<br>✅ Tingkat keberhasilan tinggi &amp; bebas hama</p>
-<p>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit.<br>Berat Bersih: 50 gram (&plusmn;5.000 butir biji).<br>Daya Tumbuh: &ge;85% dengan perawatan yang tepat.<br>Masa Panen: 25-30 hari setelah semai.<br>Media Tanam: Cocok untuk hidroponik, tanah, atau polybag.<br>Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk<br>mempercepat perkecambahan.<br>Kualitas Terjamin: Bebas dari hama &amp; penyakit, siap tumbuh dengan optimal.</p>',
+            <p>🔹 Keunggulan:<br>✅ Pertumbuhan cepat &amp; hasil melimpah<br>✅ Cocok untuk hidroponik &amp; kebun konvensional<br>✅ Tingkat keberhasilan tinggi &amp; bebas hama</p>
+            <p>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit.<br>Berat Bersih: 50 gram (&plusmn;5.000 butir biji).<br>Daya Tumbuh: &ge;85% dengan perawatan yang tepat.<br>Masa Panen: 25-30 hari setelah semai.<br>Media Tanam: Cocok untuk hidroponik, tanah, atau polybag.<br>Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk<br>mempercepat perkecambahan.<br>Kualitas Terjamin: Bebas dari hama &amp; penyakit, siap tumbuh dengan optimal.</p>',
+        ]);
+
+        Product::create([
+            'category_id' => 1,
+            'name' => 'Bibit Tomat Segar',
+            'slug' => 'bibit-tomat',
+            'picture1' => 'product_images/bibit-tomat-1.jpg',
+            'picture2' => 'product_images/bibit-tomat-2.jpg',
+            'picture3' => 'product_images/bibit-tomat-3.png',
+            'picture4' => 'product_images/bibit-tomat-4.png',
+            'picture5' => 'product_images/bibit-tomat-5.png',
+            'price' => 7500,
+            'stock' => 100,
+            'description' => '<p>Dapatkan bibit tomat berkualitas tinggi yang siap tumbuh dengan cepat dan&nbsp;subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat&nbsp;keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat,&nbsp;Anda bisa menikmati panen tomat segar dalam waktu singkat.</p>
+            <p>🔹 Keunggulan:<br>✅ Pertumbuhan cepat &amp; hasil melimpah<br>✅ Cocok untuk hidroponik &amp; kebun konvensional<br>✅ Tingkat keberhasilan tinggi &amp; bebas hama</p>
+            <p>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit.<br>Berat Bersih: 50 gram (&plusmn;5.000 butir biji).<br>Daya Tumbuh: &ge;85% dengan perawatan yang tepat.<br>Masa Panen: 25-30 hari setelah semai.<br>Media Tanam: Cocok untuk hidroponik, tanah, atau polybag.<br>Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk<br>mempercepat perkecambahan.<br>Kualitas Terjamin: Bebas dari hama &amp; penyakit, siap tumbuh dengan optimal.</p>',
+        ]);
+
+        Product::create([
+            'category_id' => 1,
+            'name' => 'Bibit Kangkung',
+            'slug' => 'bibit-kangkung',
+            'picture1' => 'product_images/bibit-kangkung-1.png',
+            'picture2' => 'product_images/bibit-kangkung-2.png',
+            'picture3' => 'product_images/bibit-kangkung-3.png',
+            'picture4' => 'product_images/bibit-kangkung-4.png',
+            'picture5' => 'product_images/bibit-kangkung-5.png',
+            'price' => 4000,
+            'stock' => 100,
+            'description' => '<p>Dapatkan bibit kangkung berkualitas tinggi yang siap tumbuh dengan cepat dan&nbsp;subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat&nbsp;keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat,&nbsp;Anda bisa menikmati panen kangkung segar dalam waktu singkat.</p>
+            <p>🔹 Keunggulan:<br>✅ Pertumbuhan cepat &amp; hasil melimpah<br>✅ Cocok untuk hidroponik &amp; kebun konvensional<br>✅ Tingkat keberhasilan tinggi &amp; bebas hama</p>
+            <p>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit.<br>Berat Bersih: 50 gram (&plusmn;5.000 butir biji).<br>Daya Tumbuh: &ge;85% dengan perawatan yang tepat.<br>Masa Panen: 25-30 hari setelah semai.<br>Media Tanam: Cocok untuk hidroponik, tanah, atau polybag.<br>Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk<br>mempercepat perkecambahan.<br>Kualitas Terjamin: Bebas dari hama &amp; penyakit, siap tumbuh dengan optimal.</p>',
+        ]);
+
+        Product::create([
+            'category_id' => 1,
+            'name' => 'Bibit Selada',
+            'slug' => 'bibit-selada',
+            'picture1' => 'product_images/bibit-selada-1.png',
+            'picture2' => 'product_images/bibit-selada-2.png',
+            'picture3' => 'product_images/bibit-selada-3.png',
+            'picture4' => 'product_images/bibit-selada-4.png',
+            'picture5' => 'product_images/bibit-selada-5.png',
+            'price' => 6000,
+            'stock' => 100,
+            'description' => '<p>Dapatkan bibit selada berkualitas tinggi yang siap tumbuh dengan cepat dan&nbsp;subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat&nbsp;keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat,&nbsp;Anda bisa menikmati panen selada segar dalam waktu singkat.</p>
+            <p>🔹 Keunggulan:<br>✅ Pertumbuhan cepat &amp; hasil melimpah<br>✅ Cocok untuk hidroponik &amp; kebun konvensional<br>✅ Tingkat keberhasilan tinggi &amp; bebas hama</p>
+            <p>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit.<br>Berat Bersih: 50 gram (&plusmn;5.000 butir biji).<br>Daya Tumbuh: &ge;85% dengan perawatan yang tepat.<br>Masa Panen: 25-30 hari setelah semai.<br>Media Tanam: Cocok untuk hidroponik, tanah, atau polybag.<br>Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk<br>mempercepat perkecambahan.<br>Kualitas Terjamin: Bebas dari hama &amp; penyakit, siap tumbuh dengan optimal.</p>',
+        ]);
+
+        Product::create([
+            'category_id' => 1,
+            'name' => 'Bibit Pakcoy',
+            'slug' => 'bibit-pakcoy',
+            'picture1' => 'product_images/bibit-pakcoy-1.png',
+            'picture2' => 'product_images/bibit-pakcoy-2.png',
+            'picture3' => 'product_images/bibit-pakcoy-3.png',
+            'picture4' => 'product_images/bibit-pakcoy-4.png',
+            'picture5' => 'product_images/bibit-pakcoy-5.png',
+            'price' => 5500,
+            'stock' => 100,
+            'description' => '<p>Dapatkan bibit pakcoy berkualitas tinggi yang siap tumbuh dengan cepat dan&nbsp;subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat&nbsp;keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat,&nbsp;Anda bisa menikmati panen pakcoy segar dalam waktu singkat.</p>
+            <p>🔹 Keunggulan:<br>✅ Pertumbuhan cepat &amp; hasil melimpah<br>✅ Cocok untuk hidroponik &amp; kebun konvensional<br>✅ Tingkat keberhasilan tinggi &amp; bebas hama</p>
+            <p>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit.<br>Berat Bersih: 50 gram (&plusmn;5.000 butir biji).<br>Daya Tumbuh: &ge;85% dengan perawatan yang tepat.<br>Masa Panen: 25-30 hari setelah semai.<br>Media Tanam: Cocok untuk hidroponik, tanah, atau polybag.<br>Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk<br>mempercepat perkecambahan.<br>Kualitas Terjamin: Bebas dari hama &amp; penyakit, siap tumbuh dengan optimal.</p>',
+        ]);
+
+        Product::create([
+            'category_id' => 1,
+            'name' => 'Bibit Cabe Rawit',
+            'slug' => 'bibit-cabe-rawit',
+            'picture1' => 'product_images/bibit-cabe-1.png',
+            'picture2' => 'product_images/bibit-cabe-2.png',
+            'picture3' => 'product_images/bibit-cabe-3.png',
+            'picture4' => 'product_images/bibit-cabe-4.png',
+            'picture5' => 'product_images/bibit-cabe-5.png',
+            'price' => 7000,
+            'stock' => 100,
+            'description' => '<p>Dapatkan bibit cabe berkualitas tinggi yang siap tumbuh dengan cepat dan&nbsp;subur! Cocok untuk sistem hidroponik maupun tanah, bibit ini memiliki tingkat&nbsp;keberhasilan tinggi dan daya tahan yang baik. Dengan perawatan yang tepat,&nbsp;Anda bisa menikmati panen cabe segar dalam waktu singkat.</p>
+            <p>🔹 Keunggulan:<br>✅ Pertumbuhan cepat &amp; hasil melimpah<br>✅ Cocok untuk hidroponik &amp; kebun konvensional<br>✅ Tingkat keberhasilan tinggi &amp; bebas hama</p>
+            <p>Kemasan: Dikemas secara kedap udara untuk menjaga kesegaran bibit.<br>Berat Bersih: 50 gram (&plusmn;5.000 butir biji).<br>Daya Tumbuh: &ge;85% dengan perawatan yang tepat.<br>Masa Panen: 25-30 hari setelah semai.<br>Media Tanam: Cocok untuk hidroponik, tanah, atau polybag.<br>Petunjuk Penyemaian: Direndam selama 6-12 jam sebelum ditanam untuk<br>mempercepat perkecambahan.<br>Kualitas Terjamin: Bebas dari hama &amp; penyakit, siap tumbuh dengan optimal.</p>',
+        ]);
+
+        // Paket Hidroponik
+        Product::create([
+            'category_id' => 2,
+            'name' => 'Paket Hidroponik Pemula',
+            'slug' => 'paket-hidroponik-pemula',
+            'picture1' => 'product_images/paket-hidroponik-pemula-1.png',
+            'picture2' => '',
+            'picture3' => '',
+            'picture4' => '',
+            'picture5' => '',
+            'price' => 850000,
+            'stock' => 50,
+            'description' => 'Paket lengkap untuk pemula hidroponik, mudah digunakan dan sudah termasuk nutrisi dasar. Cocok untuk Anda yang ingin mulai berkebun di rumah secara praktis dan efisien.',
+        ]);
+
+        Product::create([
+            'category_id' => 2,
+            'name' => 'Paket Hidroponik NFT',
+            'slug' => 'paket-hidroponik-nft',
+            'picture1' => 'product_images/komponen-nft-1.png',
+            'picture2' => 'product_images/komponen-nft-2.png',
+            'picture3' => 'product_images/komponen-nft-3.png',
+            'picture4' => 'product_images/komponen-nft-4.png',
+            'picture5' => 'product_images/nft-dft.png',
+            'price' => 1500000,
+            'stock' => 30,
+            'description' => 'Paket Hidroponik NFT (Nutrient Film Technique) siap pakai untuk Anda yang ingin memulai budidaya hidroponik di rumah atau skala komersial. Paket ini sudah termasuk semua komponen utama seperti pipa NFT, pompa air, netpot, bak nutrisi, dan selang penghubung. Mudah dirakit, efisien dalam penggunaan air dan nutrisi, serta cocok untuk berbagai jenis sayuran daun seperti sawi, selada, dan kangkung.',
+        ]);
+
+        Product::create([
+            'category_id' => 2,
+            'name' => 'Paket Hidroponik DFT',
+            'slug' => 'paket-hidroponik-dft',
+            'picture1' => 'product_images/komponen-dft-1.png',
+            'picture2' => 'product_images/komponen-dft-2.png',
+            'picture3' => 'product_images/komponen-dft-3.png',
+            'picture4' => 'product_images/komponen-dft-4.png',
+            'picture5' => 'product_images/nft-dft.png',
+            'price' => 1400000,
+            'stock' => 25,
+            'description' => 'Paket Hidroponik DFT (Deep Flow Technique) siap pakai untuk Anda yang ingin menanam berbagai jenis sayuran di rumah dengan sistem efisien dan mudah dirawat. Paket ini sudah termasuk semua komponen utama seperti pipa DFT, pompa air, netpot, bak nutrisi, dan selang penghubung. Cocok untuk pemula maupun penghobi hidroponik.',
         ]);
 
         Product::create([
             'category_id' => 2,
             'name' => 'Paket Hidroponik Wick 9 Lubang 1 Bak',
             'slug' => 'paket-hidroponik-wick-9-lubang-1-bak',
-            'picture1' => 'product_images/89SS6o3SYONsGmKxfIGP56Vaa8LhLC82tHPIRtLP.png',
+            'picture1' => 'product_images/paket-hidroponik-wick-9-lubang-1-bak.png',
             'picture2' => '',
             'picture3' => '',
             'picture4' => '',
             'picture5' => '',
             'price' => 920000,
             'stock' => 150,
-            'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500 s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            'description' => 'Paket hidroponik sistem wick dengan 9 lubang dan 1 bak, solusi praktis untuk pemula yang ingin menanam sayuran di rumah tanpa listrik. Mudah digunakan, hemat tempat, dan cocok untuk berbagai jenis tanaman daun.',
+        ]);
+
+        // Aksesori & Pendukung
+        Product::create([
+            'category_id' => 4,
+            'name' => 'Rockwool',
+            'slug' => 'rockwool',
+            'picture1' => 'product_images/rockwool-1.png',
+            'picture2' => 'product_images/rockwool-2.png',
+            'picture3' => 'product_images/rockwool-3.png',
+            'picture4' => '',
+            'picture5' => '',
+            'price' => 15000,
+            'stock' => 200,
+            'description' => 'Rockwool adalah media tanam ideal untuk penyemaian benih hidroponik. Memiliki daya serap air tinggi, ringan, dan mendukung pertumbuhan akar tanaman secara optimal.',
         ]);
 
         Product::create([
             'category_id' => 3,
             'name' => 'PH Meter TDS & EC Meter',
             'slug' => 'ph-meter-tds-ec-meter',
-            'picture1' => 'product_images/hM6XtfSjcCxkpUngVcXUM06keznuIgEsXODZpDo3.png',
+            'picture1' => 'product_images/tds-meter.jpg',
             'picture2' => '',
             'picture3' => '',
             'picture4' => '',
             'picture5' => '',
             'price' => 420000,
             'stock' => 150,
-            'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500 s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            'description' => 'Alat pengukur pH, TDS, dan EC untuk memastikan nutrisi hidroponik sesuai kebutuhan tanaman. Akurat, mudah digunakan, dan penting untuk pemantauan kualitas air.',
         ]);
 
+        // Peralatan Hidroponik
         Product::create([
             'category_id' => 4,
             'name' => 'Netpot Hidroponik 5cm',
             'slug' => 'netpot-hidroponik-5cm',
-            'picture1' => 'product_images/r9jcKj3XxmDXrMX8X706wrhF7g0n8vhXtzLZPYfs.png',
-            'picture2' => '',
+            'picture1' => 'product_images/netpot-1.webp',
+            'picture2' => 'product_images/netpot-2.jpg',
             'picture3' => '',
             'picture4' => '',
             'picture5' => '',
             'price' => 35000,
             'stock' => 720,
-            'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500 s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            'description' => 'Netpot hidroponik berdiameter 5cm, cocok untuk berbagai sistem hidroponik seperti NFT, DFT, dan wick. Kuat, tahan lama, dan mendukung pertumbuhan akar tanaman.',
+        ]);
+
+        // Nutrisi Tanaman
+        Product::create([
+            'category_id' => 5,
+            'name' => 'Nutrisi AB Mix untuk Sayuran Daun',
+            'slug' => 'ab-mix-sayuran-daun',
+            'picture1' => 'product_images/ab-daun-1.png',
+            'picture2' => 'product_images/ab-daun-2.png',
+            'picture3' => 'product_images/ab-daun-3.png',
+            'picture4' => 'product_images/ab-daun-4.png',
+            'picture5' => 'product_images/ab-daun-5.png',
+            'price' => 110000,
+            'stock' => 60,
+            'description' => 'Nutrisi AB Mix khusus untuk sayuran daun seperti sawi, selada, dan kangkung. Mempercepat pertumbuhan, meningkatkan hasil panen, dan mudah diaplikasikan.',
         ]);
 
         Product::create([
             'category_id' => 5,
-            'name' => 'Nutrisi Hidroponik AB',
-            'slug' => 'nutrisi-hidroponik-ab',
-            'picture1' => 'product_images/Ww79Gn6DiHKOyR2fbVWufl8utVx4TclPga2CGeYr.png',
-            'picture2' => '',
-            'picture3' => '',
-            'picture4' => '',
-            'picture5' => '',
-            'price' => 120000,
-            'stock' => 31,
-            'description' => 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry s standard dummy text ever since the 1500 s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+            'name' => 'Nutrisi AB Mix untuk Sayuran Buah',
+            'slug' => 'ab-mix-sayuran-buah',
+            'picture1' => 'product_images/ab-buah-1.png',
+            'picture2' => 'product_images/ab-buah-2.png',
+            'picture3' => 'product_images/ab-buah-3.png',
+            'picture4' => 'product_images/ab-buah-4.png',
+            'picture5' => 'product_images/ab-buah-5.png',
+            'price' => 115000,
+            'stock' => 60,
+            'description' => 'Nutrisi AB Mix diformulasikan khusus untuk sayuran buah seperti tomat dan cabai. Menyediakan unsur hara lengkap untuk pertumbuhan dan pembuahan optimal.',
         ]);
     }
 }
