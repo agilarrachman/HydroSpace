@@ -643,11 +643,13 @@ header .header-col.mid .social-icons {
   padding: 180px 0 80px 0;
 }
 
-#subheader h1 {
-  display: inline-block;
-  font-size: 60px;
-  line-height: 1.2em;
-  margin-bottom: 10px;
+@media screen and (min-width: 767px) {
+  #subheader h1 {
+    display: inline-block;
+    font-size: 60px;
+    line-height: 1.2em;
+    margin-bottom: 10px;
+  } 
 }
 
 #subheader.dark {
