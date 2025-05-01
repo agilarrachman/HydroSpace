@@ -131,7 +131,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <img src="images/team/1.jpg" class="w-100 rounded-10px" alt="">
+                                <img src="images/team/1.JPG" class="w-100 rounded-10px" alt="">
                             </div>
                         </div>
                         <!-- team end -->

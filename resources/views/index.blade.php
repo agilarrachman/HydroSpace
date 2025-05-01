@@ -568,48 +568,90 @@
         });
 
         // Handle form submission
+        // Handle form submission
         $('#ask').submit(function(event) {
             event.preventDefault(); // Prevent default form submission
 
-            // Get the question input
+            // Get the question input and elements
             let question = $('#question').val();
+            const inputField = $('#question');
+            const submitButton = $('button[type="submit"]'); // Pilih tombol submit yang benar
+            const originalPlaceholder = inputField.prop('placeholder');
+            let countdownInterval;
+            let countdown = 30;
+            let isCountingDown = false; // Tambahkan flag untuk menandakan sedang countdown
+
             if (question.trim() === '') return; // Avoid empty submission
 
             // Display user's message in chat window
             addMessageToChatWindow(question, 'user');
 
-            // Clear input field
-            $('#question').val('');
+            // Clear input field and disable button
+            inputField.val('');
+            submitButton.prop('disabled', true).css('cursor', 'not-allowed'); // Menonaktifkan dan mengubah kursor
 
             // Show thinking message from bot
             addMessageToChatWindow('HydroBot sedang berpikir...', 'bot');
 
             // Send question to server using AJAX
             $.ajax({
-                url: '/question', // Endpoint for your chatbot
+                url: '/question', // Endpoint untuk chatbot kamu
                 type: 'POST',
                 data: {
                     question: question,
-                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
+                    _token: $('meta[name="csrf-token"]').attr('content') // Sertakan CSRF token
                 },
                 success: function(data) {
-                    // Update the last bot message with the actual response
+                    // Update pesan bot terakhir dengan jawaban sebenarnya
                     const lastBotMessage = $('#chat-window .bot').last();
-                    lastBotMessage.remove(); // Remove "Hydrobot sedang berpikir..." message
+                    lastBotMessage.remove(); // Hapus pesan "Hydrobot sedang berpikir..."
 
-                    // Display bot's response in chat window
+                    // Tampilkan jawaban bot di jendela chat
                     addMessageToChatWindow(data.answer, 'bot');
+                    submitButton.prop('disabled', false).css('cursor', 'pointer'); // Aktifkan kembali tombol dan ubah kursor
+                    isCountingDown = false; // Reset flag
                 },
                 error: function(jqXHR) {
                     const lastBotMessage = $('#chat-window .bot').last();
-                    lastBotMessage.remove(); // Remove "Hydrobot sedang berpikir..." message
+                    lastBotMessage.remove(); // Hapus pesan "Hydrobot sedang berpikir..."
 
-                    let errorMessage = "Terjadi kesalahan, silakan coba lagi.";
-                    if (jqXHR.status === 422) {
-                        // Handle validation errors
-                        errorMessage = "Input tidak valid, silakan coba lagi.";
+                    if (jqXHR.status === 503 && !isCountingDown) { // Tambahkan pengecekan flag
+                        // Tangani error 503
+                        countdown = 60;
+                        isCountingDown = true; // Set flag menjadi true
+                        inputField.prop('placeholder', `${countdown} detik lagi HydroBot siap menjawab pertanyaanmu yaa..`);
+                        countdownInterval = setInterval(function() {
+                            countdown--;
+                            inputField.prop('placeholder', `${countdown} detik lagi HydroBot siap menjawab pertanyaanmu yaa..`);
+                            if (countdown <= 0) {
+                                clearInterval(countdownInterval);
+                                submitButton.prop('disabled', false).css('cursor', 'pointer'); // Aktifkan dan ubah kursor
+                                inputField.prop('placeholder', originalPlaceholder);
+                                isCountingDown = false; // Reset flag
+                            }
+                        }, 1000);
+                        addMessageToChatWindow("Aduh, sepertinya HydroBot sedang kelelahan dan tidak bisa menjawab sekarang. 😥 Mohon coba lagi setelah beberapa saat ya..", 'bot');
+                    } else if (jqXHR.status === 422) {
+                        // Tangani error validasi
+                        addMessageToChatWindow("Input tidak valid, mohon periksa kembali pertanyaanmu ya. 😊", 'bot');
+                        submitButton.prop('disabled', false).css('cursor', 'pointer'); // Aktifkan dan ubah kursor
+                        inputField.prop('placeholder', originalPlaceholder);
+                        isCountingDown = false; // Reset flag
+                    } else {
+                        // Tangani error lainnya
+                        addMessageToChatWindow("Terjadi kesalahan, silakan coba lagi nanti ya. 🙏", 'bot');
+                        submitButton.prop('disabled', false).css('cursor', 'pointer'); // Aktifkan dan ubah kursor
+                        inputField.prop('placeholder', originalPlaceholder);
+                        isCountingDown = false; // Reset flag
                     }
-                    addMessageToChatWindow(errorMessage, 'bot');
+                    // Hapus clearInterval di sini agar countdown tetap berjalan jika error 503
+                    // clearInterval(countdownInterval);
+                    if (jqXHR.status !== 503) {
+                        // Pastikan tombol diaktifkan kembali dan placeholder dikembalikan jika bukan error 503
+                        submitButton.prop('disabled', false).css('cursor', 'pointer');
+                        inputField.prop('placeholder', originalPlaceholder);
+                        isCountingDown = false; // Reset flag
+                    }
                 }
             });
         });
