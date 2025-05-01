@@ -86,7 +86,7 @@ class GeminiController extends Controller
     {
         session()->forget($this->historySessionKey);
         session()->forget($this->chatSessionStartedKey);
-        return redirect('/hydrobot#ai');
+        return redirect('/#ai');
     }
 
     protected function storeHistory(array $history, Request $request)
