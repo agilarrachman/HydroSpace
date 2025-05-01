@@ -136,7 +136,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6">
-                            <div class="ps-lg-3">
+                            <div class="ps-lg-3 mt-5 mt-md-0">
                                 <div class="subtitle id-color wow fadeInUp" data-wow-delay=".2s">Welcome to HydroSpace</div>
                                 <h2 class="text-uppercase wow fadeInUp" data-wow-delay=".4s">Berkebun Modern <span class="id-color-2">dengan Hidroponik</span></h2>
                                 <p class="wow fadeInUp" data-wow-delay=".6s">HydroSpace hadir untuk mengedukasi dan memudahkan siapa saja dalam memulai berkebun modern dengan hidroponik. Dengan informasi yang lengkap dan akses mudah ke berbagai kebutuhan, kami membantu pemula agar lebih percaya diri dalam bercocok tanam secara efisien dan praktis. Temukan solusi terbaik untuk perjalanan hidroponikmu, dari pembelajaran hingga penerapan nyata.</p>
@@ -483,9 +483,9 @@
 
                         @foreach ($mostViewedVideos as $mostViewedVideo)
                         <div class="col-lg-6">
-                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".3s">
+                            <div class="hover rounded-1 overflow-hidden relative text-light wow fadeInRight" data-wow-delay=".3s" style="height: 403px !important;">
                                 <a href="/edukasi/{{ $mostViewedVideo->slug }}" class="abs w-100 h-100 z-5"></a>
-                                <img src="{{ asset('../storage/' . $mostViewedVideo->thumbnail) }}" class="hover-scale-1-1 w-100" alt="">
+                                <img src="{{ asset('../storage/' . $mostViewedVideo->thumbnail) }}" class="hover-scale-1-1 w-100 h-100" alt="">
                                 <div class="abs w-100 px-4 hover-op-1 z-4 hover-mt-40 abs-centered">
                                     <div class="mb-3">{{ $mostViewedVideo->description }}</div>
                                     <b>Klik untuk menonton!</b>

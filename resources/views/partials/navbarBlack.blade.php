@@ -80,7 +80,8 @@
                             <div class="avatar avatar-online">
                                 <img src="{{ asset('../storage/' . auth()->user()->profile_picture) }}" alt class="w-px-40 rounded-circle" />
                             </div>
-                            {{ auth()->user()->username }}
+                            <p class="m-0 d-none d-md-block">{{ auth()->user()->username }}</p>
+                            <span id="menu-btn"></span>
                         </a>
                         @else
                         <div class="menu_side_area">

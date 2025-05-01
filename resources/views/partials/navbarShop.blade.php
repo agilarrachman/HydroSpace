@@ -8,7 +8,7 @@
         border-bottom: 2px solid rgb(53, 78, 51);
     }
 
-    #btn-masuk:hover{
+    #btn-masuk:hover {
         color: white !important;
     }
 </style>
@@ -90,14 +90,14 @@
                                     <img src="/images/ui/cart.svg" class="" alt="">
                                 </div>
                             </div>
+
+                            <span id="menu-btn" class="my-auto"></span>
                             @else
                             <div class="menu_side_area">
                                 <a href="/masuk" class="btn-main btn-line" style="color: rgb(53, 78, 51); border: 2px solid rgb(53, 78, 51);" id="btn-masuk">Masuk</a>
                                 <span id="menu-btn"></span>
                             </div>
                             @endauth
-
-                            <span id="menu-btn" class="my-auto"></span>
                         </div>
                     </div>
                 </div>

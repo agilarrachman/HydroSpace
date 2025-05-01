@@ -54,7 +54,7 @@
                                 <li><a href="/edukasi">Edukasi</a></li>
                                 <li class="active">{{ $video->title }}</li>
                             </ul>
-                            <h1 class="text-uppercase">{{ $video->title }}</h1>
+                            <h1 class="text-uppercase w-100">{{ $video->title }}</h1>
                             <p class="col-lg-10 lead">{{ $video->videoCategory->name }}</p>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                                 <div style="color: #798D7A;">{{ $video->delivery_style }}</div>
                             </div>
                             <div class="w-100 d-flex justify-content-between">
-                                <div class="col-4 fw-bold">Produk yang Dibutuhkan</div>
+                                <div class="col-4 fw-bold text-wrap">Produk yang Dibutuhkan</div>
                                 <div class="text-wrap col-8 text-end ps-2">
                                     @if ($video->videoProducts && $video->videoProducts->count())
                                     @foreach ($video->videoProducts as $videoProduct)
@@ -143,7 +143,7 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">01</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>{{ $video->objective_heading1 }}</h4>
+                                    <h4 class="text-wrap">{{ $video->objective_heading1 }}</h4>
                                     <p class="mb-0 text-wrap">{{ $video->objective_description1 }}</p>
                                 </div>
                             </div>
@@ -154,7 +154,7 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">02</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>{{ $video->objective_heading2 }}</h4>
+                                    <h4 class="text-wrap">{{ $video->objective_heading2 }}</h4>
                                     <p class="mb-0 text-wrap">{{ $video->objective_description2 }}</p>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">03</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>{{ $video->objective_heading3 }}</h4>
+                                    <h4 class="text-wrap">{{ $video->objective_heading3 }}</h4>
                                     <p class="mb-0 text-wrap">{{ $video->objective_description3 }}</p>
                                 </div>
                             </div>
@@ -178,7 +178,7 @@
                                 <div class="abs m-3 top-0 end-0 p-2 rounded-2 mb-3">04</div>
                                 <div>
                                     <img src="/images/logo-icon.webp" class="w-50px mb-3" alt="">
-                                    <h4>{{ $video->objective_heading4 }}</h4>
+                                    <h4 class="text-wrap">{{ $video->objective_heading4 }}</h4>
                                     <p class="mb-0 text-wrap">{{ $video->objective_description4 }}</p>
                                 </div>
                             </div>

@@ -21988,9 +21988,12 @@ border-radius:20px 0 0 20px;
     width:100%;
   }
 
+  h1 {
+    font-size: 32px !important;
+  }
 
   .menu_side_area .btn-main{
-    display: none;
+    display: initial !important;
   }
 
   .pf_full_width .item {

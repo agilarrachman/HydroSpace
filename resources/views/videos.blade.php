@@ -75,7 +75,7 @@
 
             <section class="p-4" style="margin-bottom: 140px;">
                 <div class="filter-search d-flex mt-5">
-                    <div class="container mx-0 px-0 d-flex gap-1 gap-lg-3 flex-row align-items-center" style="margin-bottom: 4rem">
+                    <div class="container mx-0 px-0 d-flex flex-column flex-md-row gap-1 gap-lg-3 flex-row align-items-start" style="margin-bottom: 4rem">
                         <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 {{ request('category') ? $videoCategories->firstWhere('slug', request('category'))->name : '💡Semua Kategori' }}
@@ -88,13 +88,13 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <form class="container m-0 p-0" action="/edukasi" method="get" style="max-width: 525px !important">
+                        <form class="container-search m-0 p-0" action="/edukasi" method="get" style="min-width: 300px; max-width: 525px !important">
                             {{-- Include category if it's selected --}}
                             @if (request('category'))
                             <input type="hidden" name="category" value="{{ request('category') }}">
                             @endif
                             <div class="serach-bar d-flex gap-2">
-                                <input type="text" name="search" id="name" class="de-quick-search ms-3 py-2 w-100 rounded-20" placeholder="Mau belajar apa hari ini?" value="{{ request('search') }}">
+                                <input type="text" name="search" id="name" class="de-quick-search ms-0 ms-md-3 py-2 w-100 rounded-20" placeholder="Mau belajar apa hari ini?" value="{{ request('search') }}">
                                 <button class="btn btn-secondary px-3 rounded-pill" type="submit"><i class="bi bi-search"></i></button>
                             </div>
                         </form>
@@ -118,7 +118,7 @@
                                 <div class="abs z-2 bottom-0 w-100 hover-op-0">
                                     <div class="bg-blur d-flex m-4 p-3 px-4 rounded-1 justify-content-between align-items-center">
                                         <div class="col-11 d-flex flex-column flex-lg-row">
-                                            <div class="me-5 w-100">
+                                            <div class="me-5 w-100 text-truncate">
                                                 {{ $video->videoCategory->name }}
                                                 <h5 class="text-truncate">{{ $video->title }}</h5>
                                             </div>
