@@ -116,7 +116,7 @@
                 </div>
             </section>
 
-            <section class="pt-100" style="margin-bottom: 50px !important;">
+            <section class="pt-md-100" style="margin-bottom: 50px !important;">
                 <div class="container">
                     <div class="row gy-4 gx-5">
                         <div class="col-md-6">
@@ -126,11 +126,11 @@
                                     $picture='picture' . $i;
                                     @endphp
                                     @if (!empty($product->$picture))
-                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 650px; height: 650px; background-color: #E1EBE2 !important;">
-                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: contain; width: 100%; height: 100%;">
+                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="max-width: 650px; aspect-ratio: 1/1 ; background-color: #E1EBE2 !important;">
+                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100" style="object-fit: contain; height: 100%;">
                                     </div>
                                     @endif
-                                    @endfor
+                                @endfor
                             </div>
 
                             <div id="sync2" class="owl-carousel owl-theme">
@@ -139,11 +139,11 @@
                                     $picture='picture' . $i;
                                     @endphp
                                     @if (!empty($product->$picture))
-                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="width: 120px; height: 120px;">
-                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100 h-100" style="object-fit: cover;">
+                                    <div class="item {{ $i === 1 ? 'active' : '' }}" style="max-width: 120px; aspect-ratio: 1/1;">
+                                        <img src="{{ asset('storage/' . $product->$picture) }}" alt="Product Image {{ $i }}" class="rounded-2 w-100 h-100" style="object-fit: contain;">
                                     </div>
                                     @endif
-                                    @endfor
+                                @endfor
                             </div>
 
                         </div>

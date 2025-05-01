@@ -85,7 +85,7 @@
                         </a>
                         @else
                         <div class="menu_side_area">
-                            <a href="/masuk" class="btn-main btn-line">Masuk</a>
+                            <a href="/masuk" class="btn-main btn-line" style="display: initial !important;">Masuk</a>
                             <span id="menu-btn"></span>
                         </div>
                         @endauth
