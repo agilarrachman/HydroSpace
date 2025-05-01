@@ -4,10 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Laravolt\Indonesia\Models\Province;
-use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\District;
-use Laravolt\Indonesia\Models\Village;
+use Laravolt\Indonesia\Facade as Indonesia;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class CustomerController extends Controller
@@ -38,10 +36,10 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('dashboard.customers.create', [
             "title" => "HydroSpace | Tambah Pelanggan",
@@ -92,10 +90,10 @@ class CustomerController extends Controller
      */
     public function show(User $user)
     {
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('dashboard.customers.show', [
             "title" => "HydroSpace | Detail Pelanggan",
@@ -113,10 +111,10 @@ class CustomerController extends Controller
      */
     public function edit(User $user)
     {
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('dashboard.customers.edit', [
             "title" => "HydroSpace | Edit Data Pelanggan",

@@ -7,10 +7,7 @@ use App\Models\OrderItem;
 use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use Laravolt\Indonesia\Models\Province;
-use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\District;
-use Laravolt\Indonesia\Models\Village;
+use Laravolt\Indonesia\Facade as Indonesia;
 use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
@@ -25,10 +22,10 @@ class OrderController extends Controller
             ->with('orderItems.product')
             ->get();
 
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('orders', [
             "title" => "HydroSpace | Pesanan Saya",
@@ -108,10 +105,10 @@ class OrderController extends Controller
 
         // Ambil detail produk dari database berdasarkan item yang dipilih
         $orderItems = OrderItem::whereIn('id', $selectedItems)->get();
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
         $customer = Auth::user();
 
         $user = Auth::user();
@@ -250,10 +247,10 @@ class OrderController extends Controller
     public function show(Order $order)
     {
         $order->load('orderItems.product');
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('orderDetail', [
             "title" => "HydroSpace | Pesanan " . $order->id,
@@ -269,10 +266,10 @@ class OrderController extends Controller
     public function showAdmin(Order $order)
     {
         $order->load('orderItems.product');
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('dashboard.orders.show', [
             "title" => "HydroSpace | Detail Pesanan",

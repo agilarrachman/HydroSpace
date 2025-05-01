@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
 use Laravolt\Indonesia\Facade as Indonesia;
+use Illuminate\Support\Facades\DB;
 
 class AuthenticationController extends Controller
 {
@@ -92,7 +93,8 @@ class AuthenticationController extends Controller
         $provinces = Indonesia::allProvinces();
         $cities = Indonesia::allCities();
         $districts = Indonesia::allDistricts();
-        $villages = Indonesia::allVillages();
+        $villages = DB::table('indonesia_villages')->get();
+
 
         $email = session('email');
         $hashedPassword = session('password');

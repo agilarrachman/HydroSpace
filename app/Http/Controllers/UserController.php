@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Laravolt\Indonesia\Models\Province;
-use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\District;
-use Laravolt\Indonesia\Models\Village;
+use Laravolt\Indonesia\Facade as Indonesia;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -41,10 +39,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('profile', [
             "title" => "HydroSpace | Profil",
@@ -62,10 +60,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = DB::table('indonesia_villages')->get();
 
         return view('updateProfile', [
             "title" => "HydroSpace | Perbarui Profil",
