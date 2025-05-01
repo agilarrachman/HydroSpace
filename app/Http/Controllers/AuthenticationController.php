@@ -10,10 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Models\User;
-use Laravolt\Indonesia\Models\Province;
-use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Models\District;
-use Laravolt\Indonesia\Models\Village;
+use Laravolt\Indonesia\Facade as Indonesia;
 
 class AuthenticationController extends Controller
 {
@@ -92,10 +89,10 @@ class AuthenticationController extends Controller
 
     public function showCreateProfile()
     {
-        // $provinces = Province::all();
-        // $cities = City::all();
-        // $districts = District::all();
-        // $villages = Village::all();
+        $provinces = Indonesia::allProvinces();
+        $cities = Indonesia::allCities();
+        $districts = Indonesia::allDistricts();
+        $villages = Indonesia::allVillages();
 
         $email = session('email');
         $hashedPassword = session('password');
@@ -110,10 +107,10 @@ class AuthenticationController extends Controller
             'title' => 'HydroSpace | Lengkapi Profil',
             'email' => $email,
             'password' => $hashedPassword,
-            // 'provinces' => $provinces,
-            // 'cities' => $cities,
-            // 'districts' => $districts,
-            // 'villages' => $villages,
+            'provinces' => $provinces,
+            'cities' => $cities,
+            'districts' => $districts,
+            'villages' => $villages,
         ]);
     }
 
