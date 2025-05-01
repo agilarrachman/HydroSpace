@@ -97,7 +97,7 @@
 
                 <h3 class="fw-bold mx-auto text-center mt-3 mb-5">Pesanan Kamu</h3>
                 <div class="container d-flex flex-column-reverse flex-lg-row justify-content-between">
-                    <div class="col-lg-6 pe-5">
+                    <div class="col-lg-6 pe-0 pe-lg-5">
                         <h5 class="mb-3"><b>Detail Pesanan</b></h5>
 
                         @foreach($orderItems as $item)
@@ -138,17 +138,17 @@
                                 <input id="read" name="read" type="checkbox" value="Ya">
                                 <label for="read" style="cursor: pointer;">Saya telah membaca ketentuan pemesanan</label>
                             </div>
-                            <div class="d-flex">
-                                <a href="/cancel" class="btn-outline col-6">Batalkan Pesanan</a>
-                                <form id="payment-form" class="col-6 ms-2">
+                            <div class="d-flex flex-column flex-lg-row gap-2">
+                                <a href="/cancel" class="btn-outline col-lg-6 mb-3 mb-lg-0">Batalkan Pesanan</a>
+                                <form id="payment-form" class="col-lg-6">
                                     <input type="hidden" name="amount" value="{{ $totalPrice }}">
-                                    <input type='submit' id='pay-button' value='Bayar Sekarang' class="btn-main w-100 h-100">
+                                    <input type='submit' id='pay-button' value='Bayar Sekarang' class="btn-main w-100 h-100" style="min-height: 50px;">
                                 </form>
                             </div>
                         </div>
                     </div>
 
-                    <div class="address col-lg-6 ps-5">
+                    <div class="address col-lg-6 ps-0 ps-lg-5">
                         <form action="/pesanan" method="post" id="form">
                             @csrf
                             <div class="d-flex justify-content-between">

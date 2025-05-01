@@ -69,7 +69,7 @@
                                                     <div class="sw-text-wrapper">
                                                         <div class="subtitle">Solusi Berkebun Modern</div>
                                                         <h2 class="slider-title mb-4">Nikmati kemudahan bercocok tanam di rumah tanpa butuh lahan luas!</h2>
-                                                        <a class="btn-main mb10 mb-3" href="projects.html">Belanja Sekarang</a>
+                                                        <a class="btn-main mb10 mb-3" href="/produk">Belanja Sekarang</a>
                                                     </div>
                                                 </div>
 
@@ -97,7 +97,7 @@
                                                     <div class="sw-text-wrapper">
                                                         <div class="subtitle">Panduan Hidroponik untuk Pemula</div>
                                                         <h2 class="slider-title mb-4">Tonton video edukasi hidroponik dan mulai bercocok tanam dengan mudah!</h2>
-                                                        <a class="btn-main mb10 mb-3" href="projects.html">Tonton Sekarang</a>
+                                                        <a class="btn-main mb10 mb-3" href="/edukasi">Tonton Sekarang</a>
                                                     </div>
                                                 </div>
 
@@ -140,7 +140,7 @@
                                 <div class="subtitle id-color wow fadeInUp" data-wow-delay=".2s">Welcome to HydroSpace</div>
                                 <h2 class="text-uppercase wow fadeInUp" data-wow-delay=".4s">Berkebun Modern <span class="id-color-2">dengan Hidroponik</span></h2>
                                 <p class="wow fadeInUp" data-wow-delay=".6s">HydroSpace hadir untuk mengedukasi dan memudahkan siapa saja dalam memulai berkebun modern dengan hidroponik. Dengan informasi yang lengkap dan akses mudah ke berbagai kebutuhan, kami membantu pemula agar lebih percaya diri dalam bercocok tanam secara efisien dan praktis. Temukan solusi terbaik untuk perjalanan hidroponikmu, dari pembelajaran hingga penerapan nyata.</p>
-                                <a class="btn-main btn-line wow fadeInUp" href="services.html" data-wow-delay=".6s">Layanan Kami</a>
+                                <a class="btn-main btn-line wow fadeInUp" href="/tentang" data-wow-delay=".6s">Layanan Kami</a>
                             </div>
                         </div>
                     </div>
@@ -160,7 +160,7 @@
                             <div class="p-lg-5 p-4 bg-dark-2 wow fadeInRight">
                                 <h4 class="fs-24 mb-3">Belanja Mudah, Berkebun Praktis</h4>
                                 <p>Dapatkan semua yang kamu butuhkan untuk memulai hidroponik! Pilih alat, bahan, dan bibit berkualitas dengan mudah dan mulai bercocok tanam tanpa repot.</p>
-                                <a class="btn-main btn-line" href="services.html" data-wow-delay=".6s">Belanja Sekarang</a>
+                                <a class="btn-main btn-line" href="/produk" data-wow-delay=".6s">Belanja Sekarang</a>
                             </div>
                         </div>
 
@@ -174,7 +174,7 @@
                             <div class="p-lg-5 p-4 bg-dark-2 wow fadeInRight">
                                 <h4 class="fs-24 mb-3">Belajar Hidroponik, Kapan Saja</h4>
                                 <p>Tingkatkan pengetahuanmu dengan panduan lengkap dan mudah dipahami! Tonton video edukasi dan mulai hidroponik dengan langkah yang benar.</p>
-                                <a class="btn-main btn-line" href="services.html" data-wow-delay=".6s">Tonton Video</a>
+                                <a class="btn-main btn-line" href="/edukasi" data-wow-delay=".6s">Tonton Video</a>
                             </div>
                         </div>
 
@@ -187,7 +187,7 @@
                             <div class="p-lg-5 p-4 bg-dark-2 wow fadeInRight">
                                 <h4 class="fs-24 mb-3">Teman Berkebun Cerdas</h4>
                                 <p>Punya pertanyaan tentang hidroponik? HydroBot siap membantumu! Dapatkan jawaban cepat, tips praktis, dan solusi tepat untuk perjalanan hidroponikmu.</p>
-                                <a class="btn-main btn-line" href="services.html" data-wow-delay=".6s">Coba Sekarang</a>
+                                <a class="btn-main btn-line" href="/#ai" data-wow-delay=".6s">Coba Sekarang</a>
                             </div>
                         </div>
                     </div>
