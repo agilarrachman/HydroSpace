@@ -92,10 +92,10 @@ class AuthenticationController extends Controller
 
     public function showCreateProfile()
     {
-        $provinces = Province::all();
-        $cities = City::all();
-        $districts = District::all();
-        $villages = Village::all();
+        // $provinces = Province::all();
+        // $cities = City::all();
+        // $districts = District::all();
+        // $villages = Village::all();
 
         $email = session('email');
         $hashedPassword = session('password');
@@ -110,10 +110,10 @@ class AuthenticationController extends Controller
             'title' => 'HydroSpace | Lengkapi Profil',
             'email' => $email,
             'password' => $hashedPassword,
-            'provinces' => $provinces,
-            'cities' => $cities,
-            'districts' => $districts,
-            'villages' => $villages,
+            // 'provinces' => $provinces,
+            // 'cities' => $cities,
+            // 'districts' => $districts,
+            // 'villages' => $villages,
         ]);
     }
 

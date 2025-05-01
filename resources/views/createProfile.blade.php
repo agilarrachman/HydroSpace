@@ -108,7 +108,7 @@
                                 </div>
                             </div>
 
-                            <div class="address">
+                            <!-- <div class="address">
                                 <div class="row g-3 mb-3">
                                     <div class="col-lg-6">
                                         <label for="province" class="form-label">Provinsi</label>
@@ -162,7 +162,7 @@
                                     <textarea class="form-control" id="full_address" name="full_address" rows="3" style="min-height: 200px;" placeholder="Masukkan alamat lengkap Anda, termasuk patokan, gang, nomor rumah, hingga link Google Maps jika tersedia. 
 Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)">{{ old('full_address') }}</textarea>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <button class="btn btn-primary d-grid w-100" type="submit">Konfirmasi</button>
                         </form>
