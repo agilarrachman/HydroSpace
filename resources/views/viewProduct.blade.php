@@ -153,18 +153,23 @@
                             <h2 class="fs-40">{{ $product->name }}</h2>
                             <p class="col-lg-10">{!! $product->description !!}</p>
                             <h3 class="fs-32 mb-0 me-2">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
-
+                            @if($product->stock > 0)
                             <div class="group d-flex gap-2 mt-2">
                                 <h5 class="mb-3">Tersisa</h5>
                                 <p>{{ $product->stock }}</p>
                             </div>
+                            @else
+                            <div class="group d-flex gap-2 mt-2">
+                                <h5 class="mb-3">Stok Habis</h5>
+                            </div>
+                            @endif
 
                             <div class="group radio__button mb-4">
                                 <h5 class="mb-3">Quantity</h5>
                                 <div class="de-number">
-                                    <button type="button" id="decrease-qty">-</button>
+                                    <button type="button" id="decrease-qty" {{ $product->stock == 0 ? 'disabled' : '' }}>-</button>
                                     <input type="number" id="quantity" class="no-border no-bg" value="1" min="1" max="{{ $product->stock }}" disabled>
-                                    <button type="button" id="increase-qty">+</button>
+                                    <button type="button" id="increase-qty" {{ $product->stock == 0 ? 'disabled' : '' }}>+</button>
                                 </div>
                             </div>
 
@@ -173,7 +178,7 @@
                                 <input type="hidden" name="product_id" value="{{ $product->id }}">
                                 <input type="hidden" name="status" value="Keranjang">
                                 <input type="hidden" name="quantity" id="hidden-quantity" value="1">
-                                <button type="submit" class="btn-main">Tambah ke Keranjang</button>
+                                <button type="submit" class="btn-main" {{ $product->stock == 0 ? 'disabled' : '' }}>Tambah ke Keranjang</button>
                             </form>
                         </div>
                     </div>
