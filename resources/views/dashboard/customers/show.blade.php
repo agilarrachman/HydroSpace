@@ -201,21 +201,21 @@
                                     <div class="row g-3 mb-3">
                                         <div class="col-lg-6">
                                             <label for="provinsi" class="form-label">Provinsi</label>
-                                            <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="{{ $provinces->firstWhere('id', $customer->province)->name }}" disabled />
+                                            <input type="text" class="form-control" id="provinsi" name="provinsi" placeholder="Provinsi" value="{{ optional($provinces->firstWhere('id', $customer->province))->name ?? 'Tidak Ditemukan' }}" disabled />
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="kota" class="form-label">Kota</label>
-                                            <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="{{ $cities->firstWhere('id', $customer->city)->name }}" disabled />
+                                            <input type="text" class="form-control" id="kota" name="kota" placeholder="Kota" value="{{ $cities->firstWhere('id', $customer->city)->name ?? 'Tidak Ditemukan' }}" disabled />
                                         </div>
                                     </div>
                                     <div class="row g-3 mb-3">
                                         <div class="col-lg-6">
                                             <label for="kecamatan" class="form-label">Kecamatan</label>
-                                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="{{ $districts->firstWhere('id', $customer->district)->name }}" disabled />
+                                            <input type="text" class="form-control" id="kecamatan" name="kecamatan" placeholder="Kecamatan" value="{{ $districts->firstWhere('id', $customer->district)->name ?? 'Tidak Ditemukan' }}" disabled />
                                         </div>
                                         <div class="col-lg-6">
                                             <label for="kelurahan" class="form-label">Kelurahan</label>
-                                            <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="{{ $villages->firstWhere('id', $customer->village)->name }}" disabled />
+                                            <input type="text" class="form-control" id="kelurahan" name="kelurahan" placeholder="Kelurahan" value="{{ $villages->firstWhere('id', $customer->village)->name ?? 'Tidak Ditemukan' }}" disabled />
                                         </div>
                                     </div>
                                     <div class="mb-3">

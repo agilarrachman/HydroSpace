@@ -136,7 +136,7 @@
                                 <div class="row g-3 mb-3">
                                     <div class="col-lg-6">
                                         <label for="district" class="form-label">Kecamatan</label>
-                                        <select class="form-select" id="district" name="district" onchange="loadVillages(this.value)">
+                                        <select class="form-select" id="district" name="district" onchange="loadVillages(this.value)" required>
                                             <option selected disabled>Pilih Kecamatan</option>
                                             @foreach ($districts as $district)
                                             <option value="{{ $district->id }}" {{ old('district') == $district->id ? 'selected' : '' }}>
@@ -147,7 +147,7 @@
                                     </div>
                                     <div class="col-lg-6">
                                         <label for="village" class="form-label">Kelurahan</label>
-                                        <select class="form-select" id="village" name="village">
+                                        <select class="form-select" id="village" name="village" required>
                                             <option selected disabled>Pilih Kelurahan</option>
                                             @foreach ($villages as $village)
                                             <option value="{{ $village->id }}" {{ old('village') == $village->id ? 'selected' : '' }}>

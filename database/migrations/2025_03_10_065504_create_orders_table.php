@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('customer_id')->references(column: 'id')->on(table: 'users');
+            $table->foreignId('customer_id')->references(column: 'id')->on(table: 'users')->onDelete('cascade')->onUpdate('cascade');
             $table->enum('status', ['Keranjang', 'Dikemas', 'Diantar', 'Selesai', 'Dibatalkan'])->default('Keranjang');
             $table->integer('total_amount')->nullable();
             $table->string('midtrans_transaction_id')->nullable();

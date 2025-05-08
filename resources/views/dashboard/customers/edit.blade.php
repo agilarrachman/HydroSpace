@@ -135,7 +135,7 @@
                                         <label for="email" class="form-label">Email</label>
                                         <input
                                             type="text"
-                                            class="form-control @error('username') is-invalid @enderror"
+                                            class="form-control @error('email') is-invalid @enderror"
                                             id="email"
                                             name="email"
                                             placeholder="Masukkan email"
