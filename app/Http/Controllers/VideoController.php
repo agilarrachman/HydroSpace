@@ -215,7 +215,12 @@ class VideoController extends Controller
     {
         $video->delete();
 
-        return redirect('/dashboard/videos')->with('Success', 'Data video berhasil dihapus!');
+        if ($video->thumbnail && $video->video) {
+            Storage::disk('public')->delete($video->thumbnail);
+            Storage::disk('public')->delete($video->video);
+        }
+
+        return redirect('/dashboard/videos')->with('success', 'Data video berhasil dihapus!');
     }
 
     public function checkSlug(Request $request)

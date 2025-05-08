@@ -158,9 +158,9 @@
                                                             <form action="/dashboard/admins/{{ $admin->username }}" method="post">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <button class="btn p-0" onclick="return confirm('Apakah kamu yakin akan menghapus data admin ini?')">
+                                                                <button class="btn p-0 w-100" onclick="return confirm('Apakah kamu yakin akan menghapus data admin ini?')">
                                                                     <i class="bx bx-trash me-2"></i>
-                                                                    <div data-i18n="Delete Account">Delete</div>
+                                                                    <div data-i18n="Delete Account" class="flex-grow-1 text-start">Delete</div>
                                                                 </button>
                                                             </form>
                                                         </a>
