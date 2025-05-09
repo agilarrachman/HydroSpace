@@ -57,7 +57,7 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'profile_picture' => 'image|file|max:5000',
+            'profile_picture' => 'required|image|file|max:5000',
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255|unique:users,username',
             'gender' => 'required|string|in:Pria,Wanita',
