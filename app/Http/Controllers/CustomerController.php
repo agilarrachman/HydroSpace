@@ -64,11 +64,11 @@ class CustomerController extends Controller
             'phone_number' => ['required', 'string', 'regex:/^08[0-9]{8,11}$/'],
             'email' => 'required|email:dns|unique:users,email',
             'password' => 'required|min:3|max:8',
-            'province' => 'nullable|integer',
-            'city' => 'nullable|integer',
-            'district' => 'nullable|integer',
-            'village' => 'nullable|integer',
-            'full_address' => 'nullable|string',
+            'province' => 'required|integer', // Tambahkan required
+            'city' => 'required|integer',    // Tambahkan required
+            'district' => 'required|integer', // Tambahkan required
+            'village' => 'required|integer', // Tambahkan required
+            'full_address' => 'required|string', // Tambahkan required
             'role' => 'required|in:Admin,Customer'
         ]);
 
