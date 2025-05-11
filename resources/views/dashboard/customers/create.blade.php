@@ -258,7 +258,7 @@
                                             <div class="mb-3">
                                                 <label for="full_address" class="form-label">Alamat Lengkap</label>
                                                 <textarea class="form-control" id="full_address" name="full_address" rows="3" style="min-height: 200px;" placeholder="Masukkan alamat lengkap Anda, termasuk patokan, gang, nomor rumah, hingga link Google Maps jika tersedia.
-Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)">{{ old('full_address') }}</textarea>
+Contoh: Jl. Merdeka No. 10, Gang Mawar, RT 02 RW 01, Kelurahan Harmoni, Kota Bogor. Dekat Indomaret, seberang Masjid Al-Falah (https://maps.app.goo.gl/xyz123)" required>{{ old('full_address') }}</textarea>
                                             </div>
                                         </div>
                                         <button class="btn btn-primary d-grid w-100" type="submit">Simpan</button>

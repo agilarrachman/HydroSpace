@@ -126,11 +126,11 @@ class AuthenticationController extends Controller
             'phone_number' => ['required', 'string', 'regex:/^08[0-9]{8,11}$/'],
             'email' => 'required|email:dns|unique:users,email',
             'password' => 'required|string',
-            'province' => 'nullable|integer',
-            'city' => 'nullable|integer',
-            'district' => 'nullable|integer',
-            'village' => 'nullable|integer',
-            'full_address' => 'nullable|string',
+            'province' => 'required|integer',
+            'city' => 'required|integer',
+            'district' => 'required|integer',
+            'village' => 'required|integer',
+            'full_address' => 'required|string',
             'role' => 'required|in:Admin,Customer'
         ]);
 
