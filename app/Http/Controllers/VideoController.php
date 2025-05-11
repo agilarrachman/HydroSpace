@@ -28,7 +28,7 @@ class VideoController extends Controller
                         $query->where('name', 'like', "%$search%");
                     });
             })
-            ->orderBy('updated_at', 'desc') 
+            ->orderBy('updated_at', 'desc')
             ->paginate(10);
 
         return view('dashboard.videos.index', [
@@ -72,12 +72,12 @@ class VideoController extends Controller
             'description' => 'required|string',
             'objective_heading1' => 'required|string|max:255',
             'objective_description1' => 'required|string|max:255',
-            'objective_heading2' => 'nullable|string|max:255',
-            'objective_description2' => 'nullable|string|max:255',
-            'objective_heading3' => 'nullable|string|max:255',
-            'objective_description3' => 'nullable|string|max:255',
-            'objective_heading4' => 'nullable|string|max:255',
-            'objective_description4' => 'nullable|string|max:255'
+            'objective_heading2' => 'required|string|max:255',
+            'objective_description2' => 'required|string|max:255',
+            'objective_heading3' => 'required|string|max:255',
+            'objective_description3' => 'required|string|max:255',
+            'objective_heading4' => 'required|string|max:255',
+            'objective_description4' => 'required|string|max:255'
         ]);
 
         // Simpan file video ke folder 'videos'
@@ -89,7 +89,7 @@ class VideoController extends Controller
         if ($request->hasFile('thumbnail')) {
             $validatedData['thumbnail'] = $request->file('thumbnail')->store('thumbnail', 'public');
         }
-        
+
         // Buat data video baru
         $video = Video::create($validatedData);
 
@@ -168,7 +168,7 @@ class VideoController extends Controller
         ]);
 
         // Jika ada upload video baru
-        if ($request->file('video')) {            
+        if ($request->file('video')) {
             // Hapus video lama jika ada
             if ($video->video) {
                 Storage::disk('public')->delete($video->video);
@@ -266,7 +266,7 @@ class VideoController extends Controller
                 });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate(10); 
+            ->paginate(10);
 
         $videoCategories = VideoCategory::all();
 
