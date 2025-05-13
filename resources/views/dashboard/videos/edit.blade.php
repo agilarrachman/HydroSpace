@@ -157,7 +157,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="title" class="form-label">Judul</label>
-                                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Masukkan judul" required value="{{ old('title', $video->title) }}" />
+                                                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Masukkan judul"  value="{{ old('title', $video->title) }}" />
                                                 <div id="rulesSlug" class="form-text">Tekan tab setelah menuliskan judul video untuk membuat slug secara otomatis</div>
                                                 @error('title')
                                                 <div class="invalid-feedback">
@@ -167,7 +167,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="slug" class="form-label">Slug</label>
-                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug" required value="{{ old('slug', $video->slug) }}" />
+                                                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Masukkan slug"  value="{{ old('slug', $video->slug) }}" />
                                                 @error('slug')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -176,7 +176,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="duration" class="form-label">Durasi Video (menit)</label>
-                                                <input type="number" class="form-control @error('duration') is-invalid @enderror" id="duration" name="duration" placeholder="Masukkan durasi video dalam satuan menit" required value="{{ old('duration', $video->duration) }}" />
+                                                <input type="number" class="form-control @error('duration') is-invalid @enderror" id="duration" name="duration" placeholder="Masukkan durasi video dalam satuan menit"  value="{{ old('duration', $video->duration) }}" />
                                                 @error('duration')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -203,7 +203,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="delivery_style" class="form-label">Gaya Penyampaian</label>
-                                                <input type="text" class="form-control @error('delivery_style') is-invalid @enderror" id="delivery_style" name="delivery_style" placeholder="Masukkan gaya penyampaian video" required value="{{ old('delivery_style', $video->delivery_style) }}" />
+                                                <input type="text" class="form-control @error('delivery_style') is-invalid @enderror" id="delivery_style" name="delivery_style" placeholder="Masukkan gaya penyampaian video"  value="{{ old('delivery_style', $video->delivery_style) }}" />
                                                 @error('delivery_style')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -212,7 +212,7 @@
                                             </div>
                                             <div class="mb-3">
                                                 <label for="description" class="form-label">Deskripsi</label>
-                                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" placeholder="Masukkan deskripsi video" required>{{ old('description', $video->description) }}</textarea>
+                                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3" placeholder="Masukkan deskripsi video" >{{ old('description', $video->description) }}</textarea>
                                                 @error('description')
                                                 <div class="invalid-feedback">
                                                     {{ $message }}
@@ -241,7 +241,7 @@
                                                                 placeholder="Masukkan judul objektif video"
                                                                 aria-describedby="floatingHeadingHelp"
                                                                 name="objective_heading1"
-                                                                required
+
                                                                 value="{{ old('objective_heading1', $video->objective_heading1) }}" />
                                                             <label for="floatingHeading">Judul Objektif</label>
                                                             @error('objective_heading1')
@@ -258,7 +258,7 @@
                                                                 placeholder="Jelaskan secara singkat tujuan dari video ini"
                                                                 aria-describedby="floatingDescriptionHelp"
                                                                 name="objective_description1"
-                                                                required
+
                                                                 value="{{ old('objective_description1', $video->objective_description1) }}" />
                                                             <label for="floatingDescription">Deskripsi Objektif</label>
                                                             @error('objective_description1')
@@ -278,7 +278,7 @@
                                                                 placeholder="Masukkan judul objektif video"
                                                                 aria-describedby="floatingHeadingHelp"
                                                                 name="objective_heading2"
-                                                                required
+
                                                                 value="{{ old('objective_heading2', $video->objective_heading2) }}" />
                                                             <label for="floatingHeading">Judul Objektif</label>
                                                             @error('objective_heading2')
@@ -295,7 +295,7 @@
                                                                 placeholder="Jelaskan secara singkat tujuan dari video ini"
                                                                 aria-describedby="floatingDescriptionHelp"
                                                                 name="objective_description2"
-                                                                required
+
                                                                 value="{{ old('objective_description2', $video->objective_description2) }}" />
                                                             <label for="floatingDescription">Deskripsi Objektif</label>
                                                             @error('objective_description2')
@@ -315,7 +315,7 @@
                                                                 placeholder="Masukkan judul objektif video"
                                                                 aria-describedby="floatingHeadingHelp"
                                                                 name="objective_heading3"
-                                                                required
+
                                                                 value="{{ old('objective_heading3', $video->objective_heading3) }}" />
                                                             <label for="floatingHeading">Judul Objektif</label>
                                                             @error('objective_heading3')
@@ -332,7 +332,7 @@
                                                                 placeholder="Jelaskan secara singkat tujuan dari video ini"
                                                                 aria-describedby="floatingDescriptionHelp"
                                                                 name="objective_description3"
-                                                                required
+
                                                                 value="{{ old('objective_description3', $video->objective_description3) }}" />
                                                             <label for="floatingDescription">Deskripsi Objektif</label>
                                                             @error('objective_description3')
@@ -352,7 +352,7 @@
                                                                 placeholder="Masukkan judul objektif video"
                                                                 aria-describedby="floatingHeadingHelp"
                                                                 name="objective_heading4"
-                                                                required
+
                                                                 value="{{ old('objective_heading4', $video->objective_heading4) }}" />
                                                             <label for="floatingHeading">Judul Objektif</label>
                                                             @error('objective_heading4')
@@ -369,7 +369,7 @@
                                                                 placeholder="Jelaskan secara singkat tujuan dari video ini"
                                                                 aria-describedby="floatingDescriptionHelp"
                                                                 name="objective_description4"
-                                                                required
+                                                                
                                                                 value="{{ old('objective_description4', $video->objective_description4) }}" />
                                                             <label for="floatingDescription">Deskripsi Objektif</label>
                                                             @error('objective_description4')
