@@ -139,7 +139,7 @@
 
             <p class="text-center">
               <span>Sudah punya akun?</span>
-              <a href="/signin">
+              <a href="/masuk">
                 <span>Masuk</span>
               </a>
             </p>
