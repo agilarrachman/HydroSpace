@@ -214,7 +214,7 @@
                   @endif
                   @endforeach
                   @else
-                  <p>Tidak ada item dalam pesanan ini.</p>
+                  <p>Produk telah dihapus.</p>
                   @endif
 
                   <div class="detail-order mt-4">

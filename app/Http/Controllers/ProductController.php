@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Product;
+use App\Models\OrderItem;
 use Illuminate\Http\Request;
 use App\Models\ProductCategory;
 use Illuminate\Support\Facades\DB;
@@ -159,7 +160,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        // Hapus semua gambar yang terkait dengan produk
+        OrderItem::where('product_id', $product->id)->delete();
+
         foreach (['picture1', 'picture2', 'picture3', 'picture4', 'picture5'] as $pictureField) {
             if ($product->$pictureField) {
                 Storage::disk('public')->delete($product->$pictureField);
@@ -167,7 +169,7 @@ class ProductController extends Controller
         }
 
         // Hapus produk dari database
-        Product::destroy($product->id);
+        $product->delete();
 
         return redirect('/dashboard/products')->with('success', 'Data produk berhasil dihapus!');
     }
