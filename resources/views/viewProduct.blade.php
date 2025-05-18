@@ -20,7 +20,12 @@
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-
+    <script>
+        function submitCartForm(productId) {
+            document.getElementById(`addToCartForm-${productId}`).submit();
+        }
+    </script>
+    
     <style>
         .header-light.transparent {
             background-color: #F8FBF3 !important;
@@ -214,7 +219,15 @@
                                                 </a>
                                                 <div class="atr__extra-menu">
                                                     <a class="atr__quick-view" href="/produk/{{ $item->slug }}"><i class="icon_zoom-in_alt"></i></a>
-                                                    <div class="atr__add-cart"><i class="icon_cart_alt"></i></div>
+                                                    <form id="addToCartForm-{{ $item->id }}" action="{{ route('cart.add') }}" method="POST" style="display: none;">
+                                                        @csrf
+                                                        <input type="hidden" name="product_id" value="{{ $item->id }}">
+                                                        <input type="hidden" name="status" value="Keranjang">
+                                                        <input type="hidden" name="quantity" value="1">
+                                                    </form>
+                                                    <<div class="atr__add-carts" onclick="submitCartForm({{ $item->id }})">
+                                                        <i class="icon_cart_alt"></i>
+                                                    </div>
                                                 </div>
                                             </div>
 
