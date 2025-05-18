@@ -215,6 +215,12 @@
                                             </a>
                                             <div class="atr__extra-menu">
                                                 <a class="atr__quick-view" href="produk/{{ $product->slug }}"><i class="icon_zoom-in_alt"></i></a>
+                                                <form id="addToCartForm-{{ $product->id }}" action="{{ route('cart.add') }}" method="POST" style="display: none;">
+                                                    @csrf
+                                                    <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                                    <input type="hidden" name="status" value="Keranjang">
+                                                    <input type="hidden" name="quantity" value="1">
+                                                </form>
                                                 <div class="atr__add-cart" onclick="submitCartForm({{ $product->id }})"><i class="icon_cart_alt"></i></div>
                                             </div>
                                         </div>
