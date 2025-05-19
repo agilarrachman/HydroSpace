@@ -236,53 +236,55 @@ class ProductController extends Controller
     {
         $user = Auth::user();
 
-        // Inisialisasi variabel orderItems dan totalOrder dengan nilai default
         $orderItems = collect([]);
         $totalOrder = 0;
 
-        // Hanya jalankan query order jika user sudah login
         if ($user) {
-            // Mendapatkan order dengan status 'Keranjang' untuk customer yang sedang login
             $order = Order::where('customer_id', $user->id)
                 ->where('status', 'Keranjang')
                 ->first();
 
-            // Jika ada order yang ditemukan, ambil item-item keranjang tersebut
             $orderItems = $order ? $order->orderItems()->orderBy('created_at', 'desc')->get() : collect([]);
             $totalOrder = Order::where('customer_id', $user->id)
                 ->where('status', '!=', 'keranjang')
                 ->count();
         }
 
-        $relatedA = DB::table('frequently_bought_togethers')
+        // Ambil count tertinggi
+        $maxCount = DB::table('frequently_bought_togethers')
             ->where('product_id', $product->id)
-            ->pluck('related_product_id')
-            ->toArray();
+            ->orWhere('related_product_id', $product->id)
+            ->max('count');
 
-        $relatedB = DB::table('frequently_bought_togethers')
-            ->where('related_product_id', $product->id)
-            ->pluck('product_id')
-            ->toArray();
+        $recommendedProducts = collect();
 
-        // Gabungkan dan ambil ID unik
-        $allRelatedIds = collect(array_merge($relatedA, $relatedB))
-            ->unique()
-            ->filter(fn($id) => $id != $product->id)
-            ->values();
+        if ($maxCount > 0) {
+            // Ambil semua record dengan count tertinggi
+            $topRelated = DB::table('frequently_bought_togethers')
+                ->where(function ($query) use ($product) {
+                    $query->where('product_id', $product->id)
+                        ->orWhere('related_product_id', $product->id);
+                })
+                ->where('count', $maxCount)
+                ->get();
 
-        // Ambil produk lalu hapus duplikat berdasarkan ID
-        $recommendedProducts = Product::whereIn('id', $allRelatedIds)
-            ->get()
-            ->unique('id') // ini penting
-            ->sortBy(fn($relatedProduct) => array_search($relatedProduct->id, $allRelatedIds->toArray()))
-            ->values();
+            // Ambil ID produk terkait
+            $relatedIds = $topRelated->map(function ($item) use ($product) {
+                return $item->product_id == $product->id
+                    ? $item->related_product_id
+                    : $item->product_id;
+            })->unique();
+
+            // Ambil produk terkait dari database
+            $recommendedProducts = Product::whereIn('id', $relatedIds)->get();
+        }
 
         return view('viewProduct', [
             "title" => $product->name . " | HydroSpace",
             "active" => "Produk",
             "product" => $product,
             "categories" => ProductCategory::all(),
-            "orderItems" => $orderItems,     // Mengirimkan orderItems ke view jika ada
+            "orderItems" => $orderItems,
             'totalPrice' => $orderItems->sum('total_price'),
             'totalItem' => $orderItems->sum('quantity'),
             'totalOrder' => $totalOrder,
