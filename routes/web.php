@@ -25,6 +25,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AdminProfileController;
 use App\Http\Controllers\VideoCategoryController;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\VideoViewController;
 use App\Models\Video;
@@ -98,12 +99,9 @@ Route::middleware(['blockAdmin'])->group(function () {
         ]);
     });
 
-    Route::get('/kontak', function () {
-        return view('contact', [
-            "title" => "HydroSpace | Kontak",
-            "active" => "Kontak"
-        ]);
-    });
+    Route::resource('/kontak', ContactController::class)->parameters([
+        'kontak' => 'contact'
+    ]);  
 });
 
 
